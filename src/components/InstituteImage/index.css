@@ -1,0 +1,65 @@
+body,html {
+  font-family: 'Oswald', sans-serif;
+
+}
+.root {
+  position: relative;
+  width: 80%;
+  height: 45vh;
+  top: 0;
+  margin-top: 5%;
+}
+@media screen and (min-width: 550px) {
+  .root {
+    position: relative;
+    width: 70%;
+    height: 40vh;
+    top: 0;
+    margin-top: 5%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .root {
+    position: relative;
+    width: 45%;
+    height: 45vh;
+    top: 0;
+    margin-top: 5%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .root {
+    position: relative;
+    width: 30%;
+    height: 45vh;
+    top: 0;
+    margin-top:2.5vh;
+    margin-bottom:2.5vh;
+  }
+}
+
+.title{ 
+  transition: all 100ms;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
+  text-transform: uppercase;
+  box-sizing: 100%;
+  color:white;
+  font-size: calc(30px + 2vmin);
+  letter-spacing: 4px;
+  padding: 1% 0;
+  width: 70%;
+}
+.title2{
+  transition: all 200ms;
+  border-top: 3px solid white;
+  border-bottom: 3px solid white;
+  text-transform: uppercase;
+  box-sizing: 100%;
+  color:white;
+  font-size: calc(40px + 2vmin);
+  letter-spacing: 10px;
+  padding: 5% 0;
+  width: 100%;
+  cursor: pointer;
+}
