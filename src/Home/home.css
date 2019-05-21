@@ -1,0 +1,43 @@
+body,html {
+  font-family: 'Oswald', sans-serif;
+
+}
+
+.head{
+  text-transform: uppercase;
+  color: #fff;
+  font-size: calc(25px + 3.2vw);
+  line-height: calc(25px + 3.2vw);
+  letter-spacing: 3px;
+  width: 100%;
+  text-align: center;
+}
+.head2{
+  text-transform: uppercase;
+  color: #fff;
+  font-size: calc(25px + 3.2vw);
+  line-height: calc(25px + 3.2vw);
+  letter-spacing: 3px;
+  width: max-content;
+  text-align: center;
+}
+.paragraph{
+  color: #fff;
+  font-size: calc(10px + 1vw);
+  line-height: calc(12px + 1vw);
+  width: 75%;
+  font-weight: lighter;
+  text-align: center;
+  margin-top:40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.margin{
+  margin-top:40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.margin2{
+  margin-bottom:40px;
+}

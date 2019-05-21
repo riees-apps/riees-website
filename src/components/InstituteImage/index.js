@@ -7,7 +7,7 @@ const Img = styled.div`
   box-shadow: 0px 45vh rgba(0, 0, 0, 0.35) inset;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 120%;
+  background-size: 150%;
   position: relative;
   display: flex;
   align-items: center;
@@ -15,10 +15,13 @@ const Img = styled.div`
   width: 100%;
   height: 100%;
   transition: all 200ms;
+  @media (max-width: 600px) {
+    background-size: cover;
+  }
   :hover {
-    transition: all 100ms;
+    transition: all 200ms;
     box-shadow: 0px 45vh rgba(0, 0, 0, 0.7) inset;
-    background-size: 125%;
+    background-size: 154%;
     cursor:pointer
   }
 `;

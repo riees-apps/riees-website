@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import Carousel from 'react-bootstrap/Carousel'
 import Button from "../components/Button/index";
 import Footer from "../components/Footer/index";
-import './index.css';
+import './home.css';
 import styled from "styled-components";
 import img from "./opa.jpg";
 import img2 from "./ei.jpg";
+import img3 from "./ee.jpg";
 import ufes from './imgs/ufes.jpg'
 import uvv from './imgs/uvv.jpg'
 import fdv from './imgs/fdv.png'
@@ -12,6 +14,7 @@ import ucl from './imgs/ucl.jpg'
 import emescam from './imgs/emescam.jpg'
 import ifes from './imgs/ifes.jpg'
 import InstituteImage from '../components/InstituteImage/index'
+import Testimonial from '../components/Testimonial/index'
 
 
 const DivInstitutes = styled.div`
@@ -27,7 +30,7 @@ const DivInstitutes = styled.div`
 `;
 const Image = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 100vh rgba(0, 0, 0, 0.4) inset;
+  box-shadow: 0px 100vh rgba(0, 0, 0, ${props => props.x} ) inset;
   position: relative;
   height: ${props => props.height};
   background-attachment: fixed;
@@ -96,13 +99,15 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Image height="100vh" image={img} brightness="120%" contrast="140%" align='center' justify='center'>
+        <Image x='0.35' height="100vh" image={img} brightness="120%" contrast="140%" align='center' justify='center'>
           <div>
             <Title>Come to meet us</Title>
             <Subheading>Non distinctio quasi alias est.</Subheading>
           </div>
           <Button name="Learn More" />
         </Image>
+
+
         <DivText>
           <Heading>ABOUT RIEES</Heading>
           <Text>
@@ -120,23 +125,69 @@ class Home extends Component {
           </Text>
           <Button name='Learn More'/>
         </DivText>
-        <Image  brightness="100%" contrast="100%" image={img2} align='flex-start' justify='flex-start'>
-            <h1 className='head'>Coming to Espirito Santo</h1>
-            <p className='paragraph'>Aut molestiae velit id maxime accusantium. Dolorem qui ab
-            accusantium qui et et tenetur facilis. Quia odio hic ea qui
-            molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
-            sequi. Voluptatem reiciendis sed perspiciatis. Consequatur a
-            voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
-            temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
-            consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
-            laudantium culpa similique. Vero dignissimos labore quos consequatur
-            explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
-            ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
-            sequi. Eos aspernatur hic. Nobis autem vel non.</p>
-            <div className='margin'>
-              <Button  name='Learn More'/>
-            </div>
-        </Image>
+
+
+        <Carousel>
+          <Carousel.Item>
+            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
+                <h1 className='head'>Coming to Espirito Santo</h1>
+                <p className='paragraph'>Aut molestiae velit id maxime accusantium. Dolorem qui ab
+                accusantium qui et et tenetur facilis. Quia odio hic ea qui
+                molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
+                sequi. Voluptatem reiciendis sed perspiciatis. Consequatur a
+                voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
+                temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
+                consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
+                laudantium culpa similique. Vero dignissimos labore quos consequatur
+                explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
+                ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
+                sequi. Eos aspernatur hic. Nobis autem vel non.</p>
+                <div className='margin'>
+                  <Button  name='Learn More'/>
+                </div>
+            </Image>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img2} align='flex-start' justify='center'>
+                <h1 className='head'>Living in Espirito Santo</h1>
+                <p className='paragraph'>Ea a consectetur
+                sequi. Voluptatem reiciendis sed perspiciatis. Aut molestiae velit id maxime accusantium. Dolorem qui ab
+                accusantium qui et et tenetur facilis. Quia odio hic ea qui
+                molestias minima. Asperiores corrupti id qui rem. Consequatur a
+                voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
+                temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
+                consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
+                laudantium culpa similique. Vero dignissimos labore quos consequatur
+                explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
+                ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
+                sequi. Eos aspernatur hic. Nobis autem vel non.</p>
+                <div className='margin'>
+                  <Button name='Learn More'/>
+                </div>
+            </Image>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
+                <h1 className='head'>Our Cities</h1>
+                <p className='paragraph'>Temporibus sed ut voluptas. Est
+                temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
+                consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
+                laudantium culpa similique. Vero dignissimos labore quos consequatur
+                explicabo.Quia reiciendis aliquid nisi. Temporibus sed ut voluptas. Est
+                temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
+                consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
+                laudantium culpa similique. Vero dignissimos labore quos consequatur
+                explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
+                ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
+                sequi. Eos aspernatur hic. Nobis autem vel non.</p>
+                <div className='margin'>
+                  <Button  name='Learn More'/>
+                </div>
+            </Image>
+          </Carousel.Item>
+        </Carousel>
+
+        
         <Heading>OUR INSTITUTES</Heading>
         <DivInstitutes>
             <InstituteImage name="UFES" input={ufes} />
@@ -147,6 +198,42 @@ class Home extends Component {
             <InstituteImage name="EMESCAm" input={emescam} />
         </DivInstitutes>
 
+        <Carousel className='margin2' fade='true'>
+          
+          <Carousel.Item>
+            <Testimonial 
+            x='0.75' height="85vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
+            p='Aut molestiae velit id maxime accusantium. Dolorem qui ab
+                    accusantium qui et et tenetur facilis. Quia odio hic ea qui
+                    molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
+                    sequi. Voluptatem reiciendis sed perspiciatis. Consequatur a
+                    voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
+                    temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
+                    consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
+                    laudantium culpa similique. Vero dignissimos labore quos consequatur
+                    explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
+                    ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
+                    sequi. Eos aspernatur hic. Nobis autem vel non.'
+            author='Carmen Rodrigues'
+            city=' Santiago, Chile'
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Testimonial 
+            x='0.75' height="85vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
+            p='Voluptatem reiciendis sed perspiciatis. Consequatur a
+                    voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
+                    temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
+                    consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
+                    laudantium culpa similique. Vero dignissimos labore quos consequatur
+                    explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
+                    ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
+                    sequi. Eos aspernatur hic. Nobis autem vel non.'
+            author='Ulices Ernser'
+            city=' Santiago, Chile'
+            />
+          </Carousel.Item>
+        </Carousel>
 
         <Footer/>    
       </div>

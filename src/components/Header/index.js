@@ -22,6 +22,7 @@ const StyledLink = styled(Link)`
     display:none;
   }
   :hover {
+    text-decoration: none;
     border-bottom: 3px solid transparent;
     color: #000066;
     transform: scale(1.05);
@@ -117,7 +118,7 @@ class Header extends Component {
   }
   render() {
     return (
-     <div className={this.state.scroll ? 'container2': 'container'}>    
+     <div className={this.state.scroll ? 'container2': 'container1'}>    
         <StyledLink onClick={()=> this.handleClick('Home')} active={this.state.active === 'Home' ? true : false} className={this.state.scroll ? 'scroll': ''} to={"/"} >Home</StyledLink>
         
         <StyledLink onClick={()=> this.handleClick('Institute')} active={this.state.active === 'Institute' ? true : false} className={this.state.scroll ? 'scroll': ''} to={"/Institutes"} >Our Institutes</StyledLink>

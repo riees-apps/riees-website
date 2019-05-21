@@ -5,7 +5,7 @@ body,html {
 .root {
   position: relative;
   width: 80%;
-  height: 45vh;
+  height: 40vh;
   top: 0;
   margin-top: 5%;
 }
@@ -22,7 +22,7 @@ body,html {
   .root {
     position: relative;
     width: 45%;
-    height: 45vh;
+    height: 40vh;
     top: 0;
     margin-top: 5%;
   }

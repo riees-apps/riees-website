@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import './footer.css';
 import opa from './opa.jpg'
 
 const StyledLink = styled(Link)`
@@ -12,12 +11,14 @@ const StyledLink = styled(Link)`
   color: #fff;
   font-weight:lighter;
   font-size: calc(6px + 1vw);
-  line-height: calc(6px + 1vw);
+  line-height: calc(8px + 1vw);
   letter-spacing: 2px;
   padding: 1% 0;
   text-decoration: none;
   transition:  all 0.15s linear ;
+  margin-bottom:10px;
   :hover {
+    text-decoration: none;
     color: #f1f1f1;
     letter-spacing: 3px;
     transition:  all 0.15s linear;
@@ -26,9 +27,12 @@ const StyledLink = styled(Link)`
 
 const Image = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 100vh rgba(0, 0, 0, 0.85) inset;
+  box-shadow: 0px 100vh rgba(0, 0, 0, 0.9) inset;
   position: relative;
   height: ${props => props.height};
+  @media (max-width: 600px) {
+    height: 50vh;
+  }
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -58,20 +62,22 @@ const Title = styled.h1`
   font-size: calc(30px + 1vw);
   line-height: calc(30px + 1vw);
   width: 100%;
+  margin-bottom:40px;
 `;
 const Text = styled.h1`
   text-align:start;
   color: #fff;
   font-weight:lighter;
-  font-size: calc(6px + 1vw);
-  line-height: calc(6px + 1vw);
+  font-size: calc(8px + 1vw);
+  line-height: calc(10px + 1vw);
   width: 100%;
+  margin-bottom:20px;
 `;
 
 class Footer extends Component {
   render() {
     return (
-      <Image  brightness="120%" height='60vh' contrast="100%" image={opa} >
+      <Image brightness="120%" height='65vh' contrast="100%" image={opa} >
         <DivText>
           <Title>CONTACT US</Title>
             <Text>Universidade Federal do Espirito Santo - Secretaria de Relações Internacionais</Text>
