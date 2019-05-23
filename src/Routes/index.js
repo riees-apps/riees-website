@@ -8,6 +8,7 @@ import Coming from '../Es/coming.js'
 import Living from '../Es/living.js'
 import Home from "../Home/index.js";
 import Institutes from "../Institutes/index.js";
+import Admin from "../Admin/index.js";
 import Header from '../components/Header/index.js'
 
 const Routes = () => (
@@ -16,6 +17,7 @@ const Routes = () => (
         <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/About" component={About}/>
+            <Route path="/Admin" component={Admin}/>
             <Route path="/Cities" component={Cities}/>
             <Route path="/Es" component={Es}/>
             <Route path="/Coming" component={Coming}/>

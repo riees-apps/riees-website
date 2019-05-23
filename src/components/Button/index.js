@@ -9,7 +9,7 @@ const Btn = styled.div`
   justify-content: space-between;
   padding: 4px 20px;
   background-color: #0077ff;
-  box-shadow: 0 0 1px 0 black;
+  box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.75);
   font-size: calc(8px + 1vw);
   border-radius: 3px;
   text-transform: uppercase;

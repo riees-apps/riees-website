@@ -73,9 +73,6 @@ const StyledLink = styled(Link)`
   }
   `}
 `;
-
-
-
 class Header extends Component {
   constructor() {
     super();

@@ -13,6 +13,7 @@ const Image = styled.div`
   background-size: cover;
   display: flex;
   flex-direction: column;
+  z-index:1;
   align-items: ${props => props.align};
   justify-content: ${props => props.justify};
   width: 100%;

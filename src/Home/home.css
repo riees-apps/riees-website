@@ -39,5 +39,6 @@ body,html {
   text-align: center;
 }
 .margin2{
+  z-index: 0;
   margin-bottom:40px;
 }

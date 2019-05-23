@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Admin from "../../Admin/index.js";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import opa from './opa.jpg'
@@ -93,6 +94,7 @@ class Footer extends Component {
           <StyledLink>LIVING IN ESPIRITO SANTO</StyledLink>
           <StyledLink>OUR CITIES</StyledLink>
           <StyledLink>ABOUT US</StyledLink>
+          <a href="../../Admin/index.js">Go to top</a>
         </DivText>
       </Image>
     )

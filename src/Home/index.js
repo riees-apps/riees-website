@@ -7,6 +7,8 @@ import styled from "styled-components";
 import img from "./opa.jpg";
 import img2 from "./ei.jpg";
 import img3 from "./ee.jpg";
+import img4 from "./oi.jpg";
+import img5 from "./ola.jpg";
 import ufes from './imgs/ufes.jpg'
 import uvv from './imgs/uvv.jpg'
 import fdv from './imgs/fdv.png'
@@ -26,7 +28,7 @@ const DivInstitutes = styled.div`
   align-items: flex-start;
   justify-content: space-around;
   width:100%;
-  padding:2.5vh 0;
+  padding:5vh 0;
 `;
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -72,7 +74,7 @@ const Heading = styled.h1`
   font-size: calc(30px + 4vw);
   line-height: calc(30px + 4vw);
   letter-spacing: 3px;
-  padding-top:2.5vh;
+  padding-top:5vh;
 `;
 const Text = styled.h1`
   margin:40px 0;
@@ -148,7 +150,7 @@ class Home extends Component {
             </Image>
           </Carousel.Item>
           <Carousel.Item>
-            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img2} align='flex-start' justify='center'>
+            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img5} align='flex-start' justify='center'>
                 <h1 className='head'>Living in Espirito Santo</h1>
                 <p className='paragraph'>Ea a consectetur
                 sequi. Voluptatem reiciendis sed perspiciatis. Aut molestiae velit id maxime accusantium. Dolorem qui ab
@@ -167,7 +169,7 @@ class Home extends Component {
             </Image>
           </Carousel.Item>
           <Carousel.Item>
-            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
+            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img4} align='center' justify='center'>
                 <h1 className='head'>Our Cities</h1>
                 <p className='paragraph'>Temporibus sed ut voluptas. Est
                 temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
@@ -198,8 +200,7 @@ class Home extends Component {
             <InstituteImage name="EMESCAm" input={emescam} />
         </DivInstitutes>
 
-        <Carousel className='margin2' fade='true'>
-          
+        <Carousel className='margin2' fade='true'>   
           <Carousel.Item>
             <Testimonial 
             x='0.75' height="85vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
