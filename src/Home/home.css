@@ -1,6 +1,6 @@
-body,html {
-  font-family: 'Oswald', sans-serif;
-
+div{
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
 }
 
 .head{
@@ -22,18 +22,19 @@ body,html {
   text-align: center;
 }
 .paragraph{
+  font-family: 'Roboto', sans-serif;
   color: #fff;
   font-size: calc(10px + 1vw);
   line-height: calc(12px + 1vw);
   width: 75%;
   font-weight: lighter;
   text-align: center;
-  margin-top:40px;
+  margin-top:5vh;
   margin-left: auto;
   margin-right: auto;
 }
 .margin{
-  margin-top:40px;
+  margin-top:5vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;

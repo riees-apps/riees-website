@@ -28,12 +28,8 @@ const StyledLink = styled(Link)`
 
 const Image = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 100vh rgba(0, 0, 0, 0.9) inset;
+  box-shadow: 0px 100vh rgba(0, 0, 0, 0.93) inset;
   position: relative;
-  height: ${props => props.height};
-  @media (max-width: 600px) {
-    height: 50vh;
-  }
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

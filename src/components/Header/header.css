@@ -1,208 +1,260 @@
-body,html {
-    font-family: 'Oswald', sans-serif;
-  
+div{
+  font-family: "Oswald", sans-serif;
 }
-.scroll{
-    font-size: calc(4px + 1vw);
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.scroll {
+  font-size: calc(4px + 1vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.scroll2{
-    font-size: calc(1px + 1vw);
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.scroll2 {
+  font-size: calc(1px + 1vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.dropscroll{
-    font-size: calc(4px + 1vw);
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.dropscroll {
+  font-size: calc(4px + 1vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.container1{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    background: white;
-    box-sizing: content-box;
-    padding: 0.3vw 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    opacity: 0.9;
-    box-shadow: 1px 1px 1px #080808b9;
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.container1 {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  background: white;
+  box-sizing: content-box;
+  padding: 0.3vw 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  opacity: 0.9;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.container2{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    background: white;
-    box-sizing: content-box;
-    padding: 0.3vw 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    opacity: 0.8;
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275)
-}
-
-.logo1{
-    width:calc(50px + 3vw);
-    height:calc(50px + 3vw);
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275)
-}
-.logo2{
-    width: calc(30px + 6vw);
-    height:calc(20px + 3vw);
-    transition: all 300ms;
-    transition-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275)
-}
-.div{
-    padding: 0 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap:nowrap;
-    align-items: center;
-    justify-items: flex-start;
-    transition: all 300ms;
+.container2 {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  background: white;
+  box-sizing: content-box;
+  padding: 0.3vw 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  opacity: 0.8;
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.logo1Scroll{
-    width:calc(30px + 2vw);
-    height:calc(30px + 2vw);
-    transition: all 300ms;
-    transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
+.logo1 {
+  width: calc(50px + 3vw);
+  height: calc(50px + 3vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.logo2Scroll{
-    width: calc(10px + 3.5vw);
-    height:calc(5px + 2vw);
-    transition: all 300ms;
-    transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
+.logo2 {
+  width: calc(30px + 6vw);
+  height: calc(20px + 3vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.divScroll{
-    padding: 0 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap:wrap;
-    align-items: center;
-    justify-items: flex-start;
-    transition: all 300ms;
+.div {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-items: flex-start;
+  transition: all 300ms;
+}
+
+.logo1Scroll {
+  width: calc(30px + 2vw);
+  height: calc(30px + 2vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
+}
+.logo2Scroll {
+  width: calc(10px + 3.5vw);
+  height: calc(5px + 2vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
+}
+.divScroll {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-items: flex-start;
+  transition: all 300ms;
 }
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-  
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-  
-.dropdown-content a:hover {background-color: #f1f1f1;}
-  
-.dropdown:hover .dropdown-content {
-    transition: all 300ms;
-    display: block;
-}
-.dropscroll:hover .dropdown-content {
-    transition: all 300ms;
-    display: block;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
-.displayNone{
-    transition: all 500ms;
-    display: none
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
 }
-.menuNone{
-    transition: all 300ms;
-    display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        position: fixed;
-        left:0;
-        background-color: #f9f9f9;
-        min-width: 80vw;
-        height:100vh;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    left:-80vw;
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  transition: all 300ms;
+  display: block;
+}
+.dropscroll:hover .dropdown-content {
+  transition: all 300ms;
+  display: block;
+}
+
+.displayNone {
+  transition: all 500ms;
+  display: none;
+}
+.menuNone {
+  transition: all 300ms;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #f1f1f1;
+  min-width: 80vw;
+  height: 100vh;
+  z-index: 1;
+  right: -80vw;
 }
 
 @media screen and (max-width: 600px) {
-    .menu {
-        transition: all 500ms;
-        display:block;
-        font-size:calc(25px + 2.5vw);
-        color:#303030;
-        margin:auto 0;
-        margin-right: 1vw;
-    }
-    .menuScroll{
-        font-size:calc(20px + 2vw);
-        margin:auto 0;
-    }
-    .logo1{
-        margin:auto 0;
-    }
-    .logo2{
-        margin:auto 0;
-    }
-    .logo1Scroll{
-        margin:auto 0;
-    }
-    .logo2Scroll{
-        margin:auto 0;
-    }
-    .container1{
-        padding: 1vw 0px;
-        opacity: 1;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-    .container2{
-        padding: 1vw 0px;
-        opacity: 1;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-    .menu-content{
-        transition: all 300ms;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        position: fixed;
-        left:0;
-        background-color: #f9f9f9;
-        min-width: 80vw;
-        height:100vh;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
+  .menu {
+    z-index: 10;
+    transition: all 500ms;
+    display: block;
+    font-size: calc(25px + 2.5vw);
+    color: #505050;
+    margin: auto 0;
+  }
+  .closee {
+    transition: all 500ms;
+    z-index: 10;
+    display: block;
+    font-size: calc(25px + 2.5vw);
+    color: #f1f1f1;
+  }
+  .menuScroll {
+    font-size: calc(20px + 2vw);
+    margin: auto 0;
+  }
+  .logo1 {
+    margin: auto 0;
+  }
+  .logo2 {
+    margin: auto 0;
+  }
+  .logo1Scroll {
+    margin: auto 0;
+  }
+  .logo2Scroll {
+    margin: auto 0;
+  }
+  .container1 {
+    padding: 1vw 0px;
+    opacity: 1;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .container2 {
+    padding: 1vw 0px;
+    opacity: 1;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .menu-content {
+    transition: all 300ms;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    right: 0;
+    background-color: transparent;
+    min-width: 75vw;
+    height: 100vh;
+    z-index: 1;
+  }
+}
+.menuClose {
+  z-index: 10;
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.menu-links {
+  transition: all 300ms;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: fixed;
+  right: 0;
+  background-color: #f1f1f1;
+  min-width: 75vw;
+  height: 100vh;
+  box-shadow: -75vw 0 0px 0px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+.logoMenu {
+  text-transform: uppercase;
+  display: block;
+  background: #505050;
+  color: #f1f1f1;
+  text-align: end;
+  padding-right:10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size: calc(9px + 1vw);
+  width: 100%;
+  letter-spacing: 3px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.active{
+  background:#d8d8d8;
+  color: rgb(0, 0, 0);
 }
 @media screen and (min-width: 601px) {
-    .menu {
-        display:none;
-    }
-    .menuScroll{
-        display:none;
-    }
-    .menu-content{
-        display:none;
-    }
+  .menu {
+    display: none;
+  }
+  .menuScroll {
+    display: none;
+  }
+  .menu-content {
+    display: none;
+  }
 }
-

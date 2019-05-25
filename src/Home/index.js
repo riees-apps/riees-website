@@ -18,7 +18,6 @@ import ifes from './imgs/ifes.jpg'
 import InstituteImage from '../components/InstituteImage/index'
 import Testimonial from '../components/Testimonial/index'
 
-
 const DivInstitutes = styled.div`
   background-color: #f1f1f1;
   min-height: 100vh;
@@ -32,9 +31,12 @@ const DivInstitutes = styled.div`
 `;
 const Image = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 100vh rgba(0, 0, 0, ${props => props.x} ) inset;
+  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
   position: relative;
   height: ${props => props.height};
+  @media (max-height: 600px) {
+    height: 100vh;
+  }
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,6 +50,7 @@ const Image = styled.div`
   filter: brightness(${props => props.brightness});
 `;
 const Title = styled.h1`
+  font-family: 'Oswald', sans-serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;
@@ -67,6 +70,7 @@ const Subheading = styled.h4`
   margin-bottom: calc(15px + 1vw);
 `;
 const Heading = styled.h1`
+  font-family: 'Oswald', sans-serif;
   margin:0;
   background:#f1f1f1;
   text-transform: uppercase;
@@ -79,7 +83,7 @@ const Heading = styled.h1`
 const Text = styled.h1`
   margin:40px 0;
   color: #505050;
-  font-weight:lighter;
+  font-weight:100;
   font-size: calc(10px + 1vw);
   line-height: calc(10px + 1vw);
   padding: calc(10px + 1vw) 0;
@@ -94,7 +98,7 @@ const DivText = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding:40px 0;
+  padding-bottom:5vh;
 `;
 
 class Home extends Component {
@@ -128,10 +132,9 @@ class Home extends Component {
           <Button name='Learn More'/>
         </DivText>
 
-
         <Carousel>
           <Carousel.Item>
-            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
+            <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
                 <h1 className='head'>Coming to Espirito Santo</h1>
                 <p className='paragraph'>Aut molestiae velit id maxime accusantium. Dolorem qui ab
                 accusantium qui et et tenetur facilis. Quia odio hic ea qui
@@ -150,7 +153,7 @@ class Home extends Component {
             </Image>
           </Carousel.Item>
           <Carousel.Item>
-            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img5} align='flex-start' justify='center'>
+            <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img5} align='flex-start' justify='center'>
                 <h1 className='head'>Living in Espirito Santo</h1>
                 <p className='paragraph'>Ea a consectetur
                 sequi. Voluptatem reiciendis sed perspiciatis. Aut molestiae velit id maxime accusantium. Dolorem qui ab
@@ -169,7 +172,7 @@ class Home extends Component {
             </Image>
           </Carousel.Item>
           <Carousel.Item>
-            <Image x='0.6' height="85vh" brightness="100%" contrast="100%" image={img4} align='center' justify='center'>
+            <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img4} align='center' justify='center'>
                 <h1 className='head'>Our Cities</h1>
                 <p className='paragraph'>Temporibus sed ut voluptas. Est
                 temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
