@@ -3,9 +3,12 @@ import styled from 'styled-components'
 
 const Image = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 100vh rgba(0, 0, 0, 0.4) inset;
+  box-shadow: 0px 100vh rgba(0, 0, 0, 0.25) inset;
   position: relative;
   height: ${props => props.height};
+  @media (max-height: 600px) {
+    height: 90vh;
+  }
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -26,7 +29,7 @@ const Title = styled.h1`
   line-height: calc(50px + 4vw);
   letter-spacing: 4px;
   margin: 0;
-  margin-top: calc(50px + 3vw)
+  margin-top: calc(40px + 3vw)
 `;
 
 class Img extends Component {

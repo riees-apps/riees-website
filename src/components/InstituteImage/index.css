@@ -5,7 +5,7 @@ body,html {
 .root {
   position: relative;
   width: 80%;
-  height: 40vh;
+  height: 45vh;
   top: 0;
   margin-top: 5%;
 }
@@ -13,7 +13,7 @@ body,html {
   .root {
     position: relative;
     width: 70%;
-    height: 40vh;
+    height: 45vh;
     top: 0;
     margin-top: 5%;
   }
@@ -22,7 +22,7 @@ body,html {
   .root {
     position: relative;
     width: 45%;
-    height: 40vh;
+    height: 45vh;
     top: 0;
     margin-top: 5%;
   }
@@ -30,7 +30,7 @@ body,html {
 @media screen and (min-width: 992px) {
   .root {
     position: relative;
-    width: 30%;
+    width: 45%;
     height: 45vh;
     top: 0;
     margin-top:2.5vh;
@@ -38,28 +38,151 @@ body,html {
   }
 }
 
-.title{ 
-  transition: all 100ms;
-  border-top: 3px solid white;
-  border-bottom: 3px solid white;
+.title{
+  transition: all 1000ms;
+  text-transform: uppercase;
+  color:white;
+  font-size: calc(30px + 2vmin);
+  line-height:calc(15px + 2vmin);
+  letter-spacing: 4px;
+  width: max-content;
+  margin-left: 35px;
+  
+  margin-top:33vh;
+}
+.title2{
+  transition: all 1000ms;
   text-transform: uppercase;
   box-sizing: 100%;
   color:white;
   font-size: calc(30px + 2vmin);
+  line-height:calc(15px + 2vmin);
   letter-spacing: 4px;
-  padding: 1% 0;
-  width: 70%;
-}
-.title2{
-  transition: all 200ms;
-  border-top: 3px solid white;
-  border-bottom: 3px solid white;
-  text-transform: uppercase;
-  box-sizing: 100%;
-  color:white;
-  font-size: calc(40px + 2vmin);
-  letter-spacing: 10px;
-  padding: 5% 0;
-  width: 100%;
+  margin-left: 35px;
+  margin-top:33vh;
+  width: max-content;
   cursor: pointer;
+}
+.info1{
+  transition: all 1000ms,color 1500ms;
+  margin-left: 35px;
+  text-transform: uppercase;
+  color: transparent;
+  width: max-content;
+  font-size: calc(10px + 2vmin);
+  line-height: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.info2{
+  transition: all 1000ms;
+  margin-left: 35px;
+  text-transform: uppercase;
+  width: max-content;
+  color:white;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  font-size: calc(10px + 2vmin);
+  line-height: 10px;
+}
+.info3{
+  transition: all 1000ms,color 1500ms;
+  margin-left: 35px;
+  text-transform: uppercase;
+  color: transparent;
+  width: max-content;
+  font-size: calc(10px + 2vmin);
+  line-height: 10px;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+}
+
+.info4{
+  transition: all 1000ms;
+  margin-left: 35px;
+  text-transform: uppercase;
+  width: max-content;
+  color:white;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  font-size: calc(10px + 2vmin);
+  line-height: 10px;
+  margin-bottom: 0;
+}
+.cities1{
+  transition: all 1000ms;
+  margin-left: 31px;
+  color:transparent;
+  width:90%;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-start;
+  color: transparent;
+  font-size: calc(10px + 2vmin);
+  letter-spacing: 1px;
+  margin-top: 12px;
+  margin-bottom: 15px;
+}
+
+.cities2{
+  transition: all 1000ms;
+  margin-left: 31px;
+  color:white;
+  width:90%;
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-start;
+  line-height:0px;
+  letter-spacing: 1px;
+  margin-top: 12px;
+  margin-bottom: 15px;
+}
+.h1Cities{
+  width:max-content;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  font-size: calc(1px + 2vmin);
+  line-height: calc(5px + 1vmin);
+  padding: 0 4px;
+}
+.sub1{
+  transition: all 1000ms,color 1500ms;
+  margin-left: 35px;
+  text-align:start;
+  text-transform: uppercase;
+  color: transparent;
+  width: 95%;
+  margin-bottom: 25px;
+  font-size: calc(6px + 2vmin);
+  line-height: calc(6px + 2vmin);;
+  letter-spacing: 0px;
+  font-weight:lighter;
+}
+
+.sub2{
+  transition: all 1000ms;
+  margin-left: 35px;
+  text-transform: uppercase;
+  text-align:start;
+  width: 95%;
+  color:white;
+  letter-spacing: 0px;
+  margin-bottom: 25px;
+  font-size: calc(6px + 2vmin);
+  line-height: calc(6px + 2vmin);;
+  font-weight:lighter;
+}
+.divInfo{
+  transition: all 1000ms;
+  top:0;
+  height:10%
+}
+.divInfo2{
+  transition: all 1000ms;
+  height:100%;
 }

@@ -7,21 +7,21 @@ const Img = styled.div`
   box-shadow: 0px 45vh rgba(0, 0, 0, 0.35) inset;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 150%;
+  background-size: 150% 150%;
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction:column;
+  align-items: flex-start;
+  justify-content: flex-end;
   width: 100%;
   height: 100%;
-  transition: all 200ms;
+  transition: all 600ms;
   @media (max-width: 600px) {
     background-size: cover;
   }
   :hover {
-    transition: all 200ms;
-    box-shadow: 0px 45vh rgba(0, 0, 0, 0.7) inset;
-    background-size: 154%;
+    transition: all 600ms;
+    box-shadow: 0px 45vh rgba(0, 0, 0, 0.75) inset;
     cursor:pointer
   }
 `;
@@ -37,10 +37,34 @@ class InstituteImage extends Component {
     this.setState({...this.state,hover:!this.state.hover})
   }
   render() {
+    const renderCities = () => {
+
+      return this.props.cities.map(row => (
+          <h1 className='h1Cities'>{row}</h1>
+      ))
+    }
+    const renderAreas = () => {
+
+      return this.props.areas.map(row => (
+          <h1 className='h1Cities'>{row}</h1>
+      ))
+    }
     return (
      <div onMouseOver={this.changeHover.bind(this)} onMouseOut={this.changeOut.bind(this)} className='root'>
         <Img input={this.props.input}>
           <h1 className={this.state.hover ? 'title2' : 'title'}>{this.props.name}</h1>
+          <div className={this.state.hover ? 'divInfo2' : 'divInfo'}>
+            <h1 className={this.state.hover ? 'sub2' : 'sub1'}>{this.props.sub}</h1>
+            <h1 className={this.state.hover ? 'info2' : 'info1'}>City:</h1>
+            <div className={this.state.hover ? 'cities2' : 'cities1'}>
+            {renderCities()}
+            </div>
+            <h1 className={this.state.hover ? 'info4' : 'info3'}>Areas:</h1>
+            <div className={this.state.hover ? 'cities2' : 'cities1'}>
+            {renderAreas()}
+            </div>
+          </div>
+          
         </Img>
      </div>
     )

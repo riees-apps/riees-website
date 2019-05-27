@@ -9,6 +9,7 @@ import img2 from "./ei.jpg";
 import img3 from "./ee.jpg";
 import img4 from "./oi.jpg";
 import img5 from "./ola.jpg";
+import img6 from "./oe.jpg";
 import ufes from './imgs/ufes.jpg'
 import uvv from './imgs/uvv.jpg'
 import fdv from './imgs/fdv.png'
@@ -35,7 +36,7 @@ const Image = styled.div`
   position: relative;
   height: ${props => props.height};
   @media (max-height: 600px) {
-    height: 100vh;
+    height: 90vh;
   }
   background-attachment: fixed;
   background-position: center;
@@ -98,21 +99,33 @@ const DivText = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding-bottom:5vh;
+  padding-bottom:7.5vh;
 `;
 
 class Home extends Component {
   render() {
     return (
       <div>
-        <Image x='0.35' height="100vh" image={img} brightness="120%" contrast="140%" align='center' justify='center'>
+      <Carousel>
+          <Carousel.Item>
+          <Image x='0.3' height="100vh" image={img} brightness="145%" align='center' justify='center'>
           <div>
             <Title>Come to meet us</Title>
             <Subheading>Non distinctio quasi alias est.</Subheading>
           </div>
           <Button name="Learn More" />
-        </Image>
-
+          </Image>
+          </Carousel.Item>
+          <Carousel.Item>
+          <Image x='0.3' height="100vh" image={img} brightness="145%" align='center' justify='center'>
+          <div>
+            <Title>Lorem ipsum dolor</Title>
+            <Subheading>Etiam cursus elementum ante a porttitor.</Subheading>
+          </div>
+          <Button name="Learn More" />
+          </Image>
+          </Carousel.Item>
+      </Carousel>
 
         <DivText>
           <Heading>ABOUT RIEES</Heading>
@@ -127,7 +140,12 @@ class Home extends Component {
             laudantium culpa similique. Vero dignissimos labore quos consequatur
             explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
             ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
+            sequi. Eos aspernatur hic. Nobis autem vel non. Aut molestiae velit id maxime accusantium. Dolorem qui ab
+            accusantium qui et et tenetur facilis. Quia odio hic ea qui
+            molestias minima. Asperiores corrupti id qui rem. Ea a consecteturPlaceat voluptatem corporis
+            ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
             sequi. Eos aspernatur hic. Nobis autem vel non.
+            sequi.
           </Text>
           <Button name='Learn More'/>
         </DivText>
@@ -195,18 +213,18 @@ class Home extends Component {
         
         <Heading>OUR INSTITUTES</Heading>
         <DivInstitutes>
-            <InstituteImage name="UFES" input={ufes} />
-            <InstituteImage name="UVV" input={uvv} />
-            <InstituteImage name="FDV" input={fdv} />
-            <InstituteImage name="IFES" input={ifes} />
-            <InstituteImage name="UCL" input={ucl} />
-            <InstituteImage name="EMESCAm" input={emescam} />
+        <InstituteImage cities={['vitoria','são mateus','alegre']} areas={['engineering','social science','medicine','engineering','social science','medicine','fitness and health','fitness and health']} name="UFES" sub='Universidade Federal do Espirito Santo' input={ufes} />
+            <InstituteImage cities={['vila velha']} areas={['engineering','social science','medicine']} name="UVV" sub='Universidade Vila Velha' input={uvv} />
+            <InstituteImage cities={['vitoria']} areas={['engineering','social science','medicine']} name="FDV" sub='Faculdade de Direito de Vitória' input={fdv} />
+            <InstituteImage cities={['vitoria']} areas={['engineering','social science','medicine']} name="EMESCAM" sub='Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória' input={emescam} />
+            <InstituteImage cities={['serra','cariacica']} areas={['engineering','social science','medicine']} name="UCL" sub='Faculdade do Centro Leste' input={ucl} />
+            <InstituteImage cities={['vitoria','Alegre', 'Aracruz', 'Barra de São Francisco', 'Cachoeiro de Itapemirim', 'Cariacica', 'Santa Maria de Jetibá', 'Colatina', 'Guarapari', 'Ibatiba', 'Itapina', 'Linhares', 'Montanha', 'Nova Venécia', 'Piúma', 'Santa Teresa', 'São Mateus', 'Serra', 'Venda Nova do Imigrante', 'Viana' , 'Vila Velha']} areas={['engineering','social science','medicine']} name="IFES" sub='Instituto Federal do Espirito Santo' input={ifes} />
         </DivInstitutes>
 
         <Carousel className='margin2' fade='true'>   
           <Carousel.Item>
             <Testimonial 
-            x='0.75' height="85vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
+            x='0.75' height="90vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
             p='Aut molestiae velit id maxime accusantium. Dolorem qui ab
                     accusantium qui et et tenetur facilis. Quia odio hic ea qui
                     molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
@@ -224,7 +242,7 @@ class Home extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <Testimonial 
-            x='0.75' height="85vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
+            x='0.75' height="90vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
             p='Voluptatem reiciendis sed perspiciatis. Consequatur a
                     voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
                     temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum

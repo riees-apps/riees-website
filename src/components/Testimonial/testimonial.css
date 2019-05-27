@@ -17,14 +17,15 @@ body,html {
   letter-spacing: 3px;
   width: max-content;
   text-align: center;
-  margin-top: 5vh;
+  margin-top: 7.5vh;
 }
 .paragraph2{
+  font-family: 'Roboto', sans-serif;
   color: #fff;
-  font-size: calc(12px + 1vw);
-  line-height: calc(13px + 1vw);
+  font-size: calc(11px + 1vw);
+  line-height: calc(9px + 1vw);
   width: 75%;
-  font-weight: lighter;
+  font-weight: 100;
   text-align: unset;
   margin-top:auto;
   margin-left: auto;

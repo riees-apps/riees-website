@@ -17,7 +17,7 @@ const StyledLink = styled(Link)`
   padding-left:3px;
   text-decoration: none;
   text-align: center;
-  transition:  all 0.15s linear ;
+  transition:  all 0.15s ease-in ;
   border-bottom: 3px solid transparent;
   @media (max-width: 600px) {
     display:none;
@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
     border-bottom: 3px solid transparent;
     color: #000066;
     transform: scale(1.05);
-    transition:  all 0.15s linear;
+    transition:  all 0.15s ease-in;
   }
   ${props =>
     props.active &&
@@ -55,7 +55,6 @@ const StyledLink = styled(Link)`
     color: #000066;
     transform: scale(1);
     transition:  all 0.15s linear;
-
   }
   `}
   ${props =>
@@ -72,10 +71,13 @@ const StyledLink = styled(Link)`
     font-size: calc(9px + 1vw);
     width:100%;
   }
-  transition:  all 0.05s linear;
+  transition:  all 0.15s linear;
   font-size: calc(1.5px + 1vw);
-  border-bottom: 1px solid #303030;
+  border-bottom: 1px solid #999999;
   border-top: 1px solid transparent;
+  :hover {
+    box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.6);
+    transition:  all 0.15s linear;
   `}
 `;
 class Header extends Component {
@@ -116,30 +118,32 @@ class Header extends Component {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
   componentDidMount() {
-    console.log(window.location.pathname)
+    console.log(window.location.pathname);
     window.onscroll = () => this.handleScroll();
-    this.setState({ ...this.state, active: (window.location.pathname)});
+    this.setState({ ...this.state, active: window.location.pathname });
   }
   render() {
     return (
-      <div className={this.state.scroll ? "container2" : "container1"}>
-        <StyledLink
-          onClick={() => this.handleClick("/")}
-          active={this.state.active === "/" ? true : false}
-          className={this.state.scroll ? "scroll" : ""}
-          to={"/"}
-        >
-          Home
-        </StyledLink>
+      <div shadow={this.state.menu ? true : false} className={this.state.scroll ? "container2" : "container1"}>
+        <div className='containerLinks'>
+          <StyledLink
+            onClick={() => this.handleClick("/")}
+            active={this.state.active === "/" ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={"/"}
+          >
+            Home
+          </StyledLink>
 
-        <StyledLink
-          onClick={() => this.handleClick("/Institutes")}
-          active={this.state.active === "/Institutes" ? true : false}
-          className={this.state.scroll ? "scroll" : ""}
-          to={"/Institutes"}
-        >
-          Our Institutes
-        </StyledLink>
+          <StyledLink
+            onClick={() => this.handleClick("/Institutes")}
+            active={this.state.active === "/Institutes" ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={"/Institutes"}
+          >
+            Our Institutes
+          </StyledLink>
+        </div>
 
         <div className="div">
           <img
@@ -153,66 +157,70 @@ class Header extends Component {
             alt=""
           />
         </div>
-        <StyledLink
-          onMouseOver={this.changeHover.bind(this)}
-          onMouseOut={this.changeOut.bind(this)}
-          active2={(this.state.active === "/Cities") || (this.state.active === "/Coming") || (this.state.active === "/Living")  ? true : false}
-          className={this.state.scroll ? "dropscroll" : "dropdown"}
-        >
-          Espirito Santo
-          <FaCaretUp className={this.state.hover ? "" : "displayNone"} />
-          <FaCaretDown className={this.state.hover ? "displayNone" : ""} />
-          <div class="dropdown-content">
-            <StyledLink
-              li
-              onClick={() => this.handleClick("/Coming")}
-              className={this.state.scroll ? "scroll2" : ""}
-              to={"/Coming"}
-            >
-              Coming to Espirito Santo
-            </StyledLink>
-            <StyledLink
-              li
-              onClick={() => this.handleClick("/Living")}
-              className={this.state.scroll ? "scroll2" : ""}
-              to={"/Living"}
-            >
-              Living in Espirito Santo
-            </StyledLink>
-            <StyledLink
-              li
-              onClick={() => this.handleClick("/Cities")}
-              className={this.state.scroll ? "scroll2" : ""}
-              to={"/Cities"}
-            >
-              Our Cities
-            </StyledLink>
-          </div>
-        </StyledLink>
+        <div className='containerLinks'>
+          <StyledLink
+            onMouseOver={this.changeHover.bind(this)}
+            onMouseOut={this.changeOut.bind(this)}
+            active2={
+              this.state.active === "/Cities" ||
+              this.state.active === "/Coming" ||
+              this.state.active === "/Living"
+                ? true
+                : false
+            }
+            className={this.state.scroll ? "dropscroll" : "dropdown"}
+          >
+            Espirito Santo
+            <div class="dropdown-content">
+              <StyledLink
+                li
+                onClick={() => this.handleClick("/Coming")}
+                className={this.state.scroll ? "scroll2" : ""}
+                to={"/Coming"}
+              >
+                Coming to Espirito Santo
+              </StyledLink>
+              <StyledLink
+                li
+                onClick={() => this.handleClick("/Living")}
+                className={this.state.scroll ? "scroll2" : ""}
+                to={"/Living"}
+              >
+                Living in Espirito Santo
+              </StyledLink>
+              <StyledLink
+                li
+                onClick={() => this.handleClick("/Cities")}
+                className={this.state.scroll ? "scroll2" : ""}
+                to={"/Cities"}
+              >
+                Our Cities
+              </StyledLink>
+            </div>
+            <FaCaretUp className={this.state.hover ? "iconUpDown" : "displayNone"} />
+          <FaCaretDown className={this.state.hover ? "displayNone" : "iconUpDown"} />
+          </StyledLink>
 
-        <StyledLink
-          onClick={() => this.handleClick("/About")}
-          active={this.state.active === "/About" ? true : false}
-          className={this.state.scroll ? "scroll" : ""}
-          to={"/About"}
-        >
-          About Us
-        </StyledLink>
+          <StyledLink
+            onClick={() => this.handleClick("/About")}
+            active={this.state.active === "/About" ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={"/About"}
+          >
+            About Us
+          </StyledLink>
+        </div>
+
         <IoIosMenu
           onClick={this.openMenu.bind(this)}
           className={this.state.menu ? "displayNone" : "menu"}
         />
-        
+
         <div className={this.state.menu ? "menu-content" : "menuNone"}>
           <div className={this.state.menu ? "menu-links" : "menuNone"}>
-            <div
-            onClick={this.openMenu.bind(this)}
-              className="logoMenu"
-            >
-              <IoIosClose
-                className="closee"
-              />
-              CLOSE
+            <div onClick={this.openMenu.bind(this)} className="logoMenu">
+              <IoIosClose className="closee" />
+              <p className="h1Close" >CLOSE</p>
             </div>
             <StyledLink
               li
