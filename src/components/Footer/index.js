@@ -6,7 +6,7 @@ import opa from './opa.jpg'
 
 const StyledLink = styled(Link)`
   text-transform: uppercase;
-  box-sizing: 100%;
+  width:100%;
   color:#fff;
   text-align:start;
   color: #fff;
@@ -14,14 +14,14 @@ const StyledLink = styled(Link)`
   font-size: calc(6px + 1vw);
   line-height: calc(8px + 1vw);
   letter-spacing: 2px;
-  padding: 1% 0;
+  padding: 1% 1%;
   text-decoration: none;
   transition:  all 0.15s linear ;
   margin-bottom:10px;
   :hover {
     text-decoration: none;
-    color: #f1f1f1;
-    letter-spacing: 3px;
+    color: #e1e1e1;
+    transform:scale(1.02);
     transition:  all 0.15s linear;
   }
 `;
@@ -37,19 +37,21 @@ const Image = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
   filter:  contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
+ 
 `;
-const DivText = styled.div`
+const DivText = styled.div`h
   color: #f1f1f1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 100%;
+  width: max-content;
   margin:40px;
+  padding-right:3vw;
 
 `;
 const Title = styled.h1`

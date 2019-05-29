@@ -12,10 +12,10 @@ const DivText = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 5vh 0;
+  padding: 10vh 0;
 `;
 const DivImage = styled.div`
-  padding: 5vh 0;
+  padding: 10vh 0;
   background-image: url(${props => props.image});
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
   position: relative;
@@ -34,10 +34,12 @@ const Heading = styled.h1`
   margin: 0;
   text-transform: uppercase;
   color: ${props => props.color};
-  font-size: calc(30px + 4vw);
-  line-height: calc(30px + 4vw);
+  font-size: calc(20px + 4vw);
+  line-height: calc(20px + 4vw);
   letter-spacing: 3px;
-  padding: 0 0 5vh 0;
+  padding: 0 0 1.5vh 0;
+  margin-bottom:5vh;
+  border-bottom: 8px solid ${props => props.border};
 `;
 const SubHeading = styled.h1`
   margin: 0;
@@ -73,24 +75,19 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px 0;
-  border-top: 3px solid ${props => props.color};
-  border-bottom: 3px solid ${props => props.color};
   width: 80%;
 `;
 class Coming extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>
         <Image title='COMING TO ESPIRITO SANTO' height="100vh" image={img}/>
         <DivText>
-            <Heading color='#0033ff'>Documents you Need</Heading>
-            <Div color='pink'>
-            <Text color='#505050'>
-              Quasi excepturi provident. Ratione laborum nulla sint. Quas et
-              perspiciatis iusto. Similique magnam exercitationem vero velit
-              quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
-              deserunt aut neque provident. Nostrum ea sunt.
-            </Text>
+            <Heading border='pink' color='#0033ff'>Documents you Need</Heading>
+            <Div >
             <SubHeading uppercase='uppercase' color='#303030'>Passport</SubHeading>
             <Text2 color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
@@ -104,7 +101,7 @@ class Coming extends Component {
               deserunt aut neque provident. Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto.
             </Text2>
-            <SubHeading uppercase='uppercase' color='#303030'>Lorem Ipsum</SubHeading>
+            <SubHeading uppercase='uppercase' color='#303030'>Loremipsum</SubHeading>
             <Text2 color='#505050'>
               Similique magnam exercitationem vero velit
               quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
@@ -129,15 +126,8 @@ class Coming extends Component {
           x="0.8"
           image={img2}
         >
-          <Heading color='#f1f1f1'>Before you leave</Heading>
-          <Div color='#f1f1f1'>
-            <Text color='#f1f1f1'>
-              Quasi excepturi provident. Ratione laborum nulla sint. Quas et
-              perspiciatis iusto. Similique magnam exercitationem vero velit
-              quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
-              deserunt aut neque provident. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime.
-            </Text>
+          <Heading border='#f1f1f1' color='#f1f1f1'>Before you leave</Heading>
+          <Div >
             <SubHeading color='#f1f1f1'>
               Similique magnam exercitationem vero velit quis quas incidunt
               animi et.
@@ -191,8 +181,8 @@ class Coming extends Component {
           </Div>
         </DivImage>
         <DivText>
-            <Heading color='#0033ff'>Lorem Ipsum</Heading>
-            <Div color='pink'>
+            <Heading border='pink' color='#0033ff'>Lorem Ipsum</Heading>
+            <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit

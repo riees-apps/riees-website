@@ -20,7 +20,7 @@ div{
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 1000;
   background: white;
   box-sizing: content-box;
   padding: 0.3vw 0;
@@ -37,7 +37,7 @@ div{
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 1000;
   background: white;
   box-sizing: content-box;
   padding: 0.3vw 0;
@@ -45,7 +45,7 @@ div{
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -230,7 +230,7 @@ div{
     background-color: transparent;
     min-width: 70vw;
     height: 100vh;
-    z-index: 1;
+    z-index: 10000;
   }
   .h1Close{
     margin:auto 0;
@@ -263,7 +263,7 @@ div{
   min-width: 70vw;
   height: 100vh;
   box-shadow: -70vw 0 0 0 rgba(0, 0, 0, 0.6);
-  z-index: 1;
+  z-index: 100;
 }
 .logoMenu {
   text-transform: uppercase;

@@ -33,6 +33,7 @@ const StyledLink = styled(Link)`
     props.active &&
     `
     border-bottom: 3px solid #000066;
+    color: #000066;
     text-align: center;
     transition:  all 0.15s linear;
     cursor:default;

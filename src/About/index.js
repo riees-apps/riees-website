@@ -37,7 +37,9 @@ const Heading = styled.h1`
   font-size: calc(30px + 4vw);
   line-height: calc(30px + 4vw);
   letter-spacing: 3px;
-  padding: 0 0 5vh 0;
+  padding: 0 0 1.5vh 0;
+  margin-bottom:5vh;
+  border-bottom: 8px solid ${props => props.border};
 `;
 const Text = styled.h1`
   font-family: 'Roboto', sans-serif;
@@ -54,19 +56,20 @@ const Div = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px 0;
-  border-top: 3px solid ${props => props.color};
-  border-bottom: 3px solid ${props => props.color};
   width: 80%;
 `;
 
 class About extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>
         <Image title="ABOUT US" height="100vh" image={img} />
         <DivText>
-          <Heading color='#0033ff'>Who we are</Heading>
-          <Div color='pink'>
+          <Heading border='pink' color='#0033ff'>Who we are</Heading>
+          <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit
@@ -102,8 +105,8 @@ class About extends Component {
           x="0.6"
           image={img2}
         >
-          <Heading color='#f1f1f1'>Mission</Heading>
-          <Div color='#f1f1f1'>
+          <Heading border='#f1f1f1' color='#f1f1f1'>Mission</Heading>
+          <Div >
             <Text color='#f1f1f1'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit
@@ -136,8 +139,8 @@ class About extends Component {
           </Div>
         </DivImage>
         <DivText>
-          <Heading color='#0033ff'>Lorem Ipsum</Heading>
-          <Div color='pink'>
+          <Heading border='pink' color='#0033ff'>Lorem Ipsum</Heading>
+          <Div>
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit

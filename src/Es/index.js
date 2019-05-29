@@ -5,6 +5,9 @@ const H = styled.h1`
   padding-top:10vh
 `;
 class Es extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>

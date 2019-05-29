@@ -1,0 +1,23 @@
+.icon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 83, 179);
+  font-size: calc(20px + 10vh);
+  width: max-content;
+}
+.areaName {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-size: calc(8px + 1.5vw);
+  line-height: calc(7px + 1.5vw);
+  width: 100%;
+  color: #353535;
+}

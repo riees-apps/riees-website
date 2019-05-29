@@ -15,6 +15,9 @@ const DivText = styled.div`
 `;
 
 class Living extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>

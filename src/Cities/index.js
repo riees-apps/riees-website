@@ -39,6 +39,9 @@ const Heading = styled.h1`
 `;
 
 class Cities extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>

@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import './index.css';
+import { Link } from "react-router-dom";
 
+const DivLink = styled(Link)`
+  decoration: none;
+`;
 const Img = styled.div`
   background: url(${props => props.input});
   box-shadow: 0px 45vh rgba(0, 0, 0, 0.35) inset;
@@ -50,7 +54,7 @@ class InstituteImage extends Component {
       ))
     }
     return (
-     <div onMouseOver={this.changeHover.bind(this)} onMouseOut={this.changeOut.bind(this)} className='root'>
+     <DivLink style={{textDecoration: 'none'}} to={"/Institute/Ufes"} onMouseOver={this.changeHover.bind(this)} onMouseOut={this.changeOut.bind(this)} className='root'>
         <Img input={this.props.input}>
           <h1 className={this.state.hover ? 'title2' : 'title'}>{this.props.name}</h1>
           <div className={this.state.hover ? 'divInfo2' : 'divInfo'}>
@@ -66,7 +70,7 @@ class InstituteImage extends Component {
           </div>
           
         </Img>
-     </div>
+     </DivLink>
     )
   }
 }

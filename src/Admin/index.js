@@ -48,6 +48,9 @@ const Form = styled.form`
 `;
 
 class Admin extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>

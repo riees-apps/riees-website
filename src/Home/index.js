@@ -15,6 +15,7 @@ import uvv from './imgs/uvv.jpg'
 import fdv from './imgs/fdv.png'
 import ucl from './imgs/ucl.jpg'
 import emescam from './imgs/emescam.jpg'
+import unesc from './imgs/unesc.jpg'
 import ifes from './imgs/ifes.jpg'
 import InstituteImage from '../components/InstituteImage/index'
 import Testimonial from '../components/Testimonial/index'
@@ -26,9 +27,15 @@ const DivInstitutes = styled.div`
   flex-direction: row;
   flex-wrap:wrap;
   align-items: flex-start;
-  justify-content: space-around;
-  width:100%;
-  padding:5vh 0;
+  justify-content: space-between;
+  width:90%;
+  padding:4vh 0;
+  margin-left:auto;
+  margin-right:auto;
+  @media (max-width: 767px) {
+    justify-content: center;
+    width:100%;
+  }
 `;
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -103,6 +110,9 @@ const DivText = styled.div`
 `;
 
 class Home extends Component {
+  componentDidMount() {
+    document.documentElement.scrollTop = 0
+  }
   render() {
     return (
       <div>
@@ -218,6 +228,7 @@ class Home extends Component {
             <InstituteImage cities={['vitoria']} areas={['engineering','social science','medicine']} name="FDV" sub='Faculdade de Direito de Vitória' input={fdv} />
             <InstituteImage cities={['vitoria']} areas={['engineering','social science','medicine']} name="EMESCAM" sub='Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória' input={emescam} />
             <InstituteImage cities={['serra','cariacica']} areas={['engineering','social science','medicine']} name="UCL" sub='Faculdade do Centro Leste' input={ucl} />
+            <InstituteImage cities={['serra','colatina']} areas={['engineering','social science','medicine']} name="UNESC" sub='Centro Universitário do Espírito Santo' input={unesc} />
             <InstituteImage cities={['vitoria','Alegre', 'Aracruz', 'Barra de São Francisco', 'Cachoeiro de Itapemirim', 'Cariacica', 'Santa Maria de Jetibá', 'Colatina', 'Guarapari', 'Ibatiba', 'Itapina', 'Linhares', 'Montanha', 'Nova Venécia', 'Piúma', 'Santa Teresa', 'São Mateus', 'Serra', 'Venda Nova do Imigrante', 'Viana' , 'Vila Velha']} areas={['engineering','social science','medicine']} name="IFES" sub='Instituto Federal do Espirito Santo' input={ifes} />
         </DivInstitutes>
 
