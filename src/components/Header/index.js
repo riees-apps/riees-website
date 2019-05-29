@@ -119,7 +119,6 @@ class Header extends Component {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
   componentDidMount() {
-    console.log(window.location.pathname);
     window.onscroll = () => this.handleScroll();
     this.setState({ ...this.state, active: window.location.pathname });
   }

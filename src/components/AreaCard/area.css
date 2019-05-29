@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   color: rgb(0, 83, 179);
-  font-size: calc(20px + 10vh);
+  font-size: calc(25px + 10vh);
   width: max-content;
 }
 .areaName {

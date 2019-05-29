@@ -24,9 +24,9 @@ const Card = styled.div`
   background: white;
   height: 25vh;
   margin-bottom: 3%;
-  margin-left: 1.5%;
-  margin-right: 0.5%;
-  width: 31%;
+  margin-left: 2%;
+  margin-right: 1%;
+  width: 30%;
   z-index: 100;
   box-shadow: 0px 0px 5px 0.3px rgba(0, 0, 0, 0.8);
   position: relative;
@@ -72,7 +72,7 @@ class AreaCard extends Component {
     return (
       <DivAreas>
         <DivHeading>
-          <Heading>UFES</Heading>
+          <Heading>{this.props.name}</Heading>
           <Heading color="rgb(0, 83, 180)">areas</Heading>
         </DivHeading>
         <DivCards>{renderAreas()}</DivCards>

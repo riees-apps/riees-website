@@ -110,51 +110,86 @@ class SideMenu extends Component {
         <Div justify="flex-start">
           <Heading color='#161030'>Institutes</Heading>
           <StyledLink
-            onClick={() => this.handleClick("/")}
+            onClick={() => this.handleClick("/Institute/Ufes")}
             active={this.state.active === "/Institute/Ufes" ? true : false}
-            to={"/"}
+            to={{
+              pathname:"/Institute/Ufes",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             UFES
           </StyledLink>
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
-            to={"/"}
+            onClick={() => this.handleClick("/Institute/Uvv")}
+            active={this.state.active === "/Institute/Uvv" ? true : false}
+            to={{
+              pathname:"/Institute/Uvv",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             UVV
           </StyledLink>
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
-            to={"/"}
+            onClick={() => this.handleClick("/Institute/Fdv")}
+            active={this.state.active === "/Institute/Fdv" ? true : false}
+            to={{
+              pathname:"/Institute/Fdv",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             FDV
           </StyledLink>
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
-            to={"/"}
+            onClick={() => this.handleClick("/Institute/Ucl")}
+            active={this.state.active === "/Institute/Ucl" ? true : false}
+            to={{
+              pathname:"/Institute/Ucl",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             UCL
           </StyledLink>
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
-            to={"/"}
+            onClick={() => this.handleClick("/Institute/Ifes")}
+            active={this.state.active === "/Institute/Ifes" ? true : false}
+            to={{
+              pathname:"/Institute/Ifes",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             IFES
           </StyledLink>
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
-            to={"/"}
+            onClick={() => this.handleClick("/Institute/Emescam")}
+            active={this.state.active === "/Institute/Emescam" ? true : false}
+            to={{
+              pathname:"/Institute/Emescam",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             EMESCAM
           </StyledLink>
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
-            to={"/"}
+            onClick={() => this.handleClick("/Institute/Unesc")}
+            active={this.state.active === "/Institute/Unesc" ? true : false}
+            to={{
+              pathname:"/Institute/Unesc",
+              state: { 
+                scrollTop: 1 
+              } 
+            }}
           >
             UNESC
           </StyledLink>

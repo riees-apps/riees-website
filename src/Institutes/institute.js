@@ -4,8 +4,6 @@ import Footer from "../components/Footer/index";
 import SideMenu from "../components/SideMenu/index";
 import AreaCard from "../components/AreaCard/index";
 import Button from "../components/Button/index";
-import logo from "./imgs/ufeslogo.png";
-import img from "./imgs/ufes.jpg";
 
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -103,47 +101,54 @@ const Container = styled.div`
 const Img = styled.div`
   background:white;
   padding-bottom:10vh;
+  padding-top:3vh;
   width:100%;
   z-index:100;
   position:relative;
 `;
-const areas = [
-  {name: 'Engineering',icon:'cog'},
-  {name: 'Social Science',icon:'users'},
-  {name: 'Health & Fitness',icon:'dumbbell'},
-  {name: 'Information Technology',icon:'desktop'},
-  {name: 'Exact Science',icon:'flask'},
-  {name: 'Medicine',icon:'user-md'},
-];
+const Logo = styled.img`
+  width:15vw;
+  height:15vh;
+  z-index:100;
+  position:relative;
+`;
+
 class Institute extends Component {
   componentDidMount() {
-    document.documentElement.scrollTop = 0
+    if(this.props.location.state.scrollTop === 0){
+      document.documentElement.scrollTop = this.props.location.state.scrollTop
+    }
+  }
+  handleClick(url) {
+    console.log(url)
   }
   render() {
+    const {name,sub,img,logo,areas,url} = this.props
+
     return (
       <div >
         <Image x='0.6' height="80vh" image={img} >
           <div>
-            <Title>UFES</Title>
-            <Subheading>Universidade Federal do Espirito Santo</Subheading>
+            <Title>{name}</Title>
+            <Subheading>{sub}</Subheading>
           </div>
         </Image>
         <Img >
-          <img src={logo} alt=''/>
+          <Logo src={logo} alt=''/>
         </Img>
         <Container>
           <SideMenu/>
           <DivText>
             <Div justify="flex-start">
-              <Heading>UFES</Heading>
+              <Heading>{name}</Heading>
               <Heading color="rgb(0, 83, 180)">overview</Heading>
             </Div>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
-              <AreaCard areas={areas}/>
-              <Button name='Visit the institute website'></Button>
+              <AreaCard name={name} areas={areas}/>
+              <Button url={url}  name='Visit the institute website'></Button>
           </DivText>
         </Container>
         <Footer/>

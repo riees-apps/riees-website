@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import './index.css';
+import React, { Component } from "react";
+import styled from "styled-components";
+import "./index.css";
 import { Link } from "react-router-dom";
 
 const DivLink = styled(Link)`
@@ -14,7 +14,7 @@ const Img = styled.div`
   background-size: 150% 150%;
   position: relative;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
   width: 100%;
@@ -26,52 +26,60 @@ const Img = styled.div`
   :hover {
     transition: all 600ms;
     box-shadow: 0px 45vh rgba(0, 0, 0, 0.75) inset;
-    cursor:pointer
+    cursor: pointer;
   }
 `;
 
 class InstituteImage extends Component {
-  state={
-    hover:false
+  state = {
+    hover: false
+  };
+  changeHover() {
+    this.setState({ ...this.state, hover: !this.state.hover });
   }
-  changeHover(){
-    this.setState({...this.state,hover:!this.state.hover})
-  }
-  changeOut(){
-    this.setState({...this.state,hover:!this.state.hover})
+  changeOut() {
+    this.setState({ ...this.state, hover: !this.state.hover });
   }
   render() {
     const renderCities = () => {
-
-      return this.props.cities.map(row => (
-          <h1 className='h1Cities'>{row}</h1>
-      ))
-    }
+      return this.props.cities.map(row => <h1 className="h1Cities">{row}</h1>);
+    };
     const renderAreas = () => {
-
-      return this.props.areas.map(row => (
-          <h1 className='h1Cities'>{row}</h1>
-      ))
-    }
+      return this.props.areas.map(row => <h1 className="h1Cities">{row}</h1>);
+    };
     return (
-     <DivLink style={{textDecoration: 'none'}} to={"/Institute/Ufes"} onMouseOver={this.changeHover.bind(this)} onMouseOut={this.changeOut.bind(this)} className='root'>
+      <DivLink
+        style={{ textDecoration: "none" }}
+        to={{
+          pathname: this.props.url,
+          state: {
+            scrollTop: 0,
+          },
+        }}
+        onMouseOver={this.changeHover.bind(this)}
+        onMouseOut={this.changeOut.bind(this)}
+        className="root"
+      >
         <Img input={this.props.input}>
-          <h1 className={this.state.hover ? 'title2' : 'title'}>{this.props.name}</h1>
-          <div className={this.state.hover ? 'divInfo2' : 'divInfo'}>
-            <h1 className={this.state.hover ? 'sub2' : 'sub1'}>{this.props.sub}</h1>
-            <h1 className={this.state.hover ? 'info2' : 'info1'}>City:</h1>
-            <div className={this.state.hover ? 'cities2' : 'cities1'}>
-            {renderCities()}
+          <h1 className={this.state.hover ? "title2" : "title"}>
+            {this.props.name}
+          </h1>
+          <div className={this.state.hover ? "divInfo2" : "divInfo"}>
+            <h1 className={this.state.hover ? "sub2" : "sub1"}>
+              {this.props.sub}
+            </h1>
+            <h1 className={this.state.hover ? "info2" : "info1"}>City:</h1>
+            <div className={this.state.hover ? "cities2" : "cities1"}>
+              {renderCities()}
             </div>
-            <h1 className={this.state.hover ? 'info4' : 'info3'}>Areas:</h1>
-            <div className={this.state.hover ? 'cities2' : 'cities1'}>
-            {renderAreas()}
+            <h1 className={this.state.hover ? "info4" : "info3"}>Areas:</h1>
+            <div className={this.state.hover ? "cities2" : "cities1"}>
+              {renderAreas()}
             </div>
           </div>
-          
         </Img>
-     </DivLink>
-    )
+      </DivLink>
+    );
   }
 }
-export default InstituteImage
+export default InstituteImage;

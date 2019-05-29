@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const Btn = styled.div`
+const Btn = styled.button`
+  border:none;
   color: white;
   letter-spacing: 3px;
   display: flex;
@@ -25,8 +26,11 @@ const Btn = styled.div`
 `;
 
 class Button extends Component {
+  handleClick(url) {
+    window.location.href = url
+  }
   render() {
-    return <Btn>{this.props.name}</Btn>;
+    return <Btn onClick={() => this.handleClick(this.props.url)}>{this.props.name}</Btn>;
   }
 }
 export default Button;
