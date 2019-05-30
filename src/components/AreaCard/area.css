@@ -5,19 +5,46 @@
   align-items: center;
   justify-content: center;
   color: rgb(0, 83, 179);
-  font-size: calc(25px + 10vh);
+  font-size: calc(85px);
   width: max-content;
 }
 .areaName {
+  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
   margin-bottom: 0;
-  letter-spacing: 2px;
+  letter-spacing: -1px;
   font-size: calc(8px + 1.5vw);
   line-height: calc(7px + 1.5vw);
   width: 100%;
-  color: #353535;
+  color: #454545;
+}
+@media screen and (max-width: 768px) {
+  .icon {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 83, 179);
+    font-size: calc(10px + 8vh);
+    width: max-content;
+  }
+  .areaName {
+    font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 0;
+    letter-spacing: 0px;
+    font-size: calc(8px + 3vw);
+    line-height: calc(7px + 3vw);
+    width: 100%;
+    color: #454545;
+  }
 }

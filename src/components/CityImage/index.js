@@ -4,10 +4,10 @@ import './index.css';
 
 const Img = styled.div`
   background: url(${props => props.input});
-  box-shadow: 0px 45vh rgba(0, 0, 0, 0.35) inset;
+  box-shadow: 0px 40vh rgba(0, 0, 0, 0.35) inset;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 150%;
+  background-size: 170%;
   position: relative;
   display: flex;
   align-items: center;
@@ -15,14 +15,17 @@ const Img = styled.div`
   width: 100%;
   height: 100%;
   transition: all 500ms;
+  :hover {
+    transition: all 500ms;
+    box-shadow: 0px 40vh rgba(0, 0, 0, 0.7) inset;
+    background-size: 160%;
+    cursor:pointer
+  }
   @media (max-width: 600px) {
     background-size: cover;
   }
-  :hover {
-    transition: all 500ms;
-    box-shadow: 0px 45vh rgba(0, 0, 0, 0.7) inset;
-    background-size: 160%;
-    cursor:pointer
+  @media (min-height: 1050px) {
+    background-size: 200%;
   }
 `;
 
@@ -39,7 +42,7 @@ class InstituteImage extends Component {
   render() {
     return (
      <div onMouseOver={this.changeHover.bind(this)} onMouseOut={this.changeOut.bind(this)} className='rootCity'>
-        <Img input={this.props.input}>
+        <Img input={this.props.img}>
           <h1 className={this.state.hover ? 'titleCity2' : 'titleCity'}>{this.props.name}</h1>
         </Img>
      </div>

@@ -5,15 +5,16 @@ body,html {
 .root {
   position: relative;
   width: 85%;
-  height: 45vh;
+  height: 35vh;
   top: 0;
   margin-top: 3%;
+  margin-bottom: 7%;
 }
 @media screen and (min-width: 550px) {
   .root {
     position: relative;
-    width: 75%;
-    height: 45vh;
+    width: 80%;
+    height: 35vh;
     top: 0;
     margin-top: 3%;
   }
@@ -21,8 +22,8 @@ body,html {
 @media screen and (min-width: 768px) {
   .root {
     position: relative;
-    width: 47%;
-    height: 45vh;
+    width: 80%;
+    height: 40vh;
     top: 0;
     margin-top: 3%;
   }

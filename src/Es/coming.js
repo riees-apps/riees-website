@@ -6,7 +6,7 @@ import Image from '../components/Image/index'
 import Footer from '../components/Footer/index'
 
 const DivText = styled.div`
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,6 @@ const Heading = styled.h1`
   line-height: calc(20px + 4vw);
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
-  margin-bottom:5vh;
   border-bottom: 8px solid ${props => props.border};
 `;
 const SubHeading = styled.h1`
@@ -126,53 +125,53 @@ class Coming extends Component {
           x="0.8"
           image={img2}
         >
-          <Heading border='#f1f1f1' color='#f1f1f1'>Before you leave</Heading>
+          <Heading border='#fafafa' color='#fafafa'>Before you leave</Heading>
           <Div >
-            <SubHeading color='#f1f1f1'>
+            <SubHeading color='#fafafa'>
               Similique magnam exercitationem vero velit quis quas incidunt
               animi et.
             </SubHeading>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Itaque qui autem eum. Delectus necessitatibus molestias. Ut ipsam
               accusamus labore molestiae ut tenetur quia voluptas
               velit.Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </Text2>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </Text2>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </Text2>
-            <SubHeading color='#f1f1f1'>
+            <SubHeading color='#fafafa'>
               Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </SubHeading>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </Text2>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Itaque qui autem eum. Delectus necessitatibus molestias. Ut ipsam
               accusamus labore molestiae ut tenetur quia voluptas
               velit.Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </Text2>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.
             </Text2>
-            <Text2 color='#f1f1f1'>
+            <Text2 color='#fafafa'>
               Doloribus voluptatibus at et. Cum aut deserunt
               aut neque provident.Similique magnam exercitationem vero velit quis quas
               incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
@@ -183,6 +182,10 @@ class Coming extends Component {
         <DivText>
             <Heading border='pink' color='#0033ff'>Lorem Ipsum</Heading>
             <Div >
+            <SubHeading color='#303030'>
+              Similique magnam exercitationem vero velit quis quas incidunt
+              animi et.
+            </SubHeading>
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit

@@ -141,7 +141,7 @@ const Institutes = [
 ];
 
 const DivInstitutes = styled.div`
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -152,7 +152,7 @@ const DivInstitutes = styled.div`
   padding:4vh 0;
   margin-left:auto;
   margin-right:auto;
-  @media (max-width: 767px) {
+  @media (max-width: 992px) {
     justify-content: center;
     width:100%;
   }

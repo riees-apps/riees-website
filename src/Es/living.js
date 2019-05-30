@@ -5,7 +5,7 @@ import Image from '../components/Image/index'
 
 
 const DivText = styled.div`
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;

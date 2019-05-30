@@ -6,8 +6,8 @@ const Image = styled.div`
   box-shadow: 0px 100vh rgba(0, 0, 0, 0.25) inset;
   position: relative;
   height: ${props => props.height};
-  @media (max-height: 600px) {
-    height: 90vh;
+  @media (max-width: 600px) {
+    height: calc(87vh);
   }
   background-attachment: fixed;
   background-position: center;
@@ -24,7 +24,7 @@ const Image = styled.div`
 const Title = styled.h1`
   text-shadow: 3px 3px black;
   text-transform: uppercase;
-  color: white;
+  color: #fafafa;
   font-size: calc(50px + 4vw);
   line-height: calc(50px + 4vw);
   letter-spacing: 4px;

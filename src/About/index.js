@@ -6,7 +6,7 @@ import Image from "../components/Image/index";
 import Footer from "../components/Footer/index";
 
 const DivText = styled.div`
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,7 @@ const Heading = styled.h1`
   line-height: calc(30px + 4vw);
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
-  margin-bottom:5vh;
+  margin-bottom:2.5vh;
   border-bottom: 8px solid ${props => props.border};
 `;
 const Text = styled.h1`
@@ -68,7 +68,7 @@ class About extends Component {
       <div>
         <Image title="ABOUT US" height="100vh" image={img} />
         <DivText>
-          <Heading border='pink' color='#0033ff'>Who we are</Heading>
+          <Heading border='#FE86AC' color='#0033ff'>Who we are</Heading>
           <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
@@ -105,9 +105,9 @@ class About extends Component {
           x="0.6"
           image={img2}
         >
-          <Heading border='#f1f1f1' color='#f1f1f1'>Mission</Heading>
+          <Heading border='#fafafa' color='#fafafa'>Mission</Heading>
           <Div >
-            <Text color='#f1f1f1'>
+            <Text color='#fafafa'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit
               quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
@@ -117,7 +117,7 @@ class About extends Component {
               molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
               voluptas velit.
             </Text>
-            <Text color='#f1f1f1'>
+            <Text color='#fafafa'>
               Similique magnam exercitationem vero velit quis quas incidunt
               animi et. Doloribus voluptatibus at et. Cum aut deserunt aut neque
               provident.Quasi excepturi provident. Ratione laborum nulla sint.
@@ -127,7 +127,7 @@ class About extends Component {
               molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
               voluptas velit.
             </Text>
-            <Text color='#f1f1f1'>
+            <Text color='#fafafa'>
               Itaque qui autem eum. Delectus necessitatibus molestias. Ut ipsam
               accusamus labore molestiae ut tenetur quia voluptas
               velit.Similique magnam exercitationem vero velit quis quas
@@ -139,7 +139,7 @@ class About extends Component {
           </Div>
         </DivImage>
         <DivText>
-          <Heading border='pink' color='#0033ff'>Lorem Ipsum</Heading>
+          <Heading border='#FE86AC' color='#0033ff'>Lorem Ipsum</Heading>
           <Div>
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et

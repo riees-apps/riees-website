@@ -1,41 +1,52 @@
 import React, { Component } from 'react'
-import CityImage from '../components/CityImage/index'
+import CitiesImages from '../components/Cities/index'
 import Img from '../components/Image/index'
+import Footer from '../components/Footer/index'
 import styled from "styled-components";
-import img2 from './ei.jpg';
 import img3 from './ola.jpg';
 
-const DivInstitutes = styled.div`
-  background-color: #f1f1f1;
-  min-height: 100vh;
+const Div = styled.div`
+  background-color: #fafafa;
   display: flex;
   flex-direction: row;
-  flex-wrap:wrap;
-  align-items: flex-start;
-  justify-content: space-around;
-  width:100%;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding-top: 6vh;
 `;
+
 const DivText = styled.div`
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   display: flex;
   flex-direction: row;
   flex-wrap:wrap;
   justify-content: space-around;
   text-align: center;
   width:100%;
-  padding:5vh 0;
+  padding:1vh 0;
 `;
 const Heading = styled.h1`
-  font-family: 'Oswald', sans-serif;
-  width:80%;
-  box-sizing: 100%;
-  color:#404040;
-  font-size: calc(10px + 1vw);
-  margin-top: 2.5vh;
-  padding: 2.5vh 0;
-  border-bottom: 1px solid #000066;
-  border-top: 1px solid #000066;
-  font-weight:lighter;
+  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  width: 80%;
+  text-align:center;
+  color: #404040;
+  font-size: calc(12px + 0.5vw);
+  font-weight: lighter
+`;
+const Title = styled.h1`
+  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  background: #fafafa;
+  color: ${props => props.color};
+  font-size: calc(30px + 3vw);
+  line-height: calc(30px + 3vw);
+  letter-spacing: 0px;
+  padding: 6vh calc(2vh);
+  @media (max-width: 769px) {
+     padding: 6vh calc(1vh);
+    }
+  padding-bottom: 1vh;
 `;
 
 class Cities extends Component {
@@ -44,19 +55,25 @@ class Cities extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{background:'#fafafa'}}>
       <Img height="100vh" image={img3} title="Our Cities"/>
-      <DivText>
-        <Heading>In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam ullam possimus voluptas. Corrupti officia beatae hic omnis porro dignissimos voluptas aliquid. Illum quis labore est. Recusandae qui ut at qui consequatur quia omnis eos beatae.</Heading>
-      </DivText>
-         <DivInstitutes>
-            <CityImage name="Vitória" input={img2} />
-            <CityImage name="Vila Velha" input={img2} />
-            <CityImage name="Vitória" input={img2} />
-            <CityImage name="Cariacica" input={img2} />
-            <CityImage name="Serra" input={img2} />
-            <CityImage name="Guarapari" input={img2} />
-        </DivInstitutes>
+
+      <Div>
+          <Title color='#505050'>Meet</Title>
+          <Title color='#4247FE'>our cities</Title>
+        </Div>
+        <DivText>
+          <Heading>
+            In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam
+            ullam possimus voluptas. Corrupti officia beatae hic omnis porro
+            dignissimos voluptas aliquid. Illum quis labore est. Recusandae qui
+            ut at qui consequatur quia omnis eos beatae. In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam
+            ullam possimus voluptas. Corrupti officia beatae hic omnis porro
+            dignissimos.
+          </Heading>
+        </DivText>
+      <CitiesImages/>
+      <Footer/>
       </div>
     )
   }

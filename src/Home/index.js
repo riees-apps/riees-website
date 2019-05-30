@@ -17,8 +17,8 @@ const Image = styled.div`
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
   position: relative;
   height: ${props => props.height};
-  @media (max-height: 600px) {
-    height: 90vh;
+  @media (max-width: 600px) {
+    height: calc(87vh);
   }
   background-attachment: fixed;
   background-position: center;
@@ -36,7 +36,7 @@ const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
-  color: white;
+  color: #fafafa;
   font-size: calc(50px + 4vw);
   line-height: calc(50px + 4vw);
   letter-spacing: 4px;
@@ -44,7 +44,7 @@ const Title = styled.h1`
   margin-top: calc(50px + 3vw)
 `;
 const Subheading = styled.h4`
-  color: white;
+  color: #fafafa;
   font-size: calc(13px + 1vw);
   letter-spacing: 1px;
   font-weight: lighter;
@@ -55,7 +55,7 @@ const Subheading = styled.h4`
 const Heading = styled.h1`
   font-family: 'Oswald', sans-serif;
   margin:0;
-  background:#f1f1f1;
+  background:#fafafa;
   text-transform: uppercase;
   color: #0033ff;
   font-size: calc(30px + 4vw);
@@ -64,9 +64,10 @@ const Heading = styled.h1`
   padding-top:5vh;
 `;
 const Text = styled.h1`
+font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   margin:40px 0;
   color: #505050;
-  font-weight:100;
+  font-weight:lighter;
   font-size: calc(10px + 1vw);
   line-height: calc(10px + 1vw);
   padding: calc(10px + 1vw) 0;
@@ -75,7 +76,7 @@ const Text = styled.h1`
   width: 80%;
 `;
 const DivText = styled.div`
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,7 +91,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <div style={{ backgroundColor: "#f1f1f1" }}>
+      <div style={{ backgroundColor: "#fafafa" }}>
       <Carousel>
           <Carousel.Item>
           <Image x='0.3' height="100vh" image={img} brightness="145%" align='center' justify='center'>
@@ -135,7 +136,7 @@ class Home extends Component {
           <Button url='/About' name='Learn More'/>
         </DivText>
 
-        <Carousel>
+        <Carousel >
           <Carousel.Item>
             <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
                 <h1 className='head'>Coming to Espirito Santo</h1>

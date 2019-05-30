@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { IoIosMenu, IoIosClose } from "react-icons/io";
 
 import "./header.css";
 import logo1 from "./riees1.png";
@@ -33,12 +32,18 @@ const StyledLink = styled(Link)`
     props.active &&
     `
     border-bottom: 3px solid #000066;
+    @media (max-width: 600px) {
+      border-bottom: none;
+    }
     color: #000066;
     text-align: center;
     transition:  all 0.15s linear;
     cursor:default;
     :hover {
     border-bottom: 3px solid #000066;
+    @media (max-width: 600px) {
+      border-bottom: none;
+    }
     color: #000066;
     transform: scale(1);
     transition:  all 0.15s linear;
@@ -48,11 +53,17 @@ const StyledLink = styled(Link)`
     props.active2 &&
     `
     border-bottom: 3px solid #000066;
+    @media (max-width: 600px) {
+      border-bottom: none;
+    }
     text-align: center;
     color: #000066;
     transition:  all 0.15s linear;
     :hover {
     border-bottom: 3px solid #000066;
+    @media (max-width: 600px) {
+      border-bottom: none;
+    }
     color: #000066;
     transform: scale(1);
     transition:  all 0.15s linear;
@@ -61,6 +72,14 @@ const StyledLink = styled(Link)`
   ${props =>
     props.li &&
     `
+  transition:  all 0.15s linear;
+  font-size: calc(1.5px + 1vw);
+  border-bottom: 1px solid #999999;
+  border-top: 1px solid transparent;
+  :hover {
+    box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.6);
+    transition:  all 0.15s linear;
+  }
   @media (max-width: 600px) {
     display:block;
     letter-spacing: 2px;
@@ -71,14 +90,14 @@ const StyledLink = styled(Link)`
     padding-bottom:10px;
     font-size: calc(9px + 1vw);
     width:100%;
+    :hover {
+      transform: scale(1);
+      color: #303030;
+      text-align: start;
+      transition:  all 0.15s linear;
+      cursor:default;
   }
-  transition:  all 0.15s linear;
-  font-size: calc(1.5px + 1vw);
-  border-bottom: 1px solid #999999;
-  border-top: 1px solid transparent;
-  :hover {
-    box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.6);
-    transition:  all 0.15s linear;
+  }
   `}
 `;
 class Header extends Component {
@@ -86,7 +105,7 @@ class Header extends Component {
     super();
     this.state = {
       scroll: false,
-      active: "/Home",
+      active: "/",
       hover: false,
       menu: false
     };
@@ -106,7 +125,7 @@ class Header extends Component {
   handleClick(active) {
     this.setState({
       active: active,
-      menu: !this.state.menu
+      menu: false
     });
   }
   openMenu() {
@@ -211,22 +230,18 @@ class Header extends Component {
           </StyledLink>
         </div>
 
-        <IoIosMenu
+        <i
           onClick={this.openMenu.bind(this)}
-          className={this.state.menu ? "displayNone" : "menu"}
+          className={this.state.menu ? "fa fa-times menu" : "fa fa-bars menu"}
         />
-
-        <div className={this.state.menu ? "menu-content" : "menuNone"}>
+        <div onClick={this.openMenu.bind(this)} className={this.state.menu ? "menu-content" : "menu-contentNone"}>
           <div className={this.state.menu ? "menu-links" : "menuNone"}>
-            <div onClick={this.openMenu.bind(this)} className="logoMenu">
-              <IoIosClose className="closee" />
-              <p className="h1Close" >CLOSE</p>
-            </div>
+
             <StyledLink
               li
               onClick={() => this.handleClick("/")}
-              active={this.state.active === "/" ? true : false}
-              className={this.state.active === "/" ? "active" : ""}
+              active={window.location.pathname === "/" ? true : false}
+              className={window.location.pathname === "/" ? "active" : ""}
               to={"/"}
             >
               Home
@@ -234,8 +249,8 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Institutes")}
-              active={this.state.active === "/Institutes" ? true : false}
-              className={this.state.active === "/Institutes" ? "active" : ""}
+              active={window.location.pathname === "/Institutes" ? true : false}
+              className={window.location.pathname === "/Institutes" ? "active" : ""}
               to={"/Institutes"}
             >
               Our Institutes
@@ -243,8 +258,8 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Coming")}
-              active2={this.state.active === "/Coming" ? true : false}
-              className={this.state.active === "/Coming" ? "active" : ""}
+              active2={window.location.pathname === "/Coming" ? true : false}
+              className={window.location.pathname === "/Coming" ? "active" : ""}
               to={"/Coming"}
             >
               Coming to Espirito Santo
@@ -252,8 +267,8 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Living")}
-              active2={this.state.active === "/Living" ? true : false}
-              className={this.state.active === "/Living" ? "active" : ""}
+              active2={window.location.pathname === "/Living" ? true : false}
+              className={window.location.pathname === "/Living" ? "active" : ""}
               to={"/Living"}
             >
               Living in Espirito Santo
@@ -261,8 +276,8 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Cities")}
-              active2={this.state.active === "/Cities" ? true : false}
-              className={this.state.active === "/Cities" ? "active" : ""}
+              active2={window.location.pathname === "/Cities" ? true : false}
+              className={window.location.pathname === "/Cities" ? "active" : ""}
               to={"/Cities"}
             >
               Our Cities
@@ -270,8 +285,8 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/About")}
-              active={this.state.active === "/About" ? true : false}
-              className={this.state.active === "/About" ? "active" : ""}
+              active={window.location.pathname === "/About" ? true : false}
+              className={window.location.pathname === "/About" ? "active" : ""}
               to={"/About"}
             >
               About Us

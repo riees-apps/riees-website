@@ -11,7 +11,7 @@ body,html {
 }
 .head2{
   text-transform: uppercase;
-  color: #fff;
+  color: #fafafa;
   font-size: calc(40px + 2.6vw);
   line-height: calc(40px + 2.6vw);
   letter-spacing: 3px;
@@ -21,7 +21,7 @@ body,html {
 }
 .paragraph2{
   font-family: 'Roboto', sans-serif;
-  color: #fff;
+  color: #fafafa;
   font-size: calc(11px + 1vw);
   line-height: calc(9px + 1vw);
   width: 75%;
@@ -32,7 +32,7 @@ body,html {
   margin-right: auto;
 }
 .autor{
-  color: #fff;
+  color: #fafafa;
   font-size: calc(10px + 1.5vw);
   line-height: calc(10px + 1.5vw);
   letter-spacing: 1px;
@@ -41,7 +41,7 @@ body,html {
   text-align: center;
 }
 .city{
-  color: #fff;
+  color: #fafafa;
   font-size: calc(15px + 1.5vw);
   line-height: calc(15px + 1.5vw);
   letter-spacing: 1px;

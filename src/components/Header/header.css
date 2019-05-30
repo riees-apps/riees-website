@@ -29,7 +29,7 @@ div{
   align-items: center;
   justify-content: space-around;
   opacity: 0.9;
-  box-shadow: 0px 1px 6px 0px rgba(0,0,0,0.49);
+  box-shadow: 0px 5px 5px -1px rgba(0,0,0,0.27);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -141,18 +141,18 @@ div{
   display: none;
 }
 .menuNone {
-  transition: all 300ms;
+  top: calc(50px + 3vw + 1.7vw);
+  transition: all 500ms;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   position: fixed;
-  top: 0;
   right: 0;
   background-color: #f1f1f1;
   min-width: 70vw;
   height: 100vh;
-  z-index: 1;
+  z-index: -1;
   right: -70vw;
 }
 .iconUpDown{
@@ -168,10 +168,10 @@ div{
     z-index: 10;
     transition: all 500ms;
     display: block;
-    font-size: calc(25px + 2.5vw);
-    color: #505050;
+    font-size: calc(20px + 2.5vw);
+    color: #686868;
     margin: auto 0;
-    margin-right: 1vw;
+    margin-right: 3vw;
   }
   .closee {
     margin: auto 0;
@@ -187,16 +187,24 @@ div{
     margin: auto 0;
   }
   .logo1 {
+    width: calc(50px + 3vw);
+    height: calc(50px + 3vw);
+    transition: all 300ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
   }
   .logo2 {
+    width: calc(30px + 6vw);
+  height: calc(20px + 3vw);
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
   }
   .logo1Scroll {
     width: calc(50px + 3vw);
-  height: calc(50px + 3vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: calc(50px + 3vw);
+    transition: all 300ms;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
   }
   .logo2Scroll {
@@ -211,26 +219,42 @@ div{
     opacity: 1;
     justify-content: space-between;
     align-items: flex-start;
+    z-index: 100;
   }
   .container2 {
     padding: 1vw 0px;
     opacity: 1;
     justify-content: space-between;
     align-items: flex-start;
+    z-index: 100;
   }
   .menu-content {
-    transition: all 300ms;
-    top: 0;
+    visibility: visible;
+    transition: all 300ms ease-in;
+    top: calc(50px + 3vw + 1.8vw);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
     position: fixed;
-    right: 0;
-    background-color: transparent;
-    min-width: 70vw;
+    box-shadow: 0px 100vh rgba(0, 0, 0, 0.6) inset;
+    width: 100vw;
     height: 100vh;
-    z-index: 10000;
+    z-index: 1;
+  }
+  .menu-contentNone{
+    visibility: hidden;
+    transition: all 200ms ease-in;
+    top: calc(50px + 3vw + 1.8vw);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    box-shadow: 0px 100vh rgba(0, 0, 0, 0.0) inset;
+    min-width: 100vw;
+    height: 100vh;
+    z-index: 1;
   }
   .h1Close{
     margin:auto 0;
@@ -250,9 +274,8 @@ div{
   text-align: center;
 }
 .menu-links {
-  transition: all 100ms ease-in;
-  transition: right 300ms;
-  top: 0;
+  margin-top: 0;
+  transition: all 100ms ease-in,right 300ms;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -262,8 +285,7 @@ div{
   background-color: #f1f1f1;
   min-width: 70vw;
   height: 100vh;
-  box-shadow: -70vw 0 0 0 rgba(0, 0, 0, 0.6);
-  z-index: 100;
+  z-index: 1000000;
 }
 .logoMenu {
   text-transform: uppercase;

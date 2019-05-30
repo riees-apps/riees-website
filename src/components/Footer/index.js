@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
   :hover {
     text-decoration: none;
     color: #e1e1e1;
-    transform:scale(1.02);
+    letter-spacing: 4px;
     transition:  all 0.15s linear;
   }
 `;
@@ -37,7 +37,7 @@ const Image = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   filter:  contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
@@ -49,10 +49,10 @@ const DivText = styled.div`h
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: max-content;
+  width: 40%;
   margin:40px;
   padding-right:3vw;
-
+  
 `;
 const Title = styled.h1`
   text-align:start;

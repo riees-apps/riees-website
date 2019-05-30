@@ -14,9 +14,6 @@ const StyledLink = styled(Link)`
   text-align: start;
   transition:  all 0.15s ease-in ;
   width:100%;
-  @media (max-width: 600px) {
-    display:none;
-  }
   :hover {
     text-decoration: none;
     background-color: #E4E3EA;
@@ -39,6 +36,9 @@ const StyledLink = styled(Link)`
 `;
 
 const DivMenu = styled.div`
+@media (max-width: 768px) {
+    display:none;
+  }
   position: sticky;
   top: 10vh;
   height: ${props => props.height};
@@ -58,6 +58,7 @@ const DivMenu = styled.div`
   margin-top:2.5vh;
 `;
 const Heading = styled.h1`
+font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   color: #E4E3EA;
   background-color: #161050;
   font-size: calc(20px + 1vw);
