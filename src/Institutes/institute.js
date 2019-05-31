@@ -11,7 +11,7 @@ const Image = styled.div`
   position: relative;
   height: ${props => props.height};
   @media (max-width: 600px) {
-    height: 90vh;
+    height: 82vh;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.4 ) inset;
   }
   background-attachment: fixed;
@@ -84,7 +84,7 @@ const Subheading = styled.h4`
 `;
 const Text = styled.h1`
     font-family: "Avenir Next", Helvetica, Arial, sans-serif;
-  color: #505052;
+  color: #303032;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
   line-height: calc(8px + 1vw);
@@ -158,7 +158,7 @@ class Institute extends Component {
     console.log(url)
   }
   render() {
-    const {name,sub,img,logo,areas,url} = this.props
+    const {name,sub,img,logo,areas,url,institutes} = this.props
 
     return (
       <div >
@@ -172,7 +172,7 @@ class Institute extends Component {
           <Logo src={logo} alt=''/>
         </Img>
         <Container>
-          <SideMenu/>
+          <SideMenu page='Institute' links={institutes}/>
           <DivText>
             <Div justify="flex-start">
               <Heading>{name}</Heading>

@@ -13,12 +13,12 @@ import InstituteImage from '../InstituteImage/index'
 const Institutes = [
   {
     url: "/Institute/Ufes",
-    name: "Ufes",
+    name: "UFES",
     subheading: "Universidade Federal do Espirito Santo",
     cities: [
-      "vitoria",
-      "são mateus",
-      "alegre"
+      "Vitória",
+      "São Mateus",
+      "Alegre"
     ],
     areas: [
       "engineering",
@@ -33,10 +33,10 @@ const Institutes = [
   },
   {
     url: "/Institute/Uvv",
-    name: "Uvv",
+    name: "UVV",
     subheading: "Universidade Vila Velha",
     cities: [
-      "vila velha",
+      "Vila Velha",
     ],
     areas: [
       "engineering",
@@ -51,10 +51,10 @@ const Institutes = [
   },
   {
     url: "/Institute/Fdv",
-    name: "Fdv",
+    name: "FDV",
     subheading: "Faculdade de Direito de Vitória",
     cities: [
-      "vitória",
+      "Vitória",
     ],
     areas: [
       "law",
@@ -64,10 +64,10 @@ const Institutes = [
   },
   {
     url: "/Institute/Emescam",
-    name: "Emescam",
+    name: "EMESCAM",
     subheading: "Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória",
     cities: [
-      "vitória",
+      "Vitória",
     ],
     areas: [
       'medicine'
@@ -76,11 +76,11 @@ const Institutes = [
   },
   {
     url: "/Institute/Ucl",
-    name: "Ucl",
+    name: "UCL",
     subheading: "Faculdade do Centro Leste",
     cities: [
-      "serra",
-      "cariacica"
+      "Serra",
+      "Cariacica"
     ],
     areas: [
       "engineering",
@@ -91,11 +91,11 @@ const Institutes = [
   },
   {
     url: "/Institute/Unesc",
-    name: "Unesc",
+    name: "UNESC",
     subheading: "Centro Universitário do Espírito Santo",
     cities: [
-      "serra",
-      "colatina"
+      "Serra",
+      "Colatina"
     ],
     areas: [
       "engineering",
@@ -106,10 +106,10 @@ const Institutes = [
   },
   {
     url: "/Institute/Ifes",
-    name: "Ifes",
+    name: "IFES",
     subheading: "Instituto Federal do Espirito Santo",
     cities: [
-      "vitoria",
+      "Vitória",
               "Alegre",
               "Aracruz",
               "Barra de São Francisco",
@@ -142,29 +142,50 @@ const Institutes = [
 
 const DivInstitutes = styled.div`
   background-color: #fafafa;
-  min-height: 100vh;
+  min-height: max-content;
   display: flex;
   flex-direction: row;
   flex-wrap:wrap;
   align-items: flex-start;
   justify-content: space-between;
   width:90%;
-  padding:4vh 0;
   margin-left:auto;
   margin-right:auto;
   @media (max-width: 992px) {
     justify-content: center;
     width:100%;
   }
+  ${props =>
+    props.cityInstitute &&
+    `
+    margin: 0;
+    width:105%
+    margin-left:5%;
+    @media (max-width: 992px) {
+    width:90%;
+    margin: 0;
+  }
+  `}
 `;
+
 class InstitutesImages extends Component {
+  isCity(institute) {
+    if(this.props.city === '')
+      return true
+    else{
+      for (let index = 0; index < institute.cities.length; index++) {
+        if (institute.cities[index] === this.props.city)
+          return true
+      }
+    }
+  }
   render() {
     const renderInstitutes = () => {
-        return Institutes.map(institute => (
+        return Institutes.filter(this.isCity.bind(this)).map(institute => (
           <InstituteImage
+            cityInstitute={this.props.cityInstitute}
             cities={institute.cities}
             areas={institute.areas}
-            url={institute.url}
             name={institute.name}
             sub={institute.subheading}
             input={institute.img}
@@ -172,7 +193,8 @@ class InstitutesImages extends Component {
         ));
       };
     return (
-        <DivInstitutes>{renderInstitutes()}</DivInstitutes>
+        
+        <DivInstitutes cityInstitute={this.props.cityInstitute}>{renderInstitutes()}</DivInstitutes>
     );
   }
 }

@@ -7,8 +7,8 @@ body,html {
   width: 85%;
   height: 35vh;
   top: 0;
-  margin-top: 3%;
-  margin-bottom: 7%;
+  margin-top: 3%;  
+  margin-bottom: 7%;  
 }
 @media screen and (min-width: 550px) {
   .root {
@@ -16,7 +16,7 @@ body,html {
     width: 80%;
     height: 35vh;
     top: 0;
-    margin-top: 3%;
+    margin-bottom: 3%;
   }
 }
 @media screen and (min-width: 768px) {
@@ -25,7 +25,7 @@ body,html {
     width: 80%;
     height: 40vh;
     top: 0;
-    margin-top: 3%;
+    margin-bottom: 3%;
   }
 }
 @media screen and (min-width: 992px) {
@@ -34,16 +34,22 @@ body,html {
     width: 47%;
     height: 45vh;
     top: 0;
-    margin-bottom:3%;
+    margin-bottom: 3%;
+  }
+  .rootC {
+    position: relative;
+    width: 47%;
+    height: 40vh;
+    top: 0;
+    margin-bottom: 7vh;
   }
 }
-
 .title{
   transition: all 1000ms;
   text-transform: uppercase;
   color:white;
-  font-size: calc(30px + 2vmin);
-  line-height:calc(15px + 2vmin);
+  font-size: 3em;
+  line-height:0.7em;
   letter-spacing: 4px;
   width: max-content;
   margin-left: 35px;
@@ -56,8 +62,8 @@ body,html {
   text-transform: uppercase;
   box-sizing: 100%;
   color:white;
-  font-size: calc(30px + 2vmin);
-  line-height:calc(15px + 2vmin);
+  font-size: 3em;
+  line-height:0.7em;
   letter-spacing: 4px;
   margin-left: 35px;
   margin-top:33vh;
@@ -71,10 +77,10 @@ body,html {
   text-transform: uppercase;
   color: transparent;
   width: max-content;
-  font-size: calc(10px + 2vmin);
-  line-height: 10px;
+  font-size: 1.3em;
+  line-height: 0.2em;
   letter-spacing: 1px;
-  margin-bottom: 0;
+  margin-bottom: 0.1em;
 }
 
 .info2{
@@ -85,9 +91,9 @@ body,html {
   width: max-content;
   color:white;
   letter-spacing: 1px;
-  margin-bottom: 0;
-  font-size: calc(10px + 2vmin);
-  line-height: 10px;
+  font-size: 1.3em;
+  line-height: 0.2em;
+  margin-bottom: 0.1em;
 }
 .info3{
   text-decoration: none;
@@ -96,10 +102,9 @@ body,html {
   text-transform: uppercase;
   color: transparent;
   width: max-content;
-  font-size: calc(10px + 2vmin);
-  line-height: 10px;
-  letter-spacing: 1px;
-  margin-bottom: 0;
+  font-size: 1.3em;
+  line-height: 0.2em;
+  margin-bottom: 0.1em;
 }
 
 .info4{
@@ -111,9 +116,9 @@ body,html {
   color:white;
   letter-spacing: 1px;
   margin-bottom: 0;
-  font-size: calc(10px + 2vmin);
-  line-height: 10px;
-  margin-bottom: 0;
+  font-size: 1.3em;
+  line-height: 0.2em;
+  margin-bottom: 0.1em;
 }
 .cities1{
   text-decoration: none;
@@ -127,7 +132,8 @@ body,html {
   align-items: flex-end;
   justify-content: flex-start;
   color: transparent;
-  font-size: calc(10px + 2vmin);
+  font-size: 1.2em;
+  line-height: 1.2em;
   letter-spacing: 1px;
   margin-top: 12px;
   margin-bottom: 15px;
@@ -144,7 +150,8 @@ body,html {
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: flex-start;
-  line-height:0px;
+  font-size: 1.2em;
+  line-height: 1.2em;
   letter-spacing: 1px;
   margin-top: 12px;
   margin-bottom: 15px;
@@ -154,9 +161,18 @@ body,html {
   width:max-content;
   text-transform: uppercase;
   letter-spacing: 0px;
-  font-size: calc(8px + 1vmin);
-  line-height: calc(5px + 1vmin);
   padding: 0 4px;
+  font-size: 12.5px;
+  line-height:8px;
+}
+.h1Cities2{
+  text-decoration: none;
+  width:max-content;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  padding: 0 4px;
+  font-size: 10px;
+  line-height:3px;
 }
 .sub1{
   text-decoration: none;
@@ -167,9 +183,9 @@ body,html {
   color: transparent;
   width: 95%;
   margin-bottom: 25px;
-  font-size: calc(6px + 2vmin);
-  line-height: calc(6px + 2vmin);;
-  letter-spacing: 0px;
+  font-size: 1em;
+  line-height: 1em;
+  letter-spacing: -0.5px;
   font-weight:lighter;
 }
 
@@ -181,10 +197,10 @@ body,html {
   text-align:start;
   width: 95%;
   color:white;
-  letter-spacing: 0px;
+  letter-spacing: -0.5px;
   margin-bottom: 25px;
-  font-size: calc(6px + 2vmin);
-  line-height: calc(6px + 2vmin);;
+  font-size: 1em;
+  line-height: 1em;
   font-weight:lighter;
 }
 .divInfo{

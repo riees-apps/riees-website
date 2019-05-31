@@ -73,7 +73,7 @@ class Institutes extends Component {
             dignissimos.
           </Heading>
         </DivText>
-        <InstituteImages/>
+        <InstituteImages city=''/>
         <Footer />
       </div>
     );

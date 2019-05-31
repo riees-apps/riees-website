@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Btn = styled.button`
   border:none;
-  color: #fafafa;
+  color: ${props => props.font || '#fafafa'};
   letter-spacing: 3px;
   display: flex;
   align-items: center;
@@ -39,6 +39,22 @@ const Btn = styled.button`
       display:none;
     }
   `}
+  ${props =>
+    props.places &&
+    `
+    padding: 4px 10px;
+    font-size: calc(5px + 1vw);
+    text-align:center;
+    justify-content: space-between;
+    :hover {
+    letter-spacing: 4.5px;
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+    @media (min-width: 769px) {
+     
+    }
+  `}
 `;
 const Icon = styled.i`
   display:none;
@@ -54,7 +70,7 @@ class Button extends Component {
     window.location.href = url
   }
   render() {
-    return <Btn color={this.props.color} return={this.props.return} width={this.props.width}  onClick={() => this.handleClick(this.props.url)}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
+    return <Btn color={this.props.color} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  onClick={() => this.handleClick(this.props.url)}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
   }
 }
 export default Button;

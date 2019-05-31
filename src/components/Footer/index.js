@@ -41,9 +41,9 @@ const Image = styled.div`
   width: 100%;
   filter:  contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
- 
+  z-index:99999999;
 `;
-const DivText = styled.div`h
+const DivText = styled.div`
   color: #f1f1f1;
   display: flex;
   flex-direction: column;

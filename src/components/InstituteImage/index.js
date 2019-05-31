@@ -4,7 +4,7 @@ import "./index.css";
 import { Link } from "react-router-dom";
 
 const DivLink = styled(Link)`
-  decoration: none;
+
 `;
 const Img = styled.div`
   background: url(${props => props.input});
@@ -28,6 +28,15 @@ const Img = styled.div`
     box-shadow: 0px 45vh rgba(0, 0, 0, 0.75) inset;
     cursor: pointer;
   }
+  ${props =>
+    props.cityInstitute &&
+    `
+    font-size: 0.75em;
+    @media (min-width: 768px) {
+
+    margin-bottom: 7%;
+  }
+  `}
 `;
 
 class InstituteImage extends Component {
@@ -42,25 +51,25 @@ class InstituteImage extends Component {
   }
   render() {
     const renderCities = () => {
-      return this.props.cities.map(row => <h1 className="h1Cities">{row}</h1>);
+      return this.props.cities.map(row => <h1 className={this.props.cityInstitute ? "h1Cities2" : "h1Cities"}>{row}</h1>);
     };
     const renderAreas = () => {
-      return this.props.areas.map(row => <h1 className="h1Cities">{row}</h1>);
+      return this.props.areas.map(row => <h1 className={this.props.cityInstitute ? "h1Cities2" : "h1Cities"}>{row}</h1>);
     };
     return (
       <DivLink
         style={{ textDecoration: "none" }}
         to={{
-          pathname: this.props.url,
+          pathname: `/Institute/${this.props.name}`,
           state: {
             scrollTop: 0,
           },
         }}
         onMouseOver={this.changeHover.bind(this)}
         onMouseOut={this.changeOut.bind(this)}
-        className="root"
+        className='root'
       >
-        <Img input={this.props.input}>
+        <Img cityInstitute={this.props.cityInstitute} input={this.props.input}>
           <h1 className={this.state.hover ? "title2" : "title"}>
             {this.props.name}
           </h1>

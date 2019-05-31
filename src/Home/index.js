@@ -18,7 +18,7 @@ const Image = styled.div`
   position: relative;
   height: ${props => props.height};
   @media (max-width: 600px) {
-    height: calc(87vh);
+    height: calc(91.5vh);
   }
   background-attachment: fixed;
   background-position: center;
@@ -198,7 +198,7 @@ class Home extends Component {
 
         
         <Heading>OUR INSTITUTES</Heading>
-        <InstituteImages/>
+        <InstituteImages city=''/>
 
         <Carousel className='margin2' fade='true'>   
           <Carousel.Item>

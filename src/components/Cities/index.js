@@ -10,36 +10,117 @@ import img2 from './imgs/img2.jpg'
 const Cities = [
   {
     name: "Vitória",
-    img: vitoria
+    img: vitoria,
+    places: [
+    {name:"Lorem ipsum",
+    text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+    img: img1
+    },
+    {name:"Lorem valor",
+    text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+    img: img2
+    } 
+    ]
+    
   },
   {
     name: "Vila Velha",
-    img: vilaVelha
+    img: vilaVelha,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+      ]
   },
   {
     name: "Cariacica",
-    img: img1
+    img: img1,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+      ]
   },
   {
     name: "Serra",
-    img: img2
+    img: img2,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+      ]
   },
   {
     name: "Colatina",
-    img: vilaVelha
+    img: vilaVelha,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+      ]
   },
   {
     name: "Guarapari",
-    img: vitoria
+    img: vitoria,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+      ]
   },
   {
     name: "Alegre",
-    img: img2
+    img: img2,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+      ]
   },
   {
     name: "São Mateus",
-    img: img1
-  },
+    img: img1,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  }
 ];
 
 const DivCities = styled.div`
@@ -66,6 +147,7 @@ class CitiesImages extends Component {
           <CityImage
             name={city.name}
             img={city.img}
+            places={city.places}
           />
         ));
       };

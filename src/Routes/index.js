@@ -26,6 +26,10 @@ import emescamlogo from "../Institutes/imgs/emescamlogo.jpg";
 import unesclogo from "../Institutes/imgs/unesclogo.png";
 import ifeslogo from "../Institutes/imgs/ifeslogo.png";
 import ucllogo from "../Institutes/imgs/ucllogo.png";
+import vitoria from '../components/Cities/imgs/vitoria.jpg'
+import vilaVelha from '../components/Cities/imgs/vilavelha.jpg'
+import img1 from '../components/Cities/imgs/vilavelha.jpg'
+import img2 from '../components/Cities/imgs/vitoria.jpg'
 
 const institutes = [
   {
@@ -134,6 +138,128 @@ const institutes = [
     url: 'https://www.ifes.edu.br/'
   }
 ];
+const cities = [
+  {
+    url:'/City/Vitoria',
+    name: "Vitória",
+    img: vitoria,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/VilaVelha',
+    name: "Vila Velha",
+    img: vilaVelha,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/Cariacica',
+    name: "Cariacica",
+    img: img1,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/Serra',
+    name: "Serra",
+    img: img2,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/Colatina',
+    name: "Colatina",
+    img: vilaVelha,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/Guarapari',
+    name: "Guarapari",
+    img: vitoria,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/Alegre',
+    name: "Alegre",
+    img: img2,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+  {
+    url:'/City/SaoMateus',
+    name: "São Mateus",
+    img: img1,
+    places: [
+      {name:"Lorem ipsum",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img1
+      },
+      {name:"Lorem valor",
+      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+      img: img2
+      },
+  ]
+  },
+];
 class Routes extends Component {
   render() {
     const renderInstitutes = () => {
@@ -149,6 +275,24 @@ class Routes extends Component {
               img={institute.img}
               areas={institute.areas}
               logo={institute.logo}
+              institutes={institutes}
+            />
+          )}
+        />
+      ));
+    };
+    const renderCities = () => {
+      return cities.map(city => (
+        <Route
+          path={`/City/${city.name.trim()}`}
+          component={props => (
+            <City
+              {...props}
+              url={city.url}
+              name={city.name}
+              img={city.img}
+              places={city.places}
+              cities={cities}
             />
           )}
         />
@@ -162,12 +306,12 @@ class Routes extends Component {
           <Route path="/About" component={About} />
           <Route path="/Admin" component={Admin} />
           <Route path="/Cities" component={Cities} />
-          <Route path="/City" component={City} />
           <Route path="/Es" component={Es} />
           <Route path="/Coming" component={Coming} />
           <Route path="/Living" component={Living} />
           <Route path="/Institutes" component={Institutes} />
           {renderInstitutes()}
+          {renderCities()}
           <Route path="/Admin" component={Admin} />
         </Switch>
       </BrowserRouter>

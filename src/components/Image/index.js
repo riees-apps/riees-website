@@ -7,7 +7,7 @@ const Image = styled.div`
   position: relative;
   height: ${props => props.height};
   @media (max-width: 600px) {
-    height: calc(87vh);
+    height: calc(91.5vh);
   }
   background-attachment: fixed;
   background-position: center;
