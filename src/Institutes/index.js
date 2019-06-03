@@ -33,6 +33,7 @@ const Heading = styled.h1`
   text-align:center;
   color: #404040;
   font-size: calc(12px + 0.5vw);
+  line-height: calc(12px + 0.5vw);
   font-weight: lighter
 `;
 const Title = styled.h1`
@@ -43,7 +44,7 @@ const Title = styled.h1`
   line-height: calc(30px + 3vw);
   letter-spacing: 3px;
   padding: 6vh calc(0.5vw);
-  padding-bottom: 1vh;
+  padding-bottom: 0vh;
 `;
 
 class Institutes extends Component {

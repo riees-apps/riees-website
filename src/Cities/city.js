@@ -56,7 +56,7 @@ const Subheading = styled.h4`
 `;
 const Text = styled.h1`
   font-family: "Avenir Next", Helvetica, Arial, sans-serif;
-  color: #303032;
+  color: #202022;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
   line-height: calc(8px + 1vw);
@@ -67,6 +67,7 @@ const Text = styled.h1`
     line-height: calc(7px + 1vh);
     text-align: justify;
     padding: 0 0 0.5vh 0;
+    color: #151515;
   }
   padding: 0 0 2.5vh 0;
 `;
@@ -92,6 +93,7 @@ const Container = styled.div`
   position: relative;
   padding-top: 15vh;
   @media (max-width: 768px) {
+    padding-top: 5vh;
     align-items: center;
     justify-content: center;
   }

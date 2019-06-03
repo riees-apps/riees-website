@@ -11,7 +11,7 @@ const Btn = styled.button`
   padding: 4px 20px;
   background-color: ${props => props.color || '#0077ff'};
   box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.75);
-  font-size: calc(8px + 1vw);
+  font-size: ${props => props.size || 'calc(8px + 1vw)'};
   border-radius: 3px;
   text-transform: uppercase;
   transition: all 150ms;
@@ -42,18 +42,38 @@ const Btn = styled.button`
   ${props =>
     props.places &&
     `
+    border-radius: 0px;
     padding: 4px 10px;
     font-size: calc(5px + 1vw);
+    text-align:center;
+    justify-content: space-between;
+    background-color: #fefefe;
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
+    color:#202020;
+    :hover {
+    letter-spacing: 4.5px;
+    transform: scale(1.01);
+    cursor: pointer; 
+    background-color: #eee;
+  }
+    
+  `}
+  ${props =>
+    props.card &&
+    `
+    box-shadow: none;
+    margin: 2vh 1vh;
+    border-radius: 0px;
+    padding: 5px 12px;
+    font-size: calc(3px + 0.9vw);
     text-align:center;
     justify-content: space-between;
     :hover {
     letter-spacing: 4.5px;
     transform: scale(1.01);
-    cursor: pointer;
+    cursor: pointer; 
   }
-    @media (min-width: 769px) {
-     
-    }
+    
   `}
 `;
 const Icon = styled.i`
@@ -70,7 +90,7 @@ class Button extends Component {
     window.location.href = url
   }
   render() {
-    return <Btn color={this.props.color} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  onClick={() => this.handleClick(this.props.url)}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
+    return <Btn color={this.props.color} card={this.props.card} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  onClick={() => this.handleClick(this.props.url)}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
   }
 }
 export default Button;

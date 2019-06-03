@@ -162,7 +162,7 @@ const DivInstitutes = styled.div`
     width:105%
     margin-left:5%;
     @media (max-width: 992px) {
-    width:90%;
+    width:110%;
     margin: 0;
   }
   `}

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
+import NewsEvents from "../News-Events/index.js";
 import Cities from "../Cities/index.js";
 import City from "../Cities/city.js";
 import Es from "../Es/index.js";
@@ -303,6 +305,8 @@ class Routes extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/News-Events" component={NewsEvents} />
           <Route path="/About" component={About} />
           <Route path="/Admin" component={Admin} />
           <Route path="/Cities" component={Cities} />

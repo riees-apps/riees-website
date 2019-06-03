@@ -2,7 +2,19 @@ div{
   font-family: 'Roboto', sans-serif;
   font-weight: lighter;
 }
-
+.cardImg{
+  width: 100%;
+  height: 30vh;
+}
+.iconDate{
+  margin-right: 0.5em;
+}
+.cardGroup{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: black;
+}
 .head{
   text-transform: uppercase;
   color: #fff;

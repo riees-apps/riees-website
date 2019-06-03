@@ -17,6 +17,7 @@ div{
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .container1 {
+  z-index: 99999999999999999;
   position: fixed;
   top: 0;
   width: 100%;
@@ -34,6 +35,7 @@ div{
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .container2 {
+  z-index: 99999999999999999;
   position: fixed;
   top: 0;
   width: 100%;
@@ -215,18 +217,19 @@ div{
     margin: auto 0;
   }
   .container1 {
+
     padding: 1vw 0px;
     opacity: 1;
     justify-content: space-between;
     align-items: flex-start;
-    z-index: 100;
+    z-index: 99999999999999999;
   }
   .container2 {
     padding: 1vw 0px;
     opacity: 1;
     justify-content: space-between;
     align-items: flex-start;
-    z-index: 100;
+    z-index: 99999999999999999;
   }
   .menu-content {
     visibility: visible;

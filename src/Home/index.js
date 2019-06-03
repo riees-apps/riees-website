@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Carousel from 'react-bootstrap/Carousel'
+import Card from 'react-bootstrap/Card'
+import CardDeck from 'react-bootstrap/CardDeck'
 import Button from "../components/Button/index";
 import Footer from "../components/Footer/index";
 import './home.css';
@@ -10,6 +12,7 @@ import img3 from "./ee.jpg";
 import img4 from "./oi.jpg";
 import img5 from "./ola.jpg";
 import InstituteImages from '../components/Institutes/index'
+import Events from '../components/Events/index'
 import Testimonial from '../components/Testimonial/index'
 
 const Image = styled.div`
@@ -17,9 +20,6 @@ const Image = styled.div`
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
   position: relative;
   height: ${props => props.height};
-  @media (max-width: 600px) {
-    height: calc(91.5vh);
-  }
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -29,8 +29,10 @@ const Image = styled.div`
   align-items: ${props => props.align};
   justify-content: ${props => props.justify};
   width: 100%;
-  filter:  contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
+  @media (max-width: 600px) {
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.35 ) inset;
+  }
 `;
 const Title = styled.h1`
   font-family: 'Oswald', sans-serif;
@@ -55,9 +57,9 @@ const Subheading = styled.h4`
 const Heading = styled.h1`
   font-family: 'Oswald', sans-serif;
   margin:0;
-  background:#fafafa;
+  background:${props => props.background || '#fafafa'};
   text-transform: uppercase;
-  color: #0033ff;
+  color: #0077ff;
   font-size: calc(30px + 4vw);
   line-height: calc(30px + 4vw);
   letter-spacing: 3px;
@@ -94,7 +96,7 @@ class Home extends Component {
       <div style={{ backgroundColor: "#fafafa" }}>
       <Carousel>
           <Carousel.Item>
-          <Image x='0.3' height="100vh" image={img} brightness="145%" align='center' justify='center'>
+          <Image x='0.4' height="100vh" image={img} brightness="145%" align='center' justify='center'>
           <div>
             <Title>Come to meet us</Title>
             <Subheading>Non distinctio quasi alias est.</Subheading>
@@ -200,7 +202,7 @@ class Home extends Component {
         <Heading>OUR INSTITUTES</Heading>
         <InstituteImages city=''/>
 
-        <Carousel className='margin2' fade='true'>   
+        <Carousel fade='true'>   
           <Carousel.Item>
             <Testimonial 
             x='0.75' height="90vh" brightness="100%" contrast="100%" image={img3} align='center' justify='center'
@@ -235,7 +237,8 @@ class Home extends Component {
             />
           </Carousel.Item>
         </Carousel>
-
+        <Heading background='#f4f4f4'>NEWS & EVENTS</Heading>
+        <Events final={3}/>
         <Footer/>    
       </div>
     );

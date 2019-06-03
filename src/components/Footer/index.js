@@ -41,7 +41,7 @@ const Image = styled.div`
   width: 100%;
   filter:  contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
-  z-index:99999999;
+  z-index:9999;
 `;
 const DivText = styled.div`
   color: #f1f1f1;
@@ -86,13 +86,13 @@ class Footer extends Component {
         </DivText>
         <DivText>
           <Title>MAP SITE</Title>
-          <StyledLink>HOME</StyledLink>
-          <StyledLink>OUR INSTITUTES</StyledLink>
-          <StyledLink>COMING TO ESPIRITO SANTO</StyledLink>
-          <StyledLink>LIVING IN ESPIRITO SANTO</StyledLink>
-          <StyledLink>OUR CITIES</StyledLink>
-          <StyledLink>ABOUT US</StyledLink>
-          <a href="../../Admin/index.js">Go to top</a>
+          <StyledLink  to={"/"} >HOME</StyledLink>
+          <StyledLink  to={"/Institutes"} >OUR INSTITUTES</StyledLink>
+          <StyledLink  to={"/Coming"} >COMING TO ESPIRITO SANTO</StyledLink>
+          <StyledLink  to={"/Living"} >LIVING IN ESPIRITO SANTO</StyledLink>
+          <StyledLink  to={"/Cities"} >OUR CITIES</StyledLink>
+          <StyledLink  to={"/About"} >ABOUT US</StyledLink>
+          <StyledLink  to={"/Admin"} >Admin</StyledLink>
         </DivText>
       </Image>
     )

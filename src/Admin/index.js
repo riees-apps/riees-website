@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import img from './img-01.jpg'
 import img2 from './img-02.png'
+import { Link } from "react-router-dom";
 import './admin.css'
 import { FaUser, FaLock } from 'react-icons/fa';
 
@@ -77,9 +78,9 @@ class Admin extends Component {
                   </span>
                 </div>
                 <div class="container-login-form-btn">
-                  <button class="login-form-btn">
+                  <Link to ='/dashboard/blog-overview' class="login-form-btn">
                     LOGIN
-                  </button>
+                  </Link>
                 </div>
               </Form>
             </Div>

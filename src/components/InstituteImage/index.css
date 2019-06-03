@@ -77,8 +77,8 @@ body,html {
   text-transform: uppercase;
   color: transparent;
   width: max-content;
-  font-size: 1.3em;
-  line-height: 0.2em;
+  font-size: 1.4em;
+  line-height: 0.3em;
   letter-spacing: 1px;
   margin-bottom: 0.1em;
 }
@@ -91,8 +91,8 @@ body,html {
   width: max-content;
   color:white;
   letter-spacing: 1px;
-  font-size: 1.3em;
-  line-height: 0.2em;
+  font-size: 1.4em;
+  line-height: 0.3em;
   margin-bottom: 0.1em;
 }
 .info3{
@@ -102,8 +102,8 @@ body,html {
   text-transform: uppercase;
   color: transparent;
   width: max-content;
-  font-size: 1.3em;
-  line-height: 0.2em;
+  font-size: 1.4em;
+  line-height: 0.3em;
   margin-bottom: 0.1em;
 }
 
@@ -116,8 +116,8 @@ body,html {
   color:white;
   letter-spacing: 1px;
   margin-bottom: 0;
-  font-size: 1.3em;
-  line-height: 0.2em;
+  font-size: 1.4em;
+  line-height: 0.3em;
   margin-bottom: 0.1em;
 }
 .cities1{
@@ -132,7 +132,7 @@ body,html {
   align-items: flex-end;
   justify-content: flex-start;
   color: transparent;
-  font-size: 1.2em;
+  font-size: 1.4em;
   line-height: 1.2em;
   letter-spacing: 1px;
   margin-top: 12px;
@@ -150,29 +150,32 @@ body,html {
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: flex-start;
-  font-size: 1.2em;
+  font-size: 1.4em;
   line-height: 1.2em;
   letter-spacing: 1px;
   margin-top: 12px;
   margin-bottom: 15px;
 }
 .h1Cities{
+  color:#fafafa;
   text-decoration: none;
   width:max-content;
   text-transform: uppercase;
+  font-weight: lighter;
   letter-spacing: 0px;
   padding: 0 4px;
   font-size: 12.5px;
   line-height:8px;
 }
 .h1Cities2{
+  color:#fafafa;
   text-decoration: none;
   width:max-content;
   text-transform: uppercase;
   letter-spacing: 0px;
-  padding: 0 4px;
-  font-size: 10px;
-  line-height:3px;
+  padding: 0 0 0 4px;
+  font-size: 11px;
+  line-height:6px;
 }
 .sub1{
   text-decoration: none;
@@ -191,7 +194,7 @@ body,html {
 
 .sub2{
   text-decoration: none;
-  transition: all 1000ms;
+  transition: all 1000ms,color 150ms;
   margin-left: 35px;
   text-transform: uppercase;
   text-align:start;
@@ -205,12 +208,12 @@ body,html {
 }
 .divInfo{
   text-decoration: none;
-  transition: all 1000ms;
+  transition: all 1000ms,color 1500ms;
   top:0;
   height:10%
 }
 .divInfo2{
   text-decoration: none;
-  transition: all 1000ms;
+  transition: all 1000ms,color 150ms;
   height:100%;
 }
