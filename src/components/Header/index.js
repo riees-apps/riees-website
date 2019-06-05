@@ -10,23 +10,23 @@ import logo2 from "./riees3.png";
 const StyledLink = styled(Link)`
   text-transform: uppercase;
   box-sizing: 100%;
-  color:#505050;
-  font-size: calc(6.5px + 1vw);
+  color: #505050;
+  font-size: calc(3px + 1vw);
   letter-spacing: 3px;
-  padding-left:3px;
+  padding-left: 3px;
   text-decoration: none;
   text-align: center;
-  transition:  all 0.15s ease-in ;
+  transition: all 0.15s ease-in;
   border-bottom: 3px solid transparent;
   @media (max-width: 600px) {
-    display:none;
+    display: none;
   }
   :hover {
     text-decoration: none;
     border-bottom: 3px solid transparent;
     color: #000066;
     transform: scale(1.05);
-    transition:  all 0.15s ease-in;
+    transition: all 0.15s ease-in;
   }
   ${props =>
     props.active &&
@@ -49,26 +49,7 @@ const StyledLink = styled(Link)`
     transition:  all 0.15s linear;
   }
   `}
-  ${props =>
-    props.active2 &&
-    `
-    border-bottom: 3px solid #000066;
-    @media (max-width: 600px) {
-      border-bottom: none;
-    }
-    text-align: center;
-    color: #000066;
-    transition:  all 0.15s linear;
-    :hover {
-    border-bottom: 3px solid #000066;
-    @media (max-width: 600px) {
-      border-bottom: none;
-    }
-    color: #000066;
-    transform: scale(1);
-    transition:  all 0.15s linear;
-  }
-  `}
+
   ${props =>
     props.li &&
     `
@@ -143,8 +124,24 @@ class Header extends Component {
   }
   render() {
     return (
-      <div shadow={this.state.menu ? true : false} className={this.state.scroll ? "container2" : "container1"}>
-        <div className='containerLinks'>
+      <div
+        shadow={this.state.menu ? true : false}
+        className={this.state.scroll ? "container2" : "container1"}
+      >
+        <div className="div">
+          <img
+            className={this.state.scroll ? "logo1Scroll" : "logo1"}
+            src={logo1}
+            alt=""
+          />
+          <img
+            className={this.state.scroll ? "logo2Scroll" : "logo2"}
+            src={logo2}
+            alt=""
+          />
+        </div>
+
+        <div className="containerLinks">
           <StyledLink
             onClick={() => this.handleClick("/")}
             active={this.state.active === "/" ? true : false}
@@ -162,25 +159,10 @@ class Header extends Component {
           >
             Our Institutes
           </StyledLink>
-        </div>
-
-        <div className="div">
-          <img
-            className={this.state.scroll ? "logo1Scroll" : "logo1"}
-            src={logo1}
-            alt=""
-          />
-          <img
-            className={this.state.scroll ? "logo2Scroll" : "logo2"}
-            src={logo2}
-            alt=""
-          />
-        </div>
-        <div className='containerLinks'>
           <StyledLink
             onMouseOver={this.changeHover.bind(this)}
             onMouseOut={this.changeOut.bind(this)}
-            active2={
+            active={
               this.state.active === "/Cities" ||
               this.state.active === "/Coming" ||
               this.state.active === "/Living"
@@ -216,8 +198,12 @@ class Header extends Component {
                 Our Cities
               </StyledLink>
             </div>
-            <FaCaretUp className={this.state.hover ? "iconUpDown" : "displayNone"} />
-          <FaCaretDown className={this.state.hover ? "displayNone" : "iconUpDown"} />
+            <FaCaretUp
+              className={this.state.hover ? "iconUpDown" : "displayNone"}
+            />
+            <FaCaretDown
+              className={this.state.hover ? "displayNone" : "iconUpDown"}
+            />
           </StyledLink>
 
           <StyledLink
@@ -228,15 +214,26 @@ class Header extends Component {
           >
             About Us
           </StyledLink>
+
+          <StyledLink
+            onClick={() => this.handleClick("/News-Events")}
+            active={this.state.active === "/News-Events" ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={"/News-Events"}
+          >
+            News & Events
+          </StyledLink>
         </div>
 
         <i
           onClick={this.openMenu.bind(this)}
           className={this.state.menu ? "fa fa-times menu" : "fa fa-bars menu"}
         />
-        <div onClick={this.openMenu.bind(this)} className={this.state.menu ? "menu-content" : "menu-contentNone"}>
+        <div
+          onClick={this.openMenu.bind(this)}
+          className={this.state.menu ? "menu-content" : "menu-contentNone"}
+        >
           <div className={this.state.menu ? "menu-links" : "menuNone"}>
-
             <StyledLink
               li
               onClick={() => this.handleClick("/")}
@@ -250,7 +247,9 @@ class Header extends Component {
               li
               onClick={() => this.handleClick("/Institutes")}
               active={window.location.pathname === "/Institutes" ? true : false}
-              className={window.location.pathname === "/Institutes" ? "active" : ""}
+              className={
+                window.location.pathname === "/Institutes" ? "active" : ""
+              }
               to={"/Institutes"}
             >
               Our Institutes
@@ -258,7 +257,7 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Coming")}
-              active2={window.location.pathname === "/Coming" ? true : false}
+              active={window.location.pathname === "/Coming" ? true : false}
               className={window.location.pathname === "/Coming" ? "active" : ""}
               to={"/Coming"}
             >
@@ -267,7 +266,7 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Living")}
-              active2={window.location.pathname === "/Living" ? true : false}
+              active={window.location.pathname === "/Living" ? true : false}
               className={window.location.pathname === "/Living" ? "active" : ""}
               to={"/Living"}
             >
@@ -276,7 +275,7 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.handleClick("/Cities")}
-              active2={window.location.pathname === "/Cities" ? true : false}
+              active={window.location.pathname === "/Cities" ? true : false}
               className={window.location.pathname === "/Cities" ? "active" : ""}
               to={"/Cities"}
             >
@@ -290,6 +289,15 @@ class Header extends Component {
               to={"/About"}
             >
               About Us
+            </StyledLink>
+            <StyledLink
+              li
+              onClick={() => this.handleClick("/News-Events")}
+              active={window.location.pathname === "/News-Events" ? true : false}
+              className={window.location.pathname === "/News-Events" ? "active" : ""}
+              to={"/News-Events"}
+            >
+              News & Events
             </StyledLink>
           </div>
         </div>

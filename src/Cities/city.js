@@ -35,25 +35,6 @@ const Heading = styled.h1`
   padding: 0 12px 5vh 0;
   width: max-content;
 `;
-const Subheading = styled.h4`
-  position: fixed;
-  font-family: "Oswald", sans-serif;
-  text-shadow: 3px 3px black;
-  text-transform: uppercase;
-  color: white;
-  letter-spacing: 5px;
-  margin: auto;
-  margin-top: calc(80px + 1vw);
-  width: 100%;
-  text-align: center;
-  font-size: calc(20px + 0.5vw);
-  letter-spacing: 1px;
-  font-weight: lighter;
-  line-height: calc(20px + 0.5vw);
-  @media (max-width: 600px) {
-    position: absolute;
-  }
-`;
 const Text = styled.h1`
   font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   color: #202022;
@@ -76,8 +57,10 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: ${props => props.justify};
-  padding: 5vh 0 0 0;
-  width: 100%;
+  margin:0;
+  padding: 5vh 0 0 3%;
+  width: 106%;
+  border:none;
   @media (max-width: 768px) {
     justify-content: center;
   }
@@ -139,7 +122,7 @@ class City extends Component {
     return (
       <div style={{background:'#fafafa'}}>
         <Image title={name} height="100vh" image={img} />
-        <Container>
+        <Container >
           <SideMenu url={url} page="City" links={cities} />
           <DivText>
             <Div justify="flex-start">
@@ -233,11 +216,11 @@ class City extends Component {
               <Heading color="rgb(0, 83, 180)">to see</Heading>
             </Div>
             <Places places={places}/>
-            <Div justify="flex-start">
+            <Div style={{background:'#fafafa'}} justify="flex-start">
               <Heading>{name}</Heading>
               <Heading color="rgb(0, 83, 180)">institutes</Heading>
             </Div>
-            <InstituteImages cityInstitute city={name}/>
+            <InstituteImages  cityInstitute city={name}/>
             <Button
               return={true}
               color="#FF1493"

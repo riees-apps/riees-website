@@ -33,6 +33,7 @@ const Heading = styled.h1`
   text-align:center;
   color: #404040;
   font-size: calc(12px + 0.5vw);
+  line-height: calc(12px + 0.5vw);
   font-weight: lighter
 `;
 const Title = styled.h1`
@@ -46,7 +47,7 @@ const Title = styled.h1`
   @media (max-width: 769px) {
      padding: 6vh calc(1vh);
     }
-  padding-bottom: 1vh;
+  padding-bottom: 0;
 `;
 
 class Cities extends Component {

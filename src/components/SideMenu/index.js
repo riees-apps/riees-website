@@ -88,8 +88,6 @@ class SideMenu extends Component {
     };
   }
   handleClick(active) {
-    console.log(active)
-    console.log(window.location.pathname)
     this.setState({
       ...this.state,
       active: active,

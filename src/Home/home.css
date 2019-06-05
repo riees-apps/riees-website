@@ -1,7 +1,3 @@
-div{
-  font-family: 'Roboto', sans-serif;
-  font-weight: lighter;
-}
 .cardImg{
   width: 100%;
   height: 30vh;
@@ -13,7 +9,7 @@ div{
   display: flex;
   justify-content: center;
   align-content: center;
-  background: black;
+  background: #000000;
 }
 .head{
   text-transform: uppercase;
@@ -36,8 +32,8 @@ div{
 .paragraph{
   font-family: 'Roboto', sans-serif;
   color: #fff;
-  font-size: calc(10px + 1vw);
-  line-height: calc(12px + 1vw);
+  font-size: calc(7.5px + 1vw);
+  line-height: calc(7.5px + 1vw);
   width: 75%;
   font-weight: lighter;
   text-align: center;

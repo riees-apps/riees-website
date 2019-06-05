@@ -68,6 +68,8 @@ const Btn = styled.button`
     font-size: calc(3px + 0.9vw);
     text-align:center;
     justify-content: space-between;
+    margin-top:auto;
+    margin-bottom:0;
     :hover {
     letter-spacing: 4.5px;
     transform: scale(1.01);

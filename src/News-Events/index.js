@@ -1,49 +1,58 @@
 import React, { Component } from "react";
 import Footer from "../components/Footer/index";
-import Img from "../components/Image/index";
-import Events from '../components/Events/index'
+import Events from "../components/Events/index";
 import styled from "styled-components";
 import img3 from "./agenda.jpg";
 
-const Div = styled.div`
-  background-color: #fafafa;
+const Image = styled.div`
+  background-image: url(${props => props.image});
+  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
+  position: relative;
+  height: ${props => props.height};
+  @media (max-width: 600px) {
+    height: 82vh;
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4 ) inset;
+  }
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: center;
+  flex-direction: column;
   justify-content: center;
-  text-align: center;
   width: 100%;
-  padding-top: 6vh;
 `;
-const Heading = styled.h1`
+const Title = styled.h1`
+  position:fixed;
   font-family: 'Oswald', sans-serif;
-  margin:0;
-  background:${props => props.background || '#fafafa'};
+  text-shadow: 3px 3px black;
   text-transform: uppercase;
-  color: #0077ff;
-  font-size: calc(30px + 4vw);
-  line-height: calc(30px + 4vw);
-  letter-spacing: 3px;
-  padding-top:10vh;
+  color: white;
+  font-size: calc(80px + 1vw);
+  line-height: calc(80px + 1vw);
+  letter-spacing: 5px;
+  margin:auto;
+  margin-top: calc(30px + 2vw);
+  width:100%;
+  text-align:center;
+  @media (max-width: 600px) {
+    position:absolute;
+  }
 `;
-
 
 class NewsEvents extends Component {
   componentDidMount() {
     document.documentElement.scrollTop = 0;
   }
+
   render() {
     return (
-      <div style={{ backgroundColor: "#fafafa" }}>
-      <Img
-          height="100vh"
-          image={img3}
-          title="News & Events"
-          brightness="110%"
-        />
-         <Heading background='#f4f4f4'>NEWS & EVENTS</Heading>
-        <Events larger final={9}/>
+      <div style={{ backgroundColor: "#f4f4f4" }}>
+        <Image x='0.5' height="80vh" image={img3} >
+            <Title>News & Events</Title>
+        </Image>
+        <Events larger final={9} />
+        <Footer />
       </div>
     );
   }

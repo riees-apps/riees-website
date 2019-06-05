@@ -124,6 +124,10 @@ const Container = styled.div`
   }
 `;
 const Img = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background:white;
   padding-bottom:10vh;
   padding-top:3vh;

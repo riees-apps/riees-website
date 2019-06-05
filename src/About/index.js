@@ -34,8 +34,8 @@ const Heading = styled.h1`
   margin: 0;
   text-transform: uppercase;
   color: ${props => props.color};
-  font-size: calc(30px + 4vw);
-  line-height: calc(30px + 4vw);
+  font-size: calc(15px + 4vw);
+  line-height: calc(15px + 4vw);
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
   margin-bottom:2.5vh;
@@ -45,8 +45,8 @@ const Text = styled.h1`
   font-family: 'Roboto', sans-serif;
   color: ${props => props.color};
   font-weight: lighter;
-  font-size: calc(10px + 1vw);
-  line-height: calc(10px + 1vw);
+  font-size: calc(7.5px + 1vw);
+  line-height: calc(7.5px + 1vw);
   width: 100%;
   text-align: center;
 `;

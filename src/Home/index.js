@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Carousel from 'react-bootstrap/Carousel'
-import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
 import Button from "../components/Button/index";
 import Footer from "../components/Footer/index";
 import './home.css';
@@ -29,7 +27,6 @@ const Image = styled.div`
   align-items: ${props => props.align};
   justify-content: ${props => props.justify};
   width: 100%;
-  filter: brightness(${props => props.brightness});
   @media (max-width: 600px) {
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.35 ) inset;
   }
@@ -41,18 +38,19 @@ const Title = styled.h1`
   color: #fafafa;
   font-size: calc(50px + 4vw);
   line-height: calc(50px + 4vw);
-  letter-spacing: 4px;
+  letter-spacing: 10px;
   margin: 0;
   margin-top: calc(50px + 3vw)
+  
 `;
 const Subheading = styled.h4`
+  font-family: 'Oswald', sans-serif;
+  text-shadow: 3px 3px black;
   color: #fafafa;
-  font-size: calc(13px + 1vw);
+  font-size: calc(20px + 1vw);
+  line-height: calc(20px + 1vw);
   letter-spacing: 1px;
-  font-weight: lighter;
-  line-height: calc(13px + 1vw);
-  margin: 0;
-  margin-bottom: calc(15px + 1vw);
+  margin-top: calc(0.5vw);
 `;
 const Heading = styled.h1`
   font-family: 'Oswald', sans-serif;
@@ -60,30 +58,35 @@ const Heading = styled.h1`
   background:${props => props.background || '#fafafa'};
   text-transform: uppercase;
   color: #0077ff;
-  font-size: calc(30px + 4vw);
-  line-height: calc(30px + 4vw);
+  background-color: #f4f4f4;
+  font-size: calc(15px + 4vw);
+  line-height: calc(15px + 4vw);
+  width: max-content;
   letter-spacing: 3px;
   padding-top:5vh;
+  padding-bottom:1.5vh;
+  margin-top:5vh;
+  border-bottom: 1vh solid pink;
 `;
 const Text = styled.h1`
 font-family: "Avenir Next", Helvetica, Arial, sans-serif;
-  margin:40px 0;
-  color: #505050;
+  margin:2vh 0;
+  color: #707070;
   font-weight:lighter;
-  font-size: calc(10px + 1vw);
-  line-height: calc(10px + 1vw);
+  font-size: calc(7.5px + 1vw);
+  line-height: calc(7.5px + 1vw);
   padding: calc(10px + 1vw) 0;
-  border-top: 3px solid pink;
-  border-bottom: 3px solid pink;
-  width: 80%;
+  width: 100%;
+  text-align:center;
 `;
 const DivText = styled.div`
-  background-color: #fafafa;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  justify-content:center;
+  width:80%;
+  margin:0 auto;
   padding-bottom:7.5vh;
 `;
 
@@ -93,7 +96,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <div style={{ backgroundColor: "#fafafa" }}>
+      <div style={{ backgroundColor: "#f4f4f4",textAlign: 'center'}}>
       <Carousel>
           <Carousel.Item>
           <Image x='0.4' height="100vh" image={img} brightness="145%" align='center' justify='center'>
@@ -105,7 +108,7 @@ class Home extends Component {
           </Image>
           </Carousel.Item>
           <Carousel.Item>
-          <Image x='0.3' height="100vh" image={img} brightness="145%" align='center' justify='center'>
+          <Image x='0.4' height="100vh" image={img} brightness="145%" align='center' justify='center'>
           <div>
             <Title>Lorem ipsum dolor</Title>
             <Subheading>Etiam cursus elementum ante a porttitor.</Subheading>
@@ -137,6 +140,7 @@ class Home extends Component {
           </Text>
           <Button url='/About' name='Learn More'/>
         </DivText>
+        
 
         <Carousel >
           <Carousel.Item>
@@ -198,9 +202,12 @@ class Home extends Component {
           </Carousel.Item>
         </Carousel>
 
-        
+        <DivText>
         <Heading>OUR INSTITUTES</Heading>
+        </DivText>
         <InstituteImages city=''/>
+        
+        
 
         <Carousel fade='true'>   
           <Carousel.Item>
@@ -237,8 +244,11 @@ class Home extends Component {
             />
           </Carousel.Item>
         </Carousel>
+        <DivText>
         <Heading background='#f4f4f4'>NEWS & EVENTS</Heading>
         <Events final={3}/>
+        </DivText>
+       
         <Footer/>    
       </div>
     );

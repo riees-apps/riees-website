@@ -1,20 +1,14 @@
-div{
-  font-family: "Oswald", sans-serif;
-}
 .scroll {
-  font-size: calc(4px + 1vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: calc(1px + 1vw);
+  transition: all 300ms ;
 }
 .scroll2 {
-  font-size: calc(1px + 1vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: calc(0.9vw);
+  transition: all 300ms ;
 }
 .dropscroll {
-  font-size: calc(4px + 1vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: calc(1px + 1vw);
+  transition: all 300ms ;
 }
 .container1 {
   z-index: 99999999999999999;
@@ -24,12 +18,12 @@ div{
   z-index: 1000;
   background: white;
   box-sizing: content-box;
-  padding: 0.3vw 0;
+  padding: 1vw 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  opacity: 0.9;
+  justify-content: space-between;
+  opacity: 0.95;
   box-shadow: 0px 5px 5px -1px rgba(0,0,0,0.27);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -42,12 +36,12 @@ div{
   z-index: 1000;
   background: white;
   box-sizing: content-box;
-  padding: 0.3vw 0;
+  padding: 0.5vw 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  opacity: 0.9;
+  justify-content: space-between;
+  opacity: 0.8;
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -60,18 +54,20 @@ div{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  width:40%;
+  justify-content: space-between;
+  width:70%;
+  margin-right: 2.5vw;
 }
 .logo1 {
-  width: calc(50px + 3vw);
-  height: calc(50px + 3vw);
+  width: calc(30px + 3vw);
+  height: calc(30px + 3vw);
+  margin-left: 2.5vw;
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .logo2 {
-  width: calc(30px + 6vw);
-  height: calc(20px + 3vw);
+  width: calc(50px + 6vw);
+  height: calc(10px + 2.5vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -83,16 +79,18 @@ div{
   align-items: center;
   justify-items: flex-start;
   transition: all 300ms;
+  width:30%;
 }
 
 .logo1Scroll {
   width: calc(30px + 2vw);
   height: calc(30px + 2vw);
   transition: all 300ms;
+  margin-left: 2.5vw;
   transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
 }
 .logo2Scroll {
-  width: calc(10px + 3.5vw);
+  width: calc(45px + 3.5vw);
   height: calc(5px + 2vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
@@ -107,10 +105,12 @@ div{
   transition: all 300ms;
 }
 .dropdown-content {
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  max-width: max-content;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
@@ -129,10 +129,12 @@ div{
 
 .dropdown:hover .dropdown-content {
   transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: block;
 }
 .dropscroll:hover .dropdown-content {
   transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: block;
 }
 

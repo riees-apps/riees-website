@@ -32,6 +32,7 @@ const Img = styled.div`
     props.cityInstitute &&
     `
     font-size: 0.75em;
+    margin-top: -4vh;
     @media (min-width: 768px) {
 
     margin-bottom: 7%;

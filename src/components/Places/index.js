@@ -88,6 +88,7 @@ class Places extends Component {
         <Carousel.Item >  
         <Image
         image={place.img}
+
         >
         <Text>
         <Heading>
@@ -105,7 +106,7 @@ class Places extends Component {
       ));
     };
     return (
-      <Carousel interval='2500' indicators={false} fade className='container4' >
+      <Carousel  interval='2500' indicators={false} fade className='container4' >
           
           {renderPlaces()}
        
