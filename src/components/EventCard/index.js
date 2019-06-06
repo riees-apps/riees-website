@@ -16,6 +16,11 @@ const Card = styled.div`
   margin-bottom: 5%;
   box-shadow: 0px 0px 4px 0px rgba(50,50,50,0.51);
   border-radius:5px;
+  @media (max-width: 600px) {
+    width: 70%;
+    height: 48vh;
+    margin-bottom: 10%;
+  }
   ${props =>
     props.side &&
     `
@@ -31,6 +36,10 @@ const Card = styled.div`
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 600px) {
+    width: 95%;
+    height: 40vh;
+  }
   `}
 `;
 const CardImg = styled(Link)`
@@ -49,7 +58,8 @@ const CardImg = styled(Link)`
   border-top-left-radius:5px;
   border-top-right-radius:5px;
   @media (max-width: 600px) {
-    background-size: cover;
+    background-size: 100% 100%;
+    height: 24vh;
   }
   :hover {
     transition:all 200ms ease-in;
@@ -60,7 +70,7 @@ const CardImg = styled(Link)`
     props.side &&
     `
     border-top-left-radius:0;
-  border-top-right-radius:0;
+    border-top-right-radius:0;
     width:40%;
     height: 30vh;
     display: flex;
@@ -68,6 +78,10 @@ const CardImg = styled(Link)`
     flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: space-between;
+    @media (max-width: 600px) {
+    width: 50%;
+    height: 25vh;
+  }
   `}
 `;
 const Date = styled.h1`
@@ -100,6 +114,10 @@ const Title = styled.h1`
   height: max-content;
   text-align:start;
   padding: 1vh 0 1vh 1vh;
+  @media (max-width: 600px) {
+    font-size: calc(6px + 1.3vh);
+    line-height: calc(5px + 1.3vh);
+  }
 `;
 const Text = styled.h1`
 transition:all 300ms linear;
@@ -117,14 +135,21 @@ transition:all 300ms linear;
   padding: 0 1vh;
   margin: 0;
   display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;  /* Number of lines displayed before it truncate */
-     overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;  /* Number of lines displayed before it truncate */
+  overflow: hidden;
+  @media (max-width: 600px) {
+    font-size: calc(5px + 1.3vh);
+    line-height: calc(5px + 1.3vh);
+  }
   ${props =>
     props.icon &&
     `
     width: 100%;
     padding: 1vh 0 1.5vh 1vh;
+    @media (max-width: 600px) {
+      padding: 0.5vh 0 1vh 1vh;
+  }
   `}
 `;
 const CardBody = styled.div`
@@ -135,6 +160,10 @@ const CardBody = styled.div`
   height:31vh;
   padding-left:1vh;
   padding-top:1vh;
+  @media (max-width: 600px) {
+    background-size: cover;
+    height: 22.5vh;
+  }
   ${props =>
     props.larger &&
     `
@@ -143,11 +172,14 @@ const CardBody = styled.div`
   ${props =>
     props.side &&
     `
-
     width:60%
     height: 30vh;
     align-items: flex-start;
     justify-content: center;
+    @media (max-width: 600px) {
+    width: 50%;
+    height: 25vh;
+  }
   `}
 `;
 

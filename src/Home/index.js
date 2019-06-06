@@ -28,7 +28,7 @@ const Image = styled.div`
   justify-content: ${props => props.justify};
   width: 100%;
   @media (max-width: 600px) {
-    box-shadow: 0px 150vh rgba(0, 0, 0, 0.35 ) inset;
+    box-shadow: 0px 150vh rgba(0, 0, 0, calc(${props => props.x} - 0.05) ) inset;
     height: calc(91.7vh);
   }
 `;
@@ -70,15 +70,20 @@ const Heading = styled.h1`
   border-bottom: 1vh solid pink;
 `;
 const Text = styled.h1`
-font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   margin:2vh 0;
-  color: #707070;
+  color: #606060;
   font-weight:lighter;
   font-size: calc(7.5px + 1vw);
   line-height: calc(7.5px + 1vw);
   padding: calc(10px + 1vw) 0;
   width: 100%;
   text-align:center;
+  @media (max-width: 600px) {
+    font-size: calc(9px + 1vw);
+    line-height: calc(10px + 1vw);
+    color: #505050;
+  }
 `;
 const DivText = styled.div`
   background-color: #f4f4f4;
@@ -93,6 +98,7 @@ const DivText = styled.div`
 
 class Home extends Component {
   componentDidMount() {
+    console.log(window.screen.width)
     document.documentElement.scrollTop = 0
   }
   render() {
@@ -145,7 +151,7 @@ class Home extends Component {
 
         <Carousel >
           <Carousel.Item>
-            <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img2} align='center' justify='center'>
+            <Image x='0.75' height="85vh" brightness="100%" contrast="100%" image={img2} align='space-around' justify='space-around'>
                 <h1 className='head'>Coming to Espirito Santo</h1>
                 <p className='paragraph'>Aut molestiae velit id maxime accusantium. Dolorem qui ab
                 accusantium qui et et tenetur facilis. Quia odio hic ea qui
@@ -164,7 +170,7 @@ class Home extends Component {
             </Image>
           </Carousel.Item>
           <Carousel.Item>
-            <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img5} align='flex-start' justify='center'>
+            <Image x='0.75' height="85vh" brightness="100%" contrast="100%" image={img5} align='space-around' justify='space-around'>
                 <h1 className='head'>Living in Espirito Santo</h1>
                 <p className='paragraph'>Ea a consectetur
                 sequi. Voluptatem reiciendis sed perspiciatis. Aut molestiae velit id maxime accusantium. Dolorem qui ab
@@ -183,7 +189,7 @@ class Home extends Component {
             </Image>
           </Carousel.Item>
           <Carousel.Item>
-            <Image x='0.65' height="85vh" brightness="100%" contrast="100%" image={img4} align='center' justify='center'>
+            <Image x='0.75' height="85vh" brightness="100%" contrast="100%" image={img4} align='space-around' justify='space-around'>
                 <h1 className='head'>Our Cities</h1>
                 <p className='paragraph'>Temporibus sed ut voluptas. Est
                 temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
@@ -247,7 +253,8 @@ class Home extends Component {
         </Carousel>
         <DivText>
         <Heading background='#f4f4f4'>NEWS & EVENTS</Heading>
-        <Events final={3}/>
+        <Events final={window.screen.width >= 768 ? 3 : 1 }/>
+        <Button url='/News-Events' name="All news and events" />
         </DivText>
        
         <Footer/>    

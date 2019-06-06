@@ -1,9 +1,9 @@
 .scroll {
-  font-size: calc(1px + 1vw);
+  font-size: calc(1px + 0.9vw);
   transition: all 300ms ;
 }
 .scroll2 {
-  font-size: calc(0.9vw);
+  font-size: calc(1px + 0.9vw);
   transition: all 300ms ;
 }
 .dropscroll {

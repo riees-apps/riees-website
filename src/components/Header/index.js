@@ -11,7 +11,7 @@ const StyledLink = styled(Link)`
   text-transform: uppercase;
   box-sizing: 100%;
   color: #505050;
-  font-size: calc(3px + 1vw);
+  font-size: calc(1px + 1.1vw);
   letter-spacing: 3px;
   padding-left: 3px;
   text-decoration: none;

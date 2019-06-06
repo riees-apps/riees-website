@@ -72,6 +72,9 @@ const Btn = styled(Link)`
     justify-content: space-between;
     margin-top:auto;
     margin-bottom:1%;
+    @media (max-width: 600px) {
+      font-size: calc(6px + 0.9vw);
+    }
     :hover {
     letter-spacing: 4.5px;
     transform: scale(1.01);

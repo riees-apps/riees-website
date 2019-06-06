@@ -49,10 +49,17 @@ const DivText = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 60%;
+  width: 30vw;
   margin:40px;
   padding-right:3vw;
-  
+  ${props =>
+    props.active &&
+    `
+    @media (max-width: 600px) {
+    display:none
+  }
+  `}
+
 `;
 const Title = styled.h1`
   text-align:start;
@@ -94,7 +101,7 @@ class Footer extends Component {
           <StyledLink  to={"/About"} >ABOUT US</StyledLink>
           <StyledLink  to={"/Admin"} >Admin</StyledLink>
         </DivText>
-        <DivText>
+        <DivText active>
         <Title>FEEDBACK</Title>
         <Text>Para dar sua opinião sobre o que está achando do desenvolvimento deste site envie um email para: <Text style={{color:'royalblue',marginBottom:'-3px'}}>adrian.lube@outlook.com</Text> e conte-nos o que está achando e suas sugestões</Text>
         </DivText>

@@ -10,7 +10,8 @@ import "./index.css";
 
 const eventos = [
   {
-    title: "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
     date: "Dec 06, 2019",
     text:
       " Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
@@ -27,7 +28,8 @@ const eventos = [
     img: uvv
   },
   {
-    title: "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit lorem ipsum valor3.",
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit lorem ipsum valor3.",
     date: "Dec 06, 2019",
     text:
       "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
@@ -43,7 +45,8 @@ const eventos = [
     img: ucl
   },
   {
-    title: "Dolore ipsum Dossalore ipsum Dolore nihil velit lorem ipsum valor5.",
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihil velit lorem ipsum valor5.",
     date: "Dec 06, 2019",
     text:
       "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
@@ -143,7 +146,8 @@ const eventos = [
     img: uvv
   },
   {
-    title: "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
     date: "Dec 06, 2019",
     text:
       "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
@@ -278,7 +282,7 @@ const eventos = [
 ];
 
 const DivEvents = styled.div`
-  transition:all 300ms;
+  transition: all 300ms;
   background-color: #f4f4f4;
   min-height: max-content;
   display: flex;
@@ -288,10 +292,10 @@ const DivEvents = styled.div`
   justify-content: space-between;
   width: 120%;
   padding: 5% 2.5%;
-  margin-left:-10%;
-  @media (max-width: 992px) {
-    justify-content: center;
-    width: 100%;
+  margin-left: -10%;
+  @media (max-width: 600px) {
+    width: 120%;
+    justify-content: space-between;
   }
   ${props =>
     props.larger &&
@@ -303,9 +307,9 @@ const DivEvents = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    @media (max-width: 992px) {
-    width:110%;
-    margin: 0;
+    @media (max-width: 600px) {
+    width: 100%;
+    justify-content: center;
   }
   `}
   ${props =>
@@ -320,17 +324,25 @@ const DivEvents = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 600px) {
+    width: 100%;
+    justify-content: center;
+  }
   }
   `}
 `;
 const Check = styled.div`
- transition:all 300ms;
-  width:5.5vh;
-  height:5.5vh;
-  border-radius:100%;
-  border:2px solid #ccc;
+  transition: all 300ms;
+  width: 5.3vh;
+  height: 5.3vh;
+  border-radius: 100%;
+  border: 2px solid #ccc;
   background-color: #f4f4f4;
-  cursor:pointer;
+  cursor: pointer;
+  @media (max-width: 600px) {
+    width: 4vh;
+    height: 4vh;
+  }
   ${props =>
     props.active &&
     `
@@ -351,7 +363,7 @@ const Heading = styled.h1`
   letter-spacing: 3px;
   margin-top: 10vh;
   width: max-content;
-  padding-bottom:1.5vh;
+  padding-bottom: 1.5vh;
   border-bottom: 1vh solid pink;
 `;
 const DivHeading = styled.h1`
@@ -364,24 +376,44 @@ const DivHeading = styled.h1`
   width: 85%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom:0;
+  margin-bottom: 0;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
 `;
 const Form = styled.div`
   background-color: #f4f4f4;
-  transition:all 300ms;
+  transition: all 300ms;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 50%;
+  width: 45%;
   margin: 0;
   margin-left: auto;
-  h1{
-    font-size:0.5em;
-    line-height:0.4em;
-    margin:auto 1vh;
-    cursor:pointer;
+  @media (max-width: 600px) {
+    width:100%;
+    margin:auto;
+    margin: 2vh 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 0.45em;
+    line-height: 0.35em;
+    margin: auto 0.2vw auto 0.5vw;
+    cursor: pointer;
+    @media (max-width: 600px) {
+      font-size: 0.3em;
+      line-height: 0.1em;
+      margin: auto 3vw auto 0.5vw;
+  }
   }
   ${props =>
     props.active &&
@@ -397,7 +429,7 @@ class Events extends Component {
   componentDidMount() {
     this.setState({
       ...this.state,
-      final: this.props.final,
+      final: this.props.final
     });
   }
   constructor() {
@@ -406,7 +438,7 @@ class Events extends Component {
       page: 1,
       initial: 0,
       final: 3,
-      active: 'all'
+      active: "all"
     };
   }
   handleClick(active) {
@@ -414,10 +446,10 @@ class Events extends Component {
       active: active,
       page: 1,
       initial: 0,
-      final: this.props.final,
+      final: this.props.final
     });
   }
-  
+
   filtro = event => {
     if (this.state.active === "all") {
       return true;
@@ -477,7 +509,10 @@ class Events extends Component {
       );
     };
     const nextItems = event => {
-      if (this.props.larger && this.state.page !== Math.ceil(events.length / this.props.final) ) {
+      if (
+        this.props.larger &&
+        this.state.page !== Math.ceil(events.length / this.props.final)
+      ) {
         document.documentElement.scrollTop = window.innerHeight;
       }
       return event.slice(
@@ -507,7 +542,7 @@ class Events extends Component {
       );
     };
     return (
-      <div style={{zIndex:'100', position:'relative'}}>
+      <div style={{ zIndex: "100", position: "relative" }}>
         <DivHeading className={this.props.larger ? "" : "displayNone"}>
           <Heading background="#f4f4f4">News & Events</Heading>
           <Form>
@@ -539,32 +574,36 @@ class Events extends Component {
         </DivHeading>
         <DivEvents side={this.props.side} larger={this.props.larger}>
           <i
-            onClick={() =>
-              {prevItems(renderItems(this.state.initial, this.state.final))}
-            }
+            onClick={() => {
+              prevItems(renderItems(this.state.initial, this.state.final));
+            }}
             className={`fas fa-chevron-left ${
-              this.props.larger ? "displayNone" : "iconEvent"  &&
-              this.props.side ? "displayNone" : "iconEvent"
+              this.props.larger
+                ? "displayNone"
+                : "iconEvent" && this.props.side
+                ? "displayNone"
+                : "iconEvent"
             }`}
           />
           {renderItems(this.state.initial, this.state.final)}
           <i
-            onClick={() =>
-              {nextItems(renderItems(this.state.initial, this.state.final))}
-            }
+            onClick={() => {
+              nextItems(renderItems(this.state.initial, this.state.final));
+            }}
             className={`fas fa-chevron-right ${
-              this.props.larger ? "displayNone" : "iconEvent" &&
-              this.props.side ? "displayNone" : "iconEvent"
+              this.props.larger
+                ? "displayNone"
+                : "iconEvent" && this.props.side
+                ? "displayNone"
+                : "iconEvent"
             }`}
           />
 
           <div className={` ${this.props.larger ? "pages" : "displayNone"}`}>
             <i
-              onClick={() =>
-                {prevItems(
-                  renderItems(this.state.initial, this.state.final)
-                )}
-              }
+              onClick={() => {
+                prevItems(renderItems(this.state.initial, this.state.final));
+              }}
               className={`fas fa-chevron-left ${
                 this.props.larger ? "iconEvent2" : "displayNone"
               }`}
@@ -574,11 +613,9 @@ class Events extends Component {
               {Math.ceil(events.length / this.props.final)}
             </h1>
             <i
-              onClick={() =>
-                {nextItems(
-                  renderItems(this.state.initial, this.state.final)
-                )}
-              }
+              onClick={() => {
+                nextItems(renderItems(this.state.initial, this.state.final));
+              }}
               className={`fas fa-chevron-right ${
                 this.props.larger ? "iconEvent2" : "displayNone"
               }`}

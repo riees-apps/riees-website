@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer/index";
 import Events from "../components/Events/index";
-import AreaCard from "../components/AreaCard/index";
 import Button from "../components/Button/index";
 
 const Image = styled.div`
@@ -10,10 +9,6 @@ const Image = styled.div`
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
   position: relative;
   height: ${props => props.height};
-  @media (max-width: 600px) {
-    height: 82vh;
-    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
-  }
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -22,6 +17,13 @@ const Image = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
+  @media (max-width: 600px) {
+  background-size: 100% 100%;
+  height: 70vh;
+  justify-content: center;
+  align-content: center;
+  box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
+  }
 `;
 const Img = styled.img`
   width: 65%;
@@ -34,15 +36,17 @@ const Title = styled.h1`
   text-transform: uppercase;
   color: white;
   font-weight: bold;
-  font-size: calc(30px + 1vw);
-  line-height: calc(30px + 1vw);
+  font-size: calc(30px + 2vw);
+  line-height: calc(30px + 2vw);
   letter-spacing: 1px;
   margin: auto;
   width: 80%;
   text-align: start;
   margin-bottom: 5%;
   @media (max-width: 600px) {
-    position: absolute;
+    font-size: calc(15px + 3vw);
+    line-height: calc(15px + 3vw);
+    margin-bottom: 10%;
   }
 `;
 const SubTitle = styled.h1`
@@ -56,7 +60,7 @@ const SubTitle = styled.h1`
   width: 80%;
   text-align: start;
   @media (max-width: 600px) {
-    position: absolute;
+    margin-bottom: 2.5%;
   }
 `;
 
@@ -69,8 +73,8 @@ const DivText = styled.div`
   width: 100%;
   padding: 10vh 10%;
   @media (max-width: 768px) {
-    width: 90%;
-    padding-left: 0;
+    width: 100%;
+    padding: 10vh 10%;
   }
 `;
 const Subheading = styled.div`
@@ -82,6 +86,13 @@ const Subheading = styled.div`
   margin-left: 10%;
   margin-top: 1%;
   margin-bottom: 1%;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 0;
+  }
 `;
 const Text = styled.h1`
   font-family: "Avenir Next", Helvetica, Arial, sans-serif;
@@ -91,11 +102,9 @@ const Text = styled.h1`
   line-height: calc(8px + 1vw);
   width: 100%;
   text-align: start;
-  @media (max-width: 768px) {
-    font-size: calc(6px + 1vh);
-    line-height: calc(7px + 1vh);
-    text-align: justify;
-    padding: 0 0 0.5vh 0;
+  @media (max-width: 600px) {
+    font-size: calc(12px + 1vw);
+    line-height: calc(12px + 1vw);
   }
   padding: 0 0 2.5vh 0;
 `;
@@ -109,10 +118,6 @@ const Container = styled.div`
   width: 100%;
   z-index: 100;
   position: relative;
-  @media (max-width: 768px) {
-    align-items: center;
-    justify-content: center;
-  }
 `;
 const Details = styled.h1`
   text-align: start;
@@ -127,6 +132,10 @@ const Details = styled.h1`
   width: max-content;
   color: #f4f4f4;
   height: max-content;
+  @media (max-width: 600px) {
+    font-size: calc(16px + 1vw);
+    line-height: calc(16px + 1vw);
+  }
 `;
 const Badge = styled.h1`
   display: flex;
@@ -144,6 +153,9 @@ const Badge = styled.h1`
   color: #606060;
   font-weight: bold;
   border-radius: 5%;
+  @media (max-width: 600px) {
+    margin-top:20%;
+  }
 `;
 const Heading = styled.h1`
   font-family: "Avenir Next", sans-serif;
@@ -161,6 +173,11 @@ const Heading = styled.h1`
   padding-left: 15%;
   margin-top: 5vh;
   border-bottom: 1px solid #999;
+  @media (max-width: 600px) {
+    padding-left: 2.5%;
+    font-size: calc(10px + 3vw);
+    line-height: calc(10px + 3vw);
+  }
 `;
 class Event extends Component {
   componentWillMount() {

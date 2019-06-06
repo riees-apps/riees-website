@@ -17,8 +17,10 @@
   font-size: calc(25px + 3.2vw);
   line-height: calc(25px + 3.2vw);
   letter-spacing: 3px;
-  width: 100%;
+  width: 90%;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .head2{
   text-transform: uppercase;
@@ -30,19 +32,17 @@
   text-align: center;
 }
 .paragraph{
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
-  font-size: calc(7.5px + 1vw);
-  line-height: calc(7.5px + 1vw);
+  font-family: "Avenir Next", sans-serif;
+  color: #fafafa;
+  font-size: calc(11px + 1vw);
+  line-height: calc(10px + 1vw);
   width: 75%;
   font-weight: lighter;
-  text-align: center;
-  margin-top:7.5vh;
+  text-align: unset;
   margin-left: auto;
   margin-right: auto;
 }
 .margin{
-  margin-top:5vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
