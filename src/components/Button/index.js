@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 import styled from "styled-components";
 
-const Btn = styled.button`
+const Btn = styled(Link)`
   border:none;
   color: ${props => props.font || '#fafafa'};
   letter-spacing: 3px;
@@ -18,6 +19,7 @@ const Btn = styled.button`
   transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
   width:${props => props.width};
   :hover {
+    color: ${props => props.font || '#fafafa'};
     background: #0055ff;
     letter-spacing: 4.5px;
     transform: scale(1.01);
@@ -69,7 +71,7 @@ const Btn = styled.button`
     text-align:center;
     justify-content: space-between;
     margin-top:auto;
-    margin-bottom:0;
+    margin-bottom:1%;
     :hover {
     letter-spacing: 4.5px;
     transform: scale(1.01);
@@ -92,7 +94,7 @@ class Button extends Component {
     window.location.href = url
   }
   render() {
-    return <Btn color={this.props.color} card={this.props.card} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  onClick={() => this.handleClick(this.props.url)}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
+    return <Btn className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={this.props.url}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
   }
 }
 export default Button;

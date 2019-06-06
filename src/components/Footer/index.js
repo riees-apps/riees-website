@@ -13,7 +13,7 @@ const StyledLink = styled(Link)`
   font-weight:lighter;
   font-size: calc(6px + 1vw);
   line-height: calc(8px + 1vw);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   padding: 1% 1%;
   text-decoration: none;
   transition:  all 0.15s linear ;
@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
   :hover {
     text-decoration: none;
     color: #e1e1e1;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     transition:  all 0.15s linear;
   }
 `;
@@ -49,7 +49,7 @@ const DivText = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 40%;
+  width: 60%;
   margin:40px;
   padding-right:3vw;
   
@@ -93,6 +93,10 @@ class Footer extends Component {
           <StyledLink  to={"/Cities"} >OUR CITIES</StyledLink>
           <StyledLink  to={"/About"} >ABOUT US</StyledLink>
           <StyledLink  to={"/Admin"} >Admin</StyledLink>
+        </DivText>
+        <DivText>
+        <Title>FEEDBACK</Title>
+        <Text>Para dar sua opinião sobre o que está achando do desenvolvimento deste site envie um email para: <Text style={{color:'royalblue',marginBottom:'-3px'}}>adrian.lube@outlook.com</Text> e conte-nos o que está achando e suas sugestões</Text>
         </DivText>
       </Image>
     )

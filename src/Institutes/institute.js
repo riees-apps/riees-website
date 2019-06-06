@@ -163,7 +163,6 @@ class Institute extends Component {
   }
   render() {
     const {name,sub,img,logo,areas,url,institutes} = this.props
-
     return (
       <div >
         <Image x='0.5' height="80vh" image={img} >

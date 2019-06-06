@@ -29,6 +29,7 @@ const Image = styled.div`
   width: 100%;
   @media (max-width: 600px) {
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.35 ) inset;
+    height: calc(91.7vh);
   }
 `;
 const Title = styled.h1`

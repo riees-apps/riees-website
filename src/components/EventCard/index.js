@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import img2 from "./imgs/img2.jpg";
 import Button from "../Button/index";
 
 const Card = styled.div`
-transition:all 300ms;
+  transition:all 300ms;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -18,23 +17,24 @@ transition:all 300ms;
   box-shadow: 0px 0px 4px 0px rgba(50,50,50,0.51);
   border-radius:5px;
   ${props =>
-    props.larger &&
+    props.side &&
     `
+    box-shadow: none;
+    border-radius:0;
+    padding-bottom:10vh;
+    border-bottom: 1px solid #999;
+    background-color: #f4f4f4;
+    width:70%;
+    height: 30vh;
     display: flex;
-  flex-direction: row;
-  align-items: space-between;
-  justify-content: space-between;
-  width: 80%;
-  height: 40vh;
-  transition: all 600ms;
-  background-color:#f4f4f4;
-  margin-bottom:0%;
-  padding:2.5% 0;
-  border-bottom: 1px solid #ccc
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
   `}
 `;
-const CardImg = styled.div`
-  transition:background-image 300ms ease-in;
+const CardImg = styled(Link)`
+  transition:all 200ms ease-in;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -45,23 +45,29 @@ const CardImg = styled.div`
   background-repeat: no-repeat;
   background-size: 100% 100%;
   width: 100%;
-  height: 30vh;
+  height: 32.5vh;
   border-top-left-radius:5px;
   border-top-right-radius:5px;
   @media (max-width: 600px) {
     background-size: cover;
   }
   :hover {
-    transition: all 600ms;
+    transition:all 200ms ease-in;
     box-shadow: 0px 45vh rgba(20, 20, 20, 0.5) inset;
     cursor: pointer;
   }
   ${props =>
-    props.larger &&
+    props.side &&
     `
-    width: 90%;
-    height: 100%;
-  }
+    border-top-left-radius:0;
+  border-top-right-radius:0;
+    width:40%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
   `}
 `;
 const Date = styled.h1`
@@ -85,8 +91,8 @@ const Title = styled.h1`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: 1.8em;
-  line-height: 1em;
+  font-size: calc(5px + 1.2vw);
+  line-height: calc(2px + 1.2vw);
   font-weight: bold;
   width: 95%;
   color: #303032;
@@ -102,43 +108,58 @@ transition:all 300ms linear;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: 1.2em;
-  line-height: 1em;
+  font-size: calc(3px + 1vw);
+  line-height: calc(5.5px + 1vw);
   font-weight: 400;
-  width: 100%;
+  width: 98%;
   color: #606060;
   height: max-content;
-  padding: 1vh 0 1vh 1vh;
+  padding: 0 1vh;
   margin: 0;
+  display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;  /* Number of lines displayed before it truncate */
+     overflow: hidden;
   ${props =>
-    props.larger &&
+    props.icon &&
     `
-    width: 95%;
-  }
+    width: 100%;
+    padding: 1vh 0 1.5vh 1vh;
   `}
 `;
 const CardBody = styled.div`
-transition:all 300ms linear;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  height:50%;
+  justify-content: space-around;
+  height:31vh;
   padding-left:1vh;
   padding-top:1vh;
   ${props =>
     props.larger &&
     `
     margin-left:2vh;
-  }
+  `}
+  ${props =>
+    props.side &&
+    `
+
+    width:60%
+    height: 30vh;
+    align-items: flex-start;
+    justify-content: center;
   `}
 `;
 
 class EventCard extends Component {
   render() {
     return (
-      <Card >
-          <CardImg  input={this.props.img}>
+      <Card side={this.props.side}>
+          <CardImg
+          style={{textDecoration:'none'}} 
+          side={this.props.side}
+          to={`/Events/${this.props.title}`}
+          input={this.props.img}>
           <Date className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'}>
             <i className={`far fa-calendar-check iconDate`} />
             Event
@@ -150,13 +171,18 @@ class EventCard extends Component {
             
           </Date>
           </CardImg>
-          <CardBody >
+          <CardBody side={this.props.side}>
+          
           <Title>{this.props.title}</Title>
-          <Text className={typeof(this.props.dateEvent) === 'undefined' ? '' : 'displayNone'} >{this.props.text}</Text>
-          <Text className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-calendar iconDate`} /> {this.props.dateEvent}</Text>
-          <Text className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-clock iconDate`} /> {this.props.timeEvent}</Text>
-          <Text className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-map-marker-alt iconDate`} /> {this.props.placeEvent}</Text>
-          <Button card url={`/events/${this.props.title}`} name="Learn More" />
+
+          <div>
+          <Text  className={typeof(this.props.dateEvent) === 'undefined' ? '' : 'displayNone'} >{this.props.text}</Text>
+          <Text icon className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-calendar iconDate`} /> {this.props.dateEvent}</Text>
+          <Text icon className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-clock iconDate`} /> {this.props.timeEvent}</Text>
+          <Text icon className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-map-marker-alt iconDate`} /> {this.props.placeEvent}</Text>
+          </div>
+          
+          <Button card url={`/Events/${this.props.title}`} name="Learn More" />
         </CardBody>
       </Card>
     );
