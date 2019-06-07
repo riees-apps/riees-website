@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import {FormattedMessage} from 'react-intl'
 import img from "./oi.jpg";
 import img2 from "./opa.jpg";
 import Image from "../components/Image/index";
@@ -66,9 +67,9 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Image title="ABOUT US" height="100vh" image={img} />
+        <Image title={<FormattedMessage id="About"/>} height="100vh" image={img} />
         <DivText>
-          <Heading border='#FE86AC' color='#0033ff'>Who we are</Heading>
+          <Heading border='#FE86AC' color='#0033ff'><FormattedMessage id="Who"/></Heading>
           <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
@@ -105,7 +106,7 @@ class About extends Component {
           x="0.6"
           image={img2}
         >
-          <Heading border='#fafafa' color='#fafafa'>Mission</Heading>
+          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="Mission"/></Heading>
           <Div >
             <Text color='#fafafa'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et

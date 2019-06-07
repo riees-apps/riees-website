@@ -12,6 +12,7 @@ import img5 from "./ola.jpg";
 import InstituteImages from '../components/Institutes/index'
 import Events from '../components/Events/index'
 import Testimonial from '../components/Testimonial/index'
+import {FormattedMessage} from 'react-intl'
 
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -106,27 +107,31 @@ class Home extends Component {
       <div style={{ backgroundColor: "#f4f4f4",textAlign: 'center'}}>
       <Carousel>
           <Carousel.Item>
-          <Image x='0.4' height="100vh" image={img} brightness="145%" align='center' justify='center'>
+          <Image x='0.3' height="100vh" image={img} brightness="160%" align='center' justify='center'>
           <div>
-            <Title>Come to meet us</Title>
-            <Subheading>Non distinctio quasi alias est.</Subheading>
+            <Title>
+            <FormattedMessage id="HomeTitle"/>
+            </Title>
+            <Subheading>
+            <FormattedMessage id="HomeSubHeading"/>
+            </Subheading>
           </div>
-          <Button url='/Institutes' name="Learn More" />
+          <Button url='/Institutes' name={<FormattedMessage id="Button"/>}/>
           </Image>
           </Carousel.Item>
           <Carousel.Item>
-          <Image x='0.4' height="100vh" image={img} brightness="145%" align='center' justify='center'>
+          <Image x='0.3' height="100vh" image={img} brightness="145%" align='center' justify='center'>
           <div>
             <Title>Lorem ipsum dolor</Title>
             <Subheading>Etiam cursus elementum ante a porttitor.</Subheading>
           </div>
-          <Button url='/Institutes' name="Learn More" />
+          <Button url='/Institutes' name={<FormattedMessage id="Button"/>} />
           </Image>
           </Carousel.Item>
       </Carousel>
 
         <DivText>
-          <Heading>ABOUT RIEES</Heading>
+          <Heading><FormattedMessage id="About"/></Heading>
           <Text>
             Aut molestiae velit id maxime accusantium. Dolorem qui ab
             accusantium qui et et tenetur facilis. Quia odio hic ea qui
@@ -145,14 +150,14 @@ class Home extends Component {
             sequi. Eos aspernatur hic. Nobis autem vel non.
             sequi.
           </Text>
-          <Button url='/About' name='Learn More'/>
+          <Button url='/About' name={<FormattedMessage id="Button"/>}/>
         </DivText>
         
 
         <Carousel >
           <Carousel.Item>
             <Image x='0.75' height="85vh" brightness="100%" contrast="100%" image={img2} align='space-around' justify='space-around'>
-                <h1 className='head'>Coming to Espirito Santo</h1>
+                <h1 className='head'><FormattedMessage id="Coming"/></h1>
                 <p className='paragraph'>Aut molestiae velit id maxime accusantium. Dolorem qui ab
                 accusantium qui et et tenetur facilis. Quia odio hic ea qui
                 molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
@@ -165,13 +170,13 @@ class Home extends Component {
                 ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
                 sequi. Eos aspernatur hic. Nobis autem vel non.</p>
                 <div className='margin'>
-                  <Button url='/Coming'  name='Learn More'/>
+                  <Button url='/Coming'  name={<FormattedMessage id="Button"/>}/>
                 </div>
             </Image>
           </Carousel.Item>
           <Carousel.Item>
             <Image x='0.75' height="85vh" brightness="100%" contrast="100%" image={img5} align='space-around' justify='space-around'>
-                <h1 className='head'>Living in Espirito Santo</h1>
+                <h1 className='head'><FormattedMessage id="Living"/></h1>
                 <p className='paragraph'>Ea a consectetur
                 sequi. Voluptatem reiciendis sed perspiciatis. Aut molestiae velit id maxime accusantium. Dolorem qui ab
                 accusantium qui et et tenetur facilis. Quia odio hic ea qui
@@ -184,13 +189,13 @@ class Home extends Component {
                 ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
                 sequi. Eos aspernatur hic. Nobis autem vel non.</p>
                 <div className='margin'>
-                  <Button url='/Living' name='Learn More'/>
+                  <Button url='/Living' name={<FormattedMessage id="Button"/>}/>
                 </div>
             </Image>
           </Carousel.Item>
           <Carousel.Item>
             <Image x='0.75' height="85vh" brightness="100%" contrast="100%" image={img4} align='space-around' justify='space-around'>
-                <h1 className='head'>Our Cities</h1>
+                <h1 className='head'><FormattedMessage id="Cities"/></h1>
                 <p className='paragraph'>Temporibus sed ut voluptas. Est
                 temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
                 consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
@@ -203,14 +208,14 @@ class Home extends Component {
                 ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
                 sequi. Eos aspernatur hic. Nobis autem vel non.</p>
                 <div className='margin'>
-                  <Button url='/Cities'  name='Learn More'/>
+                  <Button url='/Cities'  name={<FormattedMessage id="Button"/>}/>
                 </div>
             </Image>
           </Carousel.Item>
         </Carousel>
 
         <DivText>
-        <Heading>OUR INSTITUTES</Heading>
+        <Heading><FormattedMessage id="InstitutesTitle"/></Heading>
         </DivText>
         <InstituteImages city=''/>
         
@@ -252,9 +257,9 @@ class Home extends Component {
           </Carousel.Item>
         </Carousel>
         <DivText>
-        <Heading background='#f4f4f4'>NEWS & EVENTS</Heading>
+        <Heading background='#f4f4f4'><FormattedMessage id="News"/></Heading>
         <Events final={window.screen.width >= 768 ? 3 : 1 }/>
-        <Button url='/News-Events' name="All news and events" />
+        <Button url='/News-Events' name={<FormattedMessage id="ButtonEvents"/>} />
         </DivText>
        
         <Footer/>    

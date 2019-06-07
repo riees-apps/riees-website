@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Admin from "../../Admin/index.js";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import {FormattedMessage} from 'react-intl'
 import opa from './opa.jpg'
 
 const StyledLink = styled(Link)`
@@ -13,7 +14,7 @@ const StyledLink = styled(Link)`
   font-weight:lighter;
   font-size: calc(6px + 1vw);
   line-height: calc(8px + 1vw);
-  letter-spacing: 1px;
+  letter-spacing: 0px;
   padding: 1% 1%;
   text-decoration: none;
   transition:  all 0.15s linear ;
@@ -21,7 +22,7 @@ const StyledLink = styled(Link)`
   :hover {
     text-decoration: none;
     color: #e1e1e1;
-    letter-spacing: 3px;
+    letter-spacing: 1.5px;
     transition:  all 0.15s linear;
   }
 `;
@@ -85,21 +86,22 @@ class Footer extends Component {
     return (
       <Image brightness="120%" height='65vh' contrast="100%" image={opa} >
         <DivText>
-          <Title>CONTACT US</Title>
+          <Title><FormattedMessage id="ContactUs"/></Title>
             <Text>Universidade Federal do Espirito Santo - Secretaria de Relações Internacionais</Text>
             <Text>Avenida Fernando Ferrari,514.Vitória/ES-Brasil.</Text>
             <Text>CEP 29075-910</Text>
             <Text>+55 27 40092046 / +55 27 31459205</Text>
         </DivText>
         <DivText>
-          <Title>MAP SITE</Title>
-          <StyledLink  to={"/"} >HOME</StyledLink>
-          <StyledLink  to={"/Institutes"} >OUR INSTITUTES</StyledLink>
-          <StyledLink  to={"/Coming"} >COMING TO ESPIRITO SANTO</StyledLink>
-          <StyledLink  to={"/Living"} >LIVING IN ESPIRITO SANTO</StyledLink>
-          <StyledLink  to={"/Cities"} >OUR CITIES</StyledLink>
-          <StyledLink  to={"/About"} >ABOUT US</StyledLink>
-          <StyledLink  to={"/Admin"} >Admin</StyledLink>
+          <Title><FormattedMessage id="MapSite"/></Title>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}`} ><FormattedMessage id="Home"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Institutes`} ><FormattedMessage id="Institutes"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Coming`} ><FormattedMessage id="Coming"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Living`} ><FormattedMessage id="Living"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Cities`} ><FormattedMessage id="Cities"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/About`} ><FormattedMessage id="About"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/News-Events`} ><FormattedMessage id="News"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Admin`} >Admin</StyledLink>
         </DivText>
         <DivText active>
         <Title>FEEDBACK</Title>

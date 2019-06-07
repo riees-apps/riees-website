@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import {FormattedMessage} from 'react-intl'
 import { Link } from "react-router-dom";
 import Button from "../Button/index";
 
@@ -190,7 +191,7 @@ class EventCard extends Component {
           <CardImg
           style={{textDecoration:'none'}} 
           side={this.props.side}
-          to={`/Events/${this.props.title}`}
+          to={`/${window.location.pathname.split('/')[1]}/Events/${this.props.title}`}
           input={this.props.img}>
           <Date className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'}>
             <i className={`far fa-calendar-check iconDate`} />
@@ -214,7 +215,7 @@ class EventCard extends Component {
           <Text icon className={typeof(this.props.dateEvent) !== 'undefined' ? '' : 'displayNone'} ><i className={`fas fa-map-marker-alt iconDate`} /> {this.props.placeEvent}</Text>
           </div>
           
-          <Button card url={`/Events/${this.props.title}`} name="Learn More" />
+          <Button card url={`/Events/${this.props.title}`} name={<FormattedMessage id="Button"/>} />
         </CardBody>
       </Card>
     );

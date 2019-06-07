@@ -3,6 +3,7 @@ import "./places.css";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "../../components/Button/index.js";
 import styled from "styled-components";
+import {FormattedMessage} from 'react-intl'
 
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -98,7 +99,7 @@ class Places extends Component {
         {place.text}
         </Subheading>
         <DivBtn >
-        <Button places url={`https://www.google.com/search?q=${place.name}`} name='Learn more'/>
+        <Button places url={`https://www.google.com/search?q=${place.name}`} name={<FormattedMessage id="Button"/>}/>
         </DivBtn>
         </Text>
       </Image>

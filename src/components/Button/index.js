@@ -52,10 +52,12 @@ const Btn = styled(Link)`
     background-color: #fefefe;
     box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.75);
     color:#202020;
+    width:max-content;
     :hover {
     letter-spacing: 4.5px;
     transform: scale(1.01);
-    cursor: pointer; 
+    cursor: pointer;
+    color:#202020;
     background-color: #eee;
   }
     
@@ -97,7 +99,7 @@ class Button extends Component {
     window.location.href = url
   }
   render() {
-    return <Btn className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={this.props.url}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
+    return <Btn className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={`/${window.location.pathname.split('/')[1]}${this.props.url}`}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
   }
 }
 export default Button;

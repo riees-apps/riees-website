@@ -3,10 +3,11 @@ import Footer from "../components/Footer/index";
 import Img from "../components/Image/index";
 import InstituteImages from '../components/Institutes/index'
 import styled from "styled-components";
+import {FormattedMessage} from 'react-intl'
 import img3 from "./oi.jpg";
 
 const Div = styled.div`
-  background-color: #fafafa;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -18,7 +19,7 @@ const Div = styled.div`
 `;
 
 const DivText = styled.div`
-  background-color: #fafafa;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -38,13 +39,14 @@ const Heading = styled.h1`
 `;
 const Title = styled.h1`
   font-family: "Oswald", Helvetica, Arial, sans-serif;
-  background: #fafafa;
+  background: #f4f4f4;
   color: ${props => props.color};
   font-size: calc(30px + 3vw);
   line-height: calc(30px + 3vw);
   letter-spacing: 3px;
   padding: 6vh calc(0.5vw);
-  padding-bottom: 0vh;
+  padding-bottom: 1vh;
+  border-bottom:1vh solid pink;
 `;
 
 class Institutes extends Component {
@@ -53,16 +55,15 @@ class Institutes extends Component {
   }
   render() {
     return (
-      <div style={{ backgroundColor: "#fafafa" }}>
+      <div style={{ backgroundColor: "#f4f4f4" }}>
         <Img
           height="100vh"
           image={img3}
-          title="Our Institutes"
+          title={<FormattedMessage id="Institutes"/>}
           brightness="110%"
         />
         <Div>
-          <Title color='#505050'>RIEES</Title>
-          <Title color='#4247FE'>Institutes</Title>
+          <Title color='#4247FE'><FormattedMessage id="InstitutesTitle"/></Title>
         </Div>
         <DivText>
           <Heading>

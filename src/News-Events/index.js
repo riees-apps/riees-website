@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Footer from "../components/Footer/index";
 import Events from "../components/Events/index";
+import {FormattedMessage} from 'react-intl'
 import styled from "styled-components";
 import img3 from "./agenda.jpg";
 
@@ -49,7 +50,7 @@ class NewsEvents extends Component {
     return (
       <div style={{ backgroundColor: "#f4f4f4" }}>
         <Image x='0.5' height="80vh" image={img3} >
-            <Title>News & Events</Title>
+            <Title><FormattedMessage id="News"/></Title>
         </Image>
         <Events larger final={9} />
         <Footer />

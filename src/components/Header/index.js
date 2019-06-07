@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import {FormattedMessage} from 'react-intl'
 
 import "./header.css";
 import logo1 from "./riees1.png";
 import logo2 from "./riees3.png";
+import br from "./brazil-flag.png";
+import us from "./united-flag.png";
 
 const StyledLink = styled(Link)`
   text-transform: uppercase;
   box-sizing: 100%;
   color: #505050;
-  font-size: calc(1px + 1.1vw);
+  font-size: calc(1px + 1vw);
   letter-spacing: 3px;
   padding-left: 3px;
   text-decoration: none;
@@ -88,7 +91,8 @@ class Header extends Component {
       scroll: false,
       active: "/",
       hover: false,
-      menu: false
+      menu: false,
+      lang:'pt'
     };
   }
   handleScroll() {
@@ -104,10 +108,23 @@ class Header extends Component {
     }
   }
   handleClick(active) {
+    var split = active.split('/')
+    var lang = split[1] 
     this.setState({
+      lang: lang,
       active: active,
       menu: false
     });
+  }
+  changePathname(active) {
+    var split = active.split('/')
+    var lang = split[1] 
+    this.setState({
+      lang: lang,
+      active: active,
+      menu: false
+    });
+    window.location.pathname = (active)
   }
   openMenu() {
     this.setState({ ...this.state, menu: !this.state.menu });
@@ -115,12 +132,22 @@ class Header extends Component {
   changeHover() {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
+  changeLang(lang) {
+    this.setState({ ...this.state, lang: lang });
+    console.log(this.state.lang)
+    var split = this.state.active.split('/')
+    split[1] = lang
+    var split2 = split.join('/')
+    this.changePathname(split2)
+  }
   changeOut() {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
   componentDidMount() {
     window.onscroll = () => this.handleScroll();
-    this.setState({ ...this.state, active: window.location.pathname });
+    var split = window.location.pathname.split('/')
+    var lang = split[1] 
+    this.setState({ ...this.state, active: window.location.pathname,lang: lang });
   }
   render() {
     return (
@@ -141,31 +168,66 @@ class Header extends Component {
           />
         </div>
 
-        <div className="containerLinks">
+        <div className={this.state.scroll ? "containerLinksScroll" : "containerLinks"}>
+            
+          <div className={this.state.scroll ? "divFlagScroll" : "divFlag"}>
+          <i className={`fab fa-facebook iconHeader`} />
+          <i className={`fab fa-instagram iconHeader`} />
           <StyledLink
-            onClick={() => this.handleClick("/")}
-            active={this.state.active === "/" ? true : false}
+            onClick={() => this.changeLang('pt')}
             className={this.state.scroll ? "scroll" : ""}
-            to={"/"}
-          >
-            Home
+            >
+                        <img
+              
+              src={br}
+              className="flag"
+            />
           </StyledLink>
 
           <StyledLink
-            onClick={() => this.handleClick("/Institutes")}
-            active={this.state.active === "/Institutes" ? true : false}
+            onClick={() => this.changeLang('en')}
             className={this.state.scroll ? "scroll" : ""}
-            to={"/Institutes"}
           >
-            Our Institutes
+            <img
+              
+              src={us}
+              className="flag"
+            />
+          </StyledLink>
+          <StyledLink
+            onClick={() => this.handleClick(`/${this.state.lang}/Admin`)}
+            active={this.state.active === `/${this.state.lang}/Admin` ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={`/${this.state.lang}/Admin`}
+          >
+            Admin
+          </StyledLink>
+          </div>
+          <div className={this.state.scroll ? "divLinksScroll" : "divLinks"}>
+          <StyledLink
+            onClick={() => this.handleClick(`/${this.state.lang}`)}
+            active={this.state.active === `/${this.state.lang}` ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={`/${this.state.lang}`}
+          >
+            <FormattedMessage id="Home"/>
+          </StyledLink>
+
+          <StyledLink
+            onClick={() => this.handleClick(`/${this.state.lang}/Institutes`)}
+            active={this.state.active === `/${this.state.lang}/Institutes` ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={`/${this.state.lang}/Institutes`}
+          >
+            <FormattedMessage id="Institutes"/>
           </StyledLink>
           <StyledLink
             onMouseOver={this.changeHover.bind(this)}
             onMouseOut={this.changeOut.bind(this)}
             active={
-              this.state.active === "/Cities" ||
-              this.state.active === "/Coming" ||
-              this.state.active === "/Living"
+              this.state.active === `/${this.state.lang}/Cities` ||
+              this.state.active === `/${this.state.lang}/Coming` ||
+              this.state.active === `/${this.state.lang}/Living`
                 ? true
                 : false
             }
@@ -175,27 +237,27 @@ class Header extends Component {
             <div class="dropdown-content">
               <StyledLink
                 li
-                onClick={() => this.handleClick("/Coming")}
+                onClick={() => this.handleClick(`/${this.state.lang}/Coming`)}
                 className={this.state.scroll ? "scroll2" : ""}
-                to={"/Coming"}
+                to={`/${this.state.lang}/Coming`}
               >
-                Coming to Espirito Santo
+                <FormattedMessage id="Coming"/>
               </StyledLink>
               <StyledLink
                 li
-                onClick={() => this.handleClick("/Living")}
+                onClick={() => this.handleClick(`/${this.state.lang}/Living`)}
                 className={this.state.scroll ? "scroll2" : ""}
-                to={"/Living"}
+                to={`/${this.state.lang}/Living`}
               >
-                Living in Espirito Santo
+                <FormattedMessage id="Living"/>
               </StyledLink>
               <StyledLink
                 li
-                onClick={() => this.handleClick("/Cities")}
+                onClick={() => this.handleClick(`/${this.state.lang}/Cities`)}
                 className={this.state.scroll ? "scroll2" : ""}
-                to={"/Cities"}
+                to={`/${this.state.lang}/Cities`}
               >
-                Our Cities
+                <FormattedMessage id="Cities"/>
               </StyledLink>
             </div>
             <FaCaretUp
@@ -207,22 +269,25 @@ class Header extends Component {
           </StyledLink>
 
           <StyledLink
-            onClick={() => this.handleClick("/About")}
-            active={this.state.active === "/About" ? true : false}
+            onClick={() => this.handleClick(`/${this.state.lang}/About`)}
+            active={this.state.active === `/${this.state.lang}/About` ? true : false}
             className={this.state.scroll ? "scroll" : ""}
-            to={"/About"}
+            to={`/${this.state.lang}/About`}
           >
-            About Us
+            <FormattedMessage id="About"/>
           </StyledLink>
 
           <StyledLink
-            onClick={() => this.handleClick("/News-Events")}
-            active={this.state.active === "/News-Events" ? true : false}
+            onClick={() => this.handleClick(`/${this.state.lang}/News-Events`)}
+            active={this.state.active === `/${this.state.lang}/News-Events` ? true : false}
             className={this.state.scroll ? "scroll" : ""}
-            to={"/News-Events"}
+            to={`/${this.state.lang}/News-Events`}
           >
-            News & Events
+            <FormattedMessage id="News"/>
           </StyledLink>
+          </div>
+
+          
         </div>
 
         <i
@@ -236,66 +301,66 @@ class Header extends Component {
           <div className={this.state.menu ? "menu-links" : "menuNone"}>
             <StyledLink
               li
-              onClick={() => this.handleClick("/")}
-              active={window.location.pathname === "/" ? true : false}
-              className={window.location.pathname === "/" ? "active" : ""}
-              to={"/"}
+              onClick={() => this.handleClick(`/${this.state.lang}`)}
+              active={window.location.pathname ===`/${this.state.lang}` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}` ? "active" : ""}
+              to={`/${this.state.lang}`}
             >
               Home
             </StyledLink>
             <StyledLink
               li
-              onClick={() => this.handleClick("/Institutes")}
-              active={window.location.pathname === "/Institutes" ? true : false}
+              onClick={() => this.handleClick(`/${this.state.lang}/Institutes`)}
+              active={window.location.pathname === `/${this.state.lang}/Institutes` ? true : false}
               className={
-                window.location.pathname === "/Institutes" ? "active" : ""
+                window.location.pathname === `/${this.state.lang}/Institutes` ? "active" : ""
               }
-              to={"/Institutes"}
+              to={`/${this.state.lang}/Institutes`}
             >
               Our Institutes
             </StyledLink>
             <StyledLink
               li
-              onClick={() => this.handleClick("/Coming")}
-              active={window.location.pathname === "/Coming" ? true : false}
-              className={window.location.pathname === "/Coming" ? "active" : ""}
-              to={"/Coming"}
+              onClick={() => this.handleClick(`/${this.state.lang}/Coming`)}
+              active={window.location.pathname === `/${this.state.lang}/Coming` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/Coming` ? "active" : ""}
+              to={`/${this.state.lang}/Coming`}
             >
               Coming to Espirito Santo
             </StyledLink>
             <StyledLink
               li
-              onClick={() => this.handleClick("/Living")}
-              active={window.location.pathname === "/Living" ? true : false}
-              className={window.location.pathname === "/Living" ? "active" : ""}
-              to={"/Living"}
+              onClick={() => this.handleClick(`/${this.state.lang}/Living`)}
+              active={window.location.pathname === `/${this.state.lang}/Living` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/Living` ? "active" : ""}
+              to={`/${this.state.lang}/Living`}
             >
               Living in Espirito Santo
             </StyledLink>
             <StyledLink
               li
-              onClick={() => this.handleClick("/Cities")}
-              active={window.location.pathname === "/Cities" ? true : false}
-              className={window.location.pathname === "/Cities" ? "active" : ""}
-              to={"/Cities"}
+              onClick={() => this.handleClick(`/${this.state.lang}/Cities`)}
+              active={window.location.pathname === `/${this.state.lang}/Cities` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/Cities` ? "active" : ""}
+              to={`/${this.state.lang}/Cities`}
             >
               Our Cities
             </StyledLink>
             <StyledLink
               li
-              onClick={() => this.handleClick("/About")}
-              active={window.location.pathname === "/About" ? true : false}
-              className={window.location.pathname === "/About" ? "active" : ""}
-              to={"/About"}
+              onClick={() => this.handleClick(`/${this.state.lang}/About`)}
+              active={window.location.pathname === `/${this.state.lang}/About` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/About` ? "active" : ""}
+              to={`/${this.state.lang}/About`}
             >
               About Us
             </StyledLink>
             <StyledLink
               li
-              onClick={() => this.handleClick("/News-Events")}
-              active={window.location.pathname === "/News-Events" ? true : false}
-              className={window.location.pathname === "/News-Events" ? "active" : ""}
-              to={"/News-Events"}
+              onClick={() => this.handleClick(`/${this.state.lang}/News-Events`)}
+              active={window.location.pathname === `/${this.state.lang}/News-Events` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/News-Events` ? "active" : ""}
+              to={`/${this.state.lang}/News-Events`}
             >
               News & Events
             </StyledLink>

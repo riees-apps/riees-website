@@ -1,5 +1,22 @@
+.iconHeader{
+   cursor:pointer;
+  color: #606062;
+  font-size: calc(25px);
+  width: max-content;
+}
+.iconHeader:hover {
+  transform:scale(1.05)
+}
+.flag {
+  width:2.2vw;
+  height:1.5vw;
+  cursor:pointer;
+}
+.flag:hover {
+  transform:scale(1.05)
+}
 .scroll {
-  font-size: calc(1px + 0.9vw);
+  font-size: calc(1px + 1.2vw);
   transition: all 300ms ;
 }
 .scroll2 {
@@ -7,7 +24,7 @@
   transition: all 300ms ;
 }
 .dropscroll {
-  font-size: calc(1px + 1vw);
+  font-size: calc(1px + 1.2vw);
   transition: all 300ms ;
 }
 .container1 {
@@ -18,15 +35,13 @@
   z-index: 1000;
   background: white;
   box-sizing: content-box;
-  padding: 1vw 0;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: center;
   opacity: 0.95;
   box-shadow: 0px 5px 5px -1px rgba(0,0,0,0.27);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .container2 {
   z-index: 99999999999999999;
@@ -36,43 +51,99 @@
   z-index: 1000;
   background: white;
   box-sizing: content-box;
-  padding: 0.5vw 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   opacity: 0.8;
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .containerLinks{
-  top: 0;
   z-index: 1;
   background: white;
   box-sizing: content-box;
-  padding: 0.3vw 0;
+  padding: 0 2.5vw 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  width:70%;
+  height:calc(30px + 5vw);
+}
+.containerLinksScroll{
+  z-index: 1;
+  background: white;
+  box-sizing: content-box;
+  padding: 0 2.5vw 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  width:70%;
+  height:calc(10px + 3vw);
+}
+.divLinks{
+  transition:all 300ms;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width:70%;
-  margin-right: 2.5vw;
+  width:90%;
+  height:30%;
+  margin-top:6vh;
+}
+.divLinksScroll{
+  transition:all 300ms;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width:100%;
+  height:50%;
+ 
+}
+.divFlag{
+  visibility:visible;
+  transition:all 300ms;
+  background-color:#efeef3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width:40%;
+  height:5vh;
+  padding:2.5vh 0;
+  position:fixed;
+  top: 1.5vh;
+}
+
+.divFlagScroll{
+  transition:all 300ms;
+  visibility:hidden;
+  background-color:#efeef3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width:40%;
+  height:5vh;
+  padding:2.5vh 0;
+  position:fixed;
+  top: -5vh;
 }
 .logo1 {
-  width: calc(30px + 3vw);
-  height: calc(30px + 3vw);
+  width: calc(40px + 3vw);
+  height: calc(40px + 3vw);
   margin-left: 2.5vw;
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .logo2 {
-  width: calc(50px + 6vw);
-  height: calc(10px + 2.5vw);
+  width: calc(120px + 6vw);
+  height: calc(30px + 2.5vw);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .div {
-  padding: 0 10px;
+  padding: 1vh 0;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -87,13 +158,11 @@
   height: calc(30px + 2vw);
   transition: all 300ms;
   margin-left: 2.5vw;
-  transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
 }
 .logo2Scroll {
-  width: calc(45px + 3.5vw);
-  height: calc(5px + 2vw);
+  width: calc(70px + 3.5vw);
+  height: calc(17.5px + 2vw);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
 }
 .divScroll {
   padding: 0 10px;
@@ -145,7 +214,7 @@
   display: none;
 }
 .menuNone {
-  top: calc(50px + 3vw + 1.7vw);
+  top: calc(50px + 5vw + 2vh);
   transition: all 500ms;
   display: flex;
   flex-direction: column;
@@ -168,6 +237,9 @@
   .containerLinks{
     display: none
   }
+  .containerLinksScroll{
+ display: none
+}
   .menu {
     z-index: 10;
     transition: all 500ms;
@@ -196,10 +268,11 @@
     transition: all 300ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
+    margin-left:2.5vw;
   }
   .logo2 {
-    width: calc(30px + 6vw);
-  height: calc(20px + 3vw);
+    width: calc(60px + 6vw);
+  height: calc(30px + 3vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
@@ -210,16 +283,16 @@
     transition: all 300ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
+    margin-left:2.5vw;
   }
   .logo2Scroll {
-    width: calc(30px + 6vw);
-  height: calc(20px + 3vw);
+    width: calc(60px + 6vw);
+  height: calc(30px + 3vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
   }
   .container1 {
-
     padding: 1vw 0px;
     opacity: 1;
     justify-content: space-between;
@@ -236,7 +309,7 @@
   .menu-content {
     visibility: visible;
     transition: all 300ms ease-in;
-    top: calc(50px + 3vw + 1.8vw);
+    top: calc(50px + 5vw + 2vh);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -250,7 +323,7 @@
   .menu-contentNone{
     visibility: hidden;
     transition: all 200ms ease-in;
-    top: calc(50px + 3vw + 1.8vw);
+    top: calc(50px + 5vw + 2vh);
     display: flex;
     flex-direction: row;
     align-items: flex-start;

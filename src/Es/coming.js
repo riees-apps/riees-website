@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import img from "./oi.jpg";
 import img2 from "./ola.jpg";
+import {FormattedMessage} from 'react-intl'
 import Footer from '../components/Footer/index'
 
 
@@ -129,12 +130,12 @@ class Coming extends Component {
     return (
       <div>
         <Image x='0.5' height="80vh" image={img} >
-            <Title>Coming to Espirito Santo</Title>
+            <Title><FormattedMessage id="Coming"/></Title>
         </Image>
         <DivText>
-            <Heading border='pink' color='#0033ff'>Documents you Need</Heading>
+            <Heading border='pink' color='#0033ff'><FormattedMessage id="Documents"/></Heading>
             <Div >
-            <SubHeading uppercase='uppercase' color='#303030'>Passport</SubHeading>
+            <SubHeading uppercase='uppercase' color='#303030'><FormattedMessage id="Passport"/></SubHeading>
             <Text2 color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit
@@ -172,7 +173,7 @@ class Coming extends Component {
           x="0.8"
           image={img2}
         >
-          <Heading border='#fafafa' color='#fafafa'>Before you leave</Heading>
+          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="Before"/></Heading>
           <Div >
             <SubHeading color='#fafafa'>
               Similique magnam exercitationem vero velit quis quas incidunt

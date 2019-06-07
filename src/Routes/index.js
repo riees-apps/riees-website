@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
@@ -568,12 +568,38 @@ const cities = [
     ]
   },
 ];
+
+const LANGUAGES = {
+  pt: {
+      urlLang: 'pt',
+      code: 'pt-BR'
+  },
+  en: {
+      urlLang: 'en',
+      code: 'en-US'
+  },
+  default: 'pt'
+}
+
+
+const MultiLanguageRoute = (props) => {
+  const defaultLanguage = LANGUAGES.pt.urlLang
+  const hasLang = props.computedMatch.params.lang
+  const is404Page = props.path
+  const isBasePathWithoutLang = props.path === "/"
+
+  if(isBasePathWithoutLang)  return  <Redirect to={`/${defaultLanguage}`} />
+  if(!hasLang && !is404Page) return <Redirect to={`/${defaultLanguage}`} />
+
+  return <Route {...props} />    
+}
+
 class Routes extends Component {
   render() {
     const renderEvents = () => {
       return eventos.map(event => (
-        <Route
-          path={`/Events/${event.title}`}
+        <MultiLanguageRoute
+          path={`/:lang/Events/${event.title}`}
           component={props => (
             <Event
               {...props}
@@ -592,8 +618,8 @@ class Routes extends Component {
     };
     const renderInstitutes = () => {
       return institutes.map(institute => (
-        <Route
-          path={`/Institute/${institute.name}`}
+        <MultiLanguageRoute
+          path={`/:lang/Institute/${institute.name}`}
           component={props => (
             <Institute
               {...props}
@@ -611,8 +637,8 @@ class Routes extends Component {
     };
     const renderCities = () => {
       return cities.map(city => (
-        <Route
-          path={`/City/${city.name.trim()}`}
+        <MultiLanguageRoute
+          path={`/:lang/City/${city.name.trim()}`}
           component={props => (
             <City
               {...props}
@@ -630,20 +656,21 @@ class Routes extends Component {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/News-Events" component={NewsEvents} />
-          <Route path="/About" component={About} />
-          <Route path="/Admin" component={Admin} />
-          <Route path="/Cities" component={Cities} />
-          <Route path="/Es" component={Es} />
-          <Route path="/Coming" component={Coming} />
-          <Route path="/Living" component={Living} />
-          <Route path="/Institutes" component={Institutes} />
+          <MultiLanguageRoute exact path="/"/>
+          <MultiLanguageRoute exact path="/:lang" component={Home} />
+          <MultiLanguageRoute path="/:lang/dashboard" component={Dashboard} />
+          <MultiLanguageRoute path="/:lang/News-Events" component={NewsEvents} />
+          <MultiLanguageRoute path="/:lang/About" component={About} />
+          <MultiLanguageRoute path="/:lang/Admin" component={Admin} />
+          <MultiLanguageRoute path="/:lang/Cities" component={Cities} />
+          <MultiLanguageRoute path="/:lang/Es" component={Es} />
+          <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
+          <MultiLanguageRoute path="/:lang/Living" component={Living} />
+          <MultiLanguageRoute path="/:lang/Institutes" component={Institutes} />
           {renderEvents()}
           {renderInstitutes()}
           {renderCities()}
-          <Route path="/Admin" component={Admin} />
+          <MultiLanguageRoute path="/Admin" component={Admin} />
         </Switch>
       </BrowserRouter>
     );

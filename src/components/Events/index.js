@@ -5,6 +5,7 @@ import uvv from "./imgs/img2.jpg";
 import ifes from "./imgs/vilavelha.jpg";
 import ucl from "./imgs/vitoria.jpg";
 import EventCard from "../EventCard/index";
+import {FormattedMessage} from 'react-intl'
 
 import "./index.css";
 
@@ -544,7 +545,7 @@ class Events extends Component {
     return (
       <div style={{ zIndex: "100", position: "relative" }}>
         <DivHeading className={this.props.larger ? "" : "displayNone"}>
-          <Heading background="#f4f4f4">News & Events</Heading>
+          <Heading background="#f4f4f4"><FormattedMessage id="News"/></Heading>
           <Form>
             <Form
               onClick={() => this.handleClick("all")}
@@ -552,7 +553,7 @@ class Events extends Component {
               style={{ width: "max-content" }}
             >
               <Check active={this.state.active === "all" ? true : false} />
-              <h1>News and Events</h1>
+              <h1><FormattedMessage id="News"/></h1>
             </Form>
             <Form
               onClick={() => this.handleClick("events")}
@@ -560,7 +561,7 @@ class Events extends Component {
               style={{ width: "max-content" }}
             >
               <Check active={this.state.active === "events" ? true : false} />
-              <h1>Events</h1>
+              <h1><FormattedMessage id="Events"/></h1>
             </Form>
             <Form
               onClick={() => this.handleClick("news")}
@@ -568,7 +569,7 @@ class Events extends Component {
               style={{ width: "max-content" }}
             >
               <Check active={this.state.active === "news" ? true : false} />
-              <h1>News</h1>
+              <h1><FormattedMessage id="New"/></h1>
             </Form>
           </Form>
         </DivHeading>
@@ -609,7 +610,7 @@ class Events extends Component {
               }`}
             />
             <h1 className={` ${this.props.larger ? "h1Pages" : "displayNone"}`}>
-              Page {this.state.page} of{" "}
+              <FormattedMessage id="Page"/> {this.state.page} <FormattedMessage id="Of"/>{" "}
               {Math.ceil(events.length / this.props.final)}
             </h1>
             <i

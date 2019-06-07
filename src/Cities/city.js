@@ -8,11 +8,11 @@ import img1 from "../components/Cities/imgs/img1.jpg";
 import img2 from "../components/Cities/imgs/img2.jpg";
 import InstituteImages from '../components/Institutes/index'
 import Places from '../components/Places/index'
-
+import {FormattedMessage} from 'react-intl'
 
 
 const DivText = styled.div`
-  background-color: #fafafa;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,7 +66,7 @@ const Div = styled.div`
   }
 `;
 const Container = styled.div`
-  background: #fafafa;
+  background: #f4f4f4;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -120,14 +120,14 @@ class City extends Component {
   render() {
     const { name, img, cities, places, url } = this.props;
     return (
-      <div style={{background:'#fafafa'}}>
+      <div style={{background:'#f4f4f4'}}>
         <Image title={name} height="100vh" image={img} />
         <Container >
           <SideMenu url={url} page="City" links={cities} />
           <DivText>
             <Div justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)">overview</Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Overview"/></Heading>
             </Div>
             <DivImg>
               <Img src={img1} alt="" />
@@ -170,7 +170,7 @@ class City extends Component {
             </Text>
             <Div justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)">living there</Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="LivingThere"/></Heading>
             </Div>
             <DivImg>
               <Img src={img2} alt="" />
@@ -212,20 +212,20 @@ class City extends Component {
               mollis placerat imperdiet. Suspendisse in velit m
             </Text>
             <Div justify="flex-start">
-              <Heading>Top places</Heading>
-              <Heading color="rgb(0, 83, 180)">to see</Heading>
+              <Heading><FormattedMessage id="Top"/></Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Visit"/></Heading>
             </Div>
             <Places places={places}/>
-            <Div style={{background:'#fafafa'}} justify="flex-start">
+            <Div style={{background:'#f4f4f4'}} justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)">institutes</Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Institutes"/></Heading>
             </Div>
             <InstituteImages  cityInstitute city={name}/>
             <Button
               return={true}
               color="#FF1493"
               url="/Cities"
-              name="All cities"
+              name={<FormattedMessage id="AllCities"/>}
             />
           </DivText>
         </Container>
