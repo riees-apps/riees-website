@@ -15,6 +15,7 @@ const StyledLink = styled(Link)`
   box-sizing: 100%;
   color: #505050;
   font-size: calc(1px + 1vw);
+  line-height: calc(1px + 1vw);
   letter-spacing: 3px;
   padding-left: 3px;
   text-decoration: none;
@@ -35,6 +36,7 @@ const StyledLink = styled(Link)`
     props.active &&
     `
     border-bottom: 3px solid #000066;
+    line-height: calc(1px + 1.5vw);
     @media (max-width: 600px) {
       border-bottom: none;
     }
@@ -69,9 +71,8 @@ const StyledLink = styled(Link)`
     letter-spacing: 2px;
     color: #303030;
     text-align:start;
-    padding-left:10px;
-    padding-top:10px;
-    padding-bottom:10px;
+    padding:2vh 0;
+    padding-left:2vh;
     font-size: calc(9px + 1vw);
     width:100%;
     :hover {
@@ -171,8 +172,8 @@ class Header extends Component {
         <div className={this.state.scroll ? "containerLinksScroll" : "containerLinks"}>
             
           <div className={this.state.scroll ? "divFlagScroll" : "divFlag"}>
-          <i className={`fab fa-facebook iconHeader`} />
-          <i className={`fab fa-instagram iconHeader`} />
+          <i className={`fab fa-facebook-f iconFace`} />
+          <i className={`fab fa-instagram iconInsta`} />
           <StyledLink
             onClick={() => this.changeLang('pt')}
             className={this.state.scroll ? "scroll" : ""}
@@ -182,6 +183,7 @@ class Header extends Component {
               src={br}
               className="flag"
             />
+            
           </StyledLink>
 
           <StyledLink
