@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Routes from './Routes/index.js'
-import IntlProviderConfigured from 'C:/Users/lucas/React/riees/src/i18n/IntlProviderConfigured.js';
+import IntlProviderConfigured from './i18n/IntlProviderConfigured';
 
 function App() {
   return (
