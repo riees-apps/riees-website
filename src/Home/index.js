@@ -34,28 +34,27 @@ const Image = styled.div`
   }
 `;
 const Title = styled.h1`
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: #fafafa;
   font-size: calc(50px + 4vw);
   line-height: calc(50px + 4vw);
-  letter-spacing: 10px;
+  letter-spacing: 1px;
   margin: 0;
-  margin-top: calc(50px + 3vw)
+  margin-top: calc(40px + 4vw)
   
 `;
 const Subheading = styled.h4`
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', sans-serif;
   text-shadow: 3px 3px black;
   color: #fafafa;
   font-size: calc(20px + 1vw);
   line-height: calc(20px + 1vw);
   letter-spacing: 1px;
-  margin-top: calc(0.5vw);
 `;
 const Heading = styled.h1`
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin:0;
   background:${props => props.background || '#fafafa'};
   text-transform: uppercase;
@@ -64,17 +63,17 @@ const Heading = styled.h1`
   font-size: calc(15px + 4vw);
   line-height: calc(15px + 4vw);
   width: max-content;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   padding-top:5vh;
   padding-bottom:1.5vh;
   margin-top:5vh;
   border-bottom: 1vh solid pink;
 `;
 const Text = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   margin:2vh 0;
-  color: #606060;
-  font-weight:lighter;
+  color: #404042;
+  font-weight:400;
   font-size: calc(7.5px + 1vw);
   line-height: calc(7.5px + 1vw);
   padding: calc(10px + 1vw) 0;
@@ -108,15 +107,16 @@ class Home extends Component {
       <Carousel>
           <Carousel.Item>
           <Image x='0.3' height="100vh" image={img} brightness="160%" align='center' justify='center'>
-          <div>
+          <div className="m-2">
             <Title>
             <FormattedMessage id="HomeTitle"/>
             </Title>
             <Subheading>
             <FormattedMessage id="HomeSubHeading"/>
             </Subheading>
+            
           </div>
-          <Button url='/Institutes' name={<FormattedMessage id="Button"/>}/>
+          <Button url='/Institutes' className="m-4"  name={<FormattedMessage id="Button"/>}/>
           </Image>
           </Carousel.Item>
           <Carousel.Item>

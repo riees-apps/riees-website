@@ -658,10 +658,8 @@ class Routes extends Component {
         <Switch>
           <MultiLanguageRoute exact path="/"/>
           <MultiLanguageRoute exact path="/:lang" component={Home} />
-          <MultiLanguageRoute path="/:lang/dashboard" component={Dashboard} />
           <MultiLanguageRoute path="/:lang/News-Events" component={NewsEvents} />
           <MultiLanguageRoute path="/:lang/About" component={About} />
-          <MultiLanguageRoute path="/:lang/Admin" component={Admin} />
           <MultiLanguageRoute path="/:lang/Cities" component={Cities} />
           <MultiLanguageRoute path="/:lang/Es" component={Es} />
           <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
@@ -670,7 +668,8 @@ class Routes extends Component {
           {renderEvents()}
           {renderInstitutes()}
           {renderCities()}
-          <MultiLanguageRoute path="/Admin" component={Admin} />
+          <Route path="/:lang/Admin" component={Admin} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     );

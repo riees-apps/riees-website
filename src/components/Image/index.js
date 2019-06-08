@@ -22,6 +22,7 @@ const Image = styled.div`
   filter: brightness(${props => props.brightness});
 `;
 const Title = styled.h1`
+font-family: 'Poppins', serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   text-align: center;

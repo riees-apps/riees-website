@@ -14,7 +14,7 @@ const Image = styled.div`
   background-size: cover;
   position: relative;
   height: 100vh;
-  z-index:2;
+  z-index: 999999999999999999999999999999999999999999;
 `;
 const Container = styled.div`
   position: absolute;
@@ -78,7 +78,7 @@ class Admin extends Component {
                   </span>
                 </div>
                 <div class="container-login-form-btn">
-                  <Link to ='/dashboard/blog-overview' class="login-form-btn">
+                  <Link style={{textDecoration:'none', color:'white'}} to ='/dashboard/blog-overview' class="login-form-btn">
                     LOGIN
                   </Link>
                 </div>

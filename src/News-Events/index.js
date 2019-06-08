@@ -25,7 +25,7 @@ const Image = styled.div`
 `;
 const Title = styled.h1`
   position:fixed;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;

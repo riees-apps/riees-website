@@ -11,6 +11,7 @@ import br from "./brazil-flag.png";
 import us from "./united-flag.png";
 
 const StyledLink = styled(Link)`
+  font-family: 'Poppins', serif;
   text-transform: uppercase;
   box-sizing: 100%;
   color: #505050;
@@ -182,6 +183,7 @@ class Header extends Component {
               
               src={br}
               className="flag"
+              alt=''
             />
             
           </StyledLink>
@@ -194,15 +196,8 @@ class Header extends Component {
               
               src={us}
               className="flag"
+              alt=''
             />
-          </StyledLink>
-          <StyledLink
-            onClick={() => this.handleClick(`/${this.state.lang}/Admin`)}
-            active={this.state.active === `/${this.state.lang}/Admin` ? true : false}
-            className={this.state.scroll ? "scroll" : ""}
-            to={`/${this.state.lang}/Admin`}
-          >
-            Admin
           </StyledLink>
           </div>
           <div className={this.state.scroll ? "divLinksScroll" : "divLinks"}>

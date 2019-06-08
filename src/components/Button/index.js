@@ -16,6 +16,7 @@ const Btn = styled(Link)`
   border-radius: 3px;
   text-transform: uppercase;
   transition: all 150ms;
+  width:max-content;
   transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
   width:${props => props.width};
   :hover {
