@@ -156,7 +156,6 @@ class Header extends Component {
       <div
         shadow={this.state.menu ? true : false}
         className={window.location.pathname.split('/')[2] === 'Admin' ? 'displayNone' : this.state.scroll ? "container2"  : "container1"}
-      >
         <div className="div">
           <img
             className={this.state.scroll ? "logo1Scroll" : "logo1"}

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
+<<<<<<< HEAD
 import { isAuthenticated } from "../api/auth";
 
+=======
+>>>>>>> 309f873fcc9f52775006ebc2b701826edb9b8716
 import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
 import NewsEvents from "../News-Events/index.js";
@@ -595,6 +598,7 @@ const MultiLanguageRoute = (props) => {
 
   return <Route {...props} />    
 }
+<<<<<<< HEAD
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -608,6 +612,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+=======
+>>>>>>> 309f873fcc9f52775006ebc2b701826edb9b8716
 
 class Routes extends Component {
   render() {
@@ -684,7 +690,11 @@ class Routes extends Component {
           {renderInstitutes()}
           {renderCities()}
           <Route path="/:lang/Admin" component={Admin} />
+<<<<<<< HEAD
           <PrivateRoute path="/dashboard" component={Dashboard} />
+=======
+          <Route path="/dashboard" component={Dashboard} />
+>>>>>>> 309f873fcc9f52775006ebc2b701826edb9b8716
         </Switch>
       </BrowserRouter>
     );
