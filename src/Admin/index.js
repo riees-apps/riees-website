@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
 import styled from "styled-components";
 import img from "./img-01.jpg";
@@ -6,18 +5,8 @@ import api from "../api/api";
 import { login } from "../api/auth";
 import { withRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import "./admin.css";
 import { FaUser, FaLock } from "react-icons/fa";
-=======
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import img from './img-01.jpg'
-import img2 from './img-02.png'
-import { Link } from "react-router-dom";
-import './admin.css'
-import { FaUser, FaLock } from 'react-icons/fa';
->>>>>>> 309f873fcc9f52775006ebc2b701826edb9b8716
 
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -27,11 +16,7 @@ const Image = styled.div`
   background-size: cover;
   position: relative;
   height: 100vh;
-<<<<<<< HEAD
   z-index: 999;
-=======
-  z-index: 999999999999999999999999999999999999999999;
->>>>>>> 309f873fcc9f52775006ebc2b701826edb9b8716
 `;
 const Container = styled.div`
   position: absolute;
@@ -166,17 +151,13 @@ class Admin extends Component {
                   </span>
                 </div>
                 <div class="container-login-form-btn">
-<<<<<<< HEAD
                   <button
                     style={{ textDecoration: "none", color: "white" }}
                     type="submit"
                     class="login-form-btn"
                   >
-=======
-                  <Link style={{textDecoration:'none', color:'white'}} to ='/dashboard/blog-overview' class="login-form-btn">
->>>>>>> 309f873fcc9f52775006ebc2b701826edb9b8716
                     LOGIN
-                  </Link>
+                  </button>
                 </div>
                 <Modal
                   size="sm"
