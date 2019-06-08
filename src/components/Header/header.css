@@ -1,99 +1,204 @@
-div{
-  font-family: "Oswald", sans-serif;
+.iconFace{
+  cursor:pointer;
+  color: #505050;
+  background-color: transparent;
+  font-size: calc(16px);
+  height:4vh;
+  width:6.5%;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: all 100ms;
+}
+.iconInsta{
+  cursor:pointer;
+  color: #505050;
+  background-color: transparent;
+  font-size: calc(19px);
+  height:4vh;
+  width:6.5%;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  transition: all 100ms;
+}
+.iconFace:hover {
+  transition: all 300ms;
+  color: #fff;
+  background-color: #3a589e;
+  transform:scale(1.15)
+}
+.iconInsta:hover {
+  color: #fff;
+  background-color: #e4405f;
+  transition: all 300ms;
+  transform:scale(1.15);
+}
+.flag {
+  width:2.25vw;
+  height:3vh;
+  cursor:pointer;
+  margin-top: 0.5vh;
+}
+.flag:hover {
+  transform:scale(1.05)
 }
 .scroll {
-  font-size: calc(4px + 1vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #202022;
+  font-size: calc(1px + 1.2vw);
+  transition: all 300ms ;
 }
 .scroll2 {
-  font-size: calc(1px + 1vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #303032;
+  font-size: calc(1px + 0.9vw);
+  transition: all 300ms ;
 }
 .dropscroll {
-  font-size: calc(4px + 1vw);
-  transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #202022;
+  font-size: calc(1px + 1.2vw);
+  transition: all 300ms ;
 }
 .container1 {
+  z-index: 99999999999999999;
   position: fixed;
+  padding:1vh 0;
   top: 0;
   width: 100%;
   z-index: 1000;
   background: white;
   box-sizing: content-box;
-  padding: 0.3vw 0;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  opacity: 0.9;
+  align-items: flex-start;
+  justify-content: center;
+  opacity: 0.95;
   box-shadow: 0px 5px 5px -1px rgba(0,0,0,0.27);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .container2 {
+  z-index: 99999999999999999;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   background: white;
   box-sizing: content-box;
-  padding: 0.3vw 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  opacity: 0.9;
+  justify-content: space-between;
+  opacity: 0.8;
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .containerLinks{
-  top: 0;
   z-index: 1;
   background: white;
   box-sizing: content-box;
-  padding: 0.3vw 0;
+  padding: 0 2.5vw 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  width:70%;
+  height:calc(30px + 5vw);
+}
+.containerLinksScroll{
+  z-index: 1;
+  background: white;
+  box-sizing: content-box;
+  padding: 0 2.5vw 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  width:70%;
+  height:calc(10px + 3vw);
+}
+.divLinks{
+  transition:all 300ms;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width:90%;
+  height:30%;
+  margin-top:6vh;
+}
+.divLinksScroll{
+  transition:all 300ms;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width:100%;
+  height:50%;
+}
+.divFlag{
+  visibility:visible;
+  transition:all 300ms;
+  background-color:rgba(214, 205, 248, 0.7);
+  border-radius: 2.5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width:30%;
+  height:5vh;
+  padding:2.5vh 0;
+  position:fixed;
+  top: 1.5vh;
+}
+
+.divFlagScroll{
+  transition:all 300ms;
+  visibility:hidden;
+  background-color:#efeef3;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
   width:40%;
+  height:5vh;
+  padding:2.5vh 0;
+  position:fixed;
+  top: -5vh;
 }
 .logo1 {
-  width: calc(50px + 3vw);
-  height: calc(50px + 3vw);
+  width: calc(40px + 3vw);
+  height: calc(40px + 3vw);
+  margin-left: 2.5vw;
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .logo2 {
-  width: calc(30px + 6vw);
-  height: calc(20px + 3vw);
+  width: calc(120px + 6vw);
+  height: calc(30px + 2.5vw);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .div {
-  padding: 0 10px;
+  padding: 1vh 0;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
   justify-items: flex-start;
   transition: all 300ms;
+  width:30%;
 }
 
 .logo1Scroll {
   width: calc(30px + 2vw);
   height: calc(30px + 2vw);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
+  margin-left: 2.5vw;
 }
 .logo2Scroll {
-  width: calc(10px + 3.5vw);
-  height: calc(5px + 2vw);
+  width: calc(70px + 3.5vw);
+  height: calc(17.5px + 2vw);
   transition: all 300ms;
-  transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
 }
 .divScroll {
   padding: 0 10px;
@@ -105,16 +210,18 @@ div{
   transition: all 300ms;
 }
 .dropdown-content {
+  transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  width: 15vw;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: black;
+  color: #505050;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -127,10 +234,13 @@ div{
 
 .dropdown:hover .dropdown-content {
   transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
   display: block;
 }
 .dropscroll:hover .dropdown-content {
   transition: all 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: block;
 }
 
@@ -141,7 +251,7 @@ div{
   display: none;
 }
 .menuNone {
-  top: calc(50px + 3vw + 1.7vw);
+  top: calc(50px + 5vw + 2vh);
   transition: all 500ms;
   display: flex;
   flex-direction: column;
@@ -164,6 +274,9 @@ div{
   .containerLinks{
     display: none
   }
+  .containerLinksScroll{
+ display: none
+}
   .menu {
     z-index: 10;
     transition: all 500ms;
@@ -192,24 +305,27 @@ div{
     transition: all 300ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
+    margin-left:2.5vw;
   }
   .logo2 {
-    width: calc(30px + 6vw);
-  height: calc(20px + 3vw);
+    width: calc(60px + 6vw);
+  height: calc(30px + 3vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
   }
   .logo1Scroll {
+    background: rgb(244, 244, 244,0.95);
     width: calc(50px + 3vw);
     height: calc(50px + 3vw);
     transition: all 300ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
+    margin-left:2.5vw;
   }
   .logo2Scroll {
-    width: calc(30px + 6vw);
-  height: calc(20px + 3vw);
+    width: calc(60px + 6vw);
+  height: calc(30px + 3vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     margin: auto 0;
@@ -219,19 +335,20 @@ div{
     opacity: 1;
     justify-content: space-between;
     align-items: flex-start;
-    z-index: 100;
+    z-index: 99999999999999999;
   }
   .container2 {
     padding: 1vw 0px;
     opacity: 1;
+    background: rgb(244, 244, 244,0.95);
     justify-content: space-between;
     align-items: flex-start;
-    z-index: 100;
+    z-index: 99999999999999999;
   }
   .menu-content {
     visibility: visible;
     transition: all 300ms ease-in;
-    top: calc(50px + 3vw + 1.8vw);
+    top: calc(50px + 5vw + 2vh);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -245,7 +362,7 @@ div{
   .menu-contentNone{
     visibility: hidden;
     transition: all 200ms ease-in;
-    top: calc(50px + 3vw + 1.8vw);
+    top: calc(50px + 5vw + 2vh);
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -274,6 +391,7 @@ div{
   text-align: center;
 }
 .menu-links {
+  opacity: 2;
   margin-top: 0;
   transition: all 100ms ease-in,right 300ms;
   display: flex;
@@ -307,6 +425,7 @@ div{
 .active{
   background:#d8d8d8;
   color: rgb(0, 0, 0);
+  border-bottom: 1px solid #999999;
 }
 @media screen and (min-width: 601px) {
   .menu {

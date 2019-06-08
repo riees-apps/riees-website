@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import "./index.css";
+import {FormattedMessage} from 'react-intl'
 import { Link } from "react-router-dom";
 
 const DivLink = styled(Link)`
@@ -32,6 +33,7 @@ const Img = styled.div`
     props.cityInstitute &&
     `
     font-size: 0.75em;
+    margin-top: -4vh;
     @media (min-width: 768px) {
 
     margin-bottom: 7%;
@@ -60,7 +62,7 @@ class InstituteImage extends Component {
       <DivLink
         style={{ textDecoration: "none" }}
         to={{
-          pathname: `/Institute/${this.props.name}`,
+          pathname: `/${window.location.pathname.split('/')[1]}/Institute/${this.props.name}`,
           state: {
             scrollTop: 0,
           },
@@ -77,7 +79,7 @@ class InstituteImage extends Component {
             <h1 className={this.state.hover ? "sub2" : "sub1"}>
               {this.props.sub}
             </h1>
-            <h1 className={this.state.hover ? "info2" : "info1"}>City:</h1>
+            <h1 className={this.state.hover ? "info2" : "info1"}><FormattedMessage id="City"/>:</h1>
             <div className={this.state.hover ? "cities2" : "cities1"}>
               {renderCities()}
             </div>

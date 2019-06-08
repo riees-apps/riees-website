@@ -141,14 +141,14 @@ const Institutes = [
 ];
 
 const DivInstitutes = styled.div`
-  background-color: #fafafa;
+  background-color: #f4f4f4;
   min-height: max-content;
   display: flex;
   flex-direction: row;
   flex-wrap:wrap;
   align-items: flex-start;
   justify-content: space-between;
-  width:90%;
+  width:80%;
   margin-left:auto;
   margin-right:auto;
   @media (max-width: 992px) {
@@ -159,10 +159,10 @@ const DivInstitutes = styled.div`
     props.cityInstitute &&
     `
     margin: 0;
-    width:105%
-    margin-left:5%;
+    width:106%
+    padding-left:3%;
     @media (max-width: 992px) {
-    width:90%;
+    width:110%;
     margin: 0;
   }
   `}

@@ -48,7 +48,7 @@ class InstituteImage extends Component {
       <DivLink
         style={{ textDecoration: "none" }}
         to={{
-          pathname: `/City/${this.props.name}`,
+          pathname: `/${window.location.pathname.split('/')[1]}/City/${this.props.name}`,
           state: {
             scrollTop: 0,
           },

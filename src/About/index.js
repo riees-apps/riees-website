@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import {FormattedMessage} from 'react-intl'
 import img from "./oi.jpg";
 import img2 from "./opa.jpg";
 import Image from "../components/Image/index";
@@ -34,8 +35,8 @@ const Heading = styled.h1`
   margin: 0;
   text-transform: uppercase;
   color: ${props => props.color};
-  font-size: calc(30px + 4vw);
-  line-height: calc(30px + 4vw);
+  font-size: calc(15px + 4vw);
+  line-height: calc(15px + 4vw);
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
   margin-bottom:2.5vh;
@@ -45,8 +46,8 @@ const Text = styled.h1`
   font-family: 'Roboto', sans-serif;
   color: ${props => props.color};
   font-weight: lighter;
-  font-size: calc(10px + 1vw);
-  line-height: calc(10px + 1vw);
+  font-size: calc(7.5px + 1vw);
+  line-height: calc(7.5px + 1vw);
   width: 100%;
   text-align: center;
 `;
@@ -66,9 +67,9 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Image title="ABOUT US" height="100vh" image={img} />
+        <Image title={<FormattedMessage id="About"/>} height="100vh" image={img} />
         <DivText>
-          <Heading border='#FE86AC' color='#0033ff'>Who we are</Heading>
+          <Heading border='#FE86AC' color='#0033ff'><FormattedMessage id="Who"/></Heading>
           <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
@@ -105,7 +106,7 @@ class About extends Component {
           x="0.6"
           image={img2}
         >
-          <Heading border='#fafafa' color='#fafafa'>Mission</Heading>
+          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="Mission"/></Heading>
           <Div >
             <Text color='#fafafa'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et

@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
 import Routes from './Routes/index.js'
+import IntlProviderConfigured from './i18n/IntlProviderConfigured';
 
 function App() {
   return (
     <div className="App">
-     <Routes/>
+      <IntlProviderConfigured>
+        <Routes/>
+      </IntlProviderConfigured>
     </div>
   );
 }

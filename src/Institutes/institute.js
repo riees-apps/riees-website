@@ -25,7 +25,7 @@ const Image = styled.div`
 `;
 const Title = styled.h1`
   position:fixed;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;
@@ -124,6 +124,10 @@ const Container = styled.div`
   }
 `;
 const Img = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background:white;
   padding-bottom:10vh;
   padding-top:3vh;
@@ -159,7 +163,6 @@ class Institute extends Component {
   }
   render() {
     const {name,sub,img,logo,areas,url,institutes} = this.props
-
     return (
       <div >
         <Image x='0.5' height="80vh" image={img} >

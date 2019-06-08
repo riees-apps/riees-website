@@ -7,7 +7,7 @@ const Image = styled.div`
   position: relative;
   height: ${props => props.height};
   @media (max-width: 600px) {
-    height: calc(91.5vh);
+    height: calc(91.7vh);
   }
   background-attachment: fixed;
   background-position: center;
@@ -22,14 +22,16 @@ const Image = styled.div`
   filter: brightness(${props => props.brightness});
 `;
 const Title = styled.h1`
+font-family: 'Poppins', serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
+  text-align: center;
   color: #fafafa;
   font-size: calc(50px + 4vw);
   line-height: calc(50px + 4vw);
   letter-spacing: 4px;
   margin: 0;
-  margin-top: calc(40px + 3vw)
+  margin-top: calc(30px + 2vw)
 `;
 
 class Img extends Component {

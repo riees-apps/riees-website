@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
+import { isAuthenticated } from "../api/auth";
+
+import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
+import NewsEvents from "../News-Events/index.js";
+import Event from "../News-Events/event.js";
 import Cities from "../Cities/index.js";
 import City from "../Cities/city.js";
 import Es from "../Es/index.js";
@@ -31,6 +36,295 @@ import vilaVelha from '../components/Cities/imgs/vilavelha.jpg'
 import img1 from '../components/Cities/imgs/vilavelha.jpg'
 import img2 from '../components/Cities/imgs/vitoria.jpg'
 
+const eventos = [
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
+    date: "Dec 06, 2019",
+    text: " Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1,
+    img2: vitoria,
+  },
+  {
+    title: "Dossalore ipsum Dolore nihil in velit lorem ipsum valor2.",
+    dateEvent: "Dec 06, 2019",
+    timeEvent: "4:30 PM",
+    placeEvent: "Lorem ipsum",
+    text: "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit lorem ipsum valor3.",
+    date: "Dec 06, 2019",
+    text:"Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ifes,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore  in velit  lorem ipsum valor4.",
+    dateEvent: "Dec 06, 2019",
+    timeEvent: "4:30 PM",
+    placeEvent: "Lorem ipsum",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihil velit lorem ipsum valor5.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore in velit lorem ipsum valor6.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit lorem ipsum valor7.",
+    dateEvent: "Dec 06, 2019",
+    timeEvent: "4:30 PM",
+    placeEvent: "Lorem ipsum",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in veli lorem ipsum valort8.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ifes,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit9.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit10.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit11.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit12.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit13.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ifes,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit.18",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1,
+    img2: vitoria,
+  },
+  {
+    title: "Dossalore ipsum Dolore nihil in velit2.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit3.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ifes,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore  in velit4.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihil  velit5.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1,
+    img2: vitoria,
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore in velit6.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit7.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2,
+    img2: vitoria,
+  },
+  {
+    title: "Dolorsdse nihil in velit8.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ifes
+  },
+  {
+    title: "Dolorsdse nihil in velit27.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit10.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1
+  },
+  {
+    title: "Dolorsdse nihil in velit11.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit12.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit13.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ifes
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img1
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit.36",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit.37",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.Aquia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum ",
+    img: img2
+  }
+];
 const institutes = [
   {
     name: "UFES",
@@ -79,7 +373,7 @@ const institutes = [
   },
   {
     name: "EMESCAM",
-    subheading:"Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória",
+    subheading: "Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória",
     areas: [
       { name: "Engineering", icon: "cog" },
       { name: "Medicine", icon: "user-md" },
@@ -140,132 +434,207 @@ const institutes = [
 ];
 const cities = [
   {
-    url:'/City/Vitoria',
+    url: '/City/Vitoria',
     name: "Vitória",
     img: vitoria,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/VilaVelha',
+    url: '/City/VilaVelha',
     name: "Vila Velha",
     img: vilaVelha,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/Cariacica',
+    url: '/City/Cariacica',
     name: "Cariacica",
     img: img1,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/Serra',
+    url: '/City/Serra',
     name: "Serra",
     img: img2,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/Colatina',
+    url: '/City/Colatina',
     name: "Colatina",
     img: vilaVelha,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/Guarapari',
+    url: '/City/Guarapari',
     name: "Guarapari",
     img: vitoria,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/Alegre',
+    url: '/City/Alegre',
     name: "Alegre",
     img: img2,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
   {
-    url:'/City/SaoMateus',
+    url: '/City/SaoMateus',
     name: "São Mateus",
     img: img1,
     places: [
-      {name:"Lorem ipsum",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img1
+      {
+        name: "Lorem ipsum",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img1
       },
-      {name:"Lorem valor",
-      text:'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
-      img: img2
+      {
+        name: "Lorem valor",
+        text: 'Phasellus porttitor ipsum ac eros porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris sed ornare leo, nec dapibus leo. Aliquam erat volutpat. Maecenas aliquam dui a nibh iaculis, ut mollis elit facilisis.',
+        img: img2
       },
-  ]
+    ]
   },
 ];
+
+const LANGUAGES = {
+  pt: {
+      urlLang: 'pt',
+      code: 'pt-BR'
+  },
+  en: {
+      urlLang: 'en',
+      code: 'en-US'
+  },
+  default: 'pt'
+}
+
+
+const MultiLanguageRoute = (props) => {
+  const defaultLanguage = LANGUAGES.pt.urlLang
+  const hasLang = props.computedMatch.params.lang
+  const is404Page = props.path
+  const isBasePathWithoutLang = props.path === "/"
+
+  if(isBasePathWithoutLang)  return  <Redirect to={`/${defaultLanguage}`} />
+  if(!hasLang && !is404Page) return <Redirect to={`/${defaultLanguage}`} />
+
+  return <Route {...props} />    
+}
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+      )
+    }
+  />
+);
+
+
 class Routes extends Component {
   render() {
+    const renderEvents = () => {
+      return eventos.map(event => (
+        <MultiLanguageRoute
+          path={`/:lang/Events/${event.title}`}
+          component={props => (
+            <Event
+              {...props}
+              title={event.title}
+              text={event.text}
+              date={event.date}
+              dateEvent={event.dateEvent}
+              placeEvent={event.placeEvent}
+              timeEvent={event.timeEvent}
+              img={event.img}
+              img2={event.img2}
+            />
+          )}
+        />
+      ));
+    };
     const renderInstitutes = () => {
       return institutes.map(institute => (
-        <Route
-          path={`/Institute/${institute.name}`}
+        <MultiLanguageRoute
+          path={`/:lang/Institute/${institute.name}`}
           component={props => (
             <Institute
               {...props}
@@ -283,8 +652,8 @@ class Routes extends Component {
     };
     const renderCities = () => {
       return cities.map(city => (
-        <Route
-          path={`/City/${city.name.trim()}`}
+        <MultiLanguageRoute
+          path={`/:lang/City/${city.name.trim()}`}
           component={props => (
             <City
               {...props}
@@ -302,17 +671,20 @@ class Routes extends Component {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/About" component={About} />
-          <Route path="/Admin" component={Admin} />
-          <Route path="/Cities" component={Cities} />
-          <Route path="/Es" component={Es} />
-          <Route path="/Coming" component={Coming} />
-          <Route path="/Living" component={Living} />
-          <Route path="/Institutes" component={Institutes} />
+          <MultiLanguageRoute exact path="/"/>
+          <MultiLanguageRoute exact path="/:lang" component={Home} />
+          <MultiLanguageRoute path="/:lang/News-Events" component={NewsEvents} />
+          <MultiLanguageRoute path="/:lang/About" component={About} />
+          <MultiLanguageRoute path="/:lang/Cities" component={Cities} />
+          <MultiLanguageRoute path="/:lang/Es" component={Es} />
+          <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
+          <MultiLanguageRoute path="/:lang/Living" component={Living} />
+          <MultiLanguageRoute path="/:lang/Institutes" component={Institutes} />
+          {renderEvents()}
           {renderInstitutes()}
           {renderCities()}
-          <Route path="/Admin" component={Admin} />
+          <Route path="/:lang/Admin" component={Admin} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     );

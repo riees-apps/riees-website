@@ -3,6 +3,7 @@ import CitiesImages from '../components/Cities/index'
 import Img from '../components/Image/index'
 import Footer from '../components/Footer/index'
 import styled from "styled-components";
+import {FormattedMessage} from 'react-intl'
 import img3 from './ola.jpg';
 
 const Div = styled.div`
@@ -33,6 +34,7 @@ const Heading = styled.h1`
   text-align:center;
   color: #404040;
   font-size: calc(12px + 0.5vw);
+  line-height: calc(12px + 0.5vw);
   font-weight: lighter
 `;
 const Title = styled.h1`
@@ -47,6 +49,7 @@ const Title = styled.h1`
      padding: 6vh calc(1vh);
     }
   padding-bottom: 1vh;
+  border-bottom:1vh solid pink
 `;
 
 class Cities extends Component {
@@ -56,11 +59,10 @@ class Cities extends Component {
   render() {
     return (
       <div style={{background:'#fafafa'}}>
-      <Img height="100vh" image={img3} title="Our Cities"/>
+      <Img height="100vh" image={img3} title={<FormattedMessage id="Cities"/>}/>
 
       <Div>
-          <Title color='#505050'>Meet</Title>
-          <Title color='#4247FE'>our cities</Title>
+          <Title color='#4247FE'><FormattedMessage id="CitiesTitle"/></Title>
         </Div>
         <DivText>
           <Heading>

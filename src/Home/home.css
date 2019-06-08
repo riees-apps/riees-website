@@ -1,16 +1,29 @@
-div{
-  font-family: 'Roboto', sans-serif;
-  font-weight: lighter;
-}
+.divTitle{
 
+}
+.cardImg{
+  width: 100%;
+  height: 30vh;
+}
+.iconDate{
+  margin-right: 0.5em;
+}
+.cardGroup{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: #000000;
+}
 .head{
   text-transform: uppercase;
   color: #fff;
   font-size: calc(25px + 3.2vw);
   line-height: calc(25px + 3.2vw);
   letter-spacing: 3px;
-  width: 100%;
+  width: 90%;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .head2{
   text-transform: uppercase;
@@ -22,19 +35,17 @@ div{
   text-align: center;
 }
 .paragraph{
-  font-family: 'Roboto', sans-serif;
-  color: #fff;
-  font-size: calc(10px + 1vw);
-  line-height: calc(12px + 1vw);
+  font-family: "Avenir Next", sans-serif;
+  color: #fafafa;
+  font-size: calc(11px + 1vw);
+  line-height: calc(10px + 1vw);
   width: 75%;
   font-weight: lighter;
-  text-align: center;
-  margin-top:7.5vh;
+  text-align: unset;
   margin-left: auto;
   margin-right: auto;
 }
 .margin{
-  margin-top:5vh;
   margin-left: auto;
   margin-right: auto;
   text-align: center;

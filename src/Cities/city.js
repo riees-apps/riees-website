@@ -8,11 +8,11 @@ import img1 from "../components/Cities/imgs/img1.jpg";
 import img2 from "../components/Cities/imgs/img2.jpg";
 import InstituteImages from '../components/Institutes/index'
 import Places from '../components/Places/index'
-
+import {FormattedMessage} from 'react-intl'
 
 
 const DivText = styled.div`
-  background-color: #fafafa;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,28 +35,9 @@ const Heading = styled.h1`
   padding: 0 12px 5vh 0;
   width: max-content;
 `;
-const Subheading = styled.h4`
-  position: fixed;
-  font-family: "Oswald", sans-serif;
-  text-shadow: 3px 3px black;
-  text-transform: uppercase;
-  color: white;
-  letter-spacing: 5px;
-  margin: auto;
-  margin-top: calc(80px + 1vw);
-  width: 100%;
-  text-align: center;
-  font-size: calc(20px + 0.5vw);
-  letter-spacing: 1px;
-  font-weight: lighter;
-  line-height: calc(20px + 0.5vw);
-  @media (max-width: 600px) {
-    position: absolute;
-  }
-`;
 const Text = styled.h1`
   font-family: "Avenir Next", Helvetica, Arial, sans-serif;
-  color: #303032;
+  color: #202022;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
   line-height: calc(8px + 1vw);
@@ -67,6 +48,7 @@ const Text = styled.h1`
     line-height: calc(7px + 1vh);
     text-align: justify;
     padding: 0 0 0.5vh 0;
+    color: #151515;
   }
   padding: 0 0 2.5vh 0;
 `;
@@ -75,14 +57,16 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: ${props => props.justify};
-  padding: 5vh 0 0 0;
-  width: 100%;
+  margin:0;
+  padding: 5vh 0 0 3%;
+  width: 106%;
+  border:none;
   @media (max-width: 768px) {
     justify-content: center;
   }
 `;
 const Container = styled.div`
-  background: #fafafa;
+  background: #f4f4f4;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -92,6 +76,7 @@ const Container = styled.div`
   position: relative;
   padding-top: 15vh;
   @media (max-width: 768px) {
+    padding-top: 5vh;
     align-items: center;
     justify-content: center;
   }
@@ -135,14 +120,14 @@ class City extends Component {
   render() {
     const { name, img, cities, places, url } = this.props;
     return (
-      <div style={{background:'#fafafa'}}>
+      <div style={{background:'#f4f4f4'}}>
         <Image title={name} height="100vh" image={img} />
-        <Container>
+        <Container >
           <SideMenu url={url} page="City" links={cities} />
           <DivText>
             <Div justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)">overview</Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Overview"/></Heading>
             </Div>
             <DivImg>
               <Img src={img1} alt="" />
@@ -185,7 +170,7 @@ class City extends Component {
             </Text>
             <Div justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)">living there</Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="LivingThere"/></Heading>
             </Div>
             <DivImg>
               <Img src={img2} alt="" />
@@ -227,20 +212,20 @@ class City extends Component {
               mollis placerat imperdiet. Suspendisse in velit m
             </Text>
             <Div justify="flex-start">
-              <Heading>Top places</Heading>
-              <Heading color="rgb(0, 83, 180)">to see</Heading>
+              <Heading><FormattedMessage id="Top"/></Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Visit"/></Heading>
             </Div>
             <Places places={places}/>
-            <Div justify="flex-start">
+            <Div style={{background:'#f4f4f4'}} justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)">institutes</Heading>
+              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Institutes"/></Heading>
             </Div>
-            <InstituteImages cityInstitute city={name}/>
+            <InstituteImages  cityInstitute city={name}/>
             <Button
               return={true}
               color="#FF1493"
               url="/Cities"
-              name="All cities"
+              name={<FormattedMessage id="AllCities"/>}
             />
           </DivText>
         </Container>

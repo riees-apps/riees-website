@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./testimonial.css";
+import {FormattedMessage} from 'react-intl'
 import styled from "styled-components";
 
 const Image = styled.div`
@@ -36,7 +37,7 @@ class Testimonial extends Component {
         align="center"
         justify="flex-start"
       >
-        <h1 className="head2">Testimonials</h1>
+        <h1 className="head2"><FormattedMessage id="Testimonial"/></h1>
         <div className='divTestimonial'>
           <p className="paragraph2">{this.props.p}</p>
           <h1 className="autor">{this.props.author}</h1>

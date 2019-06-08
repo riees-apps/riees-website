@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import './index.css';
 import { Link } from "react-router-dom";
+import {FormattedMessage} from 'react-intl'
 
 const StyledLink = styled(Link)`
   text-transform: uppercase;
@@ -14,6 +15,7 @@ const StyledLink = styled(Link)`
   text-align: start;
   transition:  all 0.15s ease-in ;
   width:100%;
+  background-color: white;
   :hover {
     text-decoration: none;
     background-color: #E4E3EA;
@@ -39,8 +41,9 @@ const DivMenu = styled.div`
 @media (max-width: 768px) {
     display:none;
   }
+  background-color:#f1f1f1;
   position: sticky;
-  top: 10vh;
+  top: 11vh;
   height: ${props => props.height};
   background-attachment: fixed;
   background-position: center;
@@ -82,14 +85,12 @@ class SideMenu extends Component {
   constructor() {
     super();
     this.state = {
-      active: "/",
+      active: "Vitória",
       hover: false,
       menu: false
     };
   }
   handleClick(active) {
-    console.log(active)
-    console.log(window.location.pathname)
     this.setState({
       ...this.state,
       active: active,
@@ -105,8 +106,18 @@ class SideMenu extends Component {
   changeOut() {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
-  componentWillMount() {
-    this.setState({ ...this.state, active: window.location.pathname});
+  especialCharMask (text){
+    text = text.replace(/={1}/g, '%');
+    text = decodeURI(text);
+    console.log(text)
+    return text;
+}
+  componentDidMount() {
+    console.log(window.location.pathname.split('/')[3])
+    console.log(this.state.active)
+    var path = this.especialCharMask(window.location.pathname.split('/')[3])
+    console.log(`${path}`)
+    this.setState({ ...this.state, active: path.split('%20').join(' ')});
   }
   
   render() {
@@ -114,10 +125,10 @@ class SideMenu extends Component {
   const renderLinks = () => {
     return links.map(link => (
       <StyledLink
-        onClick={() => this.handleClick(`/${page}/${link.name.trim()}`)}
-        active={this.state.active === `/${page}/${link.name.trim()}` ? true : false}
+        onClick={() => this.handleClick(`${this.especialCharMask(window.location.pathname.split('/')[3]).split('%20').join(' ')}`)}
+        active={this.state.active === `${link.name.split('%20').join(' ')}` ? true : false}
         to={{
-          pathname:`/${page}/${link.name.trim()}`,
+          pathname:`/${window.location.pathname.split('/')[1]}/${page}/${link.name}`,
           state: { 
             scrollTop: 1 
           } 
@@ -131,7 +142,7 @@ class SideMenu extends Component {
     return (
       <DivMenu>
         <Div justify="flex-start">
-          <Heading color='#161030'>{page === 'City' ? 'Cities' : 'Institutes'}</Heading>
+          <Heading color='#161030'>{page === 'City' ? <FormattedMessage id="CityP"/> : <FormattedMessage id="Institutes"/>}</Heading>
           {renderLinks()}
         </Div>
       </DivMenu>

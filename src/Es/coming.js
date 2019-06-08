@@ -2,10 +2,49 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import img from "./oi.jpg";
 import img2 from "./ola.jpg";
-import Image from '../components/Image/index'
+import {FormattedMessage} from 'react-intl'
 import Footer from '../components/Footer/index'
 
+
+const Image = styled.div`
+  background-image: url(${props => props.image});
+  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
+  position: relative;
+  height: ${props => props.height};
+  @media (max-width: 600px) {
+    height: 82vh;
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4 ) inset;
+  }
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;
+const Title = styled.h1`
+  position:fixed;
+  font-family: 'Oswald', sans-serif;
+  text-shadow: 3px 3px black;
+  text-transform: uppercase;
+  color: white;
+  font-size: calc(80px + 1vw);
+  line-height: calc(80px + 1vw);
+  letter-spacing: 5px;
+  margin:auto;
+  margin-top: calc(30px + 2vw);
+  width:100%;
+  text-align:center;
+  @media (max-width: 600px) {
+    position:absolute;
+  }
+`;
+
 const DivText = styled.div`
+z-index:100;
+  position:relative;
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
@@ -15,6 +54,8 @@ const DivText = styled.div`
   padding: 10vh 0;
 `;
 const DivImage = styled.div`
+z-index:100;
+  position:relative;
   padding: 10vh 0;
   background-image: url(${props => props.image});
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
@@ -31,30 +72,35 @@ const DivImage = styled.div`
   width: 100%;
 `;
 const Heading = styled.h1`
+text-align:center;
+  width:max-content;
   margin: 0;
   text-transform: uppercase;
   color: ${props => props.color};
-  font-size: calc(20px + 4vw);
-  line-height: calc(20px + 4vw);
+  font-size: calc(5px + 4vw);
+  line-height: calc(5px + 4vw);
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
   border-bottom: 8px solid ${props => props.border};
 `;
 const SubHeading = styled.h1`
+  text-align:center;
+  font-weight:bold;
+  width:100%;
   margin: 0;
   text-transform: ${props => props.uppercase};
   color: ${props => props.color};
-  font-size: calc(10px + 2vw);
-  line-height: calc(10px + 2vw);
-  letter-spacing: 1px;
+  font-size: calc(5px + 2vw);
+  line-height: calc(5px + 2vw);
+  letter-spacing: -1px;
   padding: 2.5vh 0 4vh 0;
 `;
 const Text = styled.h1`
   font-family: 'Roboto', sans-serif;
   color: ${props => props.color};
   font-weight: lighter;
-  font-size: calc(10px + 1vw);
-  line-height: calc(10px + 1vw);
+  font-size: calc(5px + 1vw);
+  line-height: calc(5px + 1vw);
   width: 100%;
   text-align: center;
 `;
@@ -63,8 +109,8 @@ const Text2 = styled.li`
   color: ${props => props.color};
   font-weight: lighter;
   margin-bottom:1.5vh;
-  font-size: calc(10px + 1vw);
-  line-height: calc(10px + 1vw);
+  font-size: calc(5px + 1vw);
+  line-height: calc(5px + 1vw);
   width: 100%;
   text-align: start;
 `;
@@ -83,11 +129,13 @@ class Coming extends Component {
   render() {
     return (
       <div>
-        <Image title='COMING TO ESPIRITO SANTO' height="100vh" image={img}/>
+        <Image x='0.5' height="80vh" image={img} >
+            <Title><FormattedMessage id="Coming"/></Title>
+        </Image>
         <DivText>
-            <Heading border='pink' color='#0033ff'>Documents you Need</Heading>
+            <Heading border='pink' color='#0033ff'><FormattedMessage id="Documents"/></Heading>
             <Div >
-            <SubHeading uppercase='uppercase' color='#303030'>Passport</SubHeading>
+            <SubHeading uppercase='uppercase' color='#303030'><FormattedMessage id="Passport"/></SubHeading>
             <Text2 color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
               perspiciatis iusto. Similique magnam exercitationem vero velit
@@ -125,7 +173,7 @@ class Coming extends Component {
           x="0.8"
           image={img2}
         >
-          <Heading border='#fafafa' color='#fafafa'>Before you leave</Heading>
+          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="Before"/></Heading>
           <Div >
             <SubHeading color='#fafafa'>
               Similique magnam exercitationem vero velit quis quas incidunt
