@@ -6,19 +6,21 @@ import { DefaultLayout } from "./layouts";
 
 // Route Views
 import BlogOverview from "./views/BlogOverview";
-import UserProfileLite from "./views/UserProfileLite";
-import AddNewPost from "./views/AddNewPost";
-import Errors from "./views/Errors";
-import ComponentsOverview from "./views/ComponentsOverview";
-import Tables from "./views/Tables";
-import BlogPosts from "./views/BlogPosts";
+import AddNewInstitute from "./views/AddNewInstitute";
+import AddNewCity from "./views/AddNewCity";
+import AddNewEvent from "./views/AddNewEvent";
+import AddNewUser from "./views/AddNewUser";
 
+import User from "./views/User";
+import Institutes from "./views/Institutes";
+import Cities from "./views/Cities";
+import Events from "./views/Events";
 export default [
   {
     path: "/",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/dashboard/blog-overview" />
+    component: () => <Redirect to="/dashboard/show-institutes" />
   },
   {
     path: "/dashboard/blog-overview",
@@ -26,33 +28,43 @@ export default [
     component: BlogOverview
   },
   {
-    path: "/dashboard/user-profile-lite",
+    path: "/dashboard/show-users",
     layout: DefaultLayout,
-    component: UserProfileLite
+    component: User
   },
   {
-    path: "/dashboard/add-new-post",
+    path: "/dashboard/add-new-user",
     layout: DefaultLayout,
-    component: AddNewPost
+    component: AddNewUser
   },
   {
-    path: "/dashboard/errors",
+    path: "/dashboard/add-new-institute",
     layout: DefaultLayout,
-    component: Errors
+    component: AddNewInstitute
   },
   {
-    path: "/dashboard/components-overview",
+    path: "/dashboard/add-new-city",
     layout: DefaultLayout,
-    component: ComponentsOverview
+    component: AddNewCity
   },
   {
-    path: "/dashboard/tables",
+    path: "/dashboard/add-new-event",
     layout: DefaultLayout,
-    component: Tables
+    component: AddNewEvent
   },
   {
-    path: "/dashboard/blog-posts",
+    path: "/dashboard/show-cities",
     layout: DefaultLayout,
-    component: BlogPosts
+    component: Cities
+  },
+  {
+    path: "/dashboard/show-institutes",
+    layout: DefaultLayout,
+    component: Institutes
+  },
+  {
+    path: "/dashboard/show-events",
+    layout: DefaultLayout,
+    component: Events
   }
 ];

@@ -13,7 +13,7 @@ import {
 
 import PageTitle from "../components/common/PageTitle";
 import Colors from "../components/components-overview/Colors";
-import Checkboxes from "../components/components-overview/Checkboxes";
+import Checkboxes from "../components/components-overview/CheckboxesInstitute";
 import RadioButtons from "../components/components-overview/RadioButtons";
 import ToggleButtons from "../components/components-overview/ToggleButtons";
 import SmallButtons from "../components/components-overview/SmallButtons";

@@ -7,34 +7,44 @@ export default function() {
       htmlAfter: ""
     },
     {
-      title: "Blog Posts",
+      title: "Visualizar Instituições",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
-      to: "/dashboard/blog-posts",
+      to: "/dashboard/show-institutes",
     },
     {
-      title: "Add New Post",
+      title: "Criar Instituição",
       htmlBefore: '<i class="material-icons">note_add</i>',
-      to: "/dashboard/add-new-post",
+      to: "/dashboard/add-new-institute",
     },
     {
-      title: "Forms & Components",
-      htmlBefore: '<i class="material-icons">view_module</i>',
-      to: "/dashboard/components-overview",
+      title: "Visualizar Cidades",
+      htmlBefore: '<i class="material-icons">vertical_split</i>',
+      to: "/dashboard/show-cities",
     },
     {
-      title: "Tables",
-      htmlBefore: '<i class="material-icons">table_chart</i>',
-      to: "/dashboard/tables",
+      title: "Adicionar Cidade",
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: "/dashboard/add-new-city",
     },
     {
-      title: "User Profile",
-      htmlBefore: '<i class="material-icons">person</i>',
-      to: "/dashboard/user-profile-lite",
+      title: "Visualizar Eventos",
+      htmlBefore: '<i class="material-icons">vertical_split</i>',
+      to: "/dashboard/show-events",
     },
     {
-      title: "Errors",
-      htmlBefore: '<i class="material-icons">error</i>',
-      to: "/dashboard/errors",
-    }
+      title: "Criar Evento",
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: "/dashboard/add-new-event",
+    },
+    {
+      title: "Visualizar Usuarios",
+      htmlBefore: '<i class="material-icons">vertical_split</i>',
+      to: "/dashboard/show-users",
+    },
+    {
+      title: "Criar Usuario",
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: "/dashboard/add-new-user",
+    },
   ];
 }

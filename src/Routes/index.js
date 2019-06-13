@@ -684,7 +684,7 @@ class Routes extends Component {
           {renderInstitutes()}
           {renderCities()}
           <Route path="/:lang/Admin" component={Admin} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/dashboard/show-institutes" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     );

@@ -1,4 +1,16 @@
 .z-index{
-    z-index: 999999999999999999999999999999999999999999999999999999999999999999999999999999;
+    z-index: 1000;
     background: #eee;
+}
+
+.iconDelete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+    font-size: 14px;
+    width:4vh;
+    height: 4vh;
+    color:white;
 }

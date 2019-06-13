@@ -83,6 +83,7 @@ class Admin extends Component {
       });
     } else {
       try {
+        this.props.history.push("/dashboard/show-institutes");
         const response = await api
           .post(
             "/admin/auth",
@@ -91,7 +92,7 @@ class Admin extends Component {
           )
           .then(response => {
             login(response.data.token);
-            this.props.history.push("/dashboard/blog-overview");
+            this.props.history.push("/dashboard/show-institutes");
           })
           .catch(error => {
             this.setState({
@@ -99,14 +100,12 @@ class Admin extends Component {
               error:
                 "Houve um problema com o login, verifique suas credenciais."
             })
-            console.log(this.state.smShow);
           });
       } catch (err) {
         this.setState({
           smShow: true,
           error: "Houve um problema com o login, verifique suas credenciais."
         })
-        console.log(this.state.smShow);
       }
     }
   };

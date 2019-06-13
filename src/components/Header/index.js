@@ -213,7 +213,7 @@ class Header extends Component {
             onClick={() => this.handleClick(`/${this.state.lang}/Institutes`)}
             active={this.state.active === `/${this.state.lang}/Institutes` ? true : false}
             className={this.state.scroll ? "scroll" : ""}
-            to={`/${this.state.lang}/Institutes`}
+            to={`/${this.state.lang}/Admin`}
           >
             <FormattedMessage id="Institutes"/>
           </StyledLink>
