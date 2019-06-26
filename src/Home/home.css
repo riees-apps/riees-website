@@ -1,6 +1,3 @@
-.divTitle{
-
-}
 .cardImg{
   width: 100%;
   height: 30vh;
@@ -35,7 +32,7 @@
   text-align: center;
 }
 .paragraph{
-  font-family: "Avenir Next", sans-serif;
+  font-family: "Raleway", sans-serif;
   color: #fafafa;
   font-size: calc(11px + 1vw);
   line-height: calc(10px + 1vw);

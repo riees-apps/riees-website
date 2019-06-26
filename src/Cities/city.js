@@ -27,7 +27,7 @@ const DivText = styled.div`
   }
 `;
 const Heading = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', serif;
   color: ${props => props.color};
   font-size: calc(30px + 0.6vw);
   line-height: calc(30px + 0.6vw);
@@ -36,7 +36,7 @@ const Heading = styled.h1`
   width: max-content;
 `;
 const Text = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   color: #202022;
   font-weight: lighter;
   font-size: calc(7px + 1vw);

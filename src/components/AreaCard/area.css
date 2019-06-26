@@ -9,7 +9,7 @@
   width: max-content;
 }
 .areaName {
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -34,7 +34,7 @@
     width: max-content;
   }
   .areaName {
-    font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+    font-family: "Poppins", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

@@ -8,6 +8,7 @@ import About from "../About/index.js";
 import NewsEvents from "../News-Events/index.js";
 import Blog from "../Blog/index.js";
 import Event from "../News-Events/event.js";
+import Post from "../Blog/post.js";
 import Cities from "../Cities/index.js";
 import City from "../Cities/city.js";
 import Es from "../Es/index.js";
@@ -571,6 +572,308 @@ const cities = [
     ]
   },
 ];
+const posts = [
+  {
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      " Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img1
+  },
+  {
+    title: "Dossalore ipsum Dolore nihil in velit lorem ipsum valor2.",
+    date: "Dec 06, 2019",
+    tag:"Tag2",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+
+    img: img2
+  },
+  {
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit lorem ipsum valor3.",
+    date: "Dec 06, 2019",
+    tag:"Tag2",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ifes
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore  in velit  lorem ipsum valor4.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihil velit lorem ipsum valor5.",
+    date: "Dec 06, 2019",
+    tag:"Tag3",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img1
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore in velit lorem ipsum valor6.",
+    date: "Dec 06, 2019",
+    tag:"Tag4",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit lorem ipsum valor7.",
+    date: "Dec 06, 2019",
+    tag:"Tag2",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in veli lorem ipsum valort8.",
+    date: "Dec 06, 2019",
+    tag:"Tag5",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ifes
+  },
+  {
+    title: "Dolorsdse nihil in velit9.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit10.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img1
+  },
+  {
+    title: "Dolorsdse nihil in velit11.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit12.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit13.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ifes
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img1
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img2
+  },
+  {
+    title: "Dolorsdse nihil in velit.18",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img2
+  },
+  {
+    title:
+      "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img1
+  },
+  {
+    title: "Dossalore ipsum Dolore nihil in velit2.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img2
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit3.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ifes
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore  in velit4.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore nihil  velit5.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: img1
+  },
+  {
+    title: "Dolore ipsum Dossalore ipsum Dolore in velit6.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit7.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: uvv
+  },
+  {
+    title: "Dolorsdse nihil in velit8.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ifes
+  },
+  {
+    title: "Dolorsdse nihil in velit27.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: uvv
+  },
+  {
+    title: "Dolorsdse nihil in velit10.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ufes
+  },
+  {
+    title: "Dolorsdse nihil in velit11.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit12.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: uvv
+  },
+  {
+    title: "Dolorsdse nihil in velit13.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ifes
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ufes
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: ucl
+  },
+  {
+    title: "Dolorsdse nihil in velit.",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: uvv
+  },
+  {
+    title: "Dolorsdse nihil in velit.36",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autema ida placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: uvv
+  },
+  {
+    title: "Dolorsdse nihil in velit.37",
+    date: "Dec 06, 2019",
+    tag:"Tag1",
+    text:
+      "Autema id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
+    img: uvv
+  }
+];
 
 const LANGUAGES = {
   pt: {
@@ -612,6 +915,23 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 class Routes extends Component {
   render() {
+    const renderPosts = () => {
+      return posts.map(post => (
+        <MultiLanguageRoute
+          path={`/:lang/Post/${post.title}`}
+          component={props => (
+            <Post
+              {...props}
+              title={post.title}
+              text={post.text}
+              date={post.date}
+              tag={post.tag}
+              img={post.img}
+            />
+          )}
+        />
+      ));
+    };
     const renderEvents = () => {
       return eventos.map(event => (
         <MultiLanguageRoute
@@ -682,6 +1002,7 @@ class Routes extends Component {
           <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
           <MultiLanguageRoute path="/:lang/Living" component={Living} />
           <MultiLanguageRoute path="/:lang/Institutes" component={Institutes} />
+          {renderPosts()}
           {renderEvents()}
           {renderInstitutes()}
           {renderCities()}

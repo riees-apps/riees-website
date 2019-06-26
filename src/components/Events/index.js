@@ -354,13 +354,14 @@ const Check = styled.div`
   `}
 `;
 const Heading = styled.h1`
-  font-family: "Oswald", sans-serif;
+  font-family: "Poppins", sans-serif;
+  text-transform:uppercase;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
   text-align: center;
   color: #0077ff;
-  font-size: calc(10px + 4vw);
-  line-height: calc(10px + 4vw);
+  font-size: calc(10px + 3vw);
+  line-height: calc(10px + 3vw);
   letter-spacing: 3px;
   margin-top: 10vh;
   width: max-content;
@@ -406,7 +407,7 @@ const Form = styled.div`
     justify-content: center;
   }
   h1 {
-    font-size: 0.45em;
+    font-size: 0.4em;
     line-height: 0.35em;
     margin: auto 0.2vw auto 0.5vw;
     cursor: pointer;

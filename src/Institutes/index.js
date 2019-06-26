@@ -29,7 +29,7 @@ const DivText = styled.div`
   padding-top: 2.5vh;
 `;
 const Heading = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
   width: 80%;
   text-align:center;
   color: #404040;
@@ -38,7 +38,8 @@ const Heading = styled.h1`
   font-weight: lighter
 `;
 const Title = styled.h1`
-  font-family: "Oswald", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  text-transform:uppercase;
   background: #f4f4f4;
   color: ${props => props.color};
   font-size: calc(30px + 3vw);

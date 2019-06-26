@@ -29,7 +29,7 @@ const DivText = styled.div`
   padding:1vh 0;
 `;
 const Heading = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   width: 80%;
   text-align:center;
   color: #404040;
@@ -38,8 +38,9 @@ const Heading = styled.h1`
   font-weight: lighter
 `;
 const Title = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
   background: #fafafa;
+  text-transform:uppercase;
   color: ${props => props.color};
   font-size: calc(30px + 3vw);
   line-height: calc(30px + 3vw);
@@ -49,7 +50,7 @@ const Title = styled.h1`
      padding: 6vh calc(1vh);
     }
   padding-bottom: 1vh;
-  border-bottom:1vh solid pink
+  border-bottom:1vh solid pink;
 `;
 
 class Cities extends Component {

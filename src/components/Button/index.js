@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Btn = styled(Link)`
   border:none;
   color: ${props => props.font || '#fafafa'};
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
   letter-spacing: 3px;
   display: flex;
   align-items: center;

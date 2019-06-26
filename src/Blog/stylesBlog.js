@@ -57,6 +57,41 @@ export const Image = styled.div`
   box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
   }
 `;
+export const Resume= styled.h1`
+  font-family: "Raleway", sans-serif;
+  text-align:justify;
+  color: #202022;
+  font-weight: bold;
+  font-size: calc(14px + 1vw);
+  line-height: calc(14px + 1vw);
+  margin: auto;
+  width: 100%;
+  text-align: start;
+  margin-bottom: 5%;
+  @media (max-width: 600px) {
+    font-size: calc(15px + 3vw);
+    line-height: calc(15px + 3vw);
+    margin-bottom: 10%;
+  }
+`;
+
+export const ImageParagraph = styled.div`
+  background-image: url(${props => props.image});
+  box-shadow: 0px 150vh rgba(0, 0, 0, 0.2) inset;
+  height: ${props => props.height};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 1%;
+  @media (max-width: 600px) {
+    background-size: center;
+  height: 40vh;
+  }
+`;
 export const Img = styled.img`
   width: 65%;
   height:50vh;
@@ -64,8 +99,7 @@ export const Img = styled.img`
   margin-bottom:5vh;
 `;
 export const Title = styled.h1`
-  font-family: "Oswald", sans-serif;
-  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
   color: white;
   font-weight: bold;
   font-size: calc(30px + 2vw);
@@ -82,7 +116,7 @@ export const Title = styled.h1`
   }
 `;
 export const SubTitle = styled.h1`
-  font-family: "Oswald", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
   font-weight: 500;
   font-size: calc(20px + 1vw);
@@ -95,18 +129,33 @@ export const SubTitle = styled.h1`
     margin-bottom: 2.5%;
   }
 `;
-
+export const SubTitleParagraph= styled.h1`
+  font-family: "Poppins", sans-serif;
+  text-align:center;
+  color: #101011;
+  font-size: calc(15px + 1vw);
+  line-height: calc(15px + 1vw);
+  margin: auto;
+  width: 100%;
+  margin-top:4%;
+  margin-bottom: 5%;
+  @media (max-width: 600px) {
+    font-size: calc(15px + 3vw);
+    line-height: calc(15px + 3vw);
+    margin-bottom: 10%;
+  }
+`;
 export const DivText = styled.div`
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 10vh 10%;
+  width: 70%;
+  padding: 10vh 0;
+
   @media (max-width: 768px) {
-    width: 100%;
-    padding: 10vh 10%;
+    width: 90%;
   }
 `;
 export const Subheading = styled.div`
@@ -127,7 +176,7 @@ export const Subheading = styled.div`
   }
 `;
 export const Text = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   color: #444;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
@@ -138,10 +187,10 @@ export const Text = styled.h1`
     font-size: calc(12px + 1vw);
     line-height: calc(12px + 1vw);
   }
-  padding: 0 0 2.5vh 0;
+  padding: 0 0 1vh 0;
 `;
 export const Container = styled.div`
-  background: #f4f4f4;
+  background: #fafafa;
   padding-bottom: 10vh;
   display: flex;
   flex-direction: column;
@@ -190,7 +239,7 @@ export const Badge = styled.h1`
   }
 `;
 export const Heading = styled.h1`
-  font-family: "Avenir Next", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
   color: #0077ff;
@@ -202,7 +251,7 @@ export const Heading = styled.h1`
   padding-top: 5vh;
   text-align: start;
   padding-bottom: 1.5vh;
-  padding-left: 15%;
+  padding-left: 7.5%;
   margin-top: 5vh;
   border-bottom: 1px solid #999;
   @media (max-width: 600px) {

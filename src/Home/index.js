@@ -70,18 +70,19 @@ const Heading = styled.h1`
   border-bottom: 1vh solid pink;
 `;
 const Text = styled.h1`
-  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-size: calc(11px + 1vw);
+  line-height: calc(10px + 1vw);
+  font-weight: lighter;
   margin:2vh 0;
   color: #404042;
-  font-weight:400;
-  font-size: calc(7.5px + 1vw);
-  line-height: calc(7.5px + 1vw);
   padding: calc(10px + 1vw) 0;
   width: 100%;
   text-align:center;
   @media (max-width: 600px) {
-    font-size: calc(9px + 1vw);
-    line-height: calc(10px + 1vw);
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing:0.5px;
     color: #505050;
   }
 `;

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import {Image,Badge,Title,Subheading,Details,SubTitle,Container,DivText,Heading,Text} from './stylesBlog.js'
+import {Image,ImageParagraph,Badge,Title,Resume,Subheading,Details,SubTitle,SubTitleParagraph,Container,DivText,Heading,Text} from './stylesBlog.js'
 import Footer from "../components/Footer/index";
-import Events from "../components/Events/index";
+import Blog from "../components/Blog/index";
 import Button from "../components/Button/index";
 
 
-class Blog extends Component {
+class Post extends Component {
   componentWillMount() {
         document.documentElement.scrollTop = 0;
   }
@@ -13,6 +13,7 @@ class Blog extends Component {
     const {
       title,
       img,
+      tag,
       url,
       date,
       dateEvent,
@@ -25,7 +26,7 @@ class Blog extends Component {
       <div>
         <Image x="0.6" height="90vh" image={img}>
           <div>
-            <Badge>{typeof dateEvent !== "undefined" ? "Event" : "New"}</Badge>
+            <Badge>{tag}</Badge>
             <Title>{title}</Title>
             <Subheading
               className={typeof dateEvent === "undefined" ? "" : "displayNone"}
@@ -57,24 +58,46 @@ class Blog extends Component {
         </Image>
         <Container>
           <DivText>
+          <Resume>{text}</Resume>
+            <ImageParagraph  height="60vh" image={img}/>
+            <SubTitleParagraph>Lorem ipsum dolor valor</SubTitleParagraph>
             <Text>
-              {text}
+            {text}{text}
             </Text>
             <Text>
             {text}
             </Text>
             <Text>
+            Lorem ipsum dolor valor. {text}{text}
+            </Text>
+            <SubTitleParagraph>Lorem ipsum dolor valor</SubTitleParagraph>
+            <Text>
+            {text}{text}
+            </Text>
+            <Text>
             {text}
             </Text>
-            <Button className={typeof dateEvent !== "undefined" ? "" : "displayNone"}  url={url} name="sign up here" />
+            <Text>
+            Lorem ipsum dolor valor. {text}{text}
+            </Text>
+            <SubTitleParagraph>Lorem ipsum dolor valor</SubTitleParagraph>
+            <Text>
+            {text}{text}
+            </Text>
+            <Text>
+            {text}
+            </Text>
+            <Text>
+            Lorem ipsum dolor valor. {text}{text}
+            </Text>           
           </DivText>
-          <Heading>Latest news</Heading>
-          <Events side final={9} />
-          <Button url="/News-Events" name="All news and events" />
+          <Heading>Latest posts</Heading>
+          <Blog side final={9} />
+          <Button url="/Blog" name="Return to blog" />
         </Container>
         <Footer />
       </div>
     );
   }
 }
-export default Blog;
+export default Post;

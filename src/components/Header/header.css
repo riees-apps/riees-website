@@ -48,18 +48,16 @@
   transform:scale(1.05)
 }
 .scroll {
-  color: #202022;
-  font-size: calc(1px + 1.2vw);
+  font-size: calc(1.25vw);
   transition: all 300ms ;
 }
 .scroll2 {
-  color: #303032;
+  
   font-size: calc(1px + 0.9vw);
   transition: all 300ms ;
 }
 .dropscroll {
-  color: #202022;
-  font-size: calc(1px + 1.2vw);
+  font-size: calc(1.25vw);
   transition: all 300ms ;
 }
 .container1 {
@@ -103,7 +101,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-around;
-  width:70%;
+  width:80%;
   height:calc(30px + 5vw);
 }
 .containerLinksScroll{
@@ -115,7 +113,7 @@
   flex-direction: column;
   align-items: flex-end;
   justify-content: space-around;
-  width:70%;
+  width:80%;
   height:calc(10px + 3vw);
 }
 .divLinks{
@@ -152,7 +150,6 @@
   position:fixed;
   top: 1.5vh;
 }
-
 .divFlagScroll{
   transition:all 300ms;
   visibility:hidden;
@@ -311,7 +308,7 @@
     margin: auto 0;
   }
   .logo1 {
-    width: calc(50px + 3vw);
+    width: calc(60px + 3vw);
     height: calc(50px + 3vw);
     transition: all 300ms;
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -319,7 +316,7 @@
     margin-left:2.5vw;
   }
   .logo2 {
-    width: calc(60px + 6vw);
+    width: calc(80px + 6vw);
   height: calc(30px + 3vw);
   transition: all 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);

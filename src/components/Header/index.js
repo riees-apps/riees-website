@@ -15,8 +15,8 @@ const StyledLink = styled(Link)`
   text-transform: uppercase;
   box-sizing: 100%;
   color: #505050;
-  font-size: calc(1px + 1vw);
-  line-height: calc(1px + 1vw);
+  font-size: calc(1.1vw);
+  line-height: calc(1.1vw);
   letter-spacing: 3px;
   padding-left: 3px;
   text-decoration: none;
@@ -265,21 +265,28 @@ class Header extends Component {
           </StyledLink>
 
           <StyledLink
-            onClick={() => this.handleClick(`/${this.state.lang}/About`)}
-            active={this.state.active === `/${this.state.lang}/About` ? true : false}
-            className={this.state.scroll ? "scroll" : ""}
-            to={`/${this.state.lang}/About`}
-          >
-            <FormattedMessage id="About"/>
-          </StyledLink>
-
-          <StyledLink
             onClick={() => this.handleClick(`/${this.state.lang}/News-Events`)}
             active={this.state.active === `/${this.state.lang}/News-Events` ? true : false}
             className={this.state.scroll ? "scroll" : ""}
             to={`/${this.state.lang}/News-Events`}
           >
             <FormattedMessage id="News"/>
+          </StyledLink>
+          <StyledLink
+            onClick={() => this.handleClick(`/${this.state.lang}/Blog`)}
+            active={this.state.active === `/${this.state.lang}/Blog` ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={`/${this.state.lang}/Blog`}
+          >
+            <FormattedMessage id="Blog"/>
+          </StyledLink>
+          <StyledLink
+            onClick={() => this.handleClick(`/${this.state.lang}/About`)}
+            active={this.state.active === `/${this.state.lang}/About` ? true : false}
+            className={this.state.scroll ? "scroll" : ""}
+            to={`/${this.state.lang}/About`}
+          >
+            <FormattedMessage id="About"/>
           </StyledLink>
           </div>
 
@@ -302,7 +309,7 @@ class Header extends Component {
               className={window.location.pathname === `/${this.state.lang}` ? "active" : ""}
               to={`/${this.state.lang}`}
             >
-              Home
+              <FormattedMessage id="Home"/>
             </StyledLink>
             <StyledLink
               li
@@ -313,7 +320,7 @@ class Header extends Component {
               }
               to={`/${this.state.lang}/Institutes`}
             >
-              Our Institutes
+              <FormattedMessage id="Institutes"/>
             </StyledLink>
             <StyledLink
               li
@@ -322,7 +329,7 @@ class Header extends Component {
               className={window.location.pathname === `/${this.state.lang}/Coming` ? "active" : ""}
               to={`/${this.state.lang}/Coming`}
             >
-              Coming to Espirito Santo
+              <FormattedMessage id="Coming"/>
             </StyledLink>
             <StyledLink
               li
@@ -331,7 +338,7 @@ class Header extends Component {
               className={window.location.pathname === `/${this.state.lang}/Living` ? "active" : ""}
               to={`/${this.state.lang}/Living`}
             >
-              Living in Espirito Santo
+              <FormattedMessage id="Living"/>
             </StyledLink>
             <StyledLink
               li
@@ -340,16 +347,7 @@ class Header extends Component {
               className={window.location.pathname === `/${this.state.lang}/Cities` ? "active" : ""}
               to={`/${this.state.lang}/Cities`}
             >
-              Our Cities
-            </StyledLink>
-            <StyledLink
-              li
-              onClick={() => this.handleClick(`/${this.state.lang}/About`)}
-              active={window.location.pathname === `/${this.state.lang}/About` ? true : false}
-              className={window.location.pathname === `/${this.state.lang}/About` ? "active" : ""}
-              to={`/${this.state.lang}/About`}
-            >
-              About Us
+              <FormattedMessage id="Cities"/>
             </StyledLink>
             <StyledLink
               li
@@ -358,7 +356,25 @@ class Header extends Component {
               className={window.location.pathname === `/${this.state.lang}/News-Events` ? "active" : ""}
               to={`/${this.state.lang}/News-Events`}
             >
-              News & Events
+              <FormattedMessage id="News"/>
+            </StyledLink>
+            <StyledLink
+              li
+              onClick={() => this.handleClick(`/${this.state.lang}/Blog`)}
+              active={window.location.pathname === `/${this.state.lang}/Blog` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/Blog` ? "active" : ""}
+              to={`/${this.state.lang}/Blog`}
+            >
+              Blog
+            </StyledLink>
+            <StyledLink
+              li
+              onClick={() => this.handleClick(`/${this.state.lang}/About`)}
+              active={window.location.pathname === `/${this.state.lang}/About` ? true : false}
+              className={window.location.pathname === `/${this.state.lang}/About` ? "active" : ""}
+              to={`/${this.state.lang}/About`}
+            >
+              <FormattedMessage id="About"/>
             </StyledLink>
           </div>
         </div>

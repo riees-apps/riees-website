@@ -17,7 +17,8 @@
   width: 95%;
 }
 .paragraph2{
-  font-family: 'Roboto', sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-weight: lighter;
   color: #fafafa;
   font-size: calc(11px + 1vw);
   line-height: calc(9px + 1vw);

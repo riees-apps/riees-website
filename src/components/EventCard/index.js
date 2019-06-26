@@ -101,6 +101,7 @@ const Date = styled.h1`
   color: #fafafa;
 `;
 const Title = styled.h1`
+  font-family: 'Puppin', sans-serif;
   transition:all 300ms linear;
   display: flex;
   flex-direction: column;
@@ -108,7 +109,7 @@ const Title = styled.h1`
   justify-content: flex-start;
   font-size: calc(5px + 1.2vw);
   line-height: calc(2px + 1.2vw);
-  font-weight: bold;
+  font-weight: bolder;
   width: 95%;
   color: #303032;
   margin: 0;
@@ -121,6 +122,7 @@ const Title = styled.h1`
   }
 `;
 const Text = styled.h1`
+font-family: 'Raleway', sans-serif;
 transition:all 300ms linear;
   text-align: start;
   display: flex;

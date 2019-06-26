@@ -40,6 +40,7 @@ const Title = styled.h1`
   }
 `;
 const DivText = styled.div`
+  font-family: 'Raleway', serif;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -55,7 +56,7 @@ const DivText = styled.div`
   }
 `;
 const Heading = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', serif;
   color: ${props => props.color};
   font-size: calc(30px + 0.6vw);
   line-height: calc(30px + 0.6vw);
@@ -65,7 +66,7 @@ const Heading = styled.h1`
 `;
 const Subheading = styled.h4`
   position:fixed;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Poppins', serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;
@@ -83,7 +84,7 @@ const Subheading = styled.h4`
   }
 `;
 const Text = styled.h1`
-    font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+   font-family: 'Raleway', serif;
   color: #303032;
   font-weight: lighter;
   font-size: calc(7px + 1vw);

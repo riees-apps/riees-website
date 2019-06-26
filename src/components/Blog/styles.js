@@ -7,7 +7,7 @@ export const Image = styled.div`
   height: ${props => props.height};
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -21,6 +21,7 @@ export const Image = styled.div`
   }
   :hover {
     transition: all 500ms;
+    background-size: 102% 102%;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.7) inset;
     cursor: pointer;
   }
@@ -91,6 +92,7 @@ export const Details = styled.div`
   `}
 `;
 export const Badge = styled.h1`
+  font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -102,7 +104,7 @@ export const Badge = styled.h1`
   margin-left: 10%;
   padding: 1vh;
   background-color: #f4f4f4;
-  color: #606060;
+  color: #303033;
   font-weight: bold;
   border-radius: 5%;
   margin-right:2.5vh;
@@ -148,8 +150,7 @@ export const DivPosts = styled.div`
   padding: 5% 2.5%;
   margin-left: -10%;
   @media (max-width: 600px) {
-    width: 120%;
-    justify-content: space-between;
+
   }
   ${props =>
     props.side &&
@@ -165,6 +166,7 @@ export const DivPosts = styled.div`
     align-items: center;
     justify-content: space-between;
     @media (max-width: 600px) {
+    
     width: 100%;
     justify-content: center;
   }
@@ -184,8 +186,7 @@ export const DivLatests = styled.div`
   margin-left:5%;
   padding-top: 5%;
   @media (max-width: 600px) {
-    width: 120%;
-    justify-content: space-between;
+    display:none;
   }
   ${props =>
     props.secAndTrd &&
@@ -241,8 +242,8 @@ export const Heading = styled.h1`
   background: ${props => props.background || "#fafafa"};
   text-align: center;
   color: #0077ff;
-  font-size: calc(10px + 4vw);
-  line-height: calc(10px + 4vw);
+  font-size: calc(18px + 3vw);
+  line-height: calc(18px + 3vw);
   letter-spacing: 3px;
   margin-top: 10vh;
   width: max-content;
@@ -255,16 +256,18 @@ export const DivHeading = styled.h1`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 85%;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 0;
+  padding-bottom: 2.5%;
+  margin-bottom:0;
   @media (max-width: 600px) {
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+    
   }
 `;
 export const Form = styled.div`
@@ -278,32 +281,9 @@ export const Form = styled.div`
   width: 80%;
   margin: 0;
   margin-left: auto;
+  
   @media (max-width: 600px) {
     width:100%;
-    margin:auto;
-    margin: 2vh 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items:center;
-    justify-content: center;
+    margin-top:5%;
   }
-  h1 {
-    font-size: 0.45em;
-    line-height: 0.35em;
-    margin: auto 0.2vw auto 0.5vw;
-    cursor: pointer;
-    @media (max-width: 600px) {
-      font-size: 0.3em;
-      line-height: 0.1em;
-      margin: auto 3vw auto 0.5vw;
-  }
-  }
-  ${props =>
-    props.active &&
-    `
-    h1{
-      transition:all 500ms ease;
-      color: #0077ff;
-  }
-  `}
 `;

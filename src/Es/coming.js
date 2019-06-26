@@ -26,7 +26,7 @@ const Image = styled.div`
 `;
 const Title = styled.h1`
   position:fixed;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Puppin', sans-serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;
@@ -72,7 +72,8 @@ z-index:100;
   width: 100%;
 `;
 const Heading = styled.h1`
-text-align:center;
+  font-family: 'Puppin', sans-serif;
+  text-align:center;
   width:max-content;
   margin: 0;
   text-transform: uppercase;
@@ -84,8 +85,9 @@ text-align:center;
   border-bottom: 8px solid ${props => props.border};
 `;
 const SubHeading = styled.h1`
+font-family: 'Puppin', sans-serif;
   text-align:center;
-  font-weight:bold;
+  font-weight:bolder;
   width:100%;
   margin: 0;
   text-transform: ${props => props.uppercase};

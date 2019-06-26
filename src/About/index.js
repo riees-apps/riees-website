@@ -32,6 +32,7 @@ const DivImage = styled.div`
   width: 100%;
 `;
 const Heading = styled.h1`
+font-family: 'Poppins', sans-serif;
   margin: 0;
   text-transform: uppercase;
   color: ${props => props.color};
@@ -43,7 +44,7 @@ const Heading = styled.h1`
   border-bottom: 8px solid ${props => props.border};
 `;
 const Text = styled.h1`
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: ${props => props.color};
   font-weight: lighter;
   font-size: calc(7.5px + 1vw);
