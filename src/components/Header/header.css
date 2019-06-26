@@ -285,6 +285,17 @@
     color: #686868;
     margin: auto 0;
     margin-right: 3vw;
+    transform: rotate(0deg);
+  }
+  .menu2 {
+    z-index: 10;
+    transition: all 500ms;
+    display: block;
+    font-size: calc(20px + 2.5vw);
+    color: #686868;
+    margin: auto 0;
+    margin-right: 3vw;
+    transform: rotate(180deg);
   }
   .closee {
     margin: auto 0;

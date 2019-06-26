@@ -64,6 +64,27 @@ const Btn = styled(Link)`
     
   `}
   ${props =>
+    props.blog &&
+    `
+    margin:2.5% 10%;
+    border-radius: 0px;
+    padding: 5px 10px;
+    font-size: calc(2.5px + 1vw);
+    text-align:center;
+    justify-content: space-between;
+    background-color: #fefefe;
+    color:#202020;
+    width:max-content;
+    :hover {
+    letter-spacing: 4.5px;
+    transform: scale(1.01);
+    cursor: pointer;
+    color:#202020;
+    background-color: #eee;
+  }
+    
+  `}
+  ${props =>
     props.card &&
     `
     box-shadow: none;
@@ -100,7 +121,7 @@ class Button extends Component {
     window.location.href = url
   }
   render() {
-    return <Btn className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={`/${window.location.pathname.split('/')[1]}${this.props.url}`}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
+    return <Btn className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} blog={this.props.blog} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={`/${window.location.pathname.split('/')[1]}${this.props.url}`}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
   }
 }
 export default Button;

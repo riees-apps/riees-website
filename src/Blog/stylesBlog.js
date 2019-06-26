@@ -1,10 +1,42 @@
-import React, { Component } from "react";
 import styled from "styled-components";
-import Footer from "../components/Footer/index";
-import Events from "../components/Events/index";
-import Button from "../components/Button/index";
 
-const Image = styled.div`
+export const ImageIndex = styled.div`
+  background-image: url(${props => props.image});
+  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
+  position: relative;
+  height: ${props => props.height};
+  @media (max-width: 600px) {
+    height: 82vh;
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4 ) inset;
+  }
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;
+export const TitleIndex = styled.h1`
+  position:fixed;
+  font-family: 'Poppins', serif;
+  text-shadow: 3px 3px black;
+  text-transform: uppercase;
+  color: white;
+  font-size: calc(80px + 1vw);
+  line-height: calc(80px + 1vw);
+  letter-spacing: 5px;
+  margin:auto;
+  margin-top: calc(30px + 2vw);
+  width:100%;
+  text-align:center;
+  @media (max-width: 600px) {
+    position:absolute;
+  }
+`;
+
+export const Image = styled.div`
   background-image: url(${props => props.image});
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
   position: relative;
@@ -25,13 +57,13 @@ const Image = styled.div`
   box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
   }
 `;
-const Img = styled.img`
+export const Img = styled.img`
   width: 65%;
   height:50vh;
   margin-right:auto; 
   margin-bottom:5vh;
 `;
-const Title = styled.h1`
+export const Title = styled.h1`
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
   color: white;
@@ -49,7 +81,7 @@ const Title = styled.h1`
     margin-bottom: 10%;
   }
 `;
-const SubTitle = styled.h1`
+export const SubTitle = styled.h1`
   font-family: "Oswald", sans-serif;
   color: white;
   font-weight: 500;
@@ -64,7 +96,7 @@ const SubTitle = styled.h1`
   }
 `;
 
-const DivText = styled.div`
+export const DivText = styled.div`
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
@@ -77,7 +109,7 @@ const DivText = styled.div`
     padding: 10vh 10%;
   }
 `;
-const Subheading = styled.div`
+export const Subheading = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -94,7 +126,7 @@ const Subheading = styled.div`
     margin-bottom: 0;
   }
 `;
-const Text = styled.h1`
+export const Text = styled.h1`
   font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   color: #444;
   font-weight: lighter;
@@ -108,7 +140,7 @@ const Text = styled.h1`
   }
   padding: 0 0 2.5vh 0;
 `;
-const Container = styled.div`
+export const Container = styled.div`
   background: #f4f4f4;
   padding-bottom: 10vh;
   display: flex;
@@ -119,7 +151,7 @@ const Container = styled.div`
   z-index: 100;
   position: relative;
 `;
-const Details = styled.h1`
+export const Details = styled.h1`
   text-align: start;
   font-weight: 500;
   display: flex;
@@ -137,7 +169,7 @@ const Details = styled.h1`
     line-height: calc(16px + 1vw);
   }
 `;
-const Badge = styled.h1`
+export const Badge = styled.h1`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -157,7 +189,7 @@ const Badge = styled.h1`
     margin-top:20%;
   }
 `;
-const Heading = styled.h1`
+export const Heading = styled.h1`
   font-family: "Avenir Next", sans-serif;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
@@ -179,76 +211,3 @@ const Heading = styled.h1`
     line-height: calc(10px + 3vw);
   }
 `;
-class Event extends Component {
-  componentWillMount() {
-        document.documentElement.scrollTop = 0;
-  }
-  render() {
-    const {
-      title,
-      img,
-      url,
-      date,
-      dateEvent,
-      placeEvent,
-      timeEvent,
-      text,
-    } = this.props;
-
-    return (
-      <div>
-        <Image x="0.6" height="90vh" image={img}>
-          <div>
-            <Badge>{typeof dateEvent !== "undefined" ? "Event" : "New"}</Badge>
-            <Title>{title}</Title>
-            <Subheading
-              className={typeof dateEvent === "undefined" ? "" : "displayNone"}
-            >
-              <Details>
-                <i className={`fas fa-clock iconDate`} /> {date}
-              </Details>
-            </Subheading>
-
-            <SubTitle
-              className={typeof dateEvent !== "undefined" ? "" : "displayNone"}
-            >
-              Event details
-            </SubTitle>
-            <Subheading
-              className={typeof dateEvent !== "undefined" ? "" : "displayNone"}
-            >
-              <Details>
-                <i className={`fas fa-calendar iconDate`} /> {dateEvent}
-              </Details>
-              <Details>
-                <i className={`fas fa-clock iconDate`} /> {timeEvent}
-              </Details>
-              <Details>
-                <i className={`fas fa-map-marker-alt iconDate`} /> {placeEvent}
-              </Details>
-            </Subheading>
-          </div>
-        </Image>
-        <Container>
-          <DivText>
-            <Text>
-              {text}
-            </Text>
-            <Text>
-            {text}
-            </Text>
-            <Text>
-            {text}
-            </Text>
-            <Button className={typeof dateEvent !== "undefined" ? "" : "displayNone"}  url={url} name="sign up here" />
-          </DivText>
-          <Heading>Latest news</Heading>
-          <Events side final={9} />
-          <Button url="/News-Events" name="All news and events" />
-        </Container>
-        <Footer />
-      </div>
-    );
-  }
-}
-export default Event;

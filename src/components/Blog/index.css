@@ -1,0 +1,81 @@
+.closeSearch {
+  height: 7vh;
+  margin-left: auto;
+  margin-right: -5vh;
+  width: 0px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  border-radius: 3.25em;
+  padding: 2.5vh;
+  font-size: 0.3em;
+  letter-spacing: 2px;
+  text-shadow: 0 0 1px, 0 0 2px;
+  border: none;
+  background-color: #fff;
+  color: #505050;
+  outline: none;
+}
+
+/* When the input field gets focus, change its width to 100% */
+.openSearch {
+  height: 7vh;
+  margin-left: auto;
+  margin-right: -5vh;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+  width: 95%;
+  border-radius: 3.25em;
+  padding: 2.5vh;
+  font-size: 0.3em;
+  letter-spacing: 2px;
+  text-shadow: 0 0 1px, 0 0 2px;
+  border: none;
+  background-color: #fff;
+  color: #505050;
+  outline: none;
+}
+.openSearch:focus {
+
+  transition: all 0.2s linear;
+  outline: none;
+  border: 1px solid rgb(0, 119, 255,0.2);
+  box-shadow: 0px 0px 5px 0px rgba(0, 119, 255, 0.5);
+}
+.divIconSearch {
+    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 9vh;
+  width: 9vh;
+  border-radius: 100%;
+  background-color: #0077ff;
+  transition: all 0.4s ease-in-out;
+}
+
+.divIconSearch2 {
+    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 9vh;
+  width: 9vh;
+  border-radius: 100%;
+  background-color: #dd1d6a;
+  transition: all 0.4s ease-in-out;
+}
+
+.iconSearch {
+  margin: auto;
+  font-size: 0.6em;
+  color: #000;
+  transition: all 0.4s ease-in-out;
+  transform: rotate(180deg);
+}
+.iconSearch2 {
+  margin: auto;
+  font-size: 0.6em;
+  color: #fafafa;
+  transition: all 0.4s ease-in-out;
+  transform: rotate(360deg);
+}

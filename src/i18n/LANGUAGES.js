@@ -7,5 +7,5 @@ export const LANGUAGES = {
         urlLang: 'en',
         code: 'en-US'
     },
-    default: 'pt'
+    default: 'en'
 }

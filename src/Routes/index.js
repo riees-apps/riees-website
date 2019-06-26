@@ -6,6 +6,7 @@ import { isAuthenticated } from "../api/auth";
 import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
 import NewsEvents from "../News-Events/index.js";
+import Blog from "../Blog/index.js";
 import Event from "../News-Events/event.js";
 import Cities from "../Cities/index.js";
 import City from "../Cities/city.js";
@@ -580,7 +581,7 @@ const LANGUAGES = {
       urlLang: 'en',
       code: 'en-US'
   },
-  default: 'pt'
+  default: 'en'
 }
 
 
@@ -674,6 +675,7 @@ class Routes extends Component {
           <MultiLanguageRoute exact path="/"/>
           <MultiLanguageRoute exact path="/:lang" component={Home} />
           <MultiLanguageRoute path="/:lang/News-Events" component={NewsEvents} />
+          <MultiLanguageRoute path="/:lang/Blog" component={Blog} />
           <MultiLanguageRoute path="/:lang/About" component={About} />
           <MultiLanguageRoute path="/:lang/Cities" component={Cities} />
           <MultiLanguageRoute path="/:lang/Es" component={Es} />

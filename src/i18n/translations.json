@@ -26,12 +26,16 @@
         "New": "News",
         "Events": "Events",
         "Page": "Page",
+        "Of": "of",
         "Overview": "overview",
         "LivingThere": "living there",
         "Top": "Top places",
         "Visit": "to visit",
-        "AllCities": "All cities"
-        
+        "AllCities": "All cities",
+        "Result": "Sorry, we could not find a result",
+        "Result2": " Your search for",
+        "Result3": "does not returned results",
+        "Result4": " Try again with other terms"
     },
     "pt-BR": {
         "HomeTitle": "Venha nos conhecer",
@@ -65,6 +69,10 @@
         "LivingThere": "dia a dia",
         "Top": "Melhores lugares",
         "Visit": "para se visitar",
-        "AllCities": "Todas cidades"
+        "AllCities": "Todas cidades",
+        "Result": "Desculpe, nenhum resultado pode ser encontrado",
+        "Result2": "Sua busca por",
+        "Result3": " não retornou resultados",
+        "Result4": "Tente novamente com outras palavras"
     }
 }
