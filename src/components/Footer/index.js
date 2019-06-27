@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Admin from "../../Admin/index.js";
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import {FormattedMessage} from 'react-intl'
 import opa from './opa.jpg'
 
 const StyledLink = styled(Link)`
+font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   width:100%;
   color:#fff;
@@ -72,6 +72,7 @@ const Title = styled.h1`
   margin-bottom:40px;
 `;
 const Text = styled.h1`
+font-family: "Raleway", sans-serif;
   text-align:start;
   color: #fff;
   font-weight:lighter;

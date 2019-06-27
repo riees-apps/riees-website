@@ -146,7 +146,7 @@ const Logo = styled.img`
   z-index:100;
   position:relative;
   @media (max-width: 768px) {
-    width:35vw;
+    width:45vw;
     height:10vh;
   }
 `;

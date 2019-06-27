@@ -29,12 +29,13 @@ const Title = styled.h1`
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;
-  font-size: calc(80px + 1vw);
-  line-height: calc(80px + 1vw);
+  font-size: calc(50px + 2vw);
+  line-height: calc(50px + 2vw);
   letter-spacing: 5px;
   margin:auto;
   margin-top: calc(30px + 2vw);
   width:100%;
+  padding: 0 2.5%;
   text-align:center;
   @media (max-width: 600px) {
     position:absolute;

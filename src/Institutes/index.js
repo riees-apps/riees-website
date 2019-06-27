@@ -14,7 +14,8 @@ const Div = styled.div`
   align-content: center;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 80%;
+  margin:auto;
   padding-top: 6vh;
 `;
 

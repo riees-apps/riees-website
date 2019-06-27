@@ -17,7 +17,7 @@ const StyledLink = styled(Link)`
   color: #505050;
   font-size: calc(1.1vw);
   line-height: calc(1.1vw);
-  letter-spacing: 3px;
+  letter-spacing: 0.25vw;
   padding-left: 3px;
   text-decoration: none;
   text-align: center;

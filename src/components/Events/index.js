@@ -380,6 +380,7 @@ const DivHeading = styled.h1`
   margin-right: auto;
   margin-bottom: 0;
   @media (max-width: 600px) {
+    width: 95%;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
@@ -414,7 +415,7 @@ const Form = styled.div`
     @media (max-width: 600px) {
       font-size: 0.3em;
       line-height: 0.1em;
-      margin: auto 3vw auto 0.5vw;
+      margin: auto 2vw auto 0.5vw;
   }
   }
   ${props =>

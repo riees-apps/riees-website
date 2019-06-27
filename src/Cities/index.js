@@ -14,7 +14,8 @@ const Div = styled.div`
   align-content: center;
   justify-content: center;
   text-align: center;
-  width: 100%;
+  width: 80%;
+  margin:auto;
   padding-top: 6vh;
 `;
 
@@ -45,10 +46,7 @@ const Title = styled.h1`
   font-size: calc(30px + 3vw);
   line-height: calc(30px + 3vw);
   letter-spacing: 0px;
-  padding: 6vh calc(2vh);
-  @media (max-width: 769px) {
-     padding: 6vh calc(1vh);
-    }
+  padding: 6vh calc(0.5vw);
   padding-bottom: 1vh;
   border-bottom:1vh solid pink;
 `;
