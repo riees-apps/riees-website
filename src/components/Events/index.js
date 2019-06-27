@@ -295,8 +295,10 @@ const DivEvents = styled.div`
   padding: 5% 2.5%;
   margin-left: -10%;
   @media (max-width: 600px) {
-    margin-left: -15%;
-    width: 130%;
+    margin-left: -12.5%;
+    padding: 5% 0;
+    border:1px solid red;
+    width: 125%;
     justify-content: space-between;
   }
   ${props =>
@@ -310,6 +312,7 @@ const DivEvents = styled.div`
     align-items: center;
     justify-content: space-between;
     @media (max-width: 600px) {
+      margin:0;
     width: 100%;
     justify-content: center;
   }
@@ -327,6 +330,7 @@ const DivEvents = styled.div`
     align-items: center;
     justify-content: space-between;
     @media (max-width: 600px) {
+      margin:0;
     width: 100%;
     justify-content: center;
   }

@@ -349,7 +349,6 @@
   }
   .container2 {
     padding: 1vw 0px;
-    opacity: 1;
     opacity: 0.8;
     justify-content: space-between;
     align-items: flex-start;
@@ -401,7 +400,7 @@
   text-align: center;
 }
 .menu-links {
-  opacity: 2;
+  opacity: 1.5;
   margin-top: 0;
   transition: all 100ms ease-in,right 300ms;
   display: flex;

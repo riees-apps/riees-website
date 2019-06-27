@@ -129,7 +129,7 @@ class Header extends Component {
     window.location.pathname = (active)
   }
   openMenu() {
-    this.setState({ ...this.state, menu: !this.state.menu });
+    this.setState({ ...this.state, menu: !this.state.menu, scroll: this.state.scroll ? !this.state.scroll  : false  });
   }
   changeHover() {
     this.setState({ ...this.state, hover: !this.state.hover });
