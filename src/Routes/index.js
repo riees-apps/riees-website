@@ -5,6 +5,7 @@ import { isAuthenticated } from "../api/auth";
 
 import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
+import Contact from "../Contact/index.js";
 import NewsEvents from "../News-Events/index.js";
 import Blog from "../Blog/index.js";
 import Event from "../News-Events/event.js";
@@ -997,6 +998,7 @@ class Routes extends Component {
           <MultiLanguageRoute path="/:lang/News-Events" component={NewsEvents} />
           <MultiLanguageRoute path="/:lang/Blog" component={Blog} />
           <MultiLanguageRoute path="/:lang/About" component={About} />
+          <MultiLanguageRoute path="/:lang/Contact" component={Contact} />
           <MultiLanguageRoute path="/:lang/Cities" component={Cities} />
           <MultiLanguageRoute path="/:lang/Es" component={Es} />
           <MultiLanguageRoute path="/:lang/Coming" component={Coming} />

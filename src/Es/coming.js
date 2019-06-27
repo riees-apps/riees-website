@@ -84,19 +84,19 @@ const Heading = styled.h1`
   line-height: calc(15px + 3vw);
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
-  border-bottom: 8px solid ${props => props.border};
+  border-bottom: 1.5vh solid ${props => props.border};
 `;
 const SubHeading = styled.h1`
 font-family: 'Poppins', sans-serif;
   text-align:center;
-  font-weight:bolder;
+  font-weight:lighter;
   width:100%;
   margin: 0;
   text-transform: ${props => props.uppercase};
   color: ${props => props.color};
   font-size: calc(15px + 1vw);
   line-height: calc(15px + 1vw);
-  letter-spacing: -1px;
+  letter-spacing: 1px;
   padding: 2.5vh 0 4vh 0;
 `;
 const Text = styled.h1`
@@ -104,7 +104,8 @@ const Text = styled.h1`
   color: ${props => props.color};
   font-weight: lighter;
   font-size: calc(12px + 0.5vw);
-  line-height: calc(12px + 0.5vw);
+  line-height: calc(13px + 0.5vw);
+  letter-spacing: 0.25px;
   width: 100%;
   text-align: center;
 `;
@@ -114,7 +115,8 @@ const Text2 = styled.li`
   font-weight: lighter;
   margin-bottom:1.5vh;
   font-size: calc(12px + 0.5vw);
-  line-height: calc(12px + 0.5vw);
+  line-height: calc(13px + 0.5vw);
+  letter-spacing: 0.25px;
   width: 100%;
   text-align: start;
 `;

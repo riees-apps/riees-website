@@ -1,0 +1,52 @@
+.iconContact{
+    color:darkblue;
+    width: 5%;
+    margin-right: 5%;
+}
+.textContact{
+    width: 90%;
+    margin-bottom: 1%;
+    display: block;
+    color:#161030;
+    font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+  font-size: calc(11px + 1vw);
+  line-height: calc(14px + 1vw);
+}
+.local2{
+    margin-bottom: 0.5%;
+    margin-left: 10%;
+    width: 90%;
+    display: block;
+    font-family: "Poppins", sans-serif;
+  color:#505052;
+  font-weight: lighter;
+  font-size: calc(6px + 1vw);
+  line-height: calc(8px + 1vw);
+}
+.emailContact{
+    margin-bottom: 0.5%;
+    margin-left: 10%;
+    width: 90%;
+    display: block;
+    font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+  font-size: calc(8px + 1vw);
+  line-height: calc(11px + 1vw);
+}
+.form{
+    padding-left: 2.5%;
+    height: 3rem;
+    margin-top: -4%;
+    margin-bottom: 5%;
+    width: 95%;
+    border: 1px solid #f2ddff
+}
+.textarea{
+    padding-left: 2.5%;
+    border: 1px solid #f2ddff;
+    min-height: 8rem;
+    margin-top: -4%;
+    margin-bottom: 5%;
+    width: 95%;
+}

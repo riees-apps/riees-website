@@ -41,16 +41,22 @@ font-family: 'Poppins', sans-serif;
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
   margin-bottom:2.5vh;
-  border-bottom: 8px solid ${props => props.border};
+  border-bottom: 1.5vh solid ${props => props.border};
 `;
 const Text = styled.h1`
-  font-family: 'Raleway', sans-serif;
   color: ${props => props.color};
+  font-family: "Raleway", sans-serif;
+  font-size: calc(11px + 1vw);
+  line-height: calc(12px + 1vw);
+  letter-spacing:0.25px;
   font-weight: lighter;
-  font-size: calc(7.5px + 1vw);
-  line-height: calc(7.5px + 1vw);
   width: 100%;
-  text-align: center;
+  text-align:center;
+  @media (max-width: 600px) {
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing:0.5px;
+  }
 `;
 const Div = styled.div`
   display: flex;

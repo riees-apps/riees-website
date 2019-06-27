@@ -33,9 +33,15 @@
         "Visit": "to visit",
         "AllCities": "All cities",
         "Result": "Sorry, we could not find a result",
-        "Result2": " Your search for",
+        "Result2": "Your search for",
         "Result3": "does not returned results",
-        "Result4": " Try again with other terms"
+        "Result4": "Try again with other terms",
+        "Contact": "Contact us",
+        "Contact2": "How would you like to contact us",
+        "Time": "Monday to Friday from 8 AM to 5 PM",
+        "Atendimento": "Opening hours",
+        "Contact3": "Contact us sending an email or filling out the form below."
+
     },
     "pt-BR": {
         "HomeTitle": "Venha nos conhecer",
@@ -73,6 +79,15 @@
         "Result": "Desculpe, nenhum resultado pode ser encontrado",
         "Result2": "Sua busca por",
         "Result3": " não retornou resultados",
-        "Result4": "Tente novamente com outras palavras"
+        "Result4": "Tente novamente com outras palavras",
+        "Contact": "Fale Conosco",
+        "Contact2": "Como você gostaria de entrar em contato",
+        "Time": "segunda-feira a sexta-feira de 8h a 17h.",
+        "Atendimento": "Horário de atendimento",
+        "Contact3": "Entre em contato conosco enviando um email ou preenchendo o fomulário abaixo.",
+        "Submit": "Enviar",
+        "Subject": "Assunto",
+        "Your Message": "Sua mensagem",
+        "See all ...": "Veja tudo..."
     }
 }

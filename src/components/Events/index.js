@@ -295,7 +295,8 @@ const DivEvents = styled.div`
   padding: 5% 2.5%;
   margin-left: -10%;
   @media (max-width: 600px) {
-    width: 120%;
+    margin-left: -15%;
+    width: 130%;
     justify-content: space-between;
   }
   ${props =>

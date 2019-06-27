@@ -72,7 +72,8 @@ const Heading = styled.h1`
 const Text = styled.h1`
   font-family: "Raleway", sans-serif;
   font-size: calc(11px + 1vw);
-  line-height: calc(10px + 1vw);
+  line-height: calc(11px + 1vw);
+  letter-spacing:0.25px;
   font-weight: lighter;
   margin:2vh 0;
   color: #404042;

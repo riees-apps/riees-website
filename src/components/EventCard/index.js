@@ -18,7 +18,7 @@ const Card = styled.div`
   box-shadow: 0px 0px 4px 0px rgba(50,50,50,0.51);
   border-radius:5px;
   @media (max-width: 600px) {
-    width: 85%;
+    width: 80%;
     height: 48vh;
     margin-bottom: 10%;
   }
@@ -117,7 +117,7 @@ const Title = styled.h1`
   text-align:start;
   padding: 1vh 0 1vh 1vh;
   @media (max-width: 600px) {
-    font-size: calc(6px + 1.3vh);
+    font-size: calc(8px + 1.3vh);
     line-height: calc(5px + 1.3vh);
   }
 `;

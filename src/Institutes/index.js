@@ -30,13 +30,20 @@ const DivText = styled.div`
   padding-top: 2.5vh;
 `;
 const Heading = styled.h1`
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
+  font-size: calc(11px + 1vw);
+  line-height: calc(11px + 1vw);
+  letter-spacing:0.25px;
+  font-weight: lighter;
+  color: #404042;
   width: 80%;
   text-align:center;
-  color: #404040;
-  font-size: calc(12px + 0.5vw);
-  line-height: calc(12px + 0.5vw);
-  font-weight: lighter
+  @media (max-width: 600px) {
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing:0.5px;
+    color: #505050;
+  }
 `;
 const Title = styled.h1`
   font-family: "Poppins", Helvetica, Arial, sans-serif;

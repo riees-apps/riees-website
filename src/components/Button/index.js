@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import styled from "styled-components";
 
-const Btn = styled(Link)`
+const Btn = styled.div`
   border:none;
   color: ${props => props.font || '#fafafa'};
   font-family: "Poppins", Helvetica, Arial, sans-serif;
@@ -122,7 +122,7 @@ class Button extends Component {
     window.location.href = url
   }
   render() {
-    return <Btn className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} blog={this.props.blog} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={`/${window.location.pathname.split('/')[1]}${this.props.url}`}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
+    return <Btn as={this.props.url !== '' ? Link : ''} className={this.props.className} style={{textDecoration: 'none'}} color={this.props.color} card={this.props.card} blog={this.props.blog} font={this.props.font} places={this.props.places} return={this.props.return} width={this.props.width}  to={`/${window.location.pathname.split('/')[1]}${this.props.url}`}><Icon return={this.props.return} className={`fas fa-arrow-left`} /> {this.props.name}</Btn>;
   }
 }
 export default Button;

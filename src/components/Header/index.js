@@ -168,7 +168,7 @@ class Header extends Component {
             alt=""
           />
         </div>
-
+        
         <div className={this.state.scroll ? "containerLinksScroll" : "containerLinks"}>
             
           <div className={this.state.scroll ? "divFlagScroll" : "divFlag"}>
@@ -198,6 +198,7 @@ class Header extends Component {
               alt=''
             />
           </StyledLink>
+          
           </div>
           <div className={this.state.scroll ? "divLinksScroll" : "divLinks"}>
           <StyledLink
