@@ -59,12 +59,13 @@ const CardImg = styled(Link)`
   border-top-left-radius:5px;
   border-top-right-radius:5px;
   @media (max-width: 600px) {
-    background-size: 100% 100%;
+    background-size: center;
     height: 24vh;
   }
   :hover {
+    background-size: 101% 101%;
     transition:all 200ms ease-in;
-    box-shadow: 0px 45vh rgba(20, 20, 20, 0.5) inset;
+    box-shadow: 0px 45vh rgba(20, 20, 20, 0.35) inset;
     cursor: pointer;
   }
   ${props =>
@@ -109,7 +110,7 @@ const Title = styled.h1`
   justify-content: flex-start;
   font-size: calc(5px + 1.2vw);
   line-height: calc(2px + 1.2vw);
-  font-weight: bolder;
+  font-weight: lighter;
   width: 95%;
   color: #303032;
   margin: 0;

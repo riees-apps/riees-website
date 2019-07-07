@@ -72,7 +72,7 @@ class Institutes extends Component {
           brightness="110%"
         />
         <Div>
-          <Title color='#4247FE'><FormattedMessage id="InstitutesTitle"/></Title>
+          <Title color='#0077ff'><FormattedMessage id="InstitutesTitle"/></Title>
         </Div>
         <DivText>
           <Heading>

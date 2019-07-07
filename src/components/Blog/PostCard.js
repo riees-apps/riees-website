@@ -74,7 +74,7 @@ const Badge = styled.h1`
   }
 `;
 const CardImg = styled(Link)`
-  transition: all 200ms ease-in;
+  transition: all 150ms ease-in;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -94,7 +94,7 @@ const CardImg = styled(Link)`
   }
   :hover {
     background-size: 105% 105%;
-    transition: all 150ms ease-in;
+    transition: all 100ms ease-in;
     box-shadow: 0px 45vh rgba(20, 20, 20, 0.5) inset;
     cursor: pointer;
   }
@@ -139,7 +139,7 @@ font-family: 'Poppins', sans-serif;
   justify-content: flex-start;
   font-size: calc(5px + 1.2vw);
   line-height: calc(2px + 1.2vw);
-  font-weight: bold;
+  font-weight: lighter;
   width: 95%;
   color: #303032;
   margin: 0;

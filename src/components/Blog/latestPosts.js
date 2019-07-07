@@ -41,7 +41,7 @@ class LatestPost extends Component {
           input={this.props.img}
           height={this.props.height}
           width={this.props.width}
-          x="0.55"
+          x="0.5"
           image={this.props.img}
         >
           <div>
@@ -57,7 +57,7 @@ class LatestPost extends Component {
             <SubTitle secAndTrd={this.props.secAndTrd}>
               {this.props.text}
             </SubTitle>
-            <Button blog url={`/Post/${this.props.title}`} name={<FormattedMessage id="Button" />} />
+            
           </div>
         </Image>
     );

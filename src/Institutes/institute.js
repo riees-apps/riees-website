@@ -141,8 +141,8 @@ const Img = styled.div`
   }
 `;
 const Logo = styled.img`
-  width:25vw;
-  height:12vh;
+  width:20vw;
+  height:15vh;
   z-index:100;
   position:relative;
   @media (max-width: 768px) {
@@ -179,7 +179,7 @@ class Institute extends Component {
           <SideMenu page='Institute' links={institutes}/>
           <DivText>
             <Div justify="flex-start">
-              <Heading>{name}</Heading>
+              <Heading color="#303033">{name}</Heading>
               <Heading color="rgb(0, 83, 180)">overview</Heading>
             </Div>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
@@ -187,7 +187,7 @@ class Institute extends Component {
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
               <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc fringilla massa, eget sagittis dolor risus quis purus. Curabitur vitae ligula tristique, finibus tortor id, viverra nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis purus facilisis purus volutpat, in tempus mauris consequat. Mauris tempor non magna vitae condimentum. Phasellus commodo vitae eros ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor mollis placerat imperdiet. Suspendisse in velit m</Text>
               <AreaCard name={name} areas={areas}/>
-              <Button url={url}  name='Visit the institute website'></Button>
+              <Button url={url} institute='true' name='Visit the institute website'></Button>
               <Button return={true} color='#FF1493' url='/Institutes' name='All institutes'></Button>
           </DivText>
         </Container>

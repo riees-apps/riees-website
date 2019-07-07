@@ -59,9 +59,8 @@ export const Image = styled.div`
 `;
 export const Resume= styled.h1`
   font-family: "Raleway", sans-serif;
-  text-align:justify;
-  color: #202022;
-  font-weight: bold;
+  color: #101011;
+  font-weight: lighter;
   font-size: calc(14px + 1vw);
   line-height: calc(14px + 1vw);
   margin: auto;
@@ -240,6 +239,7 @@ export const Badge = styled.h1`
 `;
 export const Heading = styled.h1`
   font-family: "Poppins", sans-serif;
+  text-transform:uppercase;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
   color: #0077ff;

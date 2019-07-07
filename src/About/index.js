@@ -76,7 +76,7 @@ class About extends Component {
       <div>
         <Image title={<FormattedMessage id="About"/>} height="100vh" image={img} />
         <DivText>
-          <Heading border='#FE86AC' color='#0033ff'><FormattedMessage id="Who"/></Heading>
+          <Heading border='#FE86AC' color='#0077ff'><FormattedMessage id="Who"/></Heading>
           <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
@@ -147,7 +147,7 @@ class About extends Component {
           </Div>
         </DivImage>
         <DivText>
-          <Heading border='#FE86AC' color='#0033ff'>Lorem Ipsum</Heading>
+          <Heading border='#FE86AC' color='#0077ff'>Lorem Ipsum</Heading>
           <Div>
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et

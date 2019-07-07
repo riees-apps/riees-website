@@ -139,7 +139,7 @@ class Coming extends Component {
             <Title><FormattedMessage id="Coming"/></Title>
         </Image>
         <DivText>
-            <Heading border='pink' color='#0033ff'><FormattedMessage id="Documents"/></Heading>
+            <Heading border='pink' color='#0077ff'><FormattedMessage id="Documents"/></Heading>
             <Div >
             <SubHeading uppercase='uppercase' color='#303030'><FormattedMessage id="Passport"/></SubHeading>
             <Text2 color='#505050'>
@@ -234,7 +234,7 @@ class Coming extends Component {
           </Div>
         </DivImage>
         <DivText>
-            <Heading border='pink' color='#0033ff'>Lorem Ipsum</Heading>
+            <Heading border='pink' color='#0077ff'>Lorem Ipsum</Heading>
             <Div >
             <SubHeading color='#303030'>
               Similique magnam exercitationem vero velit quis quas incidunt

@@ -11,7 +11,7 @@ export const Image = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  transition: all 500ms;
+  transition: all 250ms;
   width: ${props => props.width};
   @media (max-width: 600px) {
   background-size: 100% 100%;
@@ -20,21 +20,21 @@ export const Image = styled.div`
   align-content: center;
   }
   :hover {
-    transition: all 500ms;
+    transition: all 250ms;
     background-size: 102% 102%;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.7) inset;
     cursor: pointer;
   }
 `;
 export const Title = styled.h1`
-  font-family: "Puppin", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
   font-weight: bolder;
   font-size: calc(10px + 1.75vw);
   line-height: calc(10px + 1.75vw);
   letter-spacing: 1px;
   margin: auto;
-  width: 80%;
+  width: 90%;
   text-align: start;
   margin-bottom: 2.5%;
   @media (max-width: 600px) {
@@ -101,7 +101,7 @@ export const Badge = styled.h1`
   line-height: 1em;
   width: max-content;
   height: max-content;
-  margin-left: 10%;
+  margin-left: 5%;
   padding: 1vh;
   background-color: #f4f4f4;
   color: #303033;
@@ -120,12 +120,13 @@ export const SubTitle = styled.h1`
   line-height: calc(10px + 1vw);
   letter-spacing: 1px;
   margin: auto;
-  width: 80%;
+  width: 90%;
   text-align: start;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;  /* Number of lines displayed before it truncate */
+  -webkit-line-clamp: 3;  /* Number of lines displayed before it truncate */
   overflow: hidden;
+  margin-bottom:5%;
   @media (max-width: 600px) {
     margin-bottom: 2.5%;
   }
@@ -182,8 +183,8 @@ export const DivLatests = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
-  margin-left:5%;
+  width: 85%;
+  margin:auto;
   padding-top: 5%;
   @media (max-width: 600px) {
     display:none;
@@ -237,14 +238,13 @@ export const Check = styled.div`
   `}
 `;
 export const Heading = styled.h1`
-  font-family: "Oswald", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
   text-align: center;
   color: #0077ff;
   font-size: calc(18px + 3vw);
   line-height: calc(18px + 3vw);
-  letter-spacing: 3px;
   margin-top: 10vh;
   width: max-content;
   padding-bottom: 1.5vh;

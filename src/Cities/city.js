@@ -40,12 +40,14 @@ const Text = styled.h1`
   color: #202022;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
-  line-height: calc(8px + 1vw);
+  line-height: calc(9px + 1vw);
+  letter-spacing: 0.25px;
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
     font-size: calc(6px + 1vh);
-    line-height: calc(7px + 1vh);
+    line-height: calc(8px + 1vh);
+    letter-spacing: 0.4px;
     text-align: justify;
     padding: 0 0 0.5vh 0;
     color: #151515;
@@ -127,7 +129,7 @@ class City extends Component {
           <DivText>
             <Div justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Overview"/></Heading>
+              <Heading color="#0077ff"><FormattedMessage id="Overview"/></Heading>
             </Div>
             <DivImg>
               <Img src={img1} alt="" />

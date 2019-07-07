@@ -69,7 +69,7 @@ class Cities extends Component {
       <Img height="100vh" image={img3} title={<FormattedMessage id="Cities"/>}/>
 
       <Div>
-          <Title color='#4247FE'><FormattedMessage id="CitiesTitle"/></Title>
+          <Title color='#0077ff'><FormattedMessage id="CitiesTitle"/></Title>
         </Div>
         <DivText>
           <Heading>

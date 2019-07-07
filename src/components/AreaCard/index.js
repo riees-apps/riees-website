@@ -79,8 +79,8 @@ class AreaCard extends Component {
     return (
       <DivAreas>
         <DivHeading>
-          <Heading>{this.props.name}</Heading>
-          <Heading color="rgb(0, 83, 180)">areas</Heading>
+          <Heading color="#303033">{this.props.name}</Heading>
+          <Heading color="#0077ff">areas</Heading>
         </DivHeading>
         <DivCards>{renderAreas()}</DivCards>
       </DivAreas>

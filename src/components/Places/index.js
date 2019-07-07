@@ -24,6 +24,7 @@ const Image = styled.div`
   width: 100%;
 `;
 const Text = styled.div`
+
   box-shadow: 0px 100vh rgba(30, 30, 30, 0.8) inset;
   position: relative;
   height: 50vh;
@@ -42,7 +43,7 @@ const Text = styled.div`
   }
 `;
 const Heading = styled.h1`
-font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+font-family: "Poppins", Helvetica, Arial, sans-serif;
 color: #fafafa;
 border-bottom:1px solid #fafafa;
 font-size: calc(20px + 0.6vw);
@@ -54,7 +55,7 @@ width: 90%;
 text-align:start;
 `;
 const Subheading = styled.h4`
-font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+font-family: "Raleway", Helvetica, Arial, sans-serif;
 color: #dddddd;
 font-weight: lighter;
 font-size: calc(10px + 0.6vw);
