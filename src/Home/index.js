@@ -179,7 +179,7 @@ class Home extends Component {
           <Button url="/About" name={<FormattedMessage id="Button" />} />
         </DivText>
         
-        <Carousel>
+        <Carousel fade>
           <Carousel.Item>
             <Image
               x="0.75"

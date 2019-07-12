@@ -154,7 +154,7 @@ class Header extends Component {
   render() {
     return (
       <div shadow={this.state.menu ? true : false}
-        className={window.location.pathname.split('/')[2] === 'Admin' ? 'displayNone' : this.state.scroll ? "container2"  : "container1"}
+        className={window.location.pathname.split('/')[2] === 'Admin' || window.location.pathname.split('/')[2] === 'admin'  ? 'displayNone' : this.state.scroll ? "container2"  : "container1"}
         >
         <div className="div">
           <img

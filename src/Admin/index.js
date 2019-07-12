@@ -83,17 +83,14 @@ class Admin extends Component {
       });
     } else {
       try {
-        const response = await api
-          .post(
+        await api.post(
             "/admin/auth",
             { senha: password, email: email },
             { headers: { "Access-Control-Allow-Origin": "*" } }
-          )
-          .then(response => {
+          ).then(response => {
             login(response.data.token);
             this.props.history.push("/dashboard/show-institutes");
-          })
-          .catch(error => {
+          }).catch(error => {
             this.setState({
               smShow: true,
               error:
