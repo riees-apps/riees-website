@@ -55,6 +55,7 @@ const Title = styled.h1`
   letter-spacing: 3px;
   padding: 6vh calc(0.5vw);
   padding-bottom: 1vh;
+  min-width:min-content;
   border-bottom:1vh solid pink;
 `;
 

@@ -15,7 +15,7 @@ import Events from "../components/Events/index";
 import Testimonial from "../components/Testimonial/index";
 import { FormattedMessage } from "react-intl";
 
-const Image = styled.div`
+const Imagee = styled.div`
   background-image: url(${props => props.image});
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
   position: relative;
@@ -47,7 +47,7 @@ const Title = styled.h1`
 `;
 const Subheading = styled.h4`
   font-family: "Poppins", sans-serif;
-  text-shadow: 3px 3px black;
+  text-shadow: 2px 2px black;
   color: #fafafa;
   font-size: calc(20px + 1vw);
   line-height: calc(20px + 1vw);
@@ -97,10 +97,8 @@ const DivText = styled.div`
   margin: 0 auto;
   padding-bottom: 7.5vh;
 `;
-
 class Home extends Component {
   componentDidMount() {
-    console.log(window.screen.width);
     document.documentElement.scrollTop = 0;
   }
   render() {
@@ -108,11 +106,11 @@ class Home extends Component {
       <div style={{ backgroundColor: "#f4f4f4", textAlign: "center" }}>
         <Carousel>
           <Carousel.Item>
-            <Image
+            <Imagee
               x="0.3"
               height="100vh"
               image={img}
-              brightness="160%"
+              brightness="120%"
               align="center"
               justify="center"
             >
@@ -129,10 +127,10 @@ class Home extends Component {
                 className="m-4"
                 name={<FormattedMessage id="Button" />}
               />
-            </Image>
+            </Imagee>
           </Carousel.Item>
           <Carousel.Item>
-            <Image
+            <Imagee
               x="0.3"
               height="100vh"
               image={img}
@@ -150,7 +148,7 @@ class Home extends Component {
                 url="/Institutes"
                 name={<FormattedMessage id="Button" />}
               />
-            </Image>
+            </Imagee>
           </Carousel.Item>
         </Carousel>
 
@@ -181,7 +179,7 @@ class Home extends Component {
         
         <Carousel fade>
           <Carousel.Item>
-            <Image
+            <Imagee
               x="0.75"
               height="85vh"
               brightness="100%"
@@ -210,10 +208,10 @@ class Home extends Component {
               <div className="margin">
                 <Button url="/Coming" name={<FormattedMessage id="Button" />} />
               </div>
-            </Image>
+            </Imagee>
           </Carousel.Item>
           <Carousel.Item>
-            <Image
+            <Imagee
               x="0.75"
               height="85vh"
               brightness="100%"
@@ -246,10 +244,10 @@ class Home extends Component {
               <div className="margin">
                 <Button url="/Living" name={<FormattedMessage id="Button" />} />
               </div>
-            </Image>
+            </Imagee>
           </Carousel.Item>
           <Carousel.Item>
-            <Image
+            <Imagee
               x="0.75"
               height="85vh"
               brightness="100%"
@@ -278,7 +276,7 @@ class Home extends Component {
               <div className="margin">
                 <Button url="/Cities" name={<FormattedMessage id="Button" />} />
               </div>
-            </Image>
+            </Imagee>
           </Carousel.Item> 
         </Carousel>
 

@@ -19,7 +19,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   transition:  all 0.15s linear ;
   margin-bottom:10px;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 100%;
   }
   :hover {
@@ -57,13 +57,13 @@ const DivText = styled.div`
   width: 33vw;
   margin:40px 0 40px 40px;
   padding-right:3vw;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 44vw;
   }
   ${props =>
     props.active &&
     `
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
     display:none
   }
   `}

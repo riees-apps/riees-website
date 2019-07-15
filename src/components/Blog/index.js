@@ -343,8 +343,8 @@ class Blog extends Component {
 
   filtro = event => {
     if (
-      event.props.text.indexOf(`${this.state.value}`) !== -1 ||
-      event.props.title.indexOf(`${this.state.value}`) !== -1
+      event.props.text.toUpperCase().indexOf(`${this.state.value.toUpperCase()}`) !== -1 ||
+      event.props.title.toUpperCase().indexOf(`${this.state.value.toUpperCase()}`) !== -1
     )
       return true;
     return false;

@@ -41,7 +41,7 @@ font-family: 'Poppins', sans-serif;
   letter-spacing: 3px;
   padding: 0 0 1.5vh 0;
   margin-bottom:2.5vh;
-  border-bottom: 1.5vh solid ${props => props.border};
+  border-bottom: 1vh solid ${props => props.border};
 `;
 const Text = styled.h1`
   color: ${props => props.color};
@@ -76,7 +76,7 @@ class About extends Component {
       <div>
         <Image title={<FormattedMessage id="About"/>} height="100vh" image={img} />
         <DivText>
-          <Heading border='#FE86AC' color='#0077ff'><FormattedMessage id="Who"/></Heading>
+          <Heading border='pink' color='#0077ff'><FormattedMessage id="Who"/></Heading>
           <Div >
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et
@@ -147,7 +147,7 @@ class About extends Component {
           </Div>
         </DivImage>
         <DivText>
-          <Heading border='#FE86AC' color='#0077ff'>Lorem Ipsum</Heading>
+          <Heading border='pink' color='#0077ff'>Lorem Ipsum</Heading>
           <Div>
             <Text color='#505050'>
               Quasi excepturi provident. Ratione laborum nulla sint. Quas et

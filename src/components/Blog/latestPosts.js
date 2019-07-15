@@ -41,7 +41,7 @@ class LatestPost extends Component {
           input={this.props.img}
           height={this.props.height}
           width={this.props.width}
-          x="0.5"
+          x="0.6"
           image={this.props.img}
         >
           <div>

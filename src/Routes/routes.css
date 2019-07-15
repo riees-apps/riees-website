@@ -1,0 +1,17 @@
+.spin{
+    height:2.5vw;
+    width:2.5vw;
+    color:#357edd;
+    margin:auto;
+}
+.spinDiv{
+    position: fixed;
+    background: white;
+    display:flex;
+    justify-content:center;
+    align-content:center;
+    height:100vh;
+    width:100vw;
+    z-index: 99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
+}
+

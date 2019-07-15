@@ -116,8 +116,8 @@ export const SubTitle = styled.h1`
   font-family: "Raleway", sans-serif;
   color: white;
   font-weight: lighter;
-  font-size: calc(10px + 1vw);
-  line-height: calc(10px + 1vw);
+  font-size: calc(7px + 1vw);
+  line-height: calc(8px + 1vw);
   letter-spacing: 1px;
   margin: auto;
   width: 90%;
@@ -133,8 +133,8 @@ export const SubTitle = styled.h1`
   ${props =>
     props.secAndTrd &&
     `
-    font-size: calc(3px + 1vw);
-    line-height: calc(6px + 1vw);
+    font-size: calc(2px + 1vw);
+    line-height: calc(4px + 1vw);
   `}
 `;
 

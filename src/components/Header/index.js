@@ -23,7 +23,7 @@ const StyledLink = styled(Link)`
   text-align: center;
   transition: all 0.15s ease-in;
   border-bottom: 3px solid transparent;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     display: none;
   }
   :hover {
@@ -38,7 +38,7 @@ const StyledLink = styled(Link)`
     `
     border-bottom: 3px solid #000066;
     line-height: calc(1px + 1.5vw);
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       border-bottom: none;
     }
     color: #000066;
@@ -47,7 +47,7 @@ const StyledLink = styled(Link)`
     cursor:default;
     :hover {
     border-bottom: 3px solid #000066;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       border-bottom: none;
     }
     color: #000066;
@@ -67,13 +67,13 @@ const StyledLink = styled(Link)`
     box-shadow: 0px 0px 3px 0.2px rgba(0,0,0,0.6);
     transition:  all 0.15s linear;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     display:block;
-    letter-spacing: 2px;
+    letter-spacing: 0.55vw;
     color: #303030;
     text-align:start;
-    padding:2vh 0;
-    padding-left:2vh;
+    padding:5vw 0;
+    padding-left:3vw;
     font-size: calc(9px + 1vw);
     width:100%;
     :hover {

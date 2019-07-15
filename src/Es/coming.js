@@ -60,7 +60,7 @@ z-index:100;
   position:relative;
   padding: 10vh 0;
   background-image: url(${props => props.image});
-  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
+  box-shadow: 0px 300vh rgba(0, 0, 0, ${props => props.x}) inset;
   position: relative;
   height: ${props => props.height};
   background-attachment: fixed;
