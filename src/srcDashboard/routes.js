@@ -17,53 +17,53 @@ import Cities from "./views/Cities";
 import Events from "./views/Events";
 export default [
   {
-    path: "/",
+    path: "/en",
     exact: true,
     layout: DefaultLayout,
-    component: () => <Redirect to="/dashboard/show-institutes" />
+    component: () => <Redirect to="/en/dashboard/show-institutes" />
   },
   {
-    path: "/dashboard/blog-overview",
+    path: "/en/dashboard/blog-overview",
     layout: DefaultLayout,
     component: BlogOverview
   },
   {
-    path: "/dashboard/show-users",
+    path: "/en/dashboard/show-users",
     layout: DefaultLayout,
     component: User
   },
   {
-    path: "/dashboard/add-new-user",
+    path: "/en/dashboard/add-new-user",
     layout: DefaultLayout,
     component: AddNewUser
   },
   {
-    path: "/dashboard/add-new-institute",
+    path: "/en/dashboard/add-new-institute",
     layout: DefaultLayout,
     component: AddNewInstitute
   },
   {
-    path: "/dashboard/add-new-city",
+    path: "/en/dashboard/add-new-city",
     layout: DefaultLayout,
     component: AddNewCity
   },
   {
-    path: "/dashboard/add-new-event",
+    path: "/en/dashboard/add-new-event",
     layout: DefaultLayout,
     component: AddNewEvent
   },
   {
-    path: "/dashboard/show-cities",
+    path: "/en/dashboard/show-cities",
     layout: DefaultLayout,
     component: Cities
   },
   {
-    path: "/dashboard/show-institutes",
+    path: "/en/dashboard/show-institutes",
     layout: DefaultLayout,
     component: Institutes
   },
   {
-    path: "/dashboard/show-events",
+    path: "/en/dashboard/show-events",
     layout: DefaultLayout,
     component: Events
   }

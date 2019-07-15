@@ -89,7 +89,7 @@ class Admin extends Component {
             { headers: { "Access-Control-Allow-Origin": "*" } }
           ).then(response => {
             login(response.data.token);
-            this.props.history.push("/dashboard/show-institutes");
+            this.props.history.push("/en/dashboard/show-institutes");
           }).catch(error => {
             this.setState({
               smShow: true,

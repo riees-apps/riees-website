@@ -10,7 +10,6 @@ const AddNewPost = () => (
     <Row noGutters className="page-header py-4">
       <PageTitle sm="4" title="Criar Instituição" subtitle="Instituição" className="text-sm-left" />
     </Row>
-
     <Row>
       {/* Editor */}
       <Col lg="12" md="12">
