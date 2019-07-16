@@ -18,6 +18,8 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../assets/quill.css";
 
+import api from "../../api/api";
+
 import Checkboxes from "../components/components-overview/CheckboxesInstitute";
 import UnidadesInstitute from "../components/components-overview/UnidadesInstitute";
 import CustomFileUpload from "../components/components-overview/CustomFileUpload";
@@ -33,313 +35,18 @@ import ifes from "../../Institutes/imgs/ifes.jpg";
 import ucl from "../../Institutes/imgs/ucl.jpg";
 import PageTitle from "../components/common/PageTitle";
 
-var institutes = [
-  {
-    name: "UFES",
-    subheading: "Universidade Federal do Espirito Santo",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: ufes,
-    unidades: [
-      {
-        Nome: "Goiabeiras",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Alegre",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "São Mateus",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "http://www.ufes.br/"
-  },
-  {
-    name: "UVV",
-    subheading: "Universidade Vila Velha",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: uvv,
-    unidades: [
-      {
-        Nome: "Boa Vista",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Business School",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "https://www.uvv.br/"
-  },
-  {
-    name: "FDV",
-    subheading: "Faculdade de Direito de Vitória",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: fdv,
-    unidades: [
-      {
-        Nome: "Goiabeiras",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Alegre",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "São Mateus",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "http://site.fdv.br/"
-  },
-  {
-    name: "EMESCAM",
-    subheading:
-      "Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: emescam,
-    unidades: [
-      {
-        Nome: "Goiabeiras",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Alegre",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "São Mateus",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "http://www.emescam.br/"
-  },
-  {
-    name: "UCL",
-    subheading: "Faculdade do Centro Leste",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: ucl,
-    unidades: [
-      {
-        Nome: "Goiabeiras",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Alegre",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "São Mateus",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "https://www.ucl.br/"
-  },
-  {
-    name: "UNESC",
-    subheading: "Centro Universitário do Espírito Santo",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: unesc,
-    unidades: [
-      {
-        Nome: "Goiabeiras",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Alegre",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "São Mateus",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "https://www.unesc.br/"
-  },
-  {
-    name: "IFES",
-    subheading: "Instituto Federal do Espirito Santo",
-    areas: [
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" },
-      { name: "Engineering", icon: "cog" },
-      { name: "Medicine", icon: "user-md" },
-      { name: "Social Science", icon: "users" }
-    ],
-    img: ifes,
-    unidades: [
-      {
-        Nome: "Goiabeiras",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "Alegre",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      },
-      {
-        Nome: "São Mateus",
-        Cidade: "",
-        Bairro: "",
-        Rua: "",
-        Numero: "",
-        Complemento: "",
-        Cep: ""
-      }
-    ],
-    url: "https://www.ifes.edu.br/"
-  }
-];
-
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
     return ele !== value;
   });
 }
-class BlogPosts extends React.Component {
+class Institutes extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
       smShow: false,
+      institutes: [],
       editShow: "",
       name: "",
       subheading: "",
@@ -347,6 +54,14 @@ class BlogPosts extends React.Component {
       url: "",
       overview: ""
     };
+  }
+  componentWillMount(){
+    api.get("/instituicao")
+    .then(res => {
+      const inst = res.data;
+      this.setState({ institutes: inst });
+    })
+    
   }
   editInstitute(institute, number) {
     institute = {
@@ -357,9 +72,11 @@ class BlogPosts extends React.Component {
       img: institute.img,
       url: this.state.url
     };
-    institutes[number] = institute;
+    const inst = this.state.institutes
+    inst[number] = institute;
     this.setState({
       ...this.state,
+      institutes:inst,
       editShow: "",
       name: "",
       subheading: "",
@@ -395,9 +112,11 @@ class BlogPosts extends React.Component {
     });
   }
   deleteUnidade(institute) {
-    institutes = arrayRemove(institutes, institute);
+    var inst = this.state.institutes
+    inst = arrayRemove(inst, institute);
     this.setState({
       ...this.state,
+      institutes: inst,
       smShow: false
     });
   }
@@ -405,7 +124,7 @@ class BlogPosts extends React.Component {
     let smClose = () => this.setState({ smShow: false });
     let editClose = () => this.setState({ editShow: false });
     const renderInstitute = () => {
-      return institutes.map((institute, number) => (
+      return this.state.institutes.map((institute, number) => (
         <Col key={number} lg="3" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
             <div
@@ -429,19 +148,21 @@ class BlogPosts extends React.Component {
               </div>
             </div>
             <CardBody>
-              <h4 className="card-title mb-1">
-                <p className="text-fiord-blue">{institute.name}</p>
+              <h4 className="card-title">
+                <p className="text-fiord-blue">{institute.nome}</p>
               </h4>
-              <p className="card-text d-block mb-2">{institute.subheading}</p>
-              <p className="card-text d-block mb-2">{institute.url}</p>
-              <h5 className="card-title d-block mb-1  ">Areas:</h5>
-              {institute.areas.map(area => (
-                <p className="card-text d-block mb-1">{area.name}</p>
+              <h5 className="card-title d-block mb-1  ">Endereço web:</h5>
+              <p className="card-text d-block mb-2">{institute.link}</p>
+              <h5 className="card-title d-block mb-1  ">Missão: </h5>
+              <p className="card-text d-block mb-2">{institute.missao}</p>
+              <h5 className="card-title d-block mb-1  ">Descrição: </h5>
+              <p className="card-text d-block mb-2">{institute.descricao}</p>
+              <h5 className="card-title d-block mb-1  ">Pontos fortes:</h5>
+              <ul className="px-4">
+              {institute.pontosFortes.map(pontoForte => (
+                <li className="mb-1">{pontoForte}</li>
               ))}
-              <h5 className="card-title d-block mt-2 mb-1  ">Unidades:</h5>
-              {institute.unidades.map(unidade => (
-                <p className="card-text d-block mb-1">Campus {unidade.Nome}</p>
-              ))}
+              </ul>
             </CardBody>
           </Card>
 
@@ -464,7 +185,8 @@ class BlogPosts extends React.Component {
                     <Col>
                       <Form>
                         <Row form>
-                          <Col md="6" className="form-group">
+                        <FormGroup>
+                        <Col md="6" className="form-group">
                             <label htmlFor="feName">Nome</label>
                             <FormInput
                               value={this.state.name}
@@ -488,6 +210,8 @@ class BlogPosts extends React.Component {
                               }
                             />
                           </Col>
+                        </FormGroup>
+                          
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
@@ -501,6 +225,18 @@ class BlogPosts extends React.Component {
                           <FormInput
                             id="feUrl"
                             type="url"
+                            value={this.state.url}
+                            onChange={e =>
+                              this.setState({ url: e.target.value })
+                            }
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <label htmlFor="fePontosFortes">Pontos Fortes</label>
+                          <FormInput
+                            id="fePontosFortes"
+                            type="name"
                             value={this.state.url}
                             onChange={e =>
                               this.setState({ url: e.target.value })
@@ -571,7 +307,7 @@ class BlogPosts extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
-            title="Visualizar Intituições"
+            title="Visualizar Instituições"
             subtitle="Instituições"
             className="text-sm-left"
           />
@@ -582,4 +318,4 @@ class BlogPosts extends React.Component {
   }
 }
 
-export default BlogPosts;
+export default Institutes;

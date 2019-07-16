@@ -5,6 +5,7 @@ const api = axios.create({baseURL:' https://riees-api.herokuapp.com/',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    "Access-Control-Allow-Origin": "*"
   }
 });
 

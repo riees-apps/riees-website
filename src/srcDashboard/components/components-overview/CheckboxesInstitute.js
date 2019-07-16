@@ -7,108 +7,63 @@ export default class FormCheckboxExample extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.state = {
-      Architecture: false,
-      Art: false,
-      BiomedicalSciences: false,
-      Communication: false,
-      Design: false,
-      Engineering: false,
-      InformationTechnology: false,
-      Law: false,
-      SocialScience: false,
-      Science: false,
-      HealthAndFitness: false
+      Graduacao: false,
+      PosGraduacao: false,
+      Mestrado: false,
+      Doutorado: false,
+      PosDoutorado: false,
+      Niveis:[]
     };
   }
 
-  handleChange(e, fruit) {
+  handleChange(e, nivel) {
     const newState = {};
-    newState[fruit] = !this.state[fruit];
-    this.setState({ ...this.state, ...newState });
+    const newNiveis = this.state.Niveis;
+    newState[nivel] = !this.state.nivel;
+    newNiveis.push(nivel)
+    this.setState({ ...this.state, ...newState, Niveis:newNiveis});
+    console.log(this.state.Niveis)
   }
 
   render() {
     return (
       <div sm="12" md="4" className="mb-3">
-        <strong className="text-muted d-block mb-2">Areas</strong>
         <Col lg='12'>
         <Row lg='12'>
         <FormCheckbox
-          checked={this.state.Architecture}
-          onChange={e => this.handleChange(e, "Architecture")}
+          checked={this.state.Graduacao}
+          onChange={e => this.handleChange(e, "Graduacao")}
           className="mr-4"
         >
-          Architecture
+          Graduação
         </FormCheckbox>
         <FormCheckbox
-          checked={this.state.Art}
-          onChange={e => this.handleChange(e, "Art")}
+          checked={this.state.PosGraduacao}
+          onChange={e => this.handleChange(e, "PosGraduacao")}
           className="mr-4"
         >
-          Art
+          Pós-Graduação
         </FormCheckbox>
         <FormCheckbox
-          checked={this.state.BiomedicalSciences}
-          onChange={e => this.handleChange(e, "BiomedicalSciences")}
+          checked={this.state.Mestrado}
+          onChange={e => this.handleChange(e, "Mestrado")}
           className="mr-4"
         >
-          Biomedical sciences
+          Mestrado
         </FormCheckbox>
         <FormCheckbox
-          checked={this.state.Communication}
-          onChange={e => this.handleChange(e, "Communication")}
+          checked={this.state.Doutorado}
+          onChange={e => this.handleChange(e, "Doutorado")}
           className="mr-4"
         >
-          Communication
+          Doutorado
         </FormCheckbox>
         <FormCheckbox
-          checked={this.state.Design}
-          onChange={e => this.handleChange(e, "Design")}
+          checked={this.state.PosDoutorado}
+          onChange={e => this.handleChange(e, "PosDoutorado")}
           className="mr-4"
         >
-          Design
-        </FormCheckbox>
-        <FormCheckbox
-          checked={this.state.Engineering}
-          onChange={e => this.handleChange(e, "Engineering")}
-          className="mr-4"
-        >
-          Engineering
-        </FormCheckbox>
-        <FormCheckbox
-          checked={this.state.InformationTechnology}
-          onChange={e => this.handleChange(e, "InformationTechnology")}
-          className="mr-4"
-        >
-          Information technology
-        </FormCheckbox>
-        <FormCheckbox
-          checked={this.state.Law}
-          onChange={e => this.handleChange(e, "Law")}
-          className="mr-4"
-        >
-          Law
-        </FormCheckbox>
-        <FormCheckbox
-          checked={this.state.SocialScience}
-          onChange={e => this.handleChange(e, "SocialScience")}
-          className="mr-4"
-        >
-          Social science
-        </FormCheckbox>
-        <FormCheckbox
-          checked={this.state.Science}
-          onChange={e => this.handleChange(e, "Science")}
-          className="mr-4"
-        >
-          Science
-        </FormCheckbox>
-        <FormCheckbox
-          checked={this.state.HealthAndFitness}
-          onChange={e => this.handleChange(e, "HealthAndFitness")}
-          className="mr-4"
-        >
-          Health & Fitness
+          Pós-Doutorado
         </FormCheckbox>
         </Row>
         </Col>
