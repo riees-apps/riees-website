@@ -55,13 +55,11 @@ class Institutes extends React.Component {
       overview: ""
     };
   }
-  componentWillMount(){
-    api.get("/instituicao")
-    .then(res => {
+  componentWillMount() {
+    api.get('/instituicao?where={"deletedAt":0}').then(res => {
       const inst = res.data;
       this.setState({ institutes: inst });
-    })
-    
+    });
   }
   editInstitute(institute, number) {
     institute = {
@@ -72,15 +70,15 @@ class Institutes extends React.Component {
       img: institute.img,
       url: this.state.url
     };
-    const inst = this.state.institutes
+    const inst = this.state.institutes;
     inst[number] = institute;
     this.setState({
       ...this.state,
-      institutes:inst,
+      institutes: inst,
       editShow: "",
       name: "",
       subheading: "",
-      unidades:'',
+      unidades: "",
       areas: "",
       url: "",
       overview: ""
@@ -93,8 +91,8 @@ class Institutes extends React.Component {
   }
   handleClick(institute) {
     this.setState({
-      smShow: institute.name,
-      error: `Ao confirmar a instituição ${institute.name} será deletada`
+      smShow: institute.nome,
+      error: `Ao confirmar a instituição ${institute.nome} será deletada`
     });
   }
   handleClose2() {
@@ -105,19 +103,21 @@ class Institutes extends React.Component {
   handleClick2(institute) {
     this.setState({
       ...this.state,
-      editShow: institute.name,
-      name: institute.name,
+      editShow: institute.nome,
+      name: institute.nome,
       subheading: institute.subheading,
       url: institute.url
     });
   }
   deleteUnidade(institute) {
-    var inst = this.state.institutes
-    inst = arrayRemove(inst, institute);
-    this.setState({
-      ...this.state,
-      institutes: inst,
-      smShow: false
+    api.delete(`/instituicao/${institute.id}`).then(resp => (console.log(resp)))
+    api.get('/instituicao?where={"deletedAt":0}').then(res => {
+      const inst = res.data;
+      this.setState({
+        ...this.state,
+        institutes: inst,
+        smShow: false
+      });
     });
   }
   render() {
@@ -129,7 +129,7 @@ class Institutes extends React.Component {
           <Card small className="card-post card-post--1">
             <div
               className="card-post__image"
-              style={{ backgroundImage: `url(${institute.img})` }}
+              style={{ backgroundImage: `url(${institute.capa})` }}
             >
               <div
                 pill
@@ -159,8 +159,14 @@ class Institutes extends React.Component {
               <p className="card-text d-block mb-2">{institute.descricao}</p>
               <h5 className="card-title d-block mb-1  ">Pontos fortes:</h5>
               <ul className="px-4">
-              {institute.pontosFortes.map(pontoForte => (
-                <li className="mb-1">{pontoForte}</li>
+                {institute.pontosFortes.map(pontoForte => (
+                  <li className="mb-1">{pontoForte}</li>
+                ))}
+              </ul>
+              <h5 className="card-title d-block mb-1  ">Unidades:</h5>
+              <ul className="px-4">
+              {institute.unidades.map(unidade => (
+                <li className="mb-1">{`Campus ${unidade.nome}`}</li>
               ))}
               </ul>
             </CardBody>
@@ -168,7 +174,7 @@ class Institutes extends React.Component {
 
           <Modal
             size="lg"
-            show={this.state.editShow === institute.name}
+            show={this.state.editShow === institute.nome}
             onHide={editClose}
             dialogClassName="modal-100w"
             aria-labelledby="example-custom-modal-styling-title"
@@ -185,33 +191,32 @@ class Institutes extends React.Component {
                     <Col>
                       <Form>
                         <Row form>
-                        <FormGroup>
-                        <Col md="6" className="form-group">
-                            <label htmlFor="feName">Nome</label>
-                            <FormInput
-                              value={this.state.name}
-                              onChange={e =>
-                                this.setState({ name: e.target.value })
-                              }
-                              id="feName"
-                              type="name"
-                            />
-                          </Col>
-                          <Col md="6">
-                            <label htmlFor="feCompleteName">
-                              Nome Completo
-                            </label>
-                            <FormInput
-                              id="feCompleteName"
-                              type="name"
-                              value={this.state.subheading}
-                              onChange={e =>
-                                this.setState({ subheading: e.target.value })
-                              }
-                            />
-                          </Col>
-                        </FormGroup>
-                          
+                          <FormGroup>
+                            <Col md="6" className="form-group">
+                              <label htmlFor="feName">Nome</label>
+                              <FormInput
+                                value={this.state.name}
+                                onChange={e =>
+                                  this.setState({ name: e.target.value })
+                                }
+                                id="feName"
+                                type="name"
+                              />
+                            </Col>
+                            <Col md="6">
+                              <label htmlFor="feCompleteName">
+                                Nome Completo
+                              </label>
+                              <FormInput
+                                id="feCompleteName"
+                                type="name"
+                                value={this.state.subheading}
+                                onChange={e =>
+                                  this.setState({ subheading: e.target.value })
+                                }
+                              />
+                            </Col>
+                          </FormGroup>
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
@@ -274,10 +279,9 @@ class Institutes extends React.Component {
               </Button>
             </Modal.Footer>
           </Modal>
-          
-          
+
           <Modal
-            show={this.state.smShow === institute.name}
+            show={this.state.smShow === institute.nome}
             onHide={smClose}
             aria-labelledby="example-modal-sizes-title-sm"
           >
