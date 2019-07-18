@@ -37,6 +37,16 @@ export default function() {
       to: "/en/dashboard/add-new-event",
     },
     {
+      title: "Visualizar Postagens",
+      htmlBefore: '<i class="material-icons">vertical_split</i>',
+      to: "/en/dashboard/show-posts",
+    },
+    {
+      title: "Criar Postagem",
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: "/en/dashboard/add-new-post",
+    },
+    {
       title: "Visualizar Usuarios",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/en/dashboard/show-users",

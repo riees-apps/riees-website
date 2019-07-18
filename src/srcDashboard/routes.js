@@ -10,11 +10,14 @@ import AddNewInstitute from "./views/AddNewInstitute";
 import AddNewCity from "./views/AddNewCity";
 import AddNewEvent from "./views/AddNewEvent";
 import AddNewUser from "./views/AddNewUser";
+import AddNewPost from "./views/AddNewPost";
 
 import User from "./views/User";
 import Institutes from "./views/Institutes";
 import Cities from "./views/Cities";
 import Events from "./views/Events";
+import Posts from "./views/Posts";
+
 export default [
   {
     path: "/en",
@@ -53,6 +56,11 @@ export default [
     component: AddNewEvent
   },
   {
+    path: "/en/dashboard/add-new-post",
+    layout: DefaultLayout,
+    component: AddNewPost
+  },
+  {
     path: "/en/dashboard/show-cities",
     layout: DefaultLayout,
     component: Cities
@@ -66,5 +74,10 @@ export default [
     path: "/en/dashboard/show-events",
     layout: DefaultLayout,
     component: Events
+  },
+  {
+    path: "/en/dashboard/show-posts",
+    layout: DefaultLayout,
+    component: Posts
   }
 ];

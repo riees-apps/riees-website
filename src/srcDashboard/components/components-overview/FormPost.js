@@ -30,40 +30,37 @@ function arrayRemove(arr, value) {
 }
 
 
-class FormEvent extends Component {
+class FormPost extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       smShow: false,
-      nome: "",
-      dataEvento:'',
-      horarioEvento:'',
-      localEvento:'',
-      dataInicio:'',
-      dataFim:'',
-      descricao: "",
-      link: '',
+      titulo: "",
+      dataPostagem:'',
+      horarioPostagem:'',
+      localPostagem:'',
+      data:'',
+      resumo:'',
+      conteudo: "",
       admin: "5d1a1daaaf9fc5001737e7af",
     };
   }
-  addEvento = async e => {
+  addPostagem = async e => {
     e.preventDefault();
     const {
-      nome,
-      dataInicio,
-      dataFim,
-      descricao,
-      link,
+      titulo,
+      data,
+      resumo,
+      conteudo,
       admin
     } = this.state;
 
     if (
       !(
-        nome !== "" &&
-        link !== "" &&
-        descricao !== "" &&
-        dataInicio !== "" &&
-        dataFim !== "" &&
+        titulo !== "" &&
+        conteudo !== "" &&
+        data !== "" &&
+        resumo !== "" &&
         admin !== ""
       )
     ) {
@@ -75,22 +72,20 @@ class FormEvent extends Component {
       try {
         await api
           .post(
-            "/evento",
+            "/postagem",
             {
-              nome: nome,
-              descricao: descricao,
-              dataInicio: dataInicio,
-              dataFim: dataFim,
-              link: link,
+              titulo: titulo,
+              conteudo: conteudo,
+              data: data,
+              resumo: resumo,
               admin: admin
-
             },
-            { headers: { "Access-Control-Allow-Origin": "*" }}
+            { headers: { "Access-Control-Allow-Origin": "*"}}
           )
           .then(response => {
             this.setState({
               smShow: true,
-              error: "Evento adicionado com sucesso!"
+              error: "Postagem adicionada com sucesso!"
             });
           })
           .catch(error => {
@@ -111,12 +106,12 @@ class FormEvent extends Component {
   render() {
     let smClose = () => {
       this.setState({ smShow: false });
-      if(this.state.error === "Evento adicionado com sucesso!")
+      if(this.state.error === "Postagem adicionado com sucesso!")
       this.props.history.push("/en/dashboard/show-events");
       else return
     }
     return (
-      <form onSubmit={this.addEvento}>
+      <form onSubmit={this.addPostagem}>
         <ListGroup flush>
           <ListGroupItem className="p-3">
             <Row>
@@ -124,48 +119,39 @@ class FormEvent extends Component {
                 <Form>
                   <Row form>
                     <Col md="12" className="form-group">
-                      <label htmlFor="feName">Nome</label>
+                      <label htmlFor="feName">Titulo</label>
                       <FormInput
-                        value={this.state.nome}
-                        onChange={e => this.setState({ nome: e.target.value })}
+                        value={this.state.titulo}
+                        onChange={e => this.setState({ titulo: e.target.value })}
                         id="feName"
                         type="name"
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feCompleteName">Descrição</label>
+                      <label htmlFor="feCompleteName">Conteudo</label>
                       <FormTextarea
-                      value={this.state.descricao}
+                      value={this.state.conteudo}
                         id="feDescription"
                         onChange={e =>
-                          this.setState({ descricao: e.target.value })
+                          this.setState({ conteudo: e.target.value })
                         }
                         rows="5"
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feCompleteName">Link do evento</label>
-                      <FormInput
-                        value={this.state.link}
-                        onChange={e => this.setState({ link: e.target.value })}
-                        id="feName"
-                        type="name"
+                      <label htmlFor="feResumo">Resumo</label>
+                      <FormTextarea
+                        value={this.state.resumo}
+                        onChange={e => this.setState({ resumo: e.target.value })}
+                        id="feResumo"
+                        rows='5'
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Data de Inicio</label>
+                      <label htmlFor="feDataInicio">Data</label>
                       <FormInput
-                        value={this.state.dataInicio}
-                        onChange={e => this.setState({ dataInicio: e.target.value })}
-                        id="feCustoMedio"
-                        type="number"
-                      />
-                    </Col>
-                    <Col className="mb-3" md="12">
-                      <label htmlFor="feDataFim">Data de Fim</label>
-                      <FormInput
-                        value={this.state.dataFim}
-                        onChange={e => this.setState({ dataFim: e.target.value })}
+                        value={this.state.data}
+                        onChange={e => this.setState({ data: e.target.value })}
                         id="feCustoMedio"
                         type="number"
                       />
@@ -173,12 +159,12 @@ class FormEvent extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem do evento
+                      Imagem do postagem
                     </strong>
                     <CustomFileUpload />
                   </FormGroup>
 
-                  <Button className="ml-1" type="submit">Criar novo evento</Button>
+                  <Button className="ml-1" type="submit">Criar nova postagem</Button>
                 </Form>
               </Col>
             </Row>
@@ -192,7 +178,7 @@ class FormEvent extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-sm">
-              {this.state.error === "Evento adicionado com sucesso!"
+              {this.state.error === "Postagem adicionada com sucesso!"
                 ? "Sucesso!"
                 : "Erro!"}
             </Modal.Title>
@@ -204,4 +190,4 @@ class FormEvent extends Component {
   }
 }
 
-export default withRouter(FormEvent);
+export default withRouter(FormPost);

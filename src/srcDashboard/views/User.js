@@ -1,5 +1,3 @@
-/* eslint jsx-a11y/anchor-is-valid: 0 */
-
 import React from "react";
 import {
   Container,
@@ -12,7 +10,7 @@ import {
   ListGroupItem,
   Form,
   FormGroup,
-  Badge
+  FormTextarea
 } from "shards-react";
 
 import ReactQuill from "react-quill";
@@ -22,27 +20,11 @@ import "../assets/quill.css";
 import CustomFileUpload from "../components/components-overview/CustomFileUpload";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import api from "../../api/api";
 
 import PageTitle from "../components/common/PageTitle";
-import { FaUser } from "react-icons/fa";
 
-var users = [
-  {
-    name: "admin1",
-    email: "example@gmail.com",
-    password: "minhasenha123"
-  },
-  {
-    name: "admin2",
-    email: "example@hotmail.com",
-    password: "minhasenha123"
-  },
-  {
-    name: "admin3",
-    email: "example@outlook.com",
-    password: "minhasenha123"
-  }
-];
+import { FaUser } from "react-icons/fa";
 
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
@@ -54,37 +36,71 @@ class Users extends React.Component {
     super(props, context);
 
     this.state = {
+      closeShow: false,
       smShow: false,
-      editShow: "",
-      name: "",
+      editShow: false,
+      usuarios: [],
+      nome: "",
       email: "",
-      password: ""
+      senha: ""
     };
   }
-  editEvent(user, number) {
-    console.log(this.state.dateEvent);
-    user = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password
-    };
-    users[number] = user;
-    this.setState({
-      ...this.state,
-      email: "",
-      name: "",
-      password: ""
+  componentWillMount() {
+    api.get('/admin?where={"deletedAt":0}').then(res => {
+      const admins = res.data;
+      this.setState({ usuarios: admins });
+    });
+  }
+  editUser(user) {
+    const { nome, email, senha } = this.state;
+    api.get(`/admin/${user.id}`).then(user => {
+      if (!(nome !== "" && email !== "" && senha !== "")) {
+        this.setState({
+          error: "Preencha todos os campos!",
+          smShow: nome
+        });
+      } else {
+        try {
+          api
+            .patch(
+              `/admin/${user.id}`,
+              {
+                nome: nome,
+                email: email,
+                senha: senha
+              },
+              { headers: { "Access-Control-Allow-Origin": "*" } }
+            )
+            .then(response => {
+              this.setState({
+                editShow: false
+              });
+            })
+            .catch(error => {
+              this.setState({
+                smShow: user.nome,
+                error: "Houve um problema com a edição, tente novamente1"
+              });
+            });
+        } catch (err) {
+          this.setState({
+            smShow: user.nome,
+            error: "Houve um problema com a edição, tente novamente2"
+          });
+        }
+      }
     });
   }
   handleClose() {
     this.setState({
+      closeShow: false,
       smShow: false
     });
   }
   handleClick(user) {
     this.setState({
-      smShow: user.name,
-      error: `Ao confirmar o usuario ${user.name} será deletado`
+      closeShow: user.nome,
+      error: `Ao confirmar a usero ${user.nome} será deletada`
     });
   }
   handleClose2() {
@@ -95,24 +111,29 @@ class Users extends React.Component {
   handleClick2(user) {
     this.setState({
       ...this.state,
-      editShow: user.name,
-      name: user.name,
-      email: user.email,
-      password: user.password
+      editShow: user.nome,
+      nome: user.nome,
+      email: user.email,   
+      senha: user.senha
     });
   }
-  deleteEvent(user) {
-    users = arrayRemove(users, user);
-    this.setState({
-      ...this.state,
-      smShow: false
+  deleteUnidade(user) {
+    api.delete(`/admin/${user.id}`).then(resp => console.log(resp));
+    api.get('/admin?where={"deletedAt":0}').then(res => {
+      const users = res.data;
+      this.setState({
+        ...this.state,
+        usuarios: users,
+        closeShow: false
+      });
     });
   }
   render() {
     let smClose = () => this.setState({ smShow: false });
+    let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
-    const renderCity = () => {
-      return users.map((user, number) => (
+    const renderUser = () => {
+      return this.state.usuarios.map((user, number) => (
         <Col key={number} lg="4" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
             <div>
@@ -135,32 +156,32 @@ class Users extends React.Component {
               </div>
             </div>
             <CardBody>
-              <h5 className="card-name mb-1 ml-auto mr-auto">
-                <strong>Username: </strong>
-                <p className="text-fiord-blue">{user.name}</p>
+              <h5 className="card-nome mb-1 ml-auto mr-auto">
+                <strong>Usuario: </strong>
+                <p className="text-fiord-blue">{user.nome}</p>
               </h5>
 
-              <h5 className="card-name mb-1 ml-auto mr-auto">
+              <h5 className="card-nome mb-1 ml-auto mr-auto">
                 <strong>Email: </strong>
                 <p className="text-fiord-blue">{user.email}</p>
               </h5>
-              <h5 className="card-name mb-1 ml-auto mr-auto">
-                <strong>Password: </strong>
-                <p className="text-fiord-blue">{user.password}</p>
+              <h5 className="card-nome mb-1 ml-auto mr-auto">
+                <strong>Senha: </strong>
+                <p className="text-fiord-blue">{user.senha}</p>
               </h5>
             </CardBody>
           </Card>
 
           <Modal
             size="lg"
-            show={this.state.editShow === user.name}
+            show={this.state.editShow === user.nome}
             onHide={editClose}
             dialogClassName="modal-100w"
-            aria-labelledby="example-custom-modal-styling-name"
+            aria-labelledby="example-custom-modal-styling-nome"
           >
             <Modal.Header closeButton>
-              <Modal.Title id="example-custom-modal-styling-name">
-                Editar Evento
+              <Modal.Title id="example-custom-modal-styling-nome">
+                Editar Usuario
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -173,12 +194,12 @@ class Users extends React.Component {
                           <Col md="12" className="form-group">
                             <label htmlFor="feName">Nome de usuario</label>
                             <FormInput
-                              value={this.state.name}
+                              value={this.state.nome}
                               onChange={e =>
-                                this.setState({ name: e.target.value })
+                                this.setState({ nome: e.target.value })
                               }
                               id="feName"
-                              type="name"
+                              type="nome"
                             />
                           </Col>
                         </Row>
@@ -197,13 +218,13 @@ class Users extends React.Component {
                         </Row>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Senha</label>
+                            <label htmlFor="fePassword">Senha</label>
                             <FormInput
-                              value={this.state.password}
+                              value={this.state.senha}
                               onChange={e =>
-                                this.setState({ password: e.target.value })
+                                this.setState({ senha: e.target.value })
                               }
-                              id="feName"
+                              id="fePassword"
                               type="password"
                             />
                           </Col>
@@ -213,27 +234,24 @@ class Users extends React.Component {
                   </Row>
                 </ListGroupItem>
               </ListGroup>
-            </Modal.Body>
+              </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button variant="secondary" onClick={this.handleClose2.bind(this)}>
                 Close
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => this.editEvent(user, number)}
-              >
+              <Button variant="danger" onClick={() => this.editUser(user)}>
                 Confirm
               </Button>
             </Modal.Footer>
           </Modal>
 
           <Modal
-            show={this.state.smShow === user.name}
-            onHide={smClose}
-            aria-labelledby="example-modal-sizes-name-sm"
+            show={this.state.closeShow === user.nome}
+            onHide={deleteClose}
+            aria-labelledby="example-modal-sizes-title-sm"
           >
             <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-name-sm">
+              <Modal.Title id="example-modal-sizes-title-sm">
                 Você tem certeza?
               </Modal.Title>
             </Modal.Header>
@@ -242,7 +260,10 @@ class Users extends React.Component {
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
                 Close
               </Button>
-              <Button variant="danger" onClick={() => this.deleteEvent(user)}>
+              <Button
+                variant="danger"
+                onClick={() => this.deleteUnidade(user)}
+              >
                 Confirm
               </Button>
             </Modal.Footer>
@@ -255,12 +276,12 @@ class Users extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
-            name="Visualizar Eventos"
-            subname="Eventos"
+            nome="Visualizar Usuarios"
+            subnome="Usuarios"
             className="text-sm-left"
           />
         </Row>
-        <Row>{renderCity()}</Row>
+        <Row>{renderUser()}</Row>
       </Container>
     );
   }

@@ -1,5 +1,3 @@
-/* eslint jsx-a11y/anchor-is-valid: 0 */
-
 import React from "react";
 import {
   Container,
@@ -23,80 +21,81 @@ import CustomFileUpload from "../components/components-overview/CustomFileUpload
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import api from "../../api/api";
-import vitoria from "../../components/Cities/imgs/vitoria.jpg";
-import vilaVelha from "../../components/Cities/imgs/vilavelha.jpg";
-import img1 from "../../components/Cities/imgs/img1.jpg";
-import img2 from "../../components/Cities/imgs/img2.jpg";
 
 import PageTitle from "../components/common/PageTitle";
-import Places from "../components/components-overview/Places";
 
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
     return ele !== value;
   });
 }
-class Cities extends React.Component {
+class Posts extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
       closeShow: false,
       smShow: false,
-      cidades: [],
       editShow: false,
-      nome: "",
-      custoMedio: "",
-      descricao: "",
-      capa: null,
-      logo: null,
+      postagens: [],
+      titulo: "",
+      data: "",
+      conteudo: "",
+      resumo: "",
       admin: "5d1a1daaaf9fc5001737e7af"
     };
   }
 
   componentWillMount() {
-    api.get('/cidade?where={"deletedAt":0}').then(res => {
-      const cities = res.data;
-      this.setState({ cidades: cities });
+    api.get('/postagem?where={"deletedAt":0}').then(res => {
+      const posts = res.data;
+      this.setState({ postagens: posts });
     });
   }
-  editCity(city) {
-    const { nome, descricao, custoMedio, admin } = this.state;
-    api.get(`/cidade/${city.id}`).then(city => {
+  editPost(post) {
+    const { titulo, resumo, data, conteudo, admin } = this.state;
+    api.get(`/postagem/${post.id}`).then(post => {
       if (
-        !(nome !== "" && descricao !== "" && admin !== "" && custoMedio !== "")
+        !(
+          titulo !== "" &&
+          resumo !== "" &&
+          admin !== "" &&
+          data !== "" &&
+          conteudo !== ""
+        )
       ) {
         this.setState({
           error: "Preencha todos os campos!",
-          smShow: nome
+          smShow: titulo
         });
       } else {
         try {
           api
             .patch(
-              `/cidade/${city.id}`,
+              `/postagem/${post.id}`,
               {
-                nome: nome,
-                descricao: descricao,
-                admin: admin.id,
-                custoMedio: custoMedio
+                titulo: titulo,
+                resumo: resumo,
+                data: data,
+                conteudo: conteudo,
+                admin: admin.id
               },
               { headers: { "Access-Control-Allow-Origin": "*" } }
             )
             .then(response => {
-                this.setState({
-                editShow: false,
+              this.setState({
+                editShow: false
               });
             })
             .catch(error => {
               this.setState({
-                smShow: city.nome,
+                smShow: post.titulo,
                 error: "Houve um problema com a edição, tente novamente1"
               });
             });
         } catch (err) {
           this.setState({
-            smShow: city.nome,
+            smShow: post.titulo,
             error: "Houve um problema com a edição, tente novamente2"
           });
         }
@@ -109,10 +108,10 @@ class Cities extends React.Component {
       smShow: false
     });
   }
-  handleClick(city) {
+  handleClick(post) {
     this.setState({
-      closeShow: city.nome,
-      error: `Ao confirmar a cidade ${city.nome} será deletada`
+      closeShow: post.titulo,
+      error: `Ao confirmar a postagem ${post.titulo} será deletada`
     });
   }
   handleClose2() {
@@ -120,23 +119,24 @@ class Cities extends React.Component {
       editShow: false
     });
   }
-  handleClick2(city) {
+  handleClick2(post) {
     this.setState({
       ...this.state,
-      editShow: city.nome,
-      nome: city.nome,
-      descricao: city.descricao,
-      admin: city.admin,
-      custoMedio: city.custoMedio
+      editShow: post.titulo,
+      titulo: post.titulo,
+      resumo: post.resumo,
+      admin: post.admin,
+      data: post.data,
+      conteudo: post.conteudo
     });
   }
-  deleteUnidade(city) {
-    api.delete(`/cidade/${city.id}`).then(resp => console.log(resp));
-    api.get('/cidade?where={"deletedAt":0}').then(res => {
-      const cities = res.data;
+  deleteUnidade(post) {
+    api.delete(`/postagem/${post.id}`).then(resp => console.log(resp));
+    api.get('/postagem?where={"deletedAt":0}').then(res => {
+      const posts = res.data;
       this.setState({
         ...this.state,
-        cidades: cities,
+        postagens: posts,
         closeShow: false
       });
     });
@@ -145,18 +145,18 @@ class Cities extends React.Component {
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
-    const renderCity = () => {
-      return this.state.cidades.map((city, number) => (
+    const renderPost = () => {
+      return this.state.postagens.map((post, number) => (
         <Col key={number} lg="3" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
             <div
               className="card-post__image"
-              style={{ backgroundImage: `url(${city.img})` }}
+              style={{ backgroundImage: `url(${post.img})` }}
             >
               <div
                 pill
                 className={`card-post__category bg-danger iconDelete`}
-                onClick={() => this.handleClick(city)}
+                onClick={() => this.handleClick(post)}
               >
                 <i className={`fas fa-times iconDelete`} />
               </div>
@@ -164,32 +164,34 @@ class Cities extends React.Component {
               <div
                 pill
                 className={`card-post__category bg-primary mr-5 iconDelete`}
-                onClick={() => this.handleClick2(city)}
+                onClick={() => this.handleClick2(post)}
               >
                 <i className={`fas fa-pen iconDelete`} />
               </div>
             </div>
             <CardBody>
               <h4 className="card-title mb-1">
-                <p className="text-fiord-blue">{city.nome}</p>
+                <p className="text-fiord-blue">{post.titulo}</p>
               </h4>
-              <h5 className="card-title d-block mb-1  ">Descrição:</h5>
-              <p className="card-text d-block mb-2">{city.descricao}</p>
-              <h5 className="card-title d-block mb-1  ">Custo Medio:</h5>
-              <p className="card-text d-block mb-2">{city.custoMedio}</p>
+              <h5 className="card-title d-block mb-1  ">Resumo</h5>
+              <p className="card-text d-block mb-2">{post.resumo}</p>
+              <h5 className="card-title d-block mb-1  ">Conteudo</h5>
+              <p className="card-text d-block mb-2">{post.conteudo}</p>
+              <h5 className="card-title d-block mb-1  ">Data de postagem:</h5>
+              <p className="card-text d-block mb-2">{post.data}</p>
             </CardBody>
           </Card>
 
           <Modal
             size="lg"
-            show={this.state.editShow === city.nome}
+            show={this.state.editShow === post.titulo}
             onHide={editClose}
             dialogClassName="modal-100w"
             aria-labelledby="example-custom-modal-styling-title"
           >
             <Modal.Header closeButton>
               <Modal.Title id="example-custom-modal-styling-title">
-                Editar Cidade
+                Editar Postagem
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -200,33 +202,46 @@ class Cities extends React.Component {
                       <Form>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Nome</label>
+                            <label htmlFor="feName">Titulo</label>
                             <FormInput
-                              value={this.state.nome}
+                              value={this.state.titulo}
                               onChange={e =>
-                                this.setState({ nome: e.target.value })
+                                this.setState({ titulo: e.target.value })
                               }
                               id="feName"
                               type="name"
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feCompleteName">Descrição</label>
+                            <label htmlFor="feCompleteName">Resumo</label>
                             <FormTextarea
-                              value={this.state.descricao}
+                              value={this.state.resumo}
                               id="feDescription"
                               onChange={e =>
-                                this.setState({ descricao: e.target.value })
+                                this.setState({ resumo: e.target.value })
                               }
                               rows="5"
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feCustoMedio">Custo medio</label>
-                            <FormInput
-                              value={this.state.custoMedio}
+                            <label htmlFor="feConteudo">
+                              Conteudo
+                            </label>
+                            <FormTextarea
+                              value={this.state.conteudo}
+                              id="feConteudo"
                               onChange={e =>
-                                this.setState({ custoMedio: e.target.value })
+                                this.setState({ conteudo: e.target.value })
+                              }
+                              rows="5"
+                            />
+                          </Col>
+                          <Col className="mb-3" md="12">
+                            <label htmlFor="feDataInicio">Data da postagem</label>
+                            <FormInput
+                              value={this.state.data}
+                              onChange={e =>
+                                this.setState({ data: e.target.value })
                               }
                               id="feCustoMedio"
                               type="number"
@@ -235,40 +250,9 @@ class Cities extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem da cidade
+                            Imagem da postagem
                           </strong>
                           <CustomFileUpload />
-                        </FormGroup>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Imagem do 'overview'
-                          </strong>
-                          <CustomFileUpload />
-                        </FormGroup>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Imagem do 'living there'
-                          </strong>
-                          <CustomFileUpload />
-                        </FormGroup>
-
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Overview da cidade
-                          </strong>
-                          <ReactQuill
-                            size="false"
-                            className="add-new-post__editor mb-1"
-                          />
-                        </FormGroup>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Living There da cidade
-                          </strong>
-                          <ReactQuill
-                            size="medium"
-                            className="add-new-post__editor mb-1"
-                          />
                         </FormGroup>
                       </Form>
                     </Col>
@@ -277,20 +261,17 @@ class Cities extends React.Component {
               </ListGroup>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button variant="secondary" onClick={this.handleClose2.bind(this)}>
                 Close
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => this.editCity(city)}
-              >
+              <Button variant="danger" onClick={() => this.editPost(post)}>
                 Confirm
               </Button>
             </Modal.Footer>
           </Modal>
 
           <Modal
-            show={this.state.closeShow === city.nome}
+            show={this.state.closeShow === post.titulo}
             onHide={deleteClose}
             aria-labelledby="example-modal-sizes-title-sm"
           >
@@ -304,7 +285,10 @@ class Cities extends React.Component {
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
                 Close
               </Button>
-              <Button variant="danger" onClick={() => this.deleteUnidade(city)}>
+              <Button
+                variant="danger"
+                onClick={() => this.deleteUnidade(post)}
+              >
                 Confirm
               </Button>
             </Modal.Footer>
@@ -317,15 +301,15 @@ class Cities extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
-            title="Visualizar Cidades"
-            subtitle="Cidades"
+            title="Visualizar Postagens"
+            subtitle="Postagens"
             className="text-sm-left"
           />
         </Row>
-        <Row>{renderCity()}</Row>
+        <Row>{renderPost()}</Row>
       </Container>
     );
   }
 }
 
-export default Cities;
+export default Posts;

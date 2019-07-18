@@ -11,6 +11,8 @@ import {
   FormTextarea
 } from "shards-react";
 
+import { withRouter } from "react-router-dom";
+
 import Modal from "react-bootstrap/Modal";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -91,48 +93,59 @@ class FormInstitute extends Component {
           .then(response => {
             const idInstituicao = response.data.id;
             unidades.map(unidade =>
-              api.post(
-                "/unidade",
-                {
-                  nome: unidade.nome,
-                  telefone: unidade.telefone,
-                  descricao: unidade.descricao,
-                  logradouro: unidade.logradouro,
-                  numero: unidade.numero,
-                  complemento: unidade.complemento,
-                  bairro: unidade.bairro,
-                  cidade: unidade.cidade,
-                  cep: unidade.cep,
-                  admin: response.data.admin.id,
-                  instituicao: idInstituicao
-                },
-                { headers: { "Access-Control-Allow-Origin": "*" } }
-              ).then(response => {
-                const idUnidade = response.data.id;
-                unidade.cursos.map(curso =>
-                  api.post(
-                    "/curso",
-                    {
-                      nome: curso.nome,
-                      niveis: curso.niveis,
-                      area: null,
-                      admin: response.data.admin.id,
-                      unidade: idUnidade
-                    },                    
-                    { headers: { "Access-Control-Allow-Origin": "*" } }
-                  ).then(response => {
-                    console.log('responseCurso');
-                    console.log(response);
-                  }))
-                console.log('responseUnidade');
-                console.log(response);
-              })
+              api
+                .post(
+                  "/unidade",
+                  {
+                    nome: unidade.nome,
+                    telefone: unidade.telefone,
+                    descricao: unidade.descricao,
+                    logradouro: unidade.logradouro,
+                    numero: unidade.numero,
+                    complemento: unidade.complemento,
+                    bairro: unidade.bairro,
+                    cidade: unidade.cidade,
+                    cep: unidade.cep,
+                    admin: response.data.admin.id,
+                    instituicao: idInstituicao
+                  },
+                  { headers: { "Access-Control-Allow-Origin": "*" } }
+                )
+                .then(response => {
+                  const idUnidade = response.data.id;
+                  unidade.cursos.map(curso =>
+                    api
+                      .post(
+                        "/curso",
+                        {
+                          nome: curso.nome,
+                          niveis: curso.niveis,
+                          area: null,
+                          admin: response.data.admin.id,
+                          unidade: idUnidade
+                        },
+                        { headers: { "Access-Control-Allow-Origin": "*" } }
+                      )
+                      .then(response => {
+                        this.setState({
+                          nome: "",
+                          missao: "",
+                          descricao: "",
+                          capa: null,
+                          logo: null,
+                          link: "",
+                          ponto: "",
+                          pontosFortes: [],
+                          unidades: [],
+                          smShow: true,
+                          error: "Instituição criado com sucesso!"
+                        });
+                      })
+                  );
+                })
             );
-            console.log('responseInstituicao');
-            console.log(response);
           })
           .catch(error => {
-            console.log(error);
             this.setState({
               smShow: true,
               error: "Houve um problema com a criação, tente novamente"
@@ -161,10 +174,20 @@ class FormInstitute extends Component {
     this.setState({ unidades: New });
   }
   render() {
-    let smClose = () => this.setState({ smShow: false });
-    console.log(this.state.capa)
+    let smClose = () => {
+      this.setState({ smShow: false });
+      if(this.state.error === "Instituição criada com sucesso!")
+      this.props.history.push("/en/dashboard/show-institutes");
+      else return
+    }
+
     return (
-      <form onSubmit={this.createInstitute} action="http://riees-api.herokuapps.com/uploadedfile" enctype="multipart/form-data" method="post">
+      <form
+        onSubmit={this.createInstitute}
+        action="http://riees-api.herokuapps.com/uploadedfile"
+        enctype="multipart/form-data"
+        method="post"
+      >
         <ListGroup flush>
           <ListGroupItem className="p-3">
             <Row>
@@ -174,6 +197,7 @@ class FormInstitute extends Component {
                     <Col md="12" className="form-group">
                       <label htmlFor="feName">Nome</label>
                       <FormInput
+                      value={this.state.nome}
                         onChange={e => this.setState({ nome: e.target.value })}
                         id="feName"
                         type="name"
@@ -183,6 +207,7 @@ class FormInstitute extends Component {
                     <Col className="mb-3" md="6">
                       <label htmlFor="feCompleteName">Descrição</label>
                       <FormTextarea
+                      value={this.state.descricao}
                         id="feDescription"
                         onChange={e =>
                           this.setState({ descricao: e.target.value })
@@ -193,6 +218,7 @@ class FormInstitute extends Component {
                     <Col className="mb-3" md="6">
                       <label htmlFor="feCompleteName">Missão</label>
                       <FormTextarea
+                      value={this.state.missao}
                         id="feMission"
                         onChange={e =>
                           this.setState({ missao: e.target.value })
@@ -207,6 +233,7 @@ class FormInstitute extends Component {
                     <FormInput
                       id="feUrl"
                       type="url"
+                      value={this.state.link}
                       onChange={e => this.setState({ link: e.target.value })}
                       placeholder="Ex.: http://www.ufes.br/"
                     />
@@ -261,15 +288,20 @@ class FormInstitute extends Component {
 
                   <UnidadesInstitute
                     callbackParent={New => this.onChildChanged(New)}
-                    //idInstituicao={this.state.}
+                    unidades={[]}
                   />
 
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
                       Capa do instituto
                     </strong>
-                      <input onChange={e => this.setState({ capa: e.target.value })} type="file" name="files"/><br/>
-                      <button type="submit" value="Upload"/>
+                    <input
+                      onChange={e => this.setState({ capa: e.target.value })}
+                      type="file"
+                      name="files"
+                    />
+                    <br />
+                    <button type="submit" value="Upload" />
                   </FormGroup>
 
                   <FormGroup>
@@ -296,7 +328,11 @@ class FormInstitute extends Component {
           aria-labelledby="example-modal-sizes-title-sm"
         >
           <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-sm">Erro!</Modal.Title>
+            <Modal.Title id="example-modal-sizes-title-sm">
+              {this.state.error === "Instituição criado com sucesso!"
+                ? "Sucesso!"
+                : "Erro!"}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.error}</Modal.Body>
         </Modal>
@@ -305,4 +341,4 @@ class FormInstitute extends Component {
   }
 }
 
-export default FormInstitute;
+export default withRouter(FormInstitute);

@@ -1,5 +1,3 @@
-/* eslint jsx-a11y/anchor-is-valid: 0 */
-
 import React from "react";
 import {
   Container,
@@ -12,7 +10,7 @@ import {
   ListGroupItem,
   Form,
   FormGroup,
-  Badge
+  FormTextarea
 } from "shards-react";
 
 import ReactQuill from "react-quill";
@@ -22,278 +20,13 @@ import "../assets/quill.css";
 import CustomFileUpload from "../components/components-overview/CustomFileUpload";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-
-import ufes from "../../Institutes/imgs/ufes.jpg";
-import uvv from "../../Institutes/imgs/uvv.jpg";
-import ifes from "../../Institutes/imgs/ifes.jpg";
-import ucl from "../../Institutes/imgs/ucl.jpg";
+import api from "../../api/api";
+import vitoria from "../../components/Events/imgs/vitoria.jpg";
+import vilaVelha from "../../components/Events/imgs/vilavelha.jpg";
+import img1 from "../../components/Events/imgs/img1.jpg";
+import img2 from "../../components/Events/imgs/img2.jpg";
 
 import PageTitle from "../components/common/PageTitle";
-
-var events = [
-  {
-    title: "Dossalore ipsum Dolore nihil in velit lorem ipsum valor2.",
-    dateEvent: "Dec 06, 2019",
-    timeEvent: "4:30 PM",
-    placeEvent: "Lorem ipsum",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-
-    img: uvv
-  },
-  {
-    title:
-      "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit lorem ipsum valor3.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ifes
-  },
-  {
-    title: "Dolore ipsum Dossalore ipsum Dolore  in velit  lorem ipsum valor4.",
-    dateEvent: "Dec 06, 2019",
-    timeEvent: "4:30 PM",
-    placeEvent: "Lorem ipsum",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title:
-      "Dolore ipsum Dossalore ipsum Dolore nihil velit lorem ipsum valor5.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dolore ipsum Dossalore ipsum Dolore in velit lorem ipsum valor6.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit lorem ipsum valor7.",
-    dateEvent: "Dec 06, 2019",
-    timeEvent: "4:30 PM",
-    placeEvent: "Lorem ipsum",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in veli lorem ipsum valort8.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ifes
-  },
-  {
-    title: "Dolorsdse nihil in velit9.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit10.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dolorsdse nihil in velit11.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit12.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit13.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ifes
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit.18",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title:
-      "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dossalore ipsum Dolore nihil in velit2.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolore ipsum Dossalore ipsum Dolore nihaoil in velit3.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ifes
-  },
-  {
-    title: "Dolore ipsum Dossalore ipsum Dolore  in velit4.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolore ipsum Dossalore ipsum Dolore nihil  velit5.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dolore ipsum Dossalore ipsum Dolore in velit6.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit7.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit8.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ifes
-  },
-  {
-    title: "Dolorsdse nihil in velit27.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit10.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dolorsdse nihil in velit11.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit12.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit13.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ifes
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ufes
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: ucl
-  },
-  {
-    title: "Dolorsdse nihil in velit.",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit.36",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  },
-  {
-    title: "Dolorsdse nihil in velit.37",
-    date: "Dec 06, 2019",
-    text:
-      "Autem id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
-    img: uvv
-  }
-];
 
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
@@ -305,48 +38,88 @@ class Events extends React.Component {
     super(props, context);
 
     this.state = {
+      closeShow: false,
       smShow: false,
-      editShow: "",
-      title: "",
-      text: "",
-      date: "",
-      dateEvent: "",
-      timeEvent: "",
-      placeEvent: ""
+      editShow: false,
+      eventos: [],
+      nome: "",
+      dataInicio: "",
+      dataFim: "",
+      descricao: "",
+      link: "",
+      capa: null,
+      admin: "5d1a1daaaf9fc5001737e7af"
     };
   }
-  editEvent(event, number) {
-    console.log(this.state.dateEvent)
-    event = {
-      title: this.state.title,
-      text:  event.text,
-      date: this.state.date || '',
-      dateEvent: this.state.dateEvent || '',
-      timeEvent: this.state.timeEvent || '',
-      placeEvent: this.state.placeEvent || '',
-      img: event.img
-    };
-    events[number] = event;
-    this.setState({
-      ...this.state,
-      editShow: "",
-      title: "",
-      text: "",
-      date: "",
-      dateEvent: "",
-      timeEvent: "",
-      placeEvent: ""
+
+  componentWillMount() {
+    api.get('/evento?where={"deletedAt":0}').then(res => {
+      const events = res.data;
+      this.setState({ eventos: events });
+    });
+  }
+  editCity(event) {
+    const { nome, descricao, dataInicio, dataFim, link, admin } = this.state;
+    api.get(`/evento/${event.id}`).then(event => {
+      if (
+        !(
+          nome !== "" &&
+          descricao !== "" &&
+          admin !== "" &&
+          dataInicio !== "" &&
+          dataFim !== "" &&
+          link !== ""
+        )
+      ) {
+        this.setState({
+          error: "Preencha todos os campos!",
+          smShow: nome
+        });
+      } else {
+        try {
+          api
+            .patch(
+              `/evento/${event.id}`,
+              {
+                nome: nome,
+                descricao: descricao,
+                dataInicio: dataInicio,
+                dataFim: dataFim,
+                link: link,
+                admin: admin.id
+              },
+              { headers: { "Access-Control-Allow-Origin": "*" } }
+            )
+            .then(response => {
+              this.setState({
+                editShow: false
+              });
+            })
+            .catch(error => {
+              this.setState({
+                smShow: event.nome,
+                error: "Houve um problema com a edição, tente novamente1"
+              });
+            });
+        } catch (err) {
+          this.setState({
+            smShow: event.nome,
+            error: "Houve um problema com a edição, tente novamente2"
+          });
+        }
+      }
     });
   }
   handleClose() {
     this.setState({
+      closeShow: false,
       smShow: false
     });
   }
   handleClick(event) {
     this.setState({
-      smShow: event.title,
-      error: `Ao confirmar o evento ${event.title} será deletada`
+      closeShow: event.nome,
+      error: `Ao confirmar a evento ${event.nome} será deletada`
     });
   }
   handleClose2() {
@@ -357,26 +130,32 @@ class Events extends React.Component {
   handleClick2(event) {
     this.setState({
       ...this.state,
-      editShow: event.title,
-      title: event.title,
-      date: event.date,
-      dateEvent: event.dateEvent,
-      timeEvent: event.timeEvent,
-      placeEvent: event.placeEvent
+      editShow: event.nome,
+      nome: event.nome,
+      descricao: event.descricao,
+      admin: event.admin,
+      dataInicio: event.dataInicio,
+      dataFim: event.dataFim,
+      link: event.link
     });
   }
-  deleteEvent(event) {
-    events = arrayRemove(events, event);
-    this.setState({
-      ...this.state,
-      smShow: false
+  deleteUnidade(event) {
+    api.delete(`/evento/${event.id}`).then(resp => console.log(resp));
+    api.get('/evento?where={"deletedAt":0}').then(res => {
+      const events = res.data;
+      this.setState({
+        ...this.state,
+        eventos: events,
+        closeShow: false
+      });
     });
   }
   render() {
     let smClose = () => this.setState({ smShow: false });
+    let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
-    const renderCity = () => {
-      return events.map((event, number) => (
+    const renderEvent = () => {
+      return this.state.eventos.map((event, number) => (
         <Col key={number} lg="3" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
             <div
@@ -400,52 +179,23 @@ class Events extends React.Component {
               </div>
             </div>
             <CardBody>
-              <Badge className="mb-2">
-                {typeof event.dateEvent !== "undefined" ? event.dateEvent !== '' ? "Event" : "New" : "New"}
-              </Badge>
-              <h5 className="card-title mb-1">
-                <p className="text-fiord-blue">{event.title}</p>
-              </h5>
-
-              <p className="text-fiord-blue">
-                {" "}
-                <i className={`fas fa-clock iconDate`} />{" "}
-                {typeof event.dateEvent !== "undefined"
-                  ? event.dateEvent !== '' ?
-                  event.dateEvent : event.date : event.date}
-              </p>
-
-              <p className="text-fiord-blue">
-                {" "}
-                <i
-                  className={
-                    typeof event.timeEvent !== "undefined" ?
-                      event.timeEvent !== '' ?
-                      `fas fa-calendar iconDate`
-                      : "displayNone" : "displayNone"
-                  }
-                />{" "}
-                {event.timeEvent}{" "}
-              </p>
-
-              <p className="text-fiord-blue">
-                {" "}
-                <i
-                  className={
-                    typeof event.placeEvent !== "undefined" ?
-                    event.placeEvent !== '' ?
-                      `fas fa-map-marker-alt iconDate`
-                      : "displayNone" : "displayNone"
-                  }
-                />{" "}
-                {event.placeEvent}{" "}
-              </p>
+              <h4 className="card-title mb-1">
+                <p className="text-fiord-blue">{event.nome}</p>
+              </h4>
+              <h5 className="card-title d-block mb-1  ">Descrição:</h5>
+              <p className="card-text d-block mb-2">{event.descricao}</p>
+              <h5 className="card-title d-block mb-1  ">Link</h5>
+              <p className="card-text d-block mb-2">{event.link}</p>
+              <h5 className="card-title d-block mb-1  ">Data de inicio:</h5>
+              <p className="card-text d-block mb-2">{event.dataInicio}</p>
+              <h5 className="card-title d-block mb-1  ">Data de inicio:</h5>
+              <p className="card-text d-block mb-2">{event.dataFim}</p>
             </CardBody>
           </Card>
 
           <Modal
             size="lg"
-            show={this.state.editShow === event.title}
+            show={this.state.editShow === event.nome}
             onHide={editClose}
             dialogClassName="modal-100w"
             aria-labelledby="example-custom-modal-styling-title"
@@ -463,70 +213,68 @@ class Events extends React.Component {
                       <Form>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Título</label>
+                            <label htmlFor="feName">Nome</label>
                             <FormInput
-                              value={this.state.title}
+                              value={this.state.nome}
                               onChange={e =>
-                                this.setState({ title: e.target.value })
+                                this.setState({ nome: e.target.value })
                               }
                               id="feName"
                               type="name"
                             />
                           </Col>
+                          <Col className="mb-3" md="12">
+                            <label htmlFor="feCompleteName">Descrição</label>
+                            <FormTextarea
+                              value={this.state.descricao}
+                              id="feDescription"
+                              onChange={e =>
+                                this.setState({ descricao: e.target.value })
+                              }
+                              rows="5"
+                            />
+                          </Col>
+                          <Col className="mb-3" md="12">
+                            <label htmlFor="feCompleteName">
+                              Link do evento
+                            </label>
+                            <FormInput
+                              value={this.state.link}
+                              onChange={e =>
+                                this.setState({ link: e.target.value })
+                              }
+                              id="feName"
+                              type="name"
+                            />
+                          </Col>
+                          <Col className="mb-3" md="12">
+                            <label htmlFor="feDataInicio">Data de Inicio</label>
+                            <FormInput
+                              value={this.state.dataInicio}
+                              onChange={e =>
+                                this.setState({ dataInicio: e.target.value })
+                              }
+                              id="feCustoMedio"
+                              type="number"
+                            />
+                          </Col>
+                          <Col className="mb-3" md="12">
+                            <label htmlFor="feDataFim">Data de Fim</label>
+                            <FormInput
+                              value={this.state.dataFim}
+                              onChange={e =>
+                                this.setState({ dataFim: e.target.value })
+                              }
+                              id="feCustoMedio"
+                              type="number"
+                            />
+                          </Col>
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem
+                            Imagem do evento
                           </strong>
                           <CustomFileUpload />
-                        </FormGroup>
-                        <Row form>
-                          <Col md="12" className="form-group">
-                            <label htmlFor="feName">Data do evento</label>
-                            <FormInput
-                              value={this.state.dateEvent}
-                              onChange={e =>
-                                this.setState({ dateEvent: e.target.value })
-                              }
-                              id="feName"
-                              type="date"
-                            />
-                          </Col>
-                        </Row>
-                        <Row form>
-                          <Col md="12" className="form-group">
-                            <label htmlFor="feName">Horario do evento</label>
-                            <FormInput
-                              value={this.state.timeEvent}
-                              onChange={e =>
-                                this.setState({ timeEvent: e.target.value })
-                              }
-                              id="feName"
-                              type="time"
-                            />
-                          </Col>
-                        </Row>
-                        <Row form>
-                          <Col md="12" className="form-group">
-                            <label htmlFor="feName">Local do Evento</label>
-                            <FormInput
-                              value={this.state.placeEvent}
-                              onChange={e =>
-                                this.setState({ placeEvent: e.target.value })
-                              }
-                              id="feName"
-                              type="name"
-                            />
-                          </Col>
-                        </Row>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Conteudo
-                          </strong>
-                          <ReactQuill
-                            size="false"
-                            className="add-new-post__editor mb-1"
-                          />
                         </FormGroup>
                       </Form>
                     </Col>
@@ -535,21 +283,18 @@ class Events extends React.Component {
               </ListGroup>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button variant="secondary" onClick={this.handleClose2.bind(this)}>
                 Close
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => this.editEvent(event, number)}
-              >
+              <Button variant="danger" onClick={() => this.editCity(event)}>
                 Confirm
               </Button>
             </Modal.Footer>
           </Modal>
 
           <Modal
-            show={this.state.smShow === event.title}
-            onHide={smClose}
+            show={this.state.closeShow === event.nome}
+            onHide={deleteClose}
             aria-labelledby="example-modal-sizes-title-sm"
           >
             <Modal.Header closeButton>
@@ -562,7 +307,10 @@ class Events extends React.Component {
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
                 Close
               </Button>
-              <Button variant="danger" onClick={() => this.deleteEvent(event)}>
+              <Button
+                variant="danger"
+                onClick={() => this.deleteUnidade(event)}
+              >
                 Confirm
               </Button>
             </Modal.Footer>
@@ -580,7 +328,7 @@ class Events extends React.Component {
             className="text-sm-left"
           />
         </Row>
-        <Row>{renderCity()}</Row>
+        <Row>{renderEvent()}</Row>
       </Container>
     );
   }

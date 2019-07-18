@@ -9,9 +9,11 @@ import {
   Button,
   FormTextarea
 } from "shards-react";
+
 import Modal from "react-bootstrap/Modal";
 import Checkboxes from "./CheckboxesInstitute";
 
+import api from "../../../api/api";
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
     return ele !== value;
@@ -53,7 +55,7 @@ export default class unidadesInstitute extends React.Component {
       descricao: this.state.descricao,
       telefone: this.state.telefone,
       cursos: this.state.cursos,
-      admin:'teste'
+      admin: "teste"
     };
 
     if (
@@ -100,7 +102,6 @@ export default class unidadesInstitute extends React.Component {
   }
   adicionaCurso() {
     var cursos = this.state.cursos;
-    console.log(this.state.niveis.length);
     if (
       this.state.nomeCurso !== "" &&
       this.state.area !== "" &&
@@ -110,7 +111,7 @@ export default class unidadesInstitute extends React.Component {
         nome: this.state.nomeCurso,
         area: this.state.area,
         niveis: this.state.niveis,
-        admin:'teste'
+        admin: "teste"
       };
       cursos.push(curso);
       this.setState({
@@ -134,7 +135,32 @@ export default class unidadesInstitute extends React.Component {
   onChildChanged(New, clear) {
     this.setState({ niveis: New, clear: !clear });
   }
-
+  componentDidMount() {
+    const unidades = [];
+    this.props.unidades.map(unidade =>
+      api.get(`/curso?unidade=${unidade.id}`).then(cursos => {
+        unidades.push({
+          createdAt: unidade.createdAt,
+          updatedAt: unidade.updatedAt,
+          deletedAt: unidade.deletedAt,
+          id: unidade.id,
+          nome: unidade.nome,
+          telefone: unidade.telefone,
+          descricao: unidade.descricao,
+          logradouro: unidade.logradouro,
+          numero: unidade.numero,
+          complemento: unidade.complemento,
+          bairro: unidade.bairro,
+          cidade: unidade.cidade,
+          cep: unidade.cep,
+          instituicao: unidade.instituicao,
+          admin: unidade.admin,
+          cursos: cursos.data
+        });
+        this.setState({ unidades: unidades});
+      })
+    );
+  }
   render() {
     let smClose = () => this.setState({ smShow: false });
     return (
@@ -383,19 +409,25 @@ export default class unidadesInstitute extends React.Component {
                     <Col lg="1">
                       <div
                         pill
-                        className={`card-post__category bg-danger iconDelete`}
+                        className={`card-post__category bg-danger iconDelete ml-auto`}
                         onClick={() => this.deleteUnidade(unidade)}
                       >
                         <i className={`fas fa-times iconDelete`} />
                       </div>
                     </Col>
-                    <Col lg="12">
+                    <Col lg="11">
                       <p className="text-fiord-blue">
-                        <strong>Cursos:</strong>{unidade.cursos.map(curso => (
-                         ` ${curso.nome} `
-                      ))}
+                        <strong>Cursos:</strong> {unidade.cursos.map(curso => ` ${curso.nome} `)} 
                       </p>
-                      
+                    </Col>
+                    <Col lg="1">
+                      <div
+                        pill
+                        className={`card-post__category bg-primary iconDelete ml-auto`}
+                        onClick={() => this.deleteUnidade(unidade)}
+                      >
+                        <i className={`fas fa-pen iconDelete`} />
+                      </div>
                     </Col>
                   </Row>
                 </ListGroupItem>
