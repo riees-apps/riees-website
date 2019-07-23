@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import './area.css'
+import "./area.css";
 
 const DivAreas = styled.div`
   background: #e4e3ea;
@@ -12,9 +12,9 @@ const DivAreas = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content:flex-start;
+  justify-content: flex-start;
   @media (max-width: 768px) {
-    margin:2.5vh;
+    margin: 2.5vh;
   }
 `;
 const Card = styled.div`
@@ -66,12 +66,36 @@ const Heading = styled.h1`
   padding: 2.5vh 5px 2.5vh 0;
   width: max-content;
 `;
+
+function icon(area) {
+  switch (area) {
+    case "Medicina":
+      return "user-md";
+      case "Ciências Exatas":
+      return "flask";
+      case "Ciências Biologicas":
+      return "microscope";
+      case "Ciências Sociais":
+      return "users";
+      case "Administração":
+      return "user-tie";
+      case "Direito":
+      return "balance-scale";
+      case "Engenharia":
+      return "cog";
+      case "Matemática":
+      return "square-root-alt";
+      case "T.I.":
+      return "laptop-code";
+      default: return "asterisk"
+  }
+}
 class AreaCard extends Component {
   render() {
     const renderAreas = () => {
       return this.props.areas.map(area => (
         <Card>
-          <i className={`fas fa-${area} icon`} />
+          <i className={`fas fa-${icon(area)} icon`} />
           <h1 class="areaName">{area}</h1>
         </Card>
       ));

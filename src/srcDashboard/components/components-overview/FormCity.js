@@ -76,23 +76,25 @@ class FormCity extends Component {
           .then(response => {
             const idCidade = response.data.id;
             pontosTuristicos.map(ponto => {
-              api.post(
-                "/ponto",
-                {
-                  nome: ponto.nomePonto,
-                  descricao: ponto.descricaoPonto,
-                  cidade: idCidade,
-                  admin: response.data.admin.id
-                },
-                { headers: { "Access-Control-Allow-Origin": "*" } }
-              ).then(res => {
-                console.log(res)
-                this.setState({
-                  smShow: true,
-                  error: "Cidade adicionada com sucesso!"
-                })
-              })
-            })
+              api
+                .post(
+                  "/ponto",
+                  {
+                    nome: ponto.nomePonto,
+                    descricao: ponto.descricaoPonto,
+                    cidade: idCidade,
+                    admin: response.data.admin.id
+                  },
+                  { headers: { "Access-Control-Allow-Origin": "*" } }
+                )
+                .then(res => {
+                  console.log(res);
+                  this.setState({
+                    smShow: true,
+                    error: "Cidade adicionada com sucesso!"
+                  });
+                });
+            });
           })
           .catch(error => {
             console.log(error);
@@ -201,11 +203,13 @@ class FormCity extends Component {
                             <strong className="text-muted d-block mb-2">
                               Descrição do Ponto turistico
                             </strong>
-                            <ReactQuill
-                              onChange={this.handleChangeEditor2}
+                            <FormTextarea
                               value={this.state.descricaoPonto}
-                              modules={Editor.modules}
-                              className="add-new-post__editor mb-1"
+                              onChange={e =>
+                                this.setState({ descricaoPonto: e.target.value })
+                              }
+                              id="feResumo"
+                              rows="5"
                             />
                           </FormGroup>
                         </Col>

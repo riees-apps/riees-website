@@ -81,11 +81,11 @@ class InstituteImage extends Component {
           className={
             this.props.cityInstitute
               ? this.state.hover
-                ? "h1Cities2Hover"
-                : "h1Cities2"
+                ? "h1Cities2HoverInstitute"
+                : "h1Cities2Institute"
               : this.state.hover
-              ? "h1CitiesHover"
-              : "h1Cities"
+              ? "h1CitiesHoverInstitute"
+              : "h1CitiesInstitute"
           }
         >
           {row.nome}
@@ -98,11 +98,11 @@ class InstituteImage extends Component {
           className={
             this.props.cityInstitute
               ? this.state.hover
-                ? "h1Cities2Hover"
-                : "h1Cities2"
+                ? "h1Cities2HoverInstitute"
+                : "h1Cities2Institute"
               : this.state.hover
-              ? "h1CitiesHover"
-              : "h1Cities"
+              ? "h1CitiesHoverInstitute"
+              : "h1CitiesInstitute"
           }
         >
           {row}
@@ -132,21 +132,21 @@ class InstituteImage extends Component {
         className="root"
       >
         <Img cityInstitute={this.props.cityInstitute} input={this.props.input}>
-          <h1 className={this.state.hover ? "title2" : "title"}>
+          <h1 className={this.state.hover ? "title2Institute" : "titleInstitute"}>
             {sigla}
           </h1>
-          <div className={this.state.hover ? "divInfo2" : "divInfo"}>
-            <h1 className={this.state.hover ? "sub2" : "sub1"}>
+          <div className={this.state.hover ? "divInfo2Institute" : "divInfoInstitute"}>
+            <h1 className={this.state.hover ? "sub2Institute" : "sub1Institute"}>
               {nomeCompleto}
             </h1>
-            <h1 className={this.state.hover ? "info2" : "info1"}>
-              <FormattedMessage id="City" />:
+            <h1 className={this.state.hover ? "info2Institute" : "info1Institute"}>
+              <FormattedMessage id="Campus" />:
             </h1>
-            <div className={this.state.hover ? "cities2" : "cities1"}>
+            <div className={this.state.hover ? "cities2Institute" : "cities1Institute"}>
               {renderUnidades()}
             </div>
-            <h1 className={this.state.hover ? "info2" : "info1"}>Areas:</h1>
-            <div className={this.state.hover ? "cities2" : "cities1"}>
+            <h1 className={this.state.hover ? "info2Institute" : "info1Institute"}>Areas:</h1>
+            <div className={this.state.hover ? "cities2Institute" : "cities1Institute"}>
               {renderAreas()}
             </div>
           </div>

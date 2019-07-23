@@ -121,7 +121,7 @@ class City extends Component {
     console.log(url);
   }
   render() {
-    const { name, img, Cidades, places, descricao } = this.props;
+    const { name, id, img, Cidades, places, descricao } = this.props;
     console.log('0k')
     return (
       <div style={{background:'#f4f4f4'}}>
@@ -147,7 +147,7 @@ class City extends Component {
               <Heading>{name}</Heading>
               <Heading color="#003b81"><FormattedMessage id="Institutes"/></Heading>
             </Div>
-            <InstituteImages  cityInstitute city={name}/>
+            <InstituteImages Institutos={this.props.institutes}  cityInstitute city={id}/>
             <Button
               return={true}
               color="#FF1493"

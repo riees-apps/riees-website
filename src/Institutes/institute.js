@@ -187,25 +187,23 @@ class Institute extends Component {
   }
 
   componentDidMount() {
-    let u = []
+    let u = [];
 
-    api
-    .get(`unidade?instituicao=${this.props.id}`)
-    .then(res => {
-       u = res.data;
+    api.get(`unidade?instituicao=${this.props.id}`).then(res => {
+      u = res.data;
       this.setState({ unidadesComCursos: u });
-    })
-  this.props.unidades.map(unidade => {
-    api.get(`/curso?unidade=${unidade.id}`).then(res => {
-      const cursos = res.data;
-      const newArea = this.state.areas;
-      cursos.map(curso => {
-        if (newArea.indexOf(curso.area.nome) === -1)
-          newArea.push(curso.area.nome);
-      });
-      this.setState({ areas: newArea, cursos: cursos });
     });
-  });
+    this.props.unidades.map(unidade => {
+      api.get(`/curso?unidade=${unidade.id}`).then(res => {
+        const cursos = res.data;
+        const newArea = this.state.areas;
+        cursos.map(curso => {
+          if (newArea.indexOf(curso.area.nome) === -1)
+            newArea.push(curso.area.nome);
+        });
+        this.setState({ areas: newArea, cursos: cursos });
+      });
+    });
     if (typeof this.props.location.state != "undefined") {
       if (this.props.location.state.scrollTop === 0) {
         document.documentElement.scrollTop = this.props.location.state.scrollTop;
@@ -214,12 +212,13 @@ class Institute extends Component {
   }
 
   render() {
-    const { name, sub, img, logo, url, institutes } = this.props;
+    const { sub, img, logo, url, institutes, pontosFortes } = this.props;
     const unidades = this.props.unidades;
     const areas = this.state.areas;
     const cursos = this.state.cursos;
     const unidadesComCursos = this.state.unidadesComCursos;
 
+    const name = this.props.name.split("-")[0];
     return (
       <div>
         <Image x="0.5" height="80vh" image={img}>
@@ -325,25 +324,9 @@ class Institute extends Component {
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">strengths</Heading>
             </Div>
-            <Text2>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante
-            </Text2>
-            <Text2>
-              Consectetur adipiscing elit. Lorem ipsum dolor sit amet, curabitur
-              a ante ante
-            </Text2>
-            <Text2>
-              Daipiscing consectetur elit. Lorem ipsum dolor sit amet, curabitur
-            </Text2>
-            <Text2>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante
-            </Text2>
-            <Text2>
-              Sit amet ipsum dolor , consectetur adipiscing elit. Curabitur a
-              ante ante
-            </Text2>
+            {pontosFortes.map(ponto => (
+              <Text2>{ponto}</Text2>
+            ))}
             <AreaCard name={name} areas={areas} />
             <Div justify="flex-start">
               <Heading color="#303033">Campus</Heading>
@@ -366,9 +349,11 @@ class Institute extends Component {
               </Heading>
               <Heading color="#003b81">Courses</Heading>
             </Div>
-            {unidadesComCursos.length > 0 ? unidadesComCursos[this.state.unidade].cursos.map(curso => (
-              <Text2>{curso.nome}</Text2>
-            )): ''}
+            {unidadesComCursos.length > 0
+              ? unidadesComCursos[this.state.unidade].cursos.map(curso => (
+                  <Text2>{`${curso.nome} (${curso.niveis.map(nivel =>` ${nivel} `)}) `}</Text2>
+                ))
+              : ""}
             <Div justify="flex-start">
               <Heading color="#303033">
                 {unidades[this.state.unidade].nome}
@@ -383,8 +368,10 @@ class Institute extends Component {
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
               {unidades[this.state.unidade].bairro},{" "}
-              {unidades[this.state.unidade].cidade.nome} - Espirito Santo -{" "}
-              {unidades[this.state.unidade].cep}
+              {unidadesComCursos.length > 0
+                ? unidadesComCursos[this.state.unidade].cidade.nome
+                : unidades[this.state.unidade].cidade.nome}{" "}
+              - Espirito Santo - {unidades[this.state.unidade].cep}
             </Text>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}

@@ -40,19 +40,19 @@
     margin-bottom: 7vh;
   }
 }
-.title{
+.titleInstitute{
   transition: all 1000ms;
   text-transform: uppercase;
   color:white;
   font-size: 3em;
   line-height:0.7em;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   width: max-content;
   margin-left: 3vw;
   text-decoration: none;
   margin-top:33vh;
 }
-.title2{
+.title2Institute{
   text-decoration: none;
   transition: all 1000ms;
   text-transform: uppercase;
@@ -60,26 +60,26 @@
   color:white;
   font-size: 3em;
   line-height:0.7em;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   margin-left: 3vw;
   margin-top:33vh;
   width: max-content;
   cursor: pointer;
 }
-.info1{
+.info1Institute{
   text-decoration: none;
   transition: all 1000ms,color 1500ms;
   margin-left: 3vw;
   text-transform: uppercase;
   color: transparent;
   width: max-content;
-  font-size: 1.4em;
+  font-size: 1.6em;
   line-height: 0.3em;
   letter-spacing: 1px;
   margin-bottom: 0.7em;
 }
 
-.info2{
+.info2Institute{
   text-decoration: none;
   transition: all 1000ms,color 300ms;
   margin-left: 3vw;
@@ -87,12 +87,12 @@
   width: max-content;
   color:white;
   letter-spacing: 1px;
-  font-size: 1.4em;
+  font-size: 1.6em;
   line-height: 0.3em;
   margin-bottom: 0.7em;
 }
 
-.cities1{
+.cities1Institute{
   text-decoration: none;
   transition: all 1000ms;
   margin-left: 2.7vw;
@@ -110,7 +110,7 @@
   margin-bottom: 15px;
 }
 
-.cities2{
+.cities2Institute{
   text-decoration: none;
   transition: all 1000ms;
   margin-left: 2.7vw;
@@ -127,7 +127,7 @@
   margin-top: 12px;
   margin-bottom: 15px;
 }
-.h1Cities{
+.h1CitiesInstitute{
   transition: all 1000ms,color 1500ms;
   color:transparent;
   text-decoration: none;
@@ -139,7 +139,7 @@
   font-size: 12.5px;
   line-height:4px;
 }
-.h1CitiesHover{
+.h1CitiesHoverInstitute{
   transition: all 1000ms,color 300ms;
   color:#fafafa;
   text-decoration: none;
@@ -151,7 +151,7 @@
   font-size: 12.5px;
   line-height:4px;
 }
-.h1Cities2{
+.h1Cities2Institute{
   transition: all 1000ms,color 1500ms;
   color:transparent;
   text-decoration: none;
@@ -162,7 +162,7 @@
   font-size: 12.5px;
   line-height:4px;
 }
-.h1Cities2Hover{
+.h1Cities2HoverInstitute{
   transition: all 1000ms,color 300ms;
   color:#fafafa;
   text-decoration: none;
@@ -173,7 +173,7 @@
   font-size: 12.5px;
   line-height:4px;
 }
-.sub1{
+.sub1Institute{
   text-decoration: none;
   transition: all 1000ms,color 1500ms;
   margin-left: 3vw;
@@ -182,13 +182,13 @@
   color: transparent;
   width: 90%;
   margin-bottom: 25px;
-  font-size: 1.2em;
-  line-height: 1.2em;
+  font-size: 1.3em;
+  line-height: 1.3em;
   letter-spacing: -0.5px;
   font-weight:lighter;
 }
 
-.sub2{
+.sub2Institute{
   text-decoration: none;
   transition: all 1000ms,color 300ms;
   margin-left: 3vw;
@@ -198,17 +198,17 @@
   color:white;
   letter-spacing: -0.5px;
   margin-bottom: 25px;
-  font-size: 1.2em;
-  line-height: 1.2em;
+  font-size: 1.3em;
+  line-height: 1.3em;
   font-weight:lighter;
 }
-.divInfo{
+.divInfoInstitute{
   text-decoration: none;
   transition: all 1000ms,color 1500ms;
   top:0;
   height:10%
 }
-.divInfo2{
+.divInfo2Institute{
   text-decoration: none;
   transition: all 1000ms,color 300ms;
   height:100%;

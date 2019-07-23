@@ -106,7 +106,7 @@ class Footer extends Component {
         <DivText>
           <Title><FormattedMessage id="MapSite"/></Title>
           <StyledLink  to={`/${window.location.pathname.split('/')[1]}`} ><FormattedMessage id="Home"/></StyledLink>
-          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Institutes`} ><FormattedMessage id="Institutes"/></StyledLink>
+          <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Members`} ><FormattedMessage id="Institutes"/></StyledLink>
           <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Coming`} ><FormattedMessage id="Coming"/></StyledLink>
           <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Living`} ><FormattedMessage id="Living"/></StyledLink>
           <StyledLink  to={`/${window.location.pathname.split('/')[1]}/Cities`} ><FormattedMessage id="Cities"/></StyledLink>

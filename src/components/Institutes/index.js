@@ -43,13 +43,14 @@ class InstitutesImages extends Component {
     if(this.props.city === '')
       return true
     else{
-      for (let index = 0; index < institute.cities.length; index++) {
-        if (institute.cities[index] === this.props.city)
+      for (let index = 0; index < institute.unidades.length; index++) {
+        if (institute.unidades[index].cidade === this.props.city)
           return true
       }
     }
   }
   render() {
+    console.log(this.props.Institutos)
     const renderInstitutes = () => {
         return this.props.Institutos.filter(this.isCity.bind(this)).map(institute => (
           <InstituteImage

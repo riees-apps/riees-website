@@ -1348,8 +1348,10 @@ class Routes extends Component {
           component={props => (
             <City
               {...props}
+              institutes={Institutes}
               Cidades={Cidades}
               name={city.nome}
+              id={city.id}
               img={img1}
               places={city.pontos}
               descricao={city.descricao}

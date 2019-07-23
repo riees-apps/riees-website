@@ -462,6 +462,21 @@ class Header extends Component {
             >
               <FormattedMessage id="About" />
             </StyledLink>
+            <StyledLink
+              li
+              onClick={() => this.changeLang("pt")}
+              className={this.state.lang === 'pt' ? 'displayNone' : ''}
+            >
+              <img src={br} className="flagMobile" alt="" />
+            </StyledLink>
+
+            <StyledLink
+              li
+              onClick={() => this.changeLang("en")}
+              className={this.state.lang === 'en' ? 'displayNone' : ''}
+            >
+              <img src={us} className="flagMobile" alt="" />
+            </StyledLink>
           </div>
         </div>
       </div>

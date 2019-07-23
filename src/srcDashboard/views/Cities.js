@@ -319,11 +319,15 @@ class Cities extends React.Component {
                                   <strong className="text-muted d-block mb-2">
                                     Descrição do Ponto turistico
                                   </strong>
-                                  <ReactQuill
-                                    onChange={this.handleChangeEditor2}
+                                  <FormTextarea
                                     value={this.state.descricaoPonto}
-                                    modules={Editor.modules}
-                                    className="add-new-post__editor mb-1"
+                                    onChange={e =>
+                                      this.setState({
+                                        descricaoPonto: e.target.value
+                                      })
+                                    }
+                                    id="feResumo"
+                                    rows="5"
                                   />
                                 </FormGroup>
                               </Col>
