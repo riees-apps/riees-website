@@ -13,7 +13,13 @@ import {
 import Modal from "react-bootstrap/Modal";
 import Checkboxes from "./CheckboxesInstitute";
 
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "../../assets/quill.css";
 import api from "../../../api/api";
+import Editor from "./editor";
+
+
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
     return ele !== value;
@@ -40,6 +46,10 @@ export default class unidadesInstitute extends React.Component {
       niveis: [],
       smShow: false
     };
+    this.handleChangeEditor = this.handleChangeEditor.bind(this);
+  }
+  handleChangeEditor(html) {
+    this.setState({ descricao: html });
   }
 
   createUnidade() {
@@ -55,7 +65,7 @@ export default class unidadesInstitute extends React.Component {
       descricao: this.state.descricao,
       telefone: this.state.telefone,
       cursos: this.state.cursos,
-      admin: "teste"
+      admin: this.props.adminId
     };
 
     if (
@@ -97,8 +107,10 @@ export default class unidadesInstitute extends React.Component {
       });
   }
   deleteUnidade(unidade) {
+    api.delete(`/unidade/${unidade.id}`)
     var newUnidade = arrayRemove(this.state.unidades, unidade);
     this.setState({ ...this.state, unidades: newUnidade });
+    this.props.callbackParent(newUnidade);
   }
   adicionaCurso() {
     var cursos = this.state.cursos;
@@ -111,7 +123,7 @@ export default class unidadesInstitute extends React.Component {
         nome: this.state.nomeCurso,
         area: this.state.area,
         niveis: this.state.niveis,
-        admin: "teste"
+        admin: this.props.adminId
       };
       cursos.push(curso);
       this.setState({
@@ -139,25 +151,28 @@ export default class unidadesInstitute extends React.Component {
     const unidades = [];
     this.props.unidades.map(unidade =>
       api.get(`/curso?unidade=${unidade.id}`).then(cursos => {
-        unidades.push({
-          createdAt: unidade.createdAt,
-          updatedAt: unidade.updatedAt,
-          deletedAt: unidade.deletedAt,
-          id: unidade.id,
-          nome: unidade.nome,
-          telefone: unidade.telefone,
-          descricao: unidade.descricao,
-          logradouro: unidade.logradouro,
-          numero: unidade.numero,
-          complemento: unidade.complemento,
-          bairro: unidade.bairro,
-          cidade: unidade.cidade,
-          cep: unidade.cep,
-          instituicao: unidade.instituicao,
-          admin: unidade.admin,
-          cursos: cursos.data
-        });
-        this.setState({ unidades: unidades});
+        if(unidade.deletedAt !== 0)
+        {
+          unidades.push({
+            createdAt: unidade.createdAt,
+            updatedAt: unidade.updatedAt,
+            deletedAt: unidade.deletedAt,
+            id: unidade.id,
+            nome: unidade.nome,
+            telefone: unidade.telefone,
+            descricao: unidade.descricao,
+            logradouro: unidade.logradouro,
+            numero: unidade.numero,
+            complemento: unidade.complemento,
+            bairro: unidade.bairro,
+            cidade: unidade.cidade,
+            cep: unidade.cep,
+            instituicao: unidade.instituicao,
+            admin: unidade.admin,
+            cursos: cursos.data
+          });
+          this.setState({ unidades: unidades });
+        }
       })
     );
   }
@@ -171,7 +186,7 @@ export default class unidadesInstitute extends React.Component {
           instituição
         </p>
         <Row lg="12" form>
-          <Col lg="12" className="form-group">
+          <Col lg="6" className="form-group">
             <label htmlFor="feCampus">Nome</label>
             <FormInput
               value={this.state.nome}
@@ -236,15 +251,6 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="feCompleteName">Descrição</label>
-            <FormTextarea
-              id="feDescription"
-              value={this.state.descricao}
-              onChange={e => this.setState({ descricao: e.target.value })}
-              rows="5"
-            />
-          </Col>
-          <Col lg="6" className="form-group">
             <label htmlFor="fecep">Telefone</label>
             <FormInput
               value={this.state.telefone}
@@ -252,6 +258,17 @@ export default class unidadesInstitute extends React.Component {
               id="fetelefone"
               type="text"
             />
+          </Col>
+          <Col className="mb-3" md="12">
+            <FormGroup>
+              <strong className="text-muted d-block mb-2">Descrição da unidade</strong>
+              <ReactQuill
+                onChange={this.handleChangeEditor}
+                value={this.state.descricao}
+                modules={Editor.modules}
+                className="add-new-post__editor mb-1"
+              />
+            </FormGroup>
           </Col>
           <Col lg="12" className="form-group">
             <h5 htmlFor="feCursos">Cursos da Unidade</h5>
@@ -279,7 +296,7 @@ export default class unidadesInstitute extends React.Component {
                   <option value="">Escolha...</option>
                   <option value="Medicina">Medicina</option>
                   <option value="Ciências Exatas">Ciências Exatas</option>
-                  <option value="Ciências Biológicas">
+                  <option value="Ciências Biologicas">
                     Ciências Biológicas
                   </option>
                   <option value="Ciências Sociais">Ciências Sociais</option>
@@ -288,7 +305,6 @@ export default class unidadesInstitute extends React.Component {
                   <option value="Engenharia">Engenharia</option>
                   <option value="Matemática">Matemática</option>
                   <option value="T.I.">T.I.</option>
-                  <option value="Engenharia">Engenharia</option>
                 </FormSelect>
               </Col>
               <Col md="10" className="form-group">
@@ -325,6 +341,7 @@ export default class unidadesInstitute extends React.Component {
                   }}
                 >
                   {this.state.cursos.map(curso => (
+                    
                     <ListGroupItem>
                       <Row lg="12">
                         <Col lg="4">
@@ -334,7 +351,7 @@ export default class unidadesInstitute extends React.Component {
                         </Col>
                         <Col lg="2">
                           <p className="text-fiord-blue">
-                            <strong>Área:</strong> {curso.area}
+                            <strong>Área:</strong> {curso.area.split(',')[0]}
                           </p>
                         </Col>
                         <Col lg="5">
@@ -383,15 +400,10 @@ export default class unidadesInstitute extends React.Component {
                   <Row lg="12">
                     <Col lg="2">
                       <p className="text-fiord-blue">
-                        <strong>Cidade:</strong> {unidade.cidade}
-                      </p>
-                    </Col>
-                    <Col lg="2">
-                      <p className="text-fiord-blue">
                         <strong>Bairro:</strong> {unidade.bairro}
                       </p>
                     </Col>
-                    <Col lg="3">
+                    <Col lg="4">
                       <p className="text-fiord-blue">
                         <strong>Logradouro:</strong> {unidade.logradouro}
                       </p>
@@ -401,7 +413,7 @@ export default class unidadesInstitute extends React.Component {
                         <strong>Numero:</strong> {unidade.numero}
                       </p>
                     </Col>
-                    <Col lg="2">
+                    <Col lg="3">
                       <p className="text-fiord-blue">
                         <strong>Cep:</strong> {unidade.cep}
                       </p>
@@ -417,7 +429,8 @@ export default class unidadesInstitute extends React.Component {
                     </Col>
                     <Col lg="11">
                       <p className="text-fiord-blue">
-                        <strong>Cursos:</strong> {unidade.cursos.map(curso => ` ${curso.nome} `)} 
+                        <strong>Cursos:</strong>{" "}
+                        {unidade.cursos.map(curso => ` ${curso.nome}  `)}
                       </p>
                     </Col>
                     <Col lg="1">

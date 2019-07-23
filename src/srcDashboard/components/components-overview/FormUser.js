@@ -24,15 +24,10 @@ import UnidadesInstitute from "./UnidadesInstitute";
 import CustomFileUpload from "../components-overview/CustomFileUpload";
 
 function IsEmail(email) {
-  console.log(email)
-  if (
-    email === "" ||
-    email.indexOf("@") === -1 ||
-    email.indexOf(".") === -1
-  ){
+  console.log(email);
+  if (email === "" || email.indexOf("@") === -1 || email.indexOf(".") === -1) {
     return false;
-  }
-  else return true
+  } else return true;
 }
 class FormUser extends Component {
   constructor(props, context) {
@@ -41,19 +36,23 @@ class FormUser extends Component {
       smShow: false,
       nome: "",
       email: "",
-      senha: ""
+      senha: "",
+      senha2: ""
     };
   }
   addUsuario = async e => {
     e.preventDefault();
-    const { nome, email, senha } = this.state;
-    console.log(nome)
-    console.log(email)
-    console.log(senha)
-    if (!(nome !== "" && IsEmail(email) && senha !== "")) {
+    const { nome, email, senha, senha2 } = this.state;
+
+    if (!(nome !== "" && IsEmail(email) && senha !== "" && senha2 !== "")) {
       this.setState({
         error: "Preencha todos os campos corretamente!",
         smShow: true
+      });
+    } else if (!(senha === senha2)) {
+      this.setState({
+        error: "Confirme corretamente sua senha",
+        smShow: nome
       });
     } else {
       try {
@@ -85,7 +84,7 @@ class FormUser extends Component {
         this.setState({
           smShow: true,
           error:
-            "Ocorreu um problema na tentativa de adicionar, tente novamente2"
+            "Ocorreu um problema na tentativa de adicionar, tente novamente"
         });
       }
     }
@@ -132,6 +131,19 @@ class FormUser extends Component {
                       <FormInput
                         value={this.state.senha}
                         onChange={e => this.setState({ senha: e.target.value })}
+                        id="fePassword"
+                        type="password"
+                      />
+                    </Col>
+                  </Row>
+                  <Row form>
+                    <Col md="12" className="form-group">
+                      <label htmlFor="feName">Confirme a senha</label>
+                      <FormInput
+                        value={this.state.senha2}
+                        onChange={e =>
+                          this.setState({ senha2: e.target.value })
+                        }
                         id="fePassword"
                         type="password"
                       />

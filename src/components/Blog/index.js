@@ -6,12 +6,13 @@ import uvv from "./imgs/img2.jpg";
 import ifes from "./imgs/vilavelha.jpg";
 import ucl from "./imgs/vitoria.jpg";
 import { FormattedMessage } from "react-intl";
+import api from "../../api/api";
 
 import "./index.css";
 import LatestPost from "./latestPosts";
 import PostCard from "./PostCard";
 
-const posts = [
+/*const posts = [
   {
     title:
       "Dolore ipsum Dossalore ipsum Dolore nihil in velit lorem ipsum valor1.",
@@ -312,18 +313,27 @@ const posts = [
       "Autema id placeat minus quasi aut repellat. Sit dignissimos unde ut officia porro. Sunt id ab alias quo magnam quia aut accusantium distinctio. Incidunt ipsa odit optio voluptatem Dolore ipsum Dossalore ipsum Dolorem eos quae.",
     img: uvv
   }
-];
+];*/
 
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
 class Blog extends Component {
-  componentDidMount() {
-    this.setState({
-      ...this.state,
-      final: this.props.final
-    });
-  }
-  constructor() {
-    super();
+  constructor(props, context) {
+    super(props, context);
     this.state = {
+      posts: [],
       page: 1,
       initial: 0,
       final: 3,
@@ -332,6 +342,7 @@ class Blog extends Component {
       value: ""
     };
   }
+
   handleClick(active) {
     this.setState({
       active: active,
@@ -343,25 +354,42 @@ class Blog extends Component {
 
   filtro = event => {
     if (
-      event.props.text.toUpperCase().indexOf(`${this.state.value.toUpperCase()}`) !== -1 ||
-      event.props.title.toUpperCase().indexOf(`${this.state.value.toUpperCase()}`) !== -1
+      event.props.text
+        .toUpperCase()
+        .indexOf(`${this.state.value.toUpperCase()}`) !== -1 ||
+      event.props.title
+        .toUpperCase()
+        .indexOf(`${this.state.value.toUpperCase()}`) !== -1
     )
       return true;
     return false;
   };
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      final: this.props.final,
+      posts: this.props.postagens
+    });
+  }
+
   render() {
+    const posts = this.props.postagens;
+    console.log(this.props.postagens);
+    console.log(1);
+    console.log(posts);
     const renderPosts = () => {
       return posts.map(post => (
         <PostCard
           side="true"
-          title={post.title}
-          placeEvent={post.placeEvent}
-          timeEvent={post.timeEvent}
-          dateEvent={post.dateEvent}
-          text={post.text}
-          tag={post.tag}
-          img={post.img}
-          date={post.date}
+          id={post.id}
+          title={post.titulo}
+          text={post.resumo}
+          tag={post.tags[0]}
+          img={ufes}
+          ano={new Date(post.data).getFullYear()}
+          mes={months[new Date(post.data).getMonth()]}
+          dia={new Date(post.data).getDate()}
         />
       ));
     };
@@ -461,7 +489,7 @@ class Blog extends Component {
         })
       );
     };
-
+    console.log(posts);
     return (
       <div style={{ zIndex: "100", position: "relative" }}>
         <DivLatests className={this.props.larger ? "" : "displayNone"}>
@@ -471,18 +499,18 @@ class Blog extends Component {
             to={`/${window.location.pathname.split("/")[1]}/Post/${
               this.props.title
             }`}
-            input={this.props.img}
+            id={posts[0].id}
+            input={ufes}
             width="50%"
             height="80vh"
             larger={this.props.larger}
-            title={posts[0].title}
-            placeEvent={posts[0].placeEvent}
-            timeEvent={posts[0].timeEvent}
-            dateEvent={posts[0].dateEvent}
-            text={posts[0].text}
-            tag={posts[0].tag}
-            img={posts[0].img}
-            date={posts[0].date}
+            title={posts[0].titulo}
+            text={posts[0].resumo}
+            tag={posts[0].tags[0]}
+            img={ufes}
+            ano={new Date(posts[0].data).getFullYear()}
+            mes={months[new Date(posts[0].data).getMonth()]}
+            dia={new Date(posts[0].data).getDate()}
           />
           <DivLatests secAndTrd="true">
             <LatestPost
@@ -491,14 +519,14 @@ class Blog extends Component {
               height="39vh"
               side={this.props.side}
               larger={this.props.larger}
-              title={posts[1].title}
-              placeEvent={posts[1].placeEvent}
-              timeEvent={posts[1].timeEvent}
-              dateEvent={posts[1].dateEvent}
-              text={posts[1].text}
-              tag={posts[1].tag}
-              img={posts[1].img}
-              date={posts[1].date}
+              id={posts[1].id}
+              title={posts[1].titulo}
+              text={posts[1].resumo}
+              tag={posts[1].tags[0]}
+              img={ufes}
+              ano={new Date(posts[1].data).getFullYear()}
+              mes={months[new Date(posts[1].data).getMonth()]}
+              dia={new Date(posts[1].data).getDate()}
             />
             <LatestPost
               secAndTrd="true"
@@ -506,14 +534,14 @@ class Blog extends Component {
               height="39vh"
               side={this.props.side}
               larger={this.props.larger}
-              title={posts[2].title}
-              placeEvent={posts[2].placeEvent}
-              timeEvent={posts[2].timeEvent}
-              dateEvent={posts[2].dateEvent}
-              text={posts[2].text}
-              tag={posts[2].tag}
-              img={posts[2].img}
-              date={posts[2].date}
+              id={posts[2].id}
+              title={posts[2].titulo}
+              text={posts[2].resumo}
+              tag={posts[2].tags[0]}
+              img={ufes}
+              ano={new Date(posts[2].data).getFullYear()}
+              mes={months[new Date(posts[2].data).getMonth()]}
+              dia={new Date(posts[2].data).getDate()}
             />
           </DivLatests>
           <DivLatests fourthAndFifth="true">
@@ -523,14 +551,14 @@ class Blog extends Component {
               height="39vh"
               side={this.props.side}
               larger={this.props.larger}
-              title={posts[3].title}
-              placeEvent={posts[3].placeEvent}
-              timeEvent={posts[3].timeEvent}
-              dateEvent={posts[3].dateEvent}
-              text={posts[3].text}
-              tag={posts[3].tag}
-              img={posts[3].img}
-              date={posts[3].date}
+              id={posts[3].id}
+              title={posts[3].titulo}
+              text={posts[3].resumo}
+              tag={posts[3].tags[0]}
+              img={ufes}
+              ano={new Date(posts[3].data).getFullYear()}
+              mes={months[new Date(posts[3].data).getMonth()]}
+              dia={new Date(posts[3].data).getDate()}
             />
             <LatestPost
               secAndTrd="true"
@@ -538,14 +566,14 @@ class Blog extends Component {
               height="39vh"
               side={this.props.side}
               larger={this.props.larger}
-              title={posts[4].title}
-              placeEvent={posts[4].placeEvent}
-              timeEvent={posts[4].timeEvent}
-              dateEvent={posts[4].dateEvent}
-              text={posts[4].text}
-              tag={posts[4].tag}
-              img={posts[4].img}
-              date={posts[4].date}
+              id={posts[4].id}
+              title={posts[4].titulo}
+              text={posts[4].resumo}
+              tag={posts[4].tags[0]}
+              img={ufes}
+              ano={new Date(posts[4].data).getFullYear()}
+              mes={months[new Date(posts[4].data).getMonth()]}
+              dia={new Date(posts[4].data).getDate()}
             />
           </DivLatests>
         </DivLatests>

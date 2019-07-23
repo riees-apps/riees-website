@@ -4,6 +4,8 @@ import Footer from "../components/Footer/index";
 import Events from "../components/Events/index";
 import Button from "../components/Button/index";
 
+import "./event.css"
+
 const Image = styled.div`
   background-image: url(${props => props.image});
   box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
@@ -32,8 +34,7 @@ const Img = styled.img`
   margin-bottom:5vh;
 `;
 const Title = styled.h1`
-  font-family: "Oswald", sans-serif;
-  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
   color: white;
   font-weight: bold;
   font-size: calc(30px + 2vw);
@@ -50,7 +51,7 @@ const Title = styled.h1`
   }
 `;
 const SubTitle = styled.h1`
-  font-family: "Oswald", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: white;
   font-weight: 500;
   font-size: calc(20px + 1vw);
@@ -82,7 +83,7 @@ const Subheading = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  width: 80%;
+  width: 70%;
   margin-left: 10%;
   margin-top: 1%;
   margin-bottom: 1%;
@@ -95,7 +96,7 @@ const Subheading = styled.div`
   }
 `;
 const Text = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   color: #444;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
@@ -113,7 +114,7 @@ const Container = styled.div`
   padding-bottom: 10vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
   justify-content: space-between;
   width: 100%;
   z-index: 100;
@@ -126,8 +127,9 @@ const Details = styled.h1`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: calc(7.5px + 1vw);
-  line-height: calc(7.5px + 1vw);
+  font-size: calc(9px + 1vw);
+  line-height: calc(9px + 1vw);
+  letter-spacing:0.5px;
   font-weight: 400;
   width: max-content;
   color: #f4f4f4;
@@ -158,27 +160,46 @@ const Badge = styled.h1`
   }
 `;
 const Heading = styled.h1`
-  font-family: "Avenir Next", sans-serif;
-  margin: 0;
+  font-family: "Poppins", sans-serif;
+  margin-left:10%;
   background: ${props => props.background || "#fafafa"};
   color: #0077ff;
   background-color: #f4f4f4;
   font-size: calc(5px + 3vw);
   line-height: calc(5px + 3vw);
-  width: 100%;
+  width: max-content;
   letter-spacing: 3px;
   padding-top: 5vh;
   text-align: start;
   padding-bottom: 1.5vh;
-  padding-left: 15%;
   margin-top: 5vh;
-  border-bottom: 1px solid #999;
+  border-bottom: 1vh solid pink;
   @media (max-width: 600px) {
     padding-left: 2.5%;
     font-size: calc(10px + 3vw);
     line-height: calc(10px + 3vw);
   }
 `;
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+function addZero(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
 class Event extends Component {
   componentWillMount() {
         document.documentElement.scrollTop = 0;
@@ -187,41 +208,42 @@ class Event extends Component {
     const {
       title,
       img,
-      url,
+      link,
       date,
       dateEvent,
       placeEvent,
-      timeEvent,
       text,
+      eventos
     } = this.props;
+
+    const ano= new Date(date).getFullYear()
+    const mes=months[new Date(date).getMonth()]
+    const dia=new Date(date).getDate()
+    const hora=addZero(new Date(date).getHours())
+    const minuto=addZero(new Date(date).getMinutes())
 
     return (
       <div>
-        <Image x="0.6" height="90vh" image={img}>
+        <Image x="0.6" height="75vh" image={img}>
           <div>
-            <Badge>{typeof dateEvent !== "undefined" ? "Event" : "New"}</Badge>
+            <Badge>{ placeEvent !== "" ? "Event" : "New"}</Badge>
             <Title>{title}</Title>
             <Subheading
-              className={typeof dateEvent === "undefined" ? "" : "displayNone"}
+              className={ placeEvent === "" ? "" : "displayNone"}
             >
               <Details>
-                <i className={`fas fa-clock iconDate`} /> {date}
+                <i className={`fas fa-clock iconDate`} /> {`${dia} ${mes}, ${ano}`}
               </Details>
             </Subheading>
 
-            <SubTitle
-              className={typeof dateEvent !== "undefined" ? "" : "displayNone"}
-            >
-              Event details
-            </SubTitle>
             <Subheading
-              className={typeof dateEvent !== "undefined" ? "" : "displayNone"}
+              className={ placeEvent !== "" ? "" : "displayNone"}
             >
               <Details>
-                <i className={`fas fa-calendar iconDate`} /> {dateEvent}
+                <i className={`fas fa-calendar iconDate`} /> {`${dia} ${mes}, ${ano}`}
               </Details>
               <Details>
-                <i className={`fas fa-clock iconDate`} /> {timeEvent}
+                <i className={`fas fa-clock iconDate`} /> {`${hora} : ${minuto}`}
               </Details>
               <Details>
                 <i className={`fas fa-map-marker-alt iconDate`} /> {placeEvent}
@@ -231,20 +253,15 @@ class Event extends Component {
         </Image>
         <Container>
           <DivText>
-            <Text>
-              {text}
-            </Text>
-            <Text>
-            {text}
-            </Text>
-            <Text>
-            {text}
-            </Text>
-            <Button className={typeof dateEvent !== "undefined" ? "" : "displayNone"}  url={url} name="sign up here" />
+            <div className="innerHTMLEvent" dangerouslySetInnerHTML={{ __html: text }}/>
+            <Button institute="true" className={ placeEvent !== "" ? "" : "displayNone"}  url={link} name="sign up here" />
           </DivText>
           <Heading>Latest news</Heading>
-          <Events side final={9} />
-          <Button url="/News-Events" name="All news and events" />
+          <Events eventos={eventos} side final={9} />
+          <div className='divButton'>
+          <Button style={{margin:'0 auto'}} url="/News-Events" name="All news and events" />
+          </div>
+          
         </Container>
         <Footer />
       </div>

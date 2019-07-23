@@ -18,10 +18,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
 import api from "../../../api/api";
+import Editor from "./editor";
 
 import Places from "./Places";
-import Checkboxes from "./CheckboxesInstitute";
-import UnidadesInstitute from "./UnidadesInstitute";
 import CustomFileUpload from "../components-overview/CustomFileUpload";
 
 function arrayRemove(arr, value) {
@@ -30,41 +29,34 @@ function arrayRemove(arr, value) {
   });
 }
 
-
 class FormCity extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      editorHtml: "",
       smShow: false,
       nome: "",
       descricao: "",
       capa: null,
-      custoMedio: '',
-      admin: "5d1a1daaaf9fc5001737e7af",
-      ponto: "",
+      custoMedio: "",
+      admin: this.props.adminId,
+      nomePonto: "",
+      descricaoPonto: "",
       pontosTuristicos: []
     };
+    this.handleChangeEditor = this.handleChangeEditor.bind(this);
+    this.handleChangeEditor2 = this.handleChangeEditor2.bind(this);
+  }
+  handleChangeEditor(html) {
+    this.setState({ descricao: html });
+  }
+  handleChangeEditor2(html) {
+    this.setState({ descricaoPonto: html });
   }
   addCidade = async e => {
     e.preventDefault();
-    const {
-      nome,
-      custoMedio,
-      descricao,
-      admin
-    } = this.state;
-    console.log(nome)
-    console.log(custoMedio)
-    console.log(descricao)
-    console.log(admin)
-    if (
-      !(
-        nome !== "" &&
-        descricao !== "" &&
-        custoMedio !== "" &&
-        admin !== ""
-      )
-    ) {
+    const { nome, descricao, admin, pontosTuristicos } = this.state;
+    if (!(nome !== "" && descricao !== "" && admin !== "")) {
       this.setState({
         error: "Preencha todos os campos!",
         smShow: true
@@ -77,39 +69,81 @@ class FormCity extends Component {
             {
               nome: nome,
               descricao: descricao,
-              admin: admin,
-              custoMedio: custoMedio
+              admin: admin
             },
-            { headers: { "Access-Control-Allow-Origin": "*", 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } }
+            { headers: { "Access-Control-Allow-Origin": "*" } }
           )
           .then(response => {
-            this.setState({
-              smShow: true,
-              error: "Cidade adicionada com sucesso!"
-            });
+            const idCidade = response.data.id;
+            pontosTuristicos.map(ponto => {
+              api.post(
+                "/ponto",
+                {
+                  nome: ponto.nomePonto,
+                  descricao: ponto.descricaoPonto,
+                  cidade: idCidade,
+                  admin: response.data.admin.id
+                },
+                { headers: { "Access-Control-Allow-Origin": "*" } }
+              ).then(res => {
+                console.log(res)
+                this.setState({
+                  smShow: true,
+                  error: "Cidade adicionada com sucesso!"
+                })
+              })
+            })
           })
           .catch(error => {
-            console.log(error)
+            console.log(error);
             this.setState({
               smShow: true,
-              error: "Ocorreu um problema na tentativa de adicionar, tente novamente"
+              error:
+                "Ocorreu um problema na tentativa de adicionar, tente novamente"
             });
           });
       } catch (err) {
         this.setState({
           smShow: true,
-          error: "Ocorreu um problema na tentativa de adicionar, tente novamente2"
+          error:
+            "Ocorreu um problema na tentativa de adicionar, tente novamente2"
         });
       }
     }
   };
+  adicionaPonto() {
+    var pontos = this.state.pontosTuristicos;
+    if (this.state.nomePonto !== "" && this.state.descricaoPonto !== "") {
+      var ponto = {
+        nomePonto: this.state.nomePonto,
+        descricaoPonto: this.state.descricaoPonto,
+        admin: this.props.adminId
+      };
+      pontos.push(ponto);
+      this.setState({
+        ...this.state,
+        pontos: pontos,
+        nomePonto: "",
+        descricaoPonto: "",
+        clear: true
+      });
+    } else
+      this.setState({
+        smShow: true,
+        error: "Preencha todos os campos"
+      });
+  }
+  deletaPonto(ponto) {
+    var pontos = arrayRemove(this.state.pontosTuristicos, ponto);
+    this.setState({ ...this.state, pontosTuristicos: pontos });
+  }
   render() {
     let smClose = () => {
       this.setState({ smShow: false });
-      if(this.state.error === "Cidade adicionada com sucesso!")
-      this.props.history.push("/en/dashboard/show-cities");
-      else return
-    }
+      if (this.state.error === "Cidade adicionada com sucesso!")
+        this.props.history.push("/en/dashboard/show-cities");
+      else return;
+    };
     return (
       <form onSubmit={this.addCidade}>
         <ListGroup flush>
@@ -128,24 +162,112 @@ class FormCity extends Component {
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feCompleteName">Descrição</label>
-                      <FormTextarea
-                      value={this.state.descricao}
-                        id="feDescription"
-                        onChange={e =>
-                          this.setState({ descricao: e.target.value })
-                        }
-                        rows="5"
-                      />
+                      <FormGroup>
+                        <strong className="text-muted d-block mb-2">
+                          Descrição
+                        </strong>
+                        <ReactQuill
+                          onChange={this.handleChangeEditor}
+                          value={this.state.descricao}
+                          modules={Editor.modules}
+                          className="add-new-post__editor mb-1"
+                        />
+                      </FormGroup>
                     </Col>
-                    <Col className="mb-3" md="12">
-                      <label htmlFor="feCustoMedio">Custo medio</label>
-                      <FormInput
-                        value={this.state.custoMedio}
-                        onChange={e => this.setState({ custoMedio: e.target.value })}
-                        id="feCustoMedio"
-                        type="number"
-                      />
+                    <Col lg="12" className="form-group">
+                      <h5 htmlFor="feCursos">Pontos Turisticos</h5>
+                      <p>
+                        Preencha os campos abaixo para adicionar um novo ponto
+                        turistico a cidade
+                      </p>
+                    </Col>
+                    <Col lg="12" className="form-group">
+                      <Row form>
+                        <Col md="12" className="form-group">
+                          <label htmlFor="feCursos">
+                            Nome do Ponto turistico
+                          </label>
+                          <FormInput
+                            value={this.state.nomePonto}
+                            onChange={e =>
+                              this.setState({ nomePonto: e.target.value })
+                            }
+                            id="feCursos"
+                            type="name"
+                          />
+                        </Col>
+                        <Col className="mb-3" md="12">
+                          <FormGroup>
+                            <strong className="text-muted d-block mb-2">
+                              Descrição do Ponto turistico
+                            </strong>
+                            <ReactQuill
+                              onChange={this.handleChangeEditor2}
+                              value={this.state.descricaoPonto}
+                              modules={Editor.modules}
+                              className="add-new-post__editor mb-1"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col md="2">
+                          <label
+                            style={{ color: "transparent" }}
+                            htmlFor="feCursos"
+                          >
+                            Deletarsdasdasdasdsad
+                          </label>
+                          <Button
+                            className="mb-3"
+                            style={{ marginLeft: "auto" }}
+                            onClick={() => this.adicionaPonto()}
+                            theme="primary"
+                          >
+                            Adicionar Ponto
+                          </Button>
+                        </Col>
+                        <Col md="12">
+                          <ListGroupItem
+                            style={{
+                              borderBottom: "1px solid lightgray",
+                              borderTop: "1px solid lightgray",
+                              minHeight: "10vh"
+                            }}
+                          >
+                            {this.state.pontosTuristicos.map(ponto => (
+                              <ListGroupItem>
+                                <Row lg="12">
+                                  <Col lg="2">
+                                    <p className="text-fiord-blue">
+                                      <strong>Nome:</strong> {ponto.nomePonto}
+                                    </p>
+                                  </Col>
+                                  <Col lg="9">
+                                    <p className="text-fiord-blue">
+                                      <strong>Descrição:</strong>{" "}
+                                      <div
+                                        className="card-text d-block mb-2"
+                                        dangerouslySetInnerHTML={{
+                                          __html: ponto.descricaoPonto
+                                        }}
+                                      />
+                                    </p>
+                                  </Col>
+                                  <Col lg="1">
+                                    <div
+                                      style={{ marginLeft: "auto" }}
+                                      pill
+                                      className={`card-post__category bg-danger iconDelete`}
+                                      onClick={() => this.deletaPonto(ponto)}
+                                    >
+                                      <i className={`fas fa-times`} />
+                                    </div>
+                                  </Col>
+                                </Row>
+                              </ListGroupItem>
+                            ))}
+                          </ListGroupItem>
+                        </Col>
+                      </Row>
                     </Col>
                   </Row>
                   <FormGroup>
@@ -156,36 +278,13 @@ class FormCity extends Component {
                   </FormGroup>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem do 'overview'
+                      Imagem da descrição
                     </strong>
                     <CustomFileUpload />
                   </FormGroup>
-                  <FormGroup>
-                    <strong className="text-muted d-block mb-2">
-                      Imagem do 'living there'
-                    </strong>
-                    <CustomFileUpload />
-                  </FormGroup>
-
-                  <FormGroup>
-                    <strong className="text-muted d-block mb-2">
-                      Overview da cidade
-                    </strong>
-                    <ReactQuill
-                      size="false"
-                      className="add-new-post__editor mb-1"
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <strong className="text-muted d-block mb-2">
-                      Living There da cidade
-                    </strong>
-                    <ReactQuill
-                      size="medium"
-                      className="add-new-post__editor mb-1"
-                    />
-                  </FormGroup>
-                  <Button className="ml-1" type="submit">Adicionar nova cidade</Button>
+                  <Button className="ml-1" type="submit">
+                    Adicionar nova cidade
+                  </Button>
                 </Form>
               </Col>
             </Row>

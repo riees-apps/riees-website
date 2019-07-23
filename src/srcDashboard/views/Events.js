@@ -9,9 +9,10 @@ import {
   ListGroup,
   ListGroupItem,
   Form,
-  FormGroup,
-  FormTextarea
+  FormGroup
 } from "shards-react";
+
+import "./index.css";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -21,10 +22,7 @@ import CustomFileUpload from "../components/components-overview/CustomFileUpload
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import api from "../../api/api";
-import vitoria from "../../components/Events/imgs/vitoria.jpg";
-import vilaVelha from "../../components/Events/imgs/vilavelha.jpg";
-import img1 from "../../components/Events/imgs/img1.jpg";
-import img2 from "../../components/Events/imgs/img2.jpg";
+import Editor from "../components/components-overview/editor";
 
 import PageTitle from "../components/common/PageTitle";
 
@@ -33,6 +31,20 @@ function arrayRemove(arr, value) {
     return ele !== value;
   });
 }
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
 class Events extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -43,13 +55,15 @@ class Events extends React.Component {
       editShow: false,
       eventos: [],
       nome: "",
-      dataInicio: "",
-      dataFim: "",
+      data: "",
+      localizacao: "",
       descricao: "",
+      horarioEvento: "",
       link: "",
       capa: null,
       admin: "5d1a1daaaf9fc5001737e7af"
     };
+    this.handleChangeEditor = this.handleChangeEditor.bind(this);
   }
 
   componentWillMount() {
@@ -59,52 +73,76 @@ class Events extends React.Component {
     });
   }
   editCity(event) {
-    const { nome, descricao, dataInicio, dataFim, link, admin } = this.state;
+    const {
+      nome,
+      descricao,
+      data,
+      localizacao,
+      horarioEvento,
+      link,
+      id,
+      admin
+    } = this.state;
+    let dataV = data.split("-");
+    let horarioV = horarioEvento.split(":");
+    let newDate = new Date(
+      dataV[0],
+      dataV[1] - 1,
+      dataV[2],
+      horarioV[0],
+      horarioV[1]
+    ).getTime();
+
     api.get(`/evento/${event.id}`).then(event => {
       if (
         !(
           nome !== "" &&
           descricao !== "" &&
           admin !== "" &&
-          dataInicio !== "" &&
-          dataFim !== "" &&
+          data !== "" &&
+          localizacao !== "" &&
           link !== ""
         )
       ) {
         this.setState({
           error: "Preencha todos os campos!",
-          smShow: nome
+          smShow: id
         });
       } else {
         try {
           api
             .patch(
-              `/evento/${event.id}`,
+              `/evento/${id}`,
               {
                 nome: nome,
                 descricao: descricao,
-                dataInicio: dataInicio,
-                dataFim: dataFim,
+                data: newDate,
+                localizacao: localizacao,
                 link: link,
                 admin: admin.id
               },
               { headers: { "Access-Control-Allow-Origin": "*" } }
             )
-            .then(response => {
-              this.setState({
-                editShow: false
-              });
-            })
+            .then(res =>
+              api.get('/evento?where={"deletedAt":0}').then(res => {
+                const events = res.data;
+                this.setState({
+                  ...this.state,
+                  eventos: events,
+                  editShow: false
+                });
+              })
+            )
             .catch(error => {
               this.setState({
                 smShow: event.nome,
-                error: "Houve um problema com a edição, tente novamente1"
+                error: "Houve um problema com a edição, tente novamente"
               });
             });
         } catch (err) {
           this.setState({
             smShow: event.nome,
-            error: "Houve um problema com a edição, tente novamente2"
+            error: "Houve um problema com a edição, tente novamente"
           });
         }
       }
@@ -128,28 +166,42 @@ class Events extends React.Component {
     });
   }
   handleClick2(event) {
+    let newDate = `${new Date(event.data).getFullYear()}-0${new Date(
+      event.data
+    ).getMonth() + 1}-${new Date(event.data).getDate()}`;
+
+    let newTime = `${new Date(event.data).getHours()}:${new Date(
+      event.data
+    ).getMinutes()}`;
     this.setState({
       ...this.state,
       editShow: event.nome,
+      id: event.id,
       nome: event.nome,
       descricao: event.descricao,
       admin: event.admin,
-      dataInicio: event.dataInicio,
-      dataFim: event.dataFim,
+      data: newDate,
+      horarioEvento: newTime,
+      localizacao: event.localizacao,
       link: event.link
     });
   }
   deleteUnidade(event) {
-    api.delete(`/evento/${event.id}`).then(resp => console.log(resp));
-    api.get('/evento?where={"deletedAt":0}').then(res => {
-      const events = res.data;
-      this.setState({
-        ...this.state,
-        eventos: events,
-        closeShow: false
-      });
-    });
+    api.delete(`/evento/${event.id}`).then(resp =>
+      api.get('/evento?where={"deletedAt":0}').then(res => {
+        const events = res.data;
+        this.setState({
+          ...this.state,
+          eventos: events,
+          closeShow: false
+        });
+      })
+    );
   }
+  handleChangeEditor(html) {
+    this.setState({ descricao: html });
+  }
+
   render() {
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
@@ -183,13 +235,41 @@ class Events extends React.Component {
                 <p className="text-fiord-blue">{event.nome}</p>
               </h4>
               <h5 className="card-title d-block mb-1  ">Descrição:</h5>
-              <p className="card-text d-block mb-2">{event.descricao}</p>
+              <p
+                className="card-text d-block mb-2"
+                dangerouslySetInnerHTML={{ __html: event.descricao }}
+              />
               <h5 className="card-title d-block mb-1  ">Link</h5>
               <p className="card-text d-block mb-2">{event.link}</p>
-              <h5 className="card-title d-block mb-1  ">Data de inicio:</h5>
-              <p className="card-text d-block mb-2">{event.dataInicio}</p>
-              <h5 className="card-title d-block mb-1  ">Data de inicio:</h5>
-              <p className="card-text d-block mb-2">{event.dataFim}</p>
+              {event.localizacao !== "" ? (
+                <div>
+                  <h5 className="card-title d-block mb-1 ">Data do evento:</h5>
+                  <p className="card-text d-block mb-2 ">{`${
+                    months[new Date(event.data).getMonth()]
+                  } ${new Date(event.data).getDate()}, ${new Date(
+                    event.data
+                  ).getFullYear()}`}</p>
+                  <h5 className="card-title d-block mb-1  ">
+                    Horário do evento:
+                  </h5>
+                  <p className="card-text d-block mb-2">{`${new Date(
+                    event.data
+                  ).getHours()}:${new Date(event.data).getMinutes()}`}</p>
+                  <h5 className="card-title d-block mb-1  ">
+                    Localização do evento
+                  </h5>
+                  <p className="card-text d-block mb-2">{event.localizacao}</p>
+                </div>
+              ) : (
+                <div>
+                  <h5 className="card-title d-block mb-1 ">Data de publicação:</h5>
+                  <p className="card-text d-block mb-2 ">{`${
+                    months[new Date(event.data).getMonth()]
+                  } ${new Date(event.data).getDate()}, ${new Date(
+                    event.data
+                  ).getFullYear()}`}</p>
+                </div>
+              )}
             </CardBody>
           </Card>
 
@@ -213,7 +293,9 @@ class Events extends React.Component {
                       <Form>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Nome</label>
+                            <strong className="text-muted d-block mb-2">
+                              Nome
+                            </strong>
                             <FormInput
                               value={this.state.nome}
                               onChange={e =>
@@ -224,20 +306,22 @@ class Events extends React.Component {
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feCompleteName">Descrição</label>
-                            <FormTextarea
-                              value={this.state.descricao}
-                              id="feDescription"
-                              onChange={e =>
-                                this.setState({ descricao: e.target.value })
-                              }
-                              rows="5"
-                            />
+                            <FormGroup>
+                              <strong className="text-muted d-block mb-2">
+                                Descrição
+                              </strong>
+                              <ReactQuill
+                                onChange={this.handleChangeEditor}
+                                value={this.state.descricao}
+                                modules={Editor.modules}
+                                className="add-new-post__editor mb-1"
+                              />
+                            </FormGroup>
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feCompleteName">
+                            <strong className="text-muted d-block mb-2">
                               Link do evento
-                            </label>
+                            </strong>
                             <FormInput
                               value={this.state.link}
                               onChange={e =>
@@ -248,25 +332,40 @@ class Events extends React.Component {
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feDataInicio">Data de Inicio</label>
+                            <label htmlFor="feDataInicio">Data do evento</label>
                             <FormInput
-                              value={this.state.dataInicio}
+                              value={this.state.data}
                               onChange={e =>
-                                this.setState({ dataInicio: e.target.value })
+                                this.setState({ data: e.target.value })
                               }
                               id="feCustoMedio"
-                              type="number"
+                              type="date"
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feDataFim">Data de Fim</label>
+                            <label htmlFor="feDataInicio">
+                              Horário do evento
+                            </label>
                             <FormInput
-                              value={this.state.dataFim}
+                              value={this.state.horarioEvento}
                               onChange={e =>
-                                this.setState({ dataFim: e.target.value })
+                                this.setState({ horarioEvento: e.target.value })
                               }
                               id="feCustoMedio"
-                              type="number"
+                              type="time"
+                            />
+                          </Col>
+                          <Col className="mb-3" md="12">
+                            <strong className="text-muted d-block mb-2">
+                              Local do evento
+                            </strong>
+                            <FormInput
+                              value={this.state.localizacao}
+                              onChange={e =>
+                                this.setState({ localizacao: e.target.value })
+                              }
+                              id="feName"
+                              type="name"
                             />
                           </Col>
                         </Row>
@@ -283,7 +382,10 @@ class Events extends React.Component {
               </ListGroup>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose2.bind(this)}>
+              <Button
+                variant="secondary"
+                onClick={this.handleClose2.bind(this)}
+              >
                 Close
               </Button>
               <Button variant="danger" onClick={() => this.editCity(event)}>

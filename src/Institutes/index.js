@@ -85,7 +85,7 @@ class Institutes extends Component {
             dignissimos.
           </Heading>
         </DivText>
-        <InstituteImages city=''/>
+        <InstituteImages Institutos={this.props.Institutes} city=''/>
         <Footer />
       </div>
     );

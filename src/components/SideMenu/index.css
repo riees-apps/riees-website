@@ -32,11 +32,23 @@
     margin-bottom:3%;
   }
 }
+.iconUp2{
+  color: #003b81;
+  font-size: 1.25vw;
+  margin-left: auto;
+  padding-right: 4px;
+}
+.iconDown2{
+  color: #003b81;
+  font-size: 1.25vw;
+  margin-left: auto;
+  padding-right: 4px;
+}
 
 .title{
   transition: all 1000ms;
   text-transform: uppercase;
-  color:white;
+  color:#e4e3ea;
   font-size: calc(30px + 2vmin);
   line-height:calc(15px + 2vmin);
   letter-spacing: 4px;

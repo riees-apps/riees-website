@@ -10,6 +10,7 @@ import InstituteImages from '../components/Institutes/index'
 import Places from '../components/Places/index'
 import {FormattedMessage} from 'react-intl'
 
+import './cidade.css'
 
 const DivText = styled.div`
   background-color: #f4f4f4;
@@ -120,107 +121,31 @@ class City extends Component {
     console.log(url);
   }
   render() {
-    const { name, img, cities, places, url } = this.props;
+    const { name, img, Cidades, places, descricao } = this.props;
+    console.log('0k')
     return (
       <div style={{background:'#f4f4f4'}}>
         <Image title={name} height="100vh" image={img} />
         <Container >
-          <SideMenu url={url} page="City" links={cities} />
+          <SideMenu page="City" links={Cidades} />
           <DivText>
             <Div justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="#0077ff"><FormattedMessage id="Overview"/></Heading>
+              <Heading  color="#003b81"><FormattedMessage id="Description"/></Heading>
             </Div>
             <DivImg>
               <Img src={img1} alt="" />
             </DivImg>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Div justify="flex-start">
-              <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="LivingThere"/></Heading>
-            </Div>
-            <DivImg>
-              <Img src={img2} alt="" />
-            </DivImg>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
+            
+            <div className="innerHTMLCidade" dangerouslySetInnerHTML={{ __html: descricao }}/>
             <Div justify="flex-start">
               <Heading><FormattedMessage id="Top"/></Heading>
-              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Visit"/></Heading>
+              <Heading color="#003b81"><FormattedMessage id="Visit"/></Heading>
             </Div>
             <Places places={places}/>
             <Div style={{background:'#f4f4f4'}} justify="flex-start">
               <Heading>{name}</Heading>
-              <Heading color="rgb(0, 83, 180)"><FormattedMessage id="Institutes"/></Heading>
+              <Heading color="#003b81"><FormattedMessage id="Institutes"/></Heading>
             </Div>
             <InstituteImages  cityInstitute city={name}/>
             <Button

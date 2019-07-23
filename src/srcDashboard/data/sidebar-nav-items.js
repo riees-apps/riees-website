@@ -27,7 +27,7 @@ export default function() {
       to: "/en/dashboard/add-new-city",
     },
     {
-      title: "Visualizar Eventos",
+      title: "Visualizar Eventos/Noticias",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/en/dashboard/show-events",
     },
@@ -35,6 +35,11 @@ export default function() {
       title: "Criar Evento",
       htmlBefore: '<i class="material-icons">note_add</i>',
       to: "/en/dashboard/add-new-event",
+    },
+    {
+      title: "Criar Noticia",
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: "/en/dashboard/add-new-new",
     },
     {
       title: "Visualizar Postagens",

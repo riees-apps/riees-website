@@ -5,6 +5,8 @@ import Button from "../../components/Button/index.js";
 import styled from "styled-components";
 import {FormattedMessage} from 'react-intl'
 
+import img from '../Cities/imgs/img1.jpg'
+
 const Image = styled.div`
   background-image: url(${props => props.image});
   box-shadow: 0px 100vh rgba(0, 0, 0, 0.3) inset;
@@ -89,18 +91,18 @@ class Places extends Component {
       return places.map(place => (
         <Carousel.Item >  
         <Image
-        image={place.img}
+        image={img}
 
         >
         <Text>
         <Heading>
-        {place.name}
+        {place.nome}
         </Heading>
         <Subheading>
-        {place.text}
+        {place.descricao}
         </Subheading>
         <DivBtn >
-        <Button places url={`https://www.google.com/search?q=${place.name}`} name={<FormattedMessage id="Button"/>}/>
+        <Button places url={`https://www.google.com/search?q=${place.nome}`} name={<FormattedMessage id="Button"/>}/>
         </DivBtn>
         </Text>
       </Image>

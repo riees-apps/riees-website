@@ -1,0 +1,73 @@
+.innerHTMLPost  {
+    width:100%;
+}
+.innerHTMLPost p {
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  color: #444;
+  font-weight: lighter;
+  font-size: calc(7px + 1vw);
+  line-height: calc(8px + 1vw);
+  width: 100%;
+  text-align: start;
+  padding: 0 0 1vh 0;
+}
+
+.innerHTMLPost h1 {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #191919;
+  font-size: calc(15px + 1vw);
+  line-height: calc(15px + 1vw);
+  margin: auto;
+  width: 100%;
+  margin-top: 4%;
+  margin-bottom: 5%;
+}
+.innerHTMLPost h2 {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #212121;
+    font-size: calc(12px + 1vw);
+    line-height: calc(12px + 1vw);
+    margin: auto;
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+  }
+
+@media screen and (max-width: 769px) {
+  .innerHTMLPost p {
+    font-family: "Raleway", Helvetica, Arial, sans-serif;
+    color: #444;
+    font-weight: lighter;
+    width: 100%;
+    text-align: start;
+    padding: 0 0 1vh 0;
+    font-size: calc(12px + 1vw);
+    line-height: calc(12px + 1vw);
+  }
+  .innerHTMLPost h1 {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #101011;
+    margin: auto;
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    font-size: calc(15px + 3vw);
+    line-height: calc(15px + 3vw);
+    margin-bottom: 10%;
+  }
+  .innerHTMLPost h2 {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    color: #101011;
+    margin: auto;
+    width: 100%;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    font-size: calc(15px + 2vw);
+    line-height: calc(15px + 2vw);
+    margin-bottom: 10%;
+  }
+}

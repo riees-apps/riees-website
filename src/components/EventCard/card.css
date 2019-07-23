@@ -1,0 +1,125 @@
+.innerHTMLCard {
+  width: 100%;
+}
+
+.innerHTMLCard p {
+  font-family: "Raleway", sans-serif;
+  transition: all 300ms linear;
+  text-align: start;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(4.5px + 1vw);
+  line-height: calc(5.5px + 1vw);
+  width: 98%;
+  color: #606060;
+  height: max-content;
+  padding: 0 1vh;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
+  overflow: hidden;
+}
+
+.innerHTMLCard h1 {
+    font-family: "Raleway", sans-serif;
+    transition: all 300ms linear;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: calc(5px + 1.2vw);
+    line-height: calc(6px + 1.2vw);
+    width: 98%;
+    color: #606060;
+    height: max-content;
+    padding: 0 1vh;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
+    overflow: hidden;
+}
+.innerHTMLCard h2 {
+    font-family: "Raleway", sans-serif;
+    transition: all 300ms linear;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: calc(4.75px + 1.1vw);
+    line-height: calc(5.75px + 1.1vw);
+    width: 98%;
+    color: #606060;
+    height: max-content;
+    padding: 0 1vh;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
+    overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .innerHTMLCard p {
+    transition: all 300ms linear;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 98%;
+    color: #606060;
+    height: max-content;
+    padding: 0 1vh;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
+    overflow: hidden;
+    font-size: calc(5px + 1.3vh);
+    line-height: calc(5px + 1.3vh);
+  }
+  .innerHTMLCard h1 {
+    transition: all 300ms linear;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 98%;
+    color: #606060;
+    height: max-content;
+    padding: 0 1vh;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
+    overflow: hidden;
+    font-size: calc(6px + 1.6vh);
+    line-height: calc(6px + 1.6vh);
+  }
+  .innerHTMLCard h2 {
+    transition: all 300ms linear;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 98%;
+    color: #606060;
+    height: max-content;
+    padding: 0 1vh;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
+    overflow: hidden;
+    font-size: calc(5px + 1.45vh);
+    line-height: calc(5px + 1.45vh);
+  }
+}

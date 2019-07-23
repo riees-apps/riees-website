@@ -9,6 +9,7 @@ import BlogOverview from "./views/BlogOverview";
 import AddNewInstitute from "./views/AddNewInstitute";
 import AddNewCity from "./views/AddNewCity";
 import AddNewEvent from "./views/AddNewEvent";
+import AddNewNew from "./views/AddNewNew";
 import AddNewUser from "./views/AddNewUser";
 import AddNewPost from "./views/AddNewPost";
 
@@ -54,6 +55,11 @@ export default [
     path: "/en/dashboard/add-new-event",
     layout: DefaultLayout,
     component: AddNewEvent
+  },
+  {
+    path: "/en/dashboard/add-new-new",
+    layout: DefaultLayout,
+    component: AddNewNew
   },
   {
     path: "/en/dashboard/add-new-post",

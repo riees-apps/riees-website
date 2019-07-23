@@ -4,7 +4,7 @@ import './area.css'
 
 const DivAreas = styled.div`
   background: #e4e3ea;
-  margin: 10vh 0;
+  margin: 5vh 0;
   width: calc(100%);
   z-index: 100;
   position: relative;
@@ -58,7 +58,7 @@ const DivHeading = styled.div`
   height: 20%;
 `;
 const Heading = styled.h1`
-  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", Helvetica, Arial, sans-serif;
   color: ${props => props.color};
   font-size: calc(25px + 1vw);
   line-height: calc(25px + 1vw);
@@ -71,8 +71,8 @@ class AreaCard extends Component {
     const renderAreas = () => {
       return this.props.areas.map(area => (
         <Card>
-          <i className={`fas fa-${area.icon} icon`} />
-          <h1 class="areaName">{area.name}</h1>
+          <i className={`fas fa-${area} icon`} />
+          <h1 class="areaName">{area}</h1>
         </Card>
       ));
     };
@@ -80,7 +80,7 @@ class AreaCard extends Component {
       <DivAreas>
         <DivHeading>
           <Heading color="#303033">{this.props.name}</Heading>
-          <Heading color="#0077ff">areas</Heading>
+          <Heading color="#003b81">areas</Heading>
         </DivHeading>
         <DivCards>{renderAreas()}</DivCards>
       </DivAreas>

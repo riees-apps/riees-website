@@ -59,10 +59,10 @@ export const Image = styled.div`
 `;
 export const Resume= styled.h1`
   font-family: "Raleway", sans-serif;
-  color: #101011;
+  color: #191919;
   font-weight: lighter;
-  font-size: calc(14px + 1vw);
-  line-height: calc(14px + 1vw);
+  font-size: calc(13px + 1vw);
+  line-height: calc(13px + 1vw);
   margin: auto;
   width: 100%;
   text-align: start;
@@ -206,9 +206,10 @@ export const Details = styled.h1`
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  font-size: calc(7.5px + 1vw);
-  line-height: calc(7.5px + 1vw);
-  font-weight: 400;
+  font-size: calc(8px + 1.2vw);
+  line-height: calc(8px + 1.2vw);
+  font-weight: bolder;
+  letter-spacing:0.5px;
   width: max-content;
   color: #f4f4f4;
   height: max-content;

@@ -31,6 +31,7 @@ const DivText = styled.div`
 `;
 const Heading = styled.h1`
   font-family: "Raleway", Helvetica, Arial, sans-serif;
+  margin-top:2.5vh;
   width: 80%;
   text-align:center;
   color: #404040;
@@ -81,7 +82,7 @@ class Cities extends Component {
             dignissimos.
           </Heading>
         </DivText>
-      <CitiesImages/>
+      <CitiesImages Cities={this.props.Cidades} />
       <Footer/>
       </div>
     )

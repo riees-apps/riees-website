@@ -20,6 +20,7 @@ import "react-quill/dist/quill.snow.css";
 import "../assets/quill.css";
 
 import api from "../../api/api";
+import Editor from "../components/components-overview/editor";
 
 import Checkboxes from "../components/components-overview/CheckboxesInstitute";
 import UnidadesInstitute from "../components/components-overview/UnidadesInstitute";
@@ -50,6 +51,7 @@ class Institutes extends React.Component {
       smShow: false,
       institutes: [],
       editShow: false,
+      id: "",
       nome: "",
       missao: "",
       descricao: "",
@@ -61,6 +63,14 @@ class Institutes extends React.Component {
       pontosFortes: [],
       unidades: []
     };
+    this.handleChangeEditor = this.handleChangeEditor.bind(this);
+    this.handleChangeEditor2 = this.handleChangeEditor2.bind(this);
+  }
+  handleChangeEditor(html) {
+    this.setState({ descricao: html });
+  }
+  handleChangeEditor2(html) {
+    this.setState({ missao: html });
   }
   componentWillMount() {
     api.get('/instituicao?where={"deletedAt":0}').then(res => {
@@ -78,7 +88,8 @@ class Institutes extends React.Component {
       link,
       admin,
       pontosFortes,
-      unidades
+      unidades,
+      id
     } = this.state;
     api.get(`/instituicao/${institute.id}`).then(inst => {
       if (
@@ -100,7 +111,7 @@ class Institutes extends React.Component {
         try {
           api
             .patch(
-              `/instituicao/${institute.id}`,
+              `/instituicao/${id}`,
               {
                 nome: nome,
                 missao: missao,
@@ -112,11 +123,13 @@ class Institutes extends React.Component {
                 logo: null
               },
               { headers: { "Access-Control-Allow-Origin": "*" } }
-            ).then(response => {
+            )
+            .then(response => {
               const idInstituicao = response.data.id;
+              console.log(response.data)
               inst.unidades.map(unidade =>
                 api
-                .patch(
+                  .patch(
                     `/unidade/${unidade.id}`,
                     {
                       nome: unidade.nome,
@@ -129,39 +142,51 @@ class Institutes extends React.Component {
                       cidade: unidade.cidade,
                       cep: unidade.cep,
                       admin: response.data.admin.id,
-                      instituicao: idInstituicao
+                      instituicao: unidade.deletedAt !== 0 ? 0 : idInstituicao
                     },
                     { headers: { "Access-Control-Allow-Origin": "*" } }
                   )
                   .then(response => {
                     const idUnidade = response.data.id;
+                    console.log(unidade)
                     unidade.cursos.map(curso =>
                       api
-                      .patch(
-                        `/curso/${curso.id}`,
+                        .patch(
+                          `/curso/${curso.id}`,
                           {
                             nome: curso.nome,
                             niveis: curso.niveis,
-                            area: null,
+                            area: curso.area,
                             admin: response.data.admin.id,
                             unidade: idUnidade
                           },
                           { headers: { "Access-Control-Allow-Origin": "*" } }
                         )
-                        .then(response => {})
+                        .then(res =>
+                          api
+                            .get('/instituicao?where={"deletedAt":0}')
+                            .then(res => {
+                              const inst = res.data;
+                              this.setState({
+                                ...this.state,
+                                institutes: inst,
+                                editShow: false
+                              });
+                            })
+                        )
                     );
                   })
               );
             })
             .catch(error => {
               this.setState({
-                smShow: institute.nome,
+                smShow: inst.nome,
                 error: "Houve um problema com a edição, tente novamente1"
               });
             });
         } catch (err) {
           this.setState({
-            smShow: institute.nome,
+            smShow: inst.nome,
             error: "Houve um problema com a edição, tente novamente2"
           });
         }
@@ -189,6 +214,7 @@ class Institutes extends React.Component {
     this.setState({
       ...this.state,
       editShow: institute.nome,
+      id: institute.id,
       nome: institute.nome,
       missao: institute.missao,
       descricao: institute.descricao,
@@ -201,18 +227,30 @@ class Institutes extends React.Component {
     });
   }
   deleteUnidade(institute) {
-    api.delete(`/instituicao/${institute.id}`).then(resp => console.log(resp));
-    api.get('/instituicao?where={"deletedAt":0}').then(res => {
-      const inst = res.data;
-      this.setState({
-        ...this.state,
-        institutes: inst,
-        closeShow: false
-      });
-    });
+    api.delete(`/instituicao/${institute.id}`).then(resp =>
+      api.get('/instituicao?where={"deletedAt":0}').then(res => {
+        const inst = res.data;
+        this.setState({
+          ...this.state,
+          institutes: inst,
+          closeShow: false
+        });
+      })
+    );
   }
   onChildChanged(New) {
     this.setState({ unidades: New });
+  }
+  adicionaPontoForte() {
+    var pf = this.state.pontosFortes;
+    if (this.state.ponto !== "") {
+      pf.push(this.state.ponto);
+      this.setState({ ...this.state, pontosFortes: pf, ponto: "" });
+    } else this.setState({ ...this.state, ponto: "" });
+  }
+  deletaPontoForte(ponto) {
+    var pf = arrayRemove(this.state.pontosFortes, ponto);
+    this.setState({ ...this.state, pontosFortes: pf });
   }
   render() {
     let smClose = () => this.setState({ smShow: false });
@@ -249,9 +287,9 @@ class Institutes extends React.Component {
               <h5 className="card-title d-block mb-1  ">Endereço web:</h5>
               <p className="card-text d-block mb-2">{institute.link}</p>
               <h5 className="card-title d-block mb-1  ">Missão: </h5>
-              <p className="card-text d-block mb-2">{institute.missao}</p>
+              <p className="card-text d-block mb-2" dangerouslySetInnerHTML={{ __html: institute.missao }}/>
               <h5 className="card-title d-block mb-1  ">Descrição: </h5>
-              <p className="card-text d-block mb-2">{institute.descricao}</p>
+              <p className="card-text d-block mb-2" dangerouslySetInnerHTML={{ __html: institute.descricao }} />
               <h5 className="card-title d-block mb-1  ">Pontos fortes:</h5>
               <ul className="px-4">
                 {institute.pontosFortes.map(pontoForte => (
@@ -288,7 +326,9 @@ class Institutes extends React.Component {
                       <Form>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Nome</label>
+                            <strong className="text-muted d-block mb-2">
+                              Nome
+                            </strong>
                             <FormInput
                               value={this.state.nome}
                               onChange={e =>
@@ -299,32 +339,38 @@ class Institutes extends React.Component {
                               placeholder="Ex.: UFES - Universidade Federal do Espirito Santo"
                             />
                           </Col>
-                          <Col className="mb-3" md="6">
-                            <label htmlFor="feCompleteName">Descrição</label>
-                            <FormTextarea
-                              value={this.state.descricao}
-                              id="feDescription"
-                              onChange={e =>
-                                this.setState({ descricao: e.target.value })
-                              }
-                              rows="5"
-                            />
+                          <Col className="mb-3" md="12">
+                            <FormGroup>
+                              <strong className="text-muted d-block mb-2">
+                                Descrição
+                              </strong>
+                              <ReactQuill
+                                onChange={this.handleChangeEditor}
+                                value={this.state.descricao}
+                                modules={Editor.modules}
+                                className="add-new-post__editor mb-1"
+                              />
+                            </FormGroup>
                           </Col>
-                          <Col className="mb-3" md="6">
-                            <label htmlFor="feCompleteName">Missão</label>
-                            <FormTextarea
-                              value={this.state.missao}
-                              id="feMission"
-                              onChange={e =>
-                                this.setState({ missao: e.target.value })
-                              }
-                              rows="5"
-                            />
+                          <Col className="mb-3" md="12">
+                            <FormGroup>
+                              <strong className="text-muted d-block mb-2">
+                                Missão
+                              </strong>
+                              <ReactQuill
+                                onChange={this.handleChangeEditor2}
+                                value={this.state.missao}
+                                modules={Editor.modules}
+                                className="add-new-post__editor mb-1"
+                              />
+                            </FormGroup>
                           </Col>
                         </Row>
 
                         <FormGroup>
-                          <label htmlFor="feUrl">Endereço do site</label>
+                          <strong className="text-muted d-block mb-2">
+                            Endereço do site
+                          </strong>
                           <FormInput
                             id="feUrl"
                             type="url"
@@ -335,7 +381,9 @@ class Institutes extends React.Component {
                             placeholder="Ex.: http://www.ufes.br/"
                           />
                         </FormGroup>
-                        <label htmlFor="fePontosFortes">Pontos Fortes</label>
+                        <strong className="text-muted d-block mb-2">
+                          Pontos Fortes
+                        </strong>
                         <ul className="pl-4">
                           {this.state.pontosFortes.map(pontoForte => (
                             <Row lg="12">
@@ -380,16 +428,11 @@ class Institutes extends React.Component {
                             </div>
                           </Col>
                         </Row>
-                        {/* 
-                  <ListGroupItem className="p-0 px-3 pt-3 mb-3">
-                    <Row>
-                      <Checkboxes />
-                    </Row>
-                  </ListGroupItem> */}
 
                         <UnidadesInstitute
-                          unidades={institute.unidades}
                           callbackParent={New => this.onChildChanged(New)}
+                          unidades={institute.unidades}
+                          edit='true'
                         />
 
                         <FormGroup>
@@ -414,100 +457,18 @@ class Institutes extends React.Component {
                           <CustomFileUpload />
                         </FormGroup>
 
-                        {/* <FormGroup>
-                    <label htmlFor="feUrl">Resumo do instituto</label>
-                    <ReactQuill className="add-new-post__editor mb-1" />
-                  </FormGroup> */}
                         <Button type="submit">Criar nova intituição</Button>
                       </Form>
                     </Col>
                   </Row>
                 </ListGroupItem>
               </ListGroup>
-              {/* <ListGroup flush>
-                <ListGroupItem className="p-3">
-                  <Row>
-                    <Col>
-                      <Form>
-                        <Row form>
-                          <FormGroup>
-                            <Col md="6" className="form-group">
-                              <label htmlFor="feName">Nome</label>
-                              <FormInput
-                                value={this.state.name}
-                                onChange={e =>
-                                  this.setState({ name: e.target.value })
-                                }
-                                id="feName"
-                                type="name"
-                              />
-                            </Col>
-                            <Col md="6">
-                              <label htmlFor="feCompleteName">
-                                Nome Completo
-                              </label>
-                              <FormInput
-                                id="feCompleteName"
-                                type="name"
-                                value={this.state.subheading}
-                                onChange={e =>
-                                  this.setState({ subheading: e.target.value })
-                                }
-                              />
-                            </Col>
-                          </FormGroup>
-                        </Row>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Imagem do intituto
-                          </strong>
-                          <CustomFileUpload />
-                        </FormGroup>
-
-                        <FormGroup>
-                          <label htmlFor="feUrl">Endereço do site</label>
-                          <FormInput
-                            id="feUrl"
-                            type="url"
-                            value={this.state.url}
-                            onChange={e =>
-                              this.setState({ url: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-
-                        <FormGroup>
-                          <label htmlFor="fePontosFortes">Pontos Fortes</label>
-                          <FormInput
-                            id="fePontosFortes"
-                            type="name"
-                            value={this.state.url}
-                            onChange={e =>
-                              this.setState({ url: e.target.value })
-                            }
-                          />
-                        </FormGroup>
-
-                        <ListGroupItem className="p-0 px-3 pt-3 mb-3">
-                          <Row>
-                            <Checkboxes />
-                          </Row>
-                        </ListGroupItem>
-
-                        <UnidadesInstitute />
-
-                        <FormGroup>
-                          <label htmlFor="feUrl">Resumo do instituto</label>
-                          <ReactQuill className="add-new-post__editor mb-1" />
-                        </FormGroup>
-                      </Form>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-              </ListGroup> */}
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose2.bind(this)}>
+              <Button
+                variant="secondary"
+                onClick={this.handleClose2.bind(this)}
+              >
                 Close
               </Button>
               <Button

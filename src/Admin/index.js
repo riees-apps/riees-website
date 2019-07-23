@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import img from "./img-01.jpg";
 import api from "../api/api";
-import { login } from "../api/auth";
+import { login, getToken } from "../api/auth";
 import { withRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import "./admin.css";
@@ -88,8 +88,11 @@ class Admin extends Component {
             { senha: password, email: email },
             { headers: { "Access-Control-Allow-Origin": "*" } }
           ).then(response => {
-            login(response.data.token);
-            this.props.history.push("/en/dashboard/show-institutes");
+				login(response.data.token);
+				this.props.history.push({
+				pathname: "/en/dashboard/show-institutes",
+				state: { detail: response.data.id}
+				})
           }).catch(error => {
             this.setState({
               smShow: true,

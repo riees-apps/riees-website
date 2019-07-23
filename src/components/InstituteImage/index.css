@@ -48,7 +48,7 @@
   line-height:0.7em;
   letter-spacing: 4px;
   width: max-content;
-  margin-left: 35px;
+  margin-left: 3vw;
   text-decoration: none;
   margin-top:33vh;
 }
@@ -61,7 +61,7 @@
   font-size: 3em;
   line-height:0.7em;
   letter-spacing: 4px;
-  margin-left: 35px;
+  margin-left: 3vw;
   margin-top:33vh;
   width: max-content;
   cursor: pointer;
@@ -69,57 +69,33 @@
 .info1{
   text-decoration: none;
   transition: all 1000ms,color 1500ms;
-  margin-left: 35px;
+  margin-left: 3vw;
   text-transform: uppercase;
   color: transparent;
   width: max-content;
   font-size: 1.4em;
   line-height: 0.3em;
   letter-spacing: 1px;
-  margin-bottom: 0.1em;
+  margin-bottom: 0.7em;
 }
 
 .info2{
   text-decoration: none;
-  transition: all 1000ms;
-  margin-left: 35px;
+  transition: all 1000ms,color 300ms;
+  margin-left: 3vw;
   text-transform: uppercase;
   width: max-content;
   color:white;
   letter-spacing: 1px;
   font-size: 1.4em;
   line-height: 0.3em;
-  margin-bottom: 0.1em;
-}
-.info3{
-  text-decoration: none;
-  transition: all 1000ms,color 1500ms;
-  margin-left: 35px;
-  text-transform: uppercase;
-  color: transparent;
-  width: max-content;
-  font-size: 1.4em;
-  line-height: 0.3em;
-  margin-bottom: 0.1em;
+  margin-bottom: 0.7em;
 }
 
-.info4{
-  text-decoration: none;
-  transition: all 1000ms;
-  margin-left: 35px;
-  text-transform: uppercase;
-  width: max-content;
-  color:white;
-  letter-spacing: 1px;
-  margin-bottom: 0;
-  font-size: 1.4em;
-  line-height: 0.3em;
-  margin-bottom: 0.1em;
-}
 .cities1{
   text-decoration: none;
   transition: all 1000ms;
-  margin-left: 31px;
+  margin-left: 2.7vw;
   color:transparent;
   width:90%;
   display: flex;
@@ -137,7 +113,7 @@
 .cities2{
   text-decoration: none;
   transition: all 1000ms;
-  margin-left: 31px;
+  margin-left: 2.7vw;
   color:white;
   width:90%;
   display: flex;
@@ -152,53 +128,78 @@
   margin-bottom: 15px;
 }
 .h1Cities{
+  transition: all 1000ms,color 1500ms;
+  color:transparent;
+  text-decoration: none;
+  width:max-content;
+  text-transform: uppercase;
+  font-weight: lighter;
+  letter-spacing: 0px;
+  padding: 0 0.3vw;
+  font-size: 12.5px;
+  line-height:4px;
+}
+.h1CitiesHover{
+  transition: all 1000ms,color 300ms;
   color:#fafafa;
   text-decoration: none;
   width:max-content;
   text-transform: uppercase;
   font-weight: lighter;
   letter-spacing: 0px;
-  padding: 0 4px;
+  padding: 0 0.3vw;
   font-size: 12.5px;
   line-height:4px;
 }
 .h1Cities2{
+  transition: all 1000ms,color 1500ms;
+  color:transparent;
+  text-decoration: none;
+  width:max-content;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  padding: 0 0 0 4px;
+  font-size: 12.5px;
+  line-height:4px;
+}
+.h1Cities2Hover{
+  transition: all 1000ms,color 300ms;
   color:#fafafa;
   text-decoration: none;
   width:max-content;
   text-transform: uppercase;
   letter-spacing: 0px;
   padding: 0 0 0 4px;
-  font-size: 11px;
-  line-height:2px;
+  font-size: 12.5px;
+  line-height:4px;
 }
 .sub1{
   text-decoration: none;
   transition: all 1000ms,color 1500ms;
-  margin-left: 35px;
+  margin-left: 3vw;
   text-align:start;
   text-transform: uppercase;
   color: transparent;
   width: 90%;
   margin-bottom: 25px;
-  font-size: 1em;
-  line-height: 1em;
+  font-size: 1.2em;
+  line-height: 1.2em;
   letter-spacing: -0.5px;
   font-weight:lighter;
 }
 
 .sub2{
   text-decoration: none;
-  transition: all 1000ms,color 150ms;
-  margin-left: 35px;
+  transition: all 1000ms,color 300ms;
+  margin-left: 3vw;
   text-transform: uppercase;
   text-align:start;
   width: 90%;
   color:white;
   letter-spacing: -0.5px;
   margin-bottom: 25px;
-  font-size: 1em;
-  line-height: 1em;
+  font-size: 1.2em;
+  line-height: 1.2em;
   font-weight:lighter;
 }
 .divInfo{
@@ -209,6 +210,6 @@
 }
 .divInfo2{
   text-decoration: none;
-  transition: all 1000ms,color 150ms;
+  transition: all 1000ms,color 300ms;
   height:100%;
 }

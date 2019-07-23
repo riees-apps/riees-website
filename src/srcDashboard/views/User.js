@@ -40,9 +40,11 @@ class Users extends React.Component {
       smShow: false,
       editShow: false,
       usuarios: [],
+      id: "",
       nome: "",
       email: "",
-      senha: ""
+      senha: "",
+      senha2: ""
     };
   }
   componentWillMount() {
@@ -52,18 +54,23 @@ class Users extends React.Component {
     });
   }
   editUser(user) {
-    const { nome, email, senha } = this.state;
+    const { nome, email, senha, senha2, id } = this.state;
     api.get(`/admin/${user.id}`).then(user => {
-      if (!(nome !== "" && email !== "" && senha !== "")) {
+      if (!(nome !== "" && email !== "" && senha !== ""))
         this.setState({
           error: "Preencha todos os campos!",
           smShow: nome
         });
-      } else {
+      else if (!(senha === senha2))
+        this.setState({
+          error: "Confirme corretamente sua senha",
+          smShow: nome
+        });
+      else {
         try {
           api
             .patch(
-              `/admin/${user.id}`,
+              `/admin/${id}`,
               {
                 nome: nome,
                 email: email,
@@ -71,11 +78,16 @@ class Users extends React.Component {
               },
               { headers: { "Access-Control-Allow-Origin": "*" } }
             )
-            .then(response => {
-              this.setState({
-                editShow: false
-              });
-            })
+            .then(res =>
+              api.get('/admin?where={"deletedAt":0}').then(res => {
+                const admins = res.data;
+                this.setState({
+                  ...this.state,
+                  usuarios: admins,
+                  editShow: false
+                });
+              })
+            )
             .catch(error => {
               this.setState({
                 smShow: user.nome,
@@ -112,21 +124,24 @@ class Users extends React.Component {
     this.setState({
       ...this.state,
       editShow: user.nome,
+      id: user.id,
       nome: user.nome,
-      email: user.email,   
-      senha: user.senha
+      email: user.email,
+      senha: "",
+      senha2: ""
     });
   }
   deleteUnidade(user) {
-    api.delete(`/admin/${user.id}`).then(resp => console.log(resp));
-    api.get('/admin?where={"deletedAt":0}').then(res => {
-      const users = res.data;
-      this.setState({
-        ...this.state,
-        usuarios: users,
-        closeShow: false
-      });
-    });
+    api.delete(`/admin/${user.id}`).then(resp =>
+      api.get('/admin?where={"deletedAt":0}').then(res => {
+        const users = res.data;
+        this.setState({
+          ...this.state,
+          usuarios: users,
+          closeShow: false
+        });
+      })
+    );
   }
   render() {
     let smClose = () => this.setState({ smShow: false });
@@ -229,14 +244,30 @@ class Users extends React.Component {
                             />
                           </Col>
                         </Row>
+                        <Row form>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fePassword">Confirme a senha</label>
+                            <FormInput
+                              value={this.state.senha2}
+                              onChange={e =>
+                                this.setState({ senha2: e.target.value })
+                              }
+                              id="fePassword"
+                              type="password"
+                            />
+                          </Col>
+                        </Row>
                       </Form>
                     </Col>
                   </Row>
                 </ListGroupItem>
               </ListGroup>
-              </Modal.Body>
+            </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose2.bind(this)}>
+              <Button
+                variant="secondary"
+                onClick={this.handleClose2.bind(this)}
+              >
                 Close
               </Button>
               <Button variant="danger" onClick={() => this.editUser(user)}>
@@ -260,13 +291,25 @@ class Users extends React.Component {
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
                 Close
               </Button>
-              <Button
-                variant="danger"
-                onClick={() => this.deleteUnidade(user)}
-              >
+              <Button variant="danger" onClick={() => this.deleteUnidade(user)}>
                 Confirm
               </Button>
             </Modal.Footer>
+          </Modal>
+          <Modal
+            size="sm"
+            show={this.state.smShow}
+            onHide={smClose}
+            aria-labelledby="example-modal-sizes-title-sm"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-sm">
+                {this.state.error === "Postagem adicionada com sucesso!"
+                  ? "Sucesso!"
+                  : "Erro!"}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{this.state.error}</Modal.Body>
           </Modal>
         </Col>
       ));

@@ -10,136 +10,6 @@ import ifes from './imgs/ifes.jpg'
 import InstituteImage from '../InstituteImage/index'
 
 
-const Institutes = [
-  {
-    url: "/Institute/Ufes",
-    name: "UFES",
-    subheading: "Universidade Federal do Espirito Santo",
-    cities: [
-      "Vitória",
-      "São Mateus",
-      "Alegre"
-    ],
-    areas: [
-      "engineering",
-      "social science",
-      "medicine",
-      "engineering",
-      "social science",
-      "medicine",
-      "fitness and health",
-    ],
-    img: ufes
-  },
-  {
-    url: "/Institute/Uvv",
-    name: "UVV",
-    subheading: "Universidade Vila Velha",
-    cities: [
-      "Vila Velha",
-    ],
-    areas: [
-      "engineering",
-      "social science",
-      "medicine",
-      "engineering",
-      "social science",
-      "medicine",
-      "fitness and health",
-    ],
-    img: uvv
-  },
-  {
-    url: "/Institute/Fdv",
-    name: "FDV",
-    subheading: "Faculdade de Direito de Vitória",
-    cities: [
-      "Vitória",
-    ],
-    areas: [
-      "law",
-      "social science",
-    ],
-    img: fdv
-  },
-  {
-    url: "/Institute/Emescam",
-    name: "EMESCAM",
-    subheading: "Escola Superior de Ciências da Santa Casa de Misericórdia de Vitória",
-    cities: [
-      "Vitória",
-    ],
-    areas: [
-      'medicine'
-    ],
-    img: emescam
-  },
-  {
-    url: "/Institute/Ucl",
-    name: "UCL",
-    subheading: "Faculdade do Centro Leste",
-    cities: [
-      "Serra",
-      "Cariacica"
-    ],
-    areas: [
-      "engineering",
-      "social science",
-      "medicine"
-    ],
-    img: ucl
-  },
-  {
-    url: "/Institute/Unesc",
-    name: "UNESC",
-    subheading: "Centro Universitário do Espírito Santo",
-    cities: [
-      "Serra",
-      "Colatina"
-    ],
-    areas: [
-      "engineering",
-      "social science",
-      "medicine"
-    ],
-    img: unesc
-  },
-  {
-    url: "/Institute/Ifes",
-    name: "IFES",
-    subheading: "Instituto Federal do Espirito Santo",
-    cities: [
-      "Vitória",
-              "Alegre",
-              "Aracruz",
-              "Barra de São Francisco",
-              "Cachoeiro de Itapemirim",
-              "Cariacica",
-              "Santa Maria de Jetibá",
-              "Colatina",
-              "Guarapari",
-              "Ibatiba",
-              "Itapina",
-              "Linhares",
-              "Montanha",
-              "Nova Venécia",
-              "Piúma",
-              "Santa Teresa",
-              "São Mateus",
-              "Serra",
-              "Venda Nova do Imigrante",
-              "Viana",
-              "Vila Velha"
-    ],
-    areas: [
-      "engineering",
-      "social science",
-      "medicine"
-    ],
-    img: ifes
-  },
-];
-
 const DivInstitutes = styled.div`
   background-color: #f4f4f4;
   min-height: max-content;
@@ -181,14 +51,15 @@ class InstitutesImages extends Component {
   }
   render() {
     const renderInstitutes = () => {
-        return Institutes.filter(this.isCity.bind(this)).map(institute => (
+        return this.props.Institutos.filter(this.isCity.bind(this)).map(institute => (
           <InstituteImage
             cityInstitute={this.props.cityInstitute}
-            cities={institute.cities}
-            areas={institute.areas}
-            name={institute.name}
-            sub={institute.subheading}
-            input={institute.img}
+            unidades={institute.unidades}
+            name={institute.nome}
+            descricao={institute.descricao}
+            missao={institute.missao}
+            pontosFortes={institute.pontosFortes}
+            input={ucl}
           />
         ));
       };

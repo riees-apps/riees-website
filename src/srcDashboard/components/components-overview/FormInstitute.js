@@ -18,6 +18,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
 import api from "../../../api/api";
+import Editor from "./editor";
 
 import Checkboxes from "./CheckboxesInstitute";
 import UnidadesInstitute from "./UnidadesInstitute";
@@ -39,11 +40,19 @@ class FormInstitute extends Component {
       capa: null,
       logo: null,
       link: "",
-      admin: "5d1a1daaaf9fc5001737e7af",
+      admin: this.props.adminId,
       ponto: "",
       pontosFortes: [],
       unidades: []
     };
+    this.handleChangeEditor = this.handleChangeEditor.bind(this);
+    this.handleChangeEditor2 = this.handleChangeEditor2.bind(this);
+  }
+  handleChangeEditor(html) {
+    this.setState({ descricao: html });
+  }
+  handleChangeEditor2(html) {
+    this.setState({ missao: html });
   }
   createInstitute = async e => {
     e.preventDefault();
@@ -93,56 +102,56 @@ class FormInstitute extends Component {
           .then(response => {
             const idInstituicao = response.data.id;
             unidades.map(unidade =>
-              api
-                .post(
-                  "/unidade",
-                  {
-                    nome: unidade.nome,
-                    telefone: unidade.telefone,
-                    descricao: unidade.descricao,
-                    logradouro: unidade.logradouro,
-                    numero: unidade.numero,
-                    complemento: unidade.complemento,
-                    bairro: unidade.bairro,
-                    cidade: unidade.cidade,
-                    cep: unidade.cep,
-                    admin: response.data.admin.id,
-                    instituicao: idInstituicao
-                  },
-                  { headers: { "Access-Control-Allow-Origin": "*" } }
-                )
-                .then(response => {
-                  const idUnidade = response.data.id;
-                  unidade.cursos.map(curso =>
-                    api
-                      .post(
-                        "/curso",
-                        {
-                          nome: curso.nome,
-                          niveis: curso.niveis,
-                          area: null,
-                          admin: response.data.admin.id,
-                          unidade: idUnidade
-                        },
-                        { headers: { "Access-Control-Allow-Origin": "*" } }
-                      )
-                      .then(response => {
-                        this.setState({
-                          nome: "",
-                          missao: "",
-                          descricao: "",
-                          capa: null,
-                          logo: null,
-                          link: "",
-                          ponto: "",
-                          pontosFortes: [],
-                          unidades: [],
-                          smShow: true,
-                          error: "Instituição criado com sucesso!"
-                        });
-                      })
-                  );
-                })
+              api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
+                let cidade;
+                if (res.data.length > 0) cidade = res.data[0].id;
+                api
+                  .post(
+                    "/unidade",
+                    {
+                      nome: unidade.nome,
+                      telefone: unidade.telefone,
+                      descricao: unidade.descricao,
+                      logradouro: unidade.logradouro,
+                      numero: unidade.numero,
+                      complemento: unidade.complemento,
+                      bairro: unidade.bairro,
+                      cidade: cidade,
+                      cep: unidade.cep,
+                      admin: response.data.admin.id,
+                      instituicao: idInstituicao
+                    },
+                    { headers: { "Access-Control-Allow-Origin": "*" } }
+                  )
+                  .then(response => {
+                    const idUnidade = response.data.id;
+                    unidade.cursos.map(curso => {
+                      console.log(curso.area);
+                      api.get(`/area?nome=${curso.area}`).then(res => {
+                        let area;
+                        if (res.data.length > 0) area = res.data[0].id;
+                        api
+                          .post(
+                            "/curso",
+                            {
+                              nome: curso.nome,
+                              niveis: curso.niveis,
+                              admin: response.data.admin.id,
+                              area: area,
+                              unidade: idUnidade
+                            },
+                            { headers: { "Access-Control-Allow-Origin": "*" } }
+                          )
+                          .then(response => {
+                            this.setState({
+                              smShow: true,
+                              error: "Instituição criada com sucesso!"
+                            });
+                          });
+                      });
+                    });
+                  });
+              })
             );
           })
           .catch(error => {
@@ -176,10 +185,10 @@ class FormInstitute extends Component {
   render() {
     let smClose = () => {
       this.setState({ smShow: false });
-      if(this.state.error === "Instituição criada com sucesso!")
-      this.props.history.push("/en/dashboard/show-institutes");
-      else return
-    }
+      if (this.state.error === "Instituição criada com sucesso!")
+        this.props.history.push("/en/dashboard/show-institutes");
+      else return;
+    };
 
     return (
       <form
@@ -195,41 +204,47 @@ class FormInstitute extends Component {
                 <Form>
                   <Row form>
                     <Col md="12" className="form-group">
-                      <label htmlFor="feName">Nome</label>
+                      <strong className="text-muted d-block mb-2">Nome</strong>
                       <FormInput
-                      value={this.state.nome}
+                        value={this.state.nome}
                         onChange={e => this.setState({ nome: e.target.value })}
                         id="feName"
                         type="name"
                         placeholder="Ex.: UFES - Universidade Federal do Espirito Santo"
                       />
                     </Col>
-                    <Col className="mb-3" md="6">
-                      <label htmlFor="feCompleteName">Descrição</label>
-                      <FormTextarea
-                      value={this.state.descricao}
-                        id="feDescription"
-                        onChange={e =>
-                          this.setState({ descricao: e.target.value })
-                        }
-                        rows="5"
-                      />
+                    <Col className="mb-3" md="12">
+                      <FormGroup>
+                        <strong className="text-muted d-block mb-2">
+                          Descrição
+                        </strong>
+                        <ReactQuill
+                          onChange={this.handleChangeEditor}
+                          value={this.state.descricao}
+                          modules={Editor.modules}
+                          className="add-new-post__editor mb-1"
+                        />
+                      </FormGroup>
                     </Col>
-                    <Col className="mb-3" md="6">
-                      <label htmlFor="feCompleteName">Missão</label>
-                      <FormTextarea
-                      value={this.state.missao}
-                        id="feMission"
-                        onChange={e =>
-                          this.setState({ missao: e.target.value })
-                        }
-                        rows="5"
-                      />
+                    <Col className="mb-3" md="12">
+                      <FormGroup>
+                        <strong className="text-muted d-block mb-2">
+                          Missão
+                        </strong>
+                        <ReactQuill
+                          onChange={this.handleChangeEditor2}
+                          value={this.state.missao}
+                          modules={Editor.modules}
+                          className="add-new-post__editor mb-1"
+                        />
+                      </FormGroup>
                     </Col>
                   </Row>
 
                   <FormGroup>
-                    <label htmlFor="feUrl">Endereço do site</label>
+                    <strong className="text-muted d-block mb-2">
+                      Endereço do site
+                    </strong>
                     <FormInput
                       id="feUrl"
                       type="url"
@@ -238,7 +253,9 @@ class FormInstitute extends Component {
                       placeholder="Ex.: http://www.ufes.br/"
                     />
                   </FormGroup>
-                  <label htmlFor="fePontosFortes">Pontos Fortes</label>
+                  <strong className="text-muted d-block mb-2">
+                    Pontos Fortes
+                  </strong>
                   <ul className="pl-4">
                     {this.state.pontosFortes.map(pontoForte => (
                       <Row lg="12">
@@ -279,16 +296,11 @@ class FormInstitute extends Component {
                       </div>
                     </Col>
                   </Row>
-                  {/* 
-                  <ListGroupItem className="p-0 px-3 pt-3 mb-3">
-                    <Row>
-                      <Checkboxes />
-                    </Row>
-                  </ListGroupItem> */}
 
                   <UnidadesInstitute
                     callbackParent={New => this.onChildChanged(New)}
                     unidades={[]}
+                    adminId={this.props.adminId}
                   />
 
                   <FormGroup>
@@ -311,10 +323,6 @@ class FormInstitute extends Component {
                     <CustomFileUpload />
                   </FormGroup>
 
-                  {/* <FormGroup>
-                    <label htmlFor="feUrl">Resumo do instituto</label>
-                    <ReactQuill className="add-new-post__editor mb-1" />
-                  </FormGroup> */}
                   <Button type="submit">Criar nova intituição</Button>
                 </Form>
               </Col>
@@ -329,7 +337,7 @@ class FormInstitute extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-sm">
-              {this.state.error === "Instituição criado com sucesso!"
+              {this.state.error === "Instituição criada com sucesso!"
                 ? "Sucesso!"
                 : "Erro!"}
             </Modal.Title>

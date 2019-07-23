@@ -32,12 +32,13 @@ class LatestPost extends Component {
   }
 
   render() {
+    
     return (
         <Image
           as={Link}
           style={{textDecoration:'none'}} 
           side={this.props.side}
-          to={`/${window.location.pathname.split('/')[1]}/Post/${this.props.title}`}
+          to={`/${window.location.pathname.split('/')[1]}/Post/${this.props.id}`}
           input={this.props.img}
           height={this.props.height}
           width={this.props.width}
@@ -49,7 +50,7 @@ class LatestPost extends Component {
               <Badge>
                 {this.props.tag}
               </Badge>
-              <i className={`fas fa-clock iconDate`} /> {this.props.date}
+              <i className={`fas fa-clock iconDate`} /> {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}
             </Details>
 
             <Title secAndTrd={this.props.secAndTrd}>{this.props.title}</Title>

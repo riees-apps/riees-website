@@ -1,4 +1,124 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+export const Card = styled.div`
+  transition: all 300ms;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 30%;
+  height: 65vh;
+  transition: all 600ms;
+  background-color: #fafafa;
+  margin-bottom: 5%;
+  box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.51);
+  border-radius: 5px;
+  @media (max-width: 600px) {
+    width: 70%;
+    height: 48vh;
+    margin-bottom: 10%;
+  }
+  ${props =>
+    props.side &&
+    `
+    box-shadow: none;
+    border-radius:0;
+    padding-bottom:10vh;
+    border-bottom: 1px solid #999;
+    background-color: #f4f4f4;
+    width:85%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 600px) {
+      padding-bottom:5vh;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 95%;
+      height: 50vh;
+  }
+  `
+  }
+`;
+export const CardImg = styled(Link)`
+  transition: all 150ms ease-in;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background: url(${props => props.input});
+  box-shadow: 0px 45vh rgba(0, 0, 0, 0.1) inset;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 32.5vh;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  @media (max-width: 600px) {
+    background-size: 100% 100%;
+    height: 24vh;
+  }
+  :hover {
+    background-size: 105% 105%;
+    transition: all 100ms ease-in;
+    box-shadow: 0px 45vh rgba(20, 20, 20, 0.5) inset;
+    cursor: pointer;
+  }
+  ${props =>
+    props.side &&
+    `
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    width:40%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    @media (max-width: 600px) {
+      width: 100%;
+      height: 50vh;
+    }
+  `}
+`;
+
+export const CardBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 31vh;
+  padding-left: 1vh;
+  padding-top: 1vh;
+  @media (max-width: 600px) {
+    background-size: cover;
+    height: 22.5vh;
+  }
+  ${props =>
+    props.larger &&
+    `
+    margin-left:2vh;
+  `}
+  ${props =>
+    props.side &&
+    `
+    width:60%
+    height: 30vh;
+    align-items: flex-start;
+    justify-content: center;
+    @media (max-width: 600px) {
+      padding-left:0;
+    width: 100%;
+    height: 25vh;
+  }
+  `}
+`;
 
 export const Image = styled.div`
   background-image: url(${props => props.image});
@@ -45,8 +165,8 @@ export const Title = styled.h1`
   ${props =>
     props.secAndTrd &&
     `
-    font-size: calc(9px + 1vw);
-    line-height: calc(8px + 1vw);
+    font-size: calc(10px + 1vw);
+    line-height: calc(9px + 1vw);
   `}
 `;
 export const Subheading = styled.div`

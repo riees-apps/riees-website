@@ -291,13 +291,11 @@ const DivEvents = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 120%;
-  padding: 5% 2.5%;
-  margin-left: -10%;
-  @media (max-width: 600px) {
-    margin-left: -12.5%;
+  width: 90vw;
+  padding: 5% 0;
+  @media (max-width: 768px) {
     padding: 5% 0;
-    width: 125%;
+    width:  90vw;
     justify-content: space-between;
   }
   ${props =>
@@ -310,7 +308,7 @@ const DivEvents = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       margin:0;
     width: 100%;
     justify-content: center;
@@ -319,7 +317,7 @@ const DivEvents = styled.div`
   ${props =>
     props.side &&
     `
-    width: 100%;
+    width: 95vw;
     margin: 0;
     padding: 0;
     padding-top: 10vh;
@@ -328,7 +326,7 @@ const DivEvents = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       margin:0;
     width: 100%;
     justify-content: center;
@@ -344,7 +342,7 @@ const Check = styled.div`
   border: 2px solid #ccc;
   background-color: #f4f4f4;
   cursor: pointer;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 4vh;
     height: 4vh;
   }
@@ -383,7 +381,7 @@ const DivHeading = styled.h1`
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 95%;
     flex-direction: column;
     flex-wrap: wrap;
@@ -402,7 +400,7 @@ const Form = styled.div`
   width: 45%;
   margin: 0;
   margin-left: auto;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width:100%;
     margin:auto;
     margin: 2vh 0;
@@ -416,7 +414,7 @@ const Form = styled.div`
     line-height: 0.35em;
     margin: auto 0.2vw auto 0.5vw;
     cursor: pointer;
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       font-size: 0.3em;
       line-height: 0.1em;
       margin: auto 2vw auto 0.5vw;
@@ -432,16 +430,39 @@ const Form = styled.div`
   `}
 `;
 
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
+
+function addZero(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
 class Events extends Component {
   componentDidMount() {
     this.setState({
       ...this.state,
-      final: this.props.final
+      final: this.props.final,
+      eventos: this.props.eventos
     });
   }
   constructor() {
     super();
     this.state = {
+      events:[],
       page: 1,
       initial: 0,
       final: 3,
@@ -461,24 +482,30 @@ class Events extends Component {
     if (this.state.active === "all") {
       return true;
     } else if (this.state.active === "events") {
-      return typeof event.props.dateEvent !== "undefined";
+      return event.props.placeEvent !== "";
     } else if (this.state.active === "news") {
-      return typeof event.props.dateEvent === "undefined";
+      return event.props.placeEvent === "";
     }
   };
+  
   render() {
+    const eventos = this.props.eventos;
     const renderEvents = () => {
       return eventos.map(evento => (
         <EventCard
+          id={evento.id}
           side={this.props.side}
           larger={this.props.larger}
-          title={evento.title}
-          placeEvent={evento.placeEvent}
-          timeEvent={evento.timeEvent}
-          dateEvent={evento.dateEvent}
-          text={evento.text}
+          title={evento.nome}
+          placeEvent={evento.localizacao}
+          dateEvent={evento.data}
+          text={evento.descricao}
           img={evento.img}
-          date={evento.date}
+          ano={new Date(evento.data).getFullYear()}
+          mes={months[new Date(evento.data).getMonth()]}
+          dia={new Date(evento.data).getDate()}
+          hora={addZero(new Date(evento.data).getHours())}
+          minuto={addZero(new Date(evento.data).getMinutes())}
         />
       ));
     };

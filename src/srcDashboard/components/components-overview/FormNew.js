@@ -28,15 +28,13 @@ function arrayRemove(arr, value) {
   });
 }
 
-class FormEvent extends Component {
+class FormNew extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       smShow: false,
       nome: "",
       data: "",
-      horarioEvento: "",
-      localizacao: "",
       descricao: "",
       link: "",
       admin: this.props.adminId
@@ -46,19 +44,17 @@ class FormEvent extends Component {
   handleChangeEditor(html) {
     this.setState({ descricao: html });
   }
-  addEvento = async e => {
+  addNoticia = async e => {
     e.preventDefault();
-    const { nome, data, localizacao, descricao, link, horarioEvento, admin } = this.state;
+    const { nome, data,  descricao, link, admin } = this.state;
     let dataV = data.split("-");
-    let horarioV = horarioEvento.split(":");
-    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2], horarioV[0], horarioV[1]).getTime()
+    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2]).getTime()
     if (
       !(
         nome !== "" &&
         link !== "" &&
         descricao !== "" &&
         data !== "" &&
-        localizacao !== "" &&
         admin !== ""
       )
     ) {
@@ -75,7 +71,6 @@ class FormEvent extends Component {
               nome: nome,
               descricao: descricao,
               data: newDate,
-              localizacao: localizacao,
               link: link,
               admin: admin
             },
@@ -84,7 +79,7 @@ class FormEvent extends Component {
           .then(response => {
             this.setState({
               smShow: true,
-              error: "Evento adicionado com sucesso!"
+              error: "Noticia adicionada com sucesso!"
             });
           })
           .catch(error => {
@@ -107,12 +102,12 @@ class FormEvent extends Component {
   render() {
     let smClose = () => {
       this.setState({ smShow: false });
-      if (this.state.error === "Evento adicionado com sucesso!")
+      if (this.state.error === "Noticia adicionada com sucesso!")
         this.props.history.push("/en/dashboard/show-events");
       else return;
     };
     return (
-      <form onSubmit={this.addEvento}>
+      <form onSubmit={this.addNoticia}>
         <ListGroup flush>
           <ListGroupItem className="p-3">
             <Row>
@@ -143,7 +138,7 @@ class FormEvent extends Component {
                     </Col>
                     <Col className="mb-3" md="12">
                       <strong className="text-muted d-block mb-2">
-                        Link do evento
+                        Link da noticia
                       </strong>
                       <FormInput
                         value={this.state.link}
@@ -153,44 +148,24 @@ class FormEvent extends Component {
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Data do evento</label>
+                      <label htmlFor="feDataInicio">Data de publicação</label>
                       <FormInput
                         value={this.state.data}
                         onChange={e => this.setState({ data: e.target.value })}
                         id="feCustoMedio"
                         type="date"
                       />
-                    </Col>
-                    <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Horário do evento</label>
-                      <FormInput
-                        value={this.state.horarioEvento}
-                        onChange={e => this.setState({ horarioEvento: e.target.value })}
-                        id="feCustoMedio"
-                        type="time"
-                      />
-                    </Col>
-                    <Col className="mb-3" md="12">
-                      <strong className="text-muted d-block mb-2">
-                        Local do evento
-                      </strong>
-                      <FormInput
-                        value={this.state.localizacao}
-                        onChange={e => this.setState({ localizacao: e.target.value })}
-                        id="feName"
-                        type="name"
-                      />
-                    </Col>
+                    </Col>                               
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem do evento
+                      Imagem da noticia
                     </strong>
                     <CustomFileUpload />
                   </FormGroup>
 
                   <Button className="ml-1" type="submit">
-                    Criar novo evento
+                    Criar nova noticia
                   </Button>
                 </Form>
               </Col>
@@ -205,7 +180,7 @@ class FormEvent extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-sm">
-              {this.state.error === "Evento adicionado com sucesso!"
+              {this.state.error === "Noticia adicionada com sucesso!"
                 ? "Sucesso!"
                 : "Erro!"}
             </Modal.Title>
@@ -217,4 +192,4 @@ class FormEvent extends Component {
   }
 }
 
-export default withRouter(FormEvent);
+export default withRouter(FormNew);

@@ -46,14 +46,15 @@ class NewsEvents extends Component {
   componentDidMount() {
     document.documentElement.scrollTop = 0;
   }
-
   render() {
+    console.log(2);
+    console.log(this.props.Eventos);
     return (
       <div style={{ backgroundColor: "#f4f4f4" }}>
         <Image x='0.5' height="80vh" image={img3} >
             <Title><FormattedMessage id="News"/></Title>
         </Image>
-        <Events larger final={9} />
+        <Events eventos={this.props.Eventos} larger final={9} />
         <Footer />
       </div>
     );

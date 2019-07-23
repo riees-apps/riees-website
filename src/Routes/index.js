@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import ReactLoading from "react-loading";
 import "./routes.css";
+import api from "../api/api";
 
 import { isAuthenticated } from "../api/auth";
 
+import Members from '../Institutes/index.js'
 import Dashboard from "../srcDashboard/App.js";
 import About from "../About/index.js";
 import Contact from "../Contact/index.js";
@@ -18,7 +20,6 @@ import Es from "../Es/index.js";
 import Coming from "../Es/coming.js";
 import Living from "../Es/living.js";
 import Home from "../Home/index.js";
-import Institutes from "../Institutes/index.js";
 import Institute from "../Institutes/institute.js";
 import Admin from "../Admin/index.js";
 import Header from "../components/Header/index.js";
@@ -40,12 +41,6 @@ import vitoria from "../components/Cities/imgs/vitoria.jpg";
 import vilaVelha from "../components/Cities/imgs/vilavelha.jpg";
 import img1 from "../components/Cities/imgs/vilavelha.jpg";
 import img2 from "../components/Cities/imgs/vitoria.jpg";
-// Img HomePage
-import imgHome from "../Home/opa.jpg";
-import imgHome2 from "../Home/ei.jpg";
-import imgHome3 from "../Home/ola.jpg";
-import imgHome4 from "../Home/oi.jpg";
-import imgHome5 from "../Home/esMapa.png";
 
 const eventos = [
   {
@@ -357,7 +352,47 @@ const institutes = [
     ],
     img: ufes,
     logo: ufeslogo,
-    url: "http://www.ufes.br/"
+    url: "http://www.ufes.br/",
+    unidades: [
+      {
+        nome: "Goiabeiras",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Fernando Ferrari",
+        numero: "85",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Goiabeiras",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Maruipe",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Mal. Campos",
+        numero: "1468",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Maruipe",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   },
   {
     name: "UVV",
@@ -372,7 +407,47 @@ const institutes = [
     ],
     img: uvv,
     logo: uvvlogo,
-    url: "https://www.uvv.br/"
+    url: "https://www.uvv.br/",
+    unidades: [
+      {
+        nome: "UVV Business School",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UVV",
+        logradouro: "Rua da Lama",
+        numero: "Sem número",
+        complemento: "Na esquina da padaria",
+        bairro: "Jockey de Itaparica",
+        cidade: "Vila Velha",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Universidade Vila Velha",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UVV",
+        logradouro: "Avenida Comissário José Dantas de Melo",
+        numero: "21",
+        complemento: "Na esquina da padaria",
+        bairro: "Boa Vista II",
+        cidade: "Vila Velha",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   },
   {
     name: "FDV",
@@ -387,7 +462,47 @@ const institutes = [
     ],
     img: fdv,
     logo: fdvlogo,
-    url: "http://site.fdv.br/"
+    url: "http://site.fdv.br/",
+    unidades: [
+      {
+        nome: "Goiabeiras",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Fernando Ferrari",
+        numero: "85",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Goiabeiras",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Maruipe",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Mal. Campos",
+        numero: "1468",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Maruipe",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   },
   {
     name: "EMESCAM",
@@ -403,7 +518,47 @@ const institutes = [
     ],
     img: emescam,
     logo: emescamlogo,
-    url: "http://www.emescam.br/"
+    url: "http://www.emescam.br/",
+    unidades: [
+      {
+        nome: "Goiabeiras",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Fernando Ferrari",
+        numero: "85",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Goiabeiras",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Maruipe",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Mal. Campos",
+        numero: "1468",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Maruipe",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   },
   {
     name: "UCL",
@@ -418,7 +573,47 @@ const institutes = [
     ],
     img: ucl,
     logo: ucllogo,
-    url: "https://www.ucl.br/"
+    url: "https://www.ucl.br/",
+    unidades: [
+      {
+        nome: "Goiabeiras",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Fernando Ferrari",
+        numero: "85",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Goiabeiras",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Maruipe",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Mal. Campos",
+        numero: "1468",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Maruipe",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   },
   {
     name: "UNESC",
@@ -433,7 +628,47 @@ const institutes = [
     ],
     img: unesc,
     logo: unesclogo,
-    url: "https://www.unesc.br/"
+    url: "https://www.unesc.br/",
+    unidades: [
+      {
+        nome: "Goiabeiras",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Fernando Ferrari",
+        numero: "85",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Goiabeiras",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Maruipe",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Mal. Campos",
+        numero: "1468",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Maruipe",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   },
   {
     name: "IFES",
@@ -448,7 +683,47 @@ const institutes = [
     ],
     img: ifes,
     logo: ifeslogo,
-    url: "https://www.ifes.edu.br/"
+    url: "https://www.ifes.edu.br/",
+    unidades: [
+      {
+        nome: "Goiabeiras",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Fernando Ferrari",
+        numero: "85",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Goiabeiras",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      },
+      {
+        nome: "Maruipe",
+        telefone: "+55 (27) 98877-6655",
+        descricao: "Unidade pertecente a UFES",
+        logradouro: "Av. Mal. Campos",
+        numero: "1468",
+        complemento: "Após a Ponte da Passagem",
+        bairro: "Maruipe",
+        cidade: "Vitória",
+        cep: "29103-800",
+        cursos: [
+          "Curso 1",
+          "Curso 2",
+          "Curso 3",
+          "Curso 4",
+          "Curso 5",
+          "Curso 6"
+        ]
+      }
+    ]
   }
 ];
 const cities = [
@@ -954,17 +1229,138 @@ class Routes extends Component {
   constructor() {
     super();
     this.state = {
-      isLoadingImage: true
+      isLoading: [],
+      Institutes: [],
+      Cidades: [],
+      Eventos: [],
+      Posts: []
     };
   }
-  handleImageLoaded() {
-    this.setState({ isLoadingImage: false });
+  loaded() {
+    this.setState({ isLoading: [] });
   }
-  componentWillMount() {
-    setTimeout(() => (this.handleImageLoaded()), 2000);
+  componentDidMount() {
+    api
+      .get('/instituicao?where={"deletedAt":0}')
+      .then(res => {
+        const inst = res.data;
+        
+        this.setState({ Institutes: inst });
+      })
+      .then(res => {
+        api.get('/cidade?where={"deletedAt":0}').then(res => {
+          const city = res.data;
+
+          this.setState({ Cidades: city });
+        });
+      })
+      .then(res => {
+        api.get('/evento?where={"deletedAt":0}').then(res => {
+          const event = res.data;
+
+          this.setState({ Eventos: event });
+        });
+      })
+      .then(res => {
+        api.get('/postagem?where={"deletedAt":0}').then(res => {
+          const post = res.data;
+          this.setState({ Posts: post });
+        });
+      })
+      .then(() => {
+        this.setState({ isLoading: this.state.Posts });
+      } );
   }
+
   render() {
-    
+    const { Institutes, Cidades, Eventos, Posts } = this.state;
+
+    const renderPosts2 = () => {
+      return Posts.map(post => (
+        <MultiLanguageRoute
+          path={`/:lang/Post/${post.id}`}
+          component={props => (
+            <Post
+              {...props}
+              posts={Posts}
+              titulo={post.titulo}
+              conteudo={post.conteudo}
+              resumo={post.resumo}
+              data={post.data}
+              tags={post.tags}
+              link={post.link}
+              img={img1}
+            />
+          )}
+        />
+      ));
+    };
+    const renderEvents2 = () => {
+      return Eventos.map(event => (
+        <MultiLanguageRoute
+          path={`/:lang/Events/${event.id}`}
+          component={props => (
+            <Event
+              {...props}
+              eventos={Eventos}
+              title={event.nome}
+              text={event.descricao}
+              date={event.data}
+              placeEvent={event.localizacao}
+              link={event.link}
+              img={img1}
+              img2={img2}
+            />
+          )}
+        />
+      ));
+    };
+    const renderInstitutes2 = () => {
+      console.log('inst')
+      console.log(Institutes)
+
+      return Institutes.map(institute => (
+        <MultiLanguageRoute
+          path={`/:lang/Institute/${institute.nome}`}
+          component={props => (
+            <Institute
+              {...props}
+              url={institute.link}
+              name={institute.nome}
+              pontosFortes={institute.pontosFortes}
+              descricao={institute.descricao}
+              missao={institute.missao}
+              id={institute.id}
+              img={img1}
+              logo={institute.logo}
+              unidades={institute.unidades}
+              institutes={Institutes}
+            />
+          )}
+        />
+      ));
+    };
+    const renderCities2 = () => {
+     
+      return Cidades.map(city => (
+        <MultiLanguageRoute
+          path={`/:lang/City/${city.nome}`}
+          component={props => (
+            <City
+              {...props}
+              Cidades={Cidades}
+              name={city.nome}
+              img={img1}
+              places={city.pontos}
+              descricao={city.descricao}
+            />
+          )}
+        />
+      ));
+    };
+
+    //////////////////////////////////////
+
     const renderPosts = () => {
       return posts.map(post => (
         <MultiLanguageRoute
@@ -1015,6 +1411,7 @@ class Routes extends Component {
               img={institute.img}
               areas={institute.areas}
               logo={institute.logo}
+              unidades={institute.unidades}
               institutes={institutes}
             />
           )}
@@ -1038,48 +1435,69 @@ class Routes extends Component {
         />
       ));
     };
-    return (
-      <BrowserRouter>
-        <div className={this.state.isLoadingImage ? 'spinDiv' : 'displayNone'}>
-          <ReactLoading className='spin' type='spin' color='#357edd'/>
+
+    while (this.state.Posts.length === 0) {
+
+      return (
+        <div className={this.state.isLoading ? "spinDiv" : "displayNone"}>
+          <ReactLoading className="spin" type="spin" color="#357edd" />
         </div>
-        <Header />
-        <Switch>
-          <MultiLanguageRoute exact path="/" />
-          <MultiLanguageRoute
-            exact path="/:lang"
-            component={props => (
-              <Home
-                {...props}
-                imgHome={image.src}
-                imgHome2={image2.src}
-                imgHome3={image3.src}
-                imgHome4={image4.src}
-                imgHome5={image5.src}
-              />
-            )}
-          />
-          <MultiLanguageRoute path="/:lang/News-Events" component={NewsEvents} />
-          <MultiLanguageRoute path="/:lang/Blog" component={Blog} />
-          <MultiLanguageRoute path="/:lang/About" component={About} />
-          <MultiLanguageRoute path="/:lang/Contact" component={Contact} />
-          <MultiLanguageRoute path="/:lang/Cities" component={Cities} />
-          <MultiLanguageRoute path="/:lang/Es" component={Es} />
-          <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
-          <MultiLanguageRoute path="/:lang/Living" component={Living} />
-          <MultiLanguageRoute path="/:lang/Institutes" component={Institutes} />
-          {renderPosts()}
-          {renderEvents()}
-          {renderInstitutes()}
-          {renderCities()}
-          <Route path="/:lang/Admin" component={Admin} />
-          <PrivateRoute
-            path="/en/dashboard/show-institutes"
-            component={Dashboard}
-          />
-        </Switch>
-      </BrowserRouter>
-    );
+      );
+    } 
+      return (
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <MultiLanguageRoute exact path="/" />
+            <MultiLanguageRoute
+              exact
+              path="/:lang"
+              component={props => (
+                <Home
+                  {...props}
+                  Institutes={this.state.Institutes}
+                  Eventos={this.state.Eventos}
+                  imgHome={image.src}
+                  imgHome2={image2.src}
+                  imgHome3={image3.src}
+                  imgHome4={image4.src}
+                  imgHome5={image5.src}
+                />
+              )}
+            />
+            <MultiLanguageRoute
+              path="/:lang/News-Events"
+              component={props => <NewsEvents {...props} Eventos={this.state.Eventos} />}
+            />
+            <MultiLanguageRoute
+              path="/:lang/Blog"
+              component={props => <Blog {...props} Posts={this.state.Posts} />}
+            />
+            <MultiLanguageRoute
+              path="/:lang/Cities"
+              component={props => <Cities {...props} Cidades={this.state.Cidades} />}
+            />
+             <MultiLanguageRoute
+              path="/:lang/Members"
+              component={props => <Members {...props} Institutes={this.state.Institutes} />}
+            />
+            <MultiLanguageRoute path="/:lang/About" component={About} />
+            <MultiLanguageRoute path="/:lang/Contact" component={Contact} />
+            <MultiLanguageRoute path="/:lang/Es" component={Es} />
+            <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
+            <MultiLanguageRoute path="/:lang/Living" component={Living} />
+            {renderPosts2()}
+            {renderEvents2()}
+            {renderInstitutes2()}
+            {renderCities2()}
+            <Route path="/:lang/Admin" component={Admin} />
+            <PrivateRoute
+              path="/en/dashboard/show-institutes"
+              component={Dashboard}
+            />
+          </Switch>
+        </BrowserRouter>
+      );
   }
 }
 export default Routes;

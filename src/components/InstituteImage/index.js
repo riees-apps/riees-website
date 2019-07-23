@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import "./index.css";
-import {FormattedMessage} from 'react-intl'
+import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 
-const DivLink = styled(Link)`
+import api from "../../api/api";
 
-`;
+const DivLink = styled(Link)``;
 const Img = styled.div`
   background: url(${props => props.input});
   box-shadow: 0px 45vh rgba(0, 0, 0, 0.35) inset;
@@ -43,7 +43,10 @@ const Img = styled.div`
 
 class InstituteImage extends Component {
   state = {
-    hover: false
+    hover: false,
+    areas: [],
+    unidades: [],
+    cursos: []
   };
   changeHover() {
     this.setState({ ...this.state, hover: !this.state.hover });
@@ -51,39 +54,98 @@ class InstituteImage extends Component {
   changeOut() {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
+  componentWillMount() {
+    this.props.unidades.map(unidade => {
+      api.get(`/curso?unidade=${unidade.id}`).then(res => {
+        const cursos = res.data;
+        const newArea = this.state.areas
+        cursos.map(curso => {
+          if (newArea.indexOf(curso.area.nome) === -1) newArea.push(curso.area.nome);
+        });
+        this.setState({areas:newArea,cursos:cursos})
+      }).then( res => {
+        let u = []
+        api
+          .get(`unidade?instituicao=${this.props.unidades[0].instituicao}`)
+          .then(res => {
+            u = res.data
+            this.setState({unidades: u})
+          });
+      })
+    });
+  }
   render() {
-    const renderCities = () => {
-      return this.props.cities.map(row => <h1 className={this.props.cityInstitute ? "h1Cities2" : "h1Cities"}>{row}</h1>);
+    const renderUnidades = () => {
+      return this.props.unidades.map(row => (
+        <h1
+          className={
+            this.props.cityInstitute
+              ? this.state.hover
+                ? "h1Cities2Hover"
+                : "h1Cities2"
+              : this.state.hover
+              ? "h1CitiesHover"
+              : "h1Cities"
+          }
+        >
+          {row.nome}
+        </h1>
+      ));
     };
     const renderAreas = () => {
-      return this.props.areas.map(row => <h1 className={this.props.cityInstitute ? "h1Cities2" : "h1Cities"}>{row}</h1>);
+      return this.state.areas.map(row => (
+        <h1
+          className={
+            this.props.cityInstitute
+              ? this.state.hover
+                ? "h1Cities2Hover"
+                : "h1Cities2"
+              : this.state.hover
+              ? "h1CitiesHover"
+              : "h1Cities"
+          }
+        >
+          {row}
+        </h1>
+      ));
+      
     };
+    const sigla = this.props.name.split('-')[0]
+    const nomeCompleto = typeof this.props.name.split('-')[1] !== "undefined" ? this.props.name.split('-')[1] :  ''
     return (
       <DivLink
         style={{ textDecoration: "none" }}
         to={{
-          pathname: `/${window.location.pathname.split('/')[1]}/Institute/${this.props.name}`,
+          pathname: `/${window.location.pathname.split("/")[1]}/Institute/${
+            this.props.name
+          }`,
           state: {
             scrollTop: 0,
-          },
+            areas:this.state.areas,
+            unidades: this.state.unidades,
+            institutos: this.props.institutos,
+            cursos: this.state.cursos
+          }
         }}
         onMouseOver={this.changeHover.bind(this)}
         onMouseOut={this.changeOut.bind(this)}
-        className='root'
+        className="root"
       >
         <Img cityInstitute={this.props.cityInstitute} input={this.props.input}>
           <h1 className={this.state.hover ? "title2" : "title"}>
-            {this.props.name}
+            {sigla}
           </h1>
           <div className={this.state.hover ? "divInfo2" : "divInfo"}>
             <h1 className={this.state.hover ? "sub2" : "sub1"}>
-              {this.props.sub}
+              {nomeCompleto}
             </h1>
-            <h1 className={this.state.hover ? "info2" : "info1"}><FormattedMessage id="City"/>:</h1>
+            <h1 className={this.state.hover ? "info2" : "info1"}>
+              <FormattedMessage id="City" />:
+            </h1>
             <div className={this.state.hover ? "cities2" : "cities1"}>
-              {renderCities()}
+              {renderUnidades()}
             </div>
-            <h1 className={this.state.hover ? "info4" : "info3"}>Areas:</h1>
+            <h1 className={this.state.hover ? "info2" : "info1"}>Areas:</h1>
             <div className={this.state.hover ? "cities2" : "cities1"}>
               {renderAreas()}
             </div>

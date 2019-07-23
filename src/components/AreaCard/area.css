@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  color: rgb(0, 83, 179);
+  color: #003b81;
   font-size: calc(85px);
   width: max-content;
 }
@@ -29,12 +29,13 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    color: rgb(0, 83, 179);
+    color: #003b81;
     font-size: calc(10px + 8vh);
     width: max-content;
   }
   .areaName {
     font-family: "Poppins", Helvetica, Arial, sans-serif;
+    font-weight:bolder;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

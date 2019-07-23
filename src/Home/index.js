@@ -96,6 +96,7 @@ const DivText = styled.div`
   width: 80%;
   margin: 0 auto;
   padding-bottom: 7.5vh;
+  
 `;
 class Home extends Component {
   componentDidMount() {
@@ -285,7 +286,7 @@ class Home extends Component {
             <FormattedMessage id="InstitutesTitle" />
           </Heading>
         </DivText>
-        <InstituteImages city="" />
+        <InstituteImages Institutos={this.props.Institutes} city="" />
 
         <Carousel fade="true">
           <Carousel.Item>
@@ -338,7 +339,7 @@ class Home extends Component {
           <Heading background="#f4f4f4">
             <FormattedMessage id="News" />
           </Heading>
-          <Events final={window.screen.width >= 768 ? 3 : 1} />
+          <Events eventos={this.props.Eventos}  final={window.screen.width >= 768 ? 3 : 1} />
           <Button
             url="/News-Events"
             name={<FormattedMessage id="ButtonEvents" />}
