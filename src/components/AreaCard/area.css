@@ -13,14 +13,16 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  text-align: center;
   margin-bottom: 0;
   letter-spacing: -1px;
-  font-size: calc(8px + 1.5vw);
-  line-height: calc(7px + 1.5vw);
+  font-size: calc(1px + 1.75vw);
+  line-height: calc(2px + 1.75vw);
   width: 100%;
   color: #454545;
+  
 }
 @media screen and (max-width: 768px) {
   .icon {
@@ -43,8 +45,8 @@
     justify-content: center;
     margin-bottom: 0;
     letter-spacing: 0px;
-    font-size: calc(8px + 3vw);
-    line-height: calc(7px + 3vw);
+    font-size: calc(3px + 3vw);
+    line-height: calc(4px + 3vw);
     width: 100%;
     color: #454545;
   }

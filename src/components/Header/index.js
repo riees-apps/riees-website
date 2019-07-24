@@ -160,6 +160,7 @@ class Header extends Component {
     });
   }
   render() {
+    console.log(window.location.pathname.split("/")[2])
     return (
       <div
         shadow={this.state.menu ? true : false}
@@ -211,7 +212,7 @@ class Header extends Component {
             <StyledLink
               onClick={() => this.handleClick(`/${this.state.lang}`)}
               active={
-                this.state.active === `/${this.state.lang}` ? true : false
+                typeof(window.location.pathname.split("/")[2]) === `undefined` || window.location.pathname.split("/")[2] === ""
               }
               className={this.state.scroll ? "scroll" : ""}
               to={`/${this.state.lang}`}
@@ -224,7 +225,7 @@ class Header extends Component {
               active={
                 this.state.active === `/${this.state.lang}/Members`
                   ? true
-                  : false
+                  : false || window.location.pathname.split("/")[2] === "Institute"
               }
               className={this.state.scroll ? "scroll" : ""}
               to={`/${this.state.lang}/Members`}
@@ -235,9 +236,10 @@ class Header extends Component {
               onMouseOver={this.changeHover.bind(this)}
               onMouseOut={this.changeOut.bind(this)}
               active={
-                this.state.active === `/${this.state.lang}/Cities` ||
-                this.state.active === `/${this.state.lang}/Coming` ||
-                this.state.active === `/${this.state.lang}/Living`
+                window.location.pathname.split("/")[2] === `Cities` ||
+                window.location.pathname.split("/")[2] === `Coming` ||
+                window.location.pathname.split("/")[2] === `Living` ||
+                window.location.pathname.split("/")[2] === `City`
                   ? true
                   : false
               }
@@ -285,7 +287,7 @@ class Header extends Component {
               active={
                 this.state.active === `/${this.state.lang}/News-Events`
                   ? true
-                  : false
+                  : false || window.location.pathname.split("/")[2] === "Events"
               }
               className={this.state.scroll ? "scroll" : ""}
               to={`/${this.state.lang}/News-Events`}

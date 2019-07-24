@@ -72,6 +72,12 @@ class Institutes extends React.Component {
   handleChangeEditor2(html) {
     this.setState({ missao: html });
   }
+  filtro = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
+
   componentWillMount() {
     api.get('/instituicao?where={"deletedAt":0}').then(res => {
       const inst = res.data;
@@ -99,8 +105,7 @@ class Institutes extends React.Component {
           descricao !== "" &&
           admin !== "" &&
           pontosFortes.length !== 0 &&
-          link !== "" &&
-          unidades.length !== 0
+          link !== ""
         )
       ) {
         this.setState({
@@ -124,59 +129,138 @@ class Institutes extends React.Component {
               },
               { headers: { "Access-Control-Allow-Origin": "*" } }
             )
-            .then(response => {
-              const idInstituicao = response.data.id;
-              console.log(response.data)
-              inst.unidades.map(unidade =>
-                api
-                  .patch(
-                    `/unidade/${unidade.id}`,
-                    {
-                      nome: unidade.nome,
-                      telefone: unidade.telefone,
-                      descricao: unidade.descricao,
-                      logradouro: unidade.logradouro,
-                      numero: unidade.numero,
-                      complemento: unidade.complemento,
-                      bairro: unidade.bairro,
-                      cidade: unidade.cidade,
-                      cep: unidade.cep,
-                      admin: response.data.admin.id,
-                      instituicao: unidade.deletedAt !== 0 ? 0 : idInstituicao
-                    },
-                    { headers: { "Access-Control-Allow-Origin": "*" } }
-                  )
-                  .then(response => {
-                    const idUnidade = response.data.id;
-                    console.log(unidade)
-                    unidade.cursos.map(curso =>
-                      api
-                        .patch(
-                          `/curso/${curso.id}`,
-                          {
-                            nome: curso.nome,
-                            niveis: curso.niveis,
-                            area: curso.area,
-                            admin: response.data.admin.id,
-                            unidade: idUnidade
-                          },
-                          { headers: { "Access-Control-Allow-Origin": "*" } }
-                        )
-                        .then(res =>
+            .then(res => {
+              const idInstituto = res.data.id;
+              this.state.unidades.map(unidade => {
+                api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
+                  let cidade;
+                  if (res.data.length > 0) cidade = res.data[0].id;
+                  api
+                    .get(
+                      `/unidade?where={"nome":"${
+                        unidade.nome
+                      }","instituicao":"${idInstituto}"}`
+                    )
+                    .then(res => {
+                      if (typeof unidade.createdAt === "undefined")
+                        if (res.data.length > 0) {
                           api
-                            .get('/instituicao?where={"deletedAt":0}')
-                            .then(res => {
-                              const inst = res.data;
-                              this.setState({
-                                ...this.state,
-                                institutes: inst,
-                                editShow: false
+                            .patch(
+                              `/unidade/${res.data[0].id}`,
+                              {
+                                descricao: unidade.descricao,
+                                telefone: unidade.telefone,
+                                logradouro: unidade.logradouro,
+                                numero: unidade.numero,
+                                complemento: unidade.complemento,
+                                bairro: unidade.bairro,
+                                cep: unidade.cep,
+                                cidade: cidade,
+                                deletedAt: 0
+                              },
+                              {
+                                headers: { "Access-Control-Allow-Origin": "*" }
+                              }
+                            )
+                            .then(response => {
+                              const idUnidade = response.data.id;
+                              unidade.cursos.map(curso => {
+                                api
+                                  .get(`/area?nome=${curso.area}`)
+                                  .then(res => {
+                                    let area;
+                                    if (res.data.length > 0)
+                                      area = res.data[0].id;
+                                    api.post(
+                                      "/curso",
+                                      {
+                                        nome: curso.nome,
+                                        niveis: curso.niveis,
+                                        admin: response.data.admin.id,
+                                        area: area,
+                                        unidade: idUnidade
+                                      },
+                                      {
+                                        headers: {
+                                          "Access-Control-Allow-Origin": "*"
+                                        }
+                                      }
+                                    );
+                                  });
                               });
                             })
-                        )
-                    );
-                  })
-              );
+                        } else
+                          api
+                            .post(
+                              `/unidade`,
+                              {
+                                nome: unidade.nome,
+                                descricao: unidade.descricao,
+                                telefone: unidade.telefone,
+                                logradouro: unidade.logradouro,
+                                numero: unidade.numero,
+                                complemento: unidade.complemento,
+                                bairro: unidade.bairro,
+                                cep: unidade.cep,
+                                cidade: cidade,
+                                instituicao: idInstituto,
+                                admin: admin.id
+                              },
+                              {
+                                headers: {
+                                  "Access-Control-Allow-Origin": "*"
+                                }
+                              }
+                            )
+                            .then(response => {
+                              const idUnidade = response.data.id;
+                              unidade.cursos.map(curso => {
+                                console.log(curso.area);
+                                api
+                                  .get(`/area?nome=${curso.area}`)
+                                  .then(res => {
+                                    let area;
+                                    if (res.data.length > 0)
+                                      area = res.data[0].id;
+                                    api.post(
+                                      "/curso",
+                                      {
+                                        nome: curso.nome,
+                                        niveis: curso.niveis,
+                                        admin: response.data.admin.id,
+                                        area: area,
+                                        unidade: idUnidade
+                                      },
+                                      {
+                                        headers: {
+                                          "Access-Control-Allow-Origin": "*"
+                                        }
+                                      }
+                                    );
+                                  });
+                              });
+                            })
+                    })
+                    .then(res => {
+                      api
+                        .get('/instituicao?where={"deletedAt":0}')
+                        .then(res => {
+                          const institutos = res.data;
+                          this.setState({
+                            ...this.state,
+                            institutes: institutos,
+                            editShow: false
+                          });
+                        });
+                    })
+                    .catch(error => {
+                      this.setState({
+                        smShow: inst.nome,
+                        error: "Cidade não cadastrada no sistema"
+                      });
+                    });
+                });
+              });
             })
             .catch(error => {
               this.setState({
@@ -193,21 +277,79 @@ class Institutes extends React.Component {
       }
     });
   }
+
+  editUnidade(unidade) {
+    const { pontoEdit, nomePontoEdit, descricaoPontoEdit } = this.state;
+    if (!(nomePontoEdit !== "" && descricaoPontoEdit !== "")) {
+      this.setState({
+        error: "Preencha todos os campos!",
+        smShow: pontoEdit.id
+      });
+    } else {
+      try {
+        api
+          .patch(
+            `/unidade/${pontoEdit.id}`,
+            {
+              nome: nomePontoEdit,
+              descricao: descricaoPontoEdit
+            },
+            { headers: { "Access-Control-Allow-Origin": "*" } }
+          )
+          .then(res => {
+            api
+              .get(
+                `/unidade?where={"deletedAt":0,"cidade":"${
+                  res.data.cidade.id
+                }"}`
+              )
+              .then(res => {
+                const pontos = res.data;
+                console.log(pontos);
+                if (pontos.length !== 0) {
+                  this.setState({
+                    ...this.state,
+                    pontosTuristicos: pontos,
+                    editUnidadeShow: false
+                  });
+                }
+              });
+          })
+          .catch(error => {
+            this.setState({
+              smShow: pontoEdit.nome,
+              error: "Houve um problema com a edição, tente novamente"
+            });
+          });
+      } catch (err) {
+        this.setState({
+          smShow: pontoEdit.nome,
+          error: "Houve um problema com a edição, tente novamente"
+        });
+      }
+    }
+  }
+
   handleClose() {
     this.setState({
       closeShow: false,
       smShow: false
     });
   }
+  handleClose2() {
+    this.setState({
+      editShow: false
+    });
+  }
+  handleClose3() {
+    this.setState({
+      editPontoShow: false
+    });
+  }
   handleClick(institute) {
     this.setState({
       closeShow: institute.nome,
       error: `Ao confirmar a instituição ${institute.nome} será deletada`
-    });
-  }
-  handleClose2() {
-    this.setState({
-      editShow: false
     });
   }
   handleClick2(institute) {
@@ -226,7 +368,17 @@ class Institutes extends React.Component {
       unidades: institute.unidades
     });
   }
-  deleteUnidade(institute) {
+  handleClick3(unidade) {
+    console.log(unidade);
+    this.setState({
+      ...this.state,
+      pontoEdit: unidade,
+      nomePontoEdit: unidade.nome,
+      descricaoPontoEdit: unidade.descricao,
+      editPontoShow: unidade.nome
+    });
+  }
+  deleteInstitute(institute) {
     api.delete(`/instituicao/${institute.id}`).then(resp =>
       api.get('/instituicao?where={"deletedAt":0}').then(res => {
         const inst = res.data;
@@ -287,9 +439,15 @@ class Institutes extends React.Component {
               <h5 className="card-title d-block mb-1  ">Endereço web:</h5>
               <p className="card-text d-block mb-2">{institute.link}</p>
               <h5 className="card-title d-block mb-1  ">Missão: </h5>
-              <p className="card-text d-block mb-2" dangerouslySetInnerHTML={{ __html: institute.missao }}/>
+              <p
+                className="card-text d-block mb-2"
+                dangerouslySetInnerHTML={{ __html: institute.missao }}
+              />
               <h5 className="card-title d-block mb-1  ">Descrição: </h5>
-              <p className="card-text d-block mb-2" dangerouslySetInnerHTML={{ __html: institute.descricao }} />
+              <p
+                className="card-text d-block mb-2"
+                dangerouslySetInnerHTML={{ __html: institute.descricao }}
+              />
               <h5 className="card-title d-block mb-1  ">Pontos fortes:</h5>
               <ul className="px-4">
                 {institute.pontosFortes.map(pontoForte => (
@@ -298,9 +456,11 @@ class Institutes extends React.Component {
               </ul>
               <h5 className="card-title d-block mb-1  ">Unidades:</h5>
               <ul className="px-4">
-                {institute.unidades.map(unidade => (
-                  <li className="mb-1">{`Campus ${unidade.nome}`}</li>
-                ))}
+                {institute.unidades
+                  .filter(this.filtro.bind(this))
+                  .map(unidade => (
+                    <li className="mb-1">{`Campus ${unidade.nome}`}</li>
+                  ))}
               </ul>
             </CardBody>
           </Card>
@@ -432,7 +592,8 @@ class Institutes extends React.Component {
                         <UnidadesInstitute
                           callbackParent={New => this.onChildChanged(New)}
                           unidades={institute.unidades}
-                          edit='true'
+                          adminId={institute.admin.id}
+                          edit="true"
                         />
 
                         <FormGroup>
@@ -456,8 +617,6 @@ class Institutes extends React.Component {
                           </strong>
                           <CustomFileUpload />
                         </FormGroup>
-
-                        <Button type="submit">Criar nova intituição</Button>
                       </Form>
                     </Col>
                   </Row>
@@ -497,7 +656,7 @@ class Institutes extends React.Component {
               </Button>
               <Button
                 variant="danger"
-                onClick={() => this.deleteUnidade(institute)}
+                onClick={() => this.deleteInstitute(institute)}
               >
                 Confirm
               </Button>

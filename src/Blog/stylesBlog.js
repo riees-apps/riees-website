@@ -150,8 +150,8 @@ export const DivText = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 70%;
-  padding: 10vh 0;
+  width: 100%;
+  padding: 10vh 15%;
 
   @media (max-width: 768px) {
     width: 90%;
@@ -189,11 +189,11 @@ export const Text = styled.h1`
   padding: 0 0 1vh 0;
 `;
 export const Container = styled.div`
-  background: #fafafa;
+   background-color: #f4f4f4;
   padding-bottom: 10vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   width: 100%;
   z-index: 100;
@@ -247,14 +247,14 @@ export const Heading = styled.h1`
   background-color: #f4f4f4;
   font-size: calc(5px + 3vw);
   line-height: calc(5px + 3vw);
-  width: 100%;
+  width: max-content;
   letter-spacing: 3px;
   padding-top: 5vh;
   text-align: start;
   padding-bottom: 1.5vh;
-  padding-left: 7.5%;
   margin-top: 5vh;
-  border-bottom: 1px solid #999;
+  margin-left:10%;
+  border-bottom: 1vh solid pink;
   @media (max-width: 600px) {
     padding-left: 2.5%;
     font-size: calc(10px + 3vw);

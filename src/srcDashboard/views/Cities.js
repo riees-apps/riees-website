@@ -26,7 +26,6 @@ import api from "../../api/api";
 import Editor from "../components/components-overview/editor";
 
 import PageTitle from "../components/common/PageTitle";
-import Places from "../components/components-overview/Places";
 
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
@@ -51,11 +50,22 @@ class Cities extends React.Component {
       descricaoPonto: "",
       capa: null,
       logo: null,
-      admin: "5d1a1daaaf9fc5001737e7af"
+      admin: "5d1a1daaaf9fc5001737e7af",
+      pontoEdit: "",
+      nomePontoEdit: "",
+      descricaoPontoEdit: "",
+      editPontoShow: ""
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
     this.handleChangeEditor2 = this.handleChangeEditor2.bind(this);
   }
+
+  filtro = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
+
   handleChangeEditor(html) {
     this.setState({ descricao: html });
   }
@@ -94,26 +104,43 @@ class Cities extends React.Component {
             )
             .then(res => {
               const idCidade = res.data.id;
-              console.log(res.data);
-              api.patch(
-                `/ponto/${id}`,
-                {
-                  nome: nome,
-                  descricao: descricao,
-                  admin: admin.id,
-                  custoMedio: custoMedio
-                },
-                { headers: { "Access-Control-Allow-Origin": "*" } }
-              );
-            })
-            .then(res => {
-              api.get('/cidade?where={"deletedAt":0}').then(res => {
-                const cities = res.data;
-                this.setState({
-                  ...this.state,
-                  cidades: cities,
-                  editShow: false
-                });
+              this.state.pontosTuristicos.map(ponto => {
+                api
+                  .get(`/ponto?where={"nome":"${ponto.nome}"}`)
+                  .then(res => {
+                    console.log(res.data);
+                    if (typeof ponto.createdAt === "undefined")
+                      if (res.data.length > 0) {
+                        api.patch(
+                          `/ponto/${res.data[0].id}`,
+                          {
+                            descricao: ponto.descricao,
+                            deletedAt: 0
+                          },
+                          { headers: { "Access-Control-Allow-Origin": "*" } }
+                        );
+                      } else
+                        api.post(
+                          `/ponto`,
+                          {
+                            nome: ponto.nome,
+                            descricao: ponto.descricao,
+                            cidade: idCidade,
+                            admin: admin.id
+                          },
+                          { headers: { "Access-Control-Allow-Origin": "*" } }
+                        )
+                  })
+                  .then(res => {
+                    api.get('/cidade?where={"deletedAt":0}').then(res => {
+                      const cities = res.data;
+                      this.setState({
+                        ...this.state,
+                        cidades: cities,
+                        editShow: false
+                      });
+                    });
+                  })
               });
             })
             .catch(error => {
@@ -131,6 +158,56 @@ class Cities extends React.Component {
       }
     });
   }
+  editPonto(ponto) {
+    const { pontoEdit, nomePontoEdit, descricaoPontoEdit } = this.state;
+    if (!(nomePontoEdit !== "" && descricaoPontoEdit !== "")) {
+      this.setState({
+        error: "Preencha todos os campos!",
+        smShow: pontoEdit.id
+      });
+    } else {
+      try {
+        api
+          .patch(
+            `/ponto/${pontoEdit.id}`,
+            {
+              nome: nomePontoEdit,
+              descricao: descricaoPontoEdit
+            },
+            { headers: { "Access-Control-Allow-Origin": "*" } }
+          )
+          .then(res => {
+            api
+              .get(
+                `/ponto?where={"deletedAt":0,"cidade":"${res.data.cidade.id}"}`
+              )
+              .then(res => {
+                const pontos = res.data;
+                console.log(pontos);
+                if (pontos.length !== 0) {
+                  this.setState({
+                    ...this.state,
+                    pontosTuristicos: pontos,
+                    editPontoShow: false
+                  });
+                }
+              });
+          })
+          .catch(error => {
+            this.setState({
+              smShow: pontoEdit.nome,
+              error: "Houve um problema com a edição, tente novamente"
+            });
+          });
+      } catch (err) {
+        this.setState({
+          smShow: pontoEdit.nome,
+          error: "Houve um problema com a edição, tente novamente"
+        });
+      }
+    }
+  }
+
   handleClose() {
     this.setState({
       closeShow: false,
@@ -148,6 +225,11 @@ class Cities extends React.Component {
       editShow: false
     });
   }
+  handleClose3() {
+    this.setState({
+      editPontoShow: false
+    });
+  }
   handleClick2(city) {
     this.setState({
       ...this.state,
@@ -158,6 +240,15 @@ class Cities extends React.Component {
       admin: city.admin,
       pontosTuristicos: city.pontos,
       custoMedio: city.custoMedio
+    });
+  }
+  handleClick3(ponto) {
+    this.setState({
+      ...this.state,
+      pontoEdit: ponto,
+      nomePontoEdit: ponto.nome,
+      descricaoPontoEdit: ponto.descricao,
+      editPontoShow: ponto.nome
     });
   }
   deleteUnidade(city) {
@@ -176,14 +267,14 @@ class Cities extends React.Component {
     var pontos = this.state.pontosTuristicos;
     if (this.state.nomePonto !== "" && this.state.descricaoPonto !== "") {
       var ponto = {
-        nomePonto: this.state.nomePonto,
-        descricaoPonto: this.state.descricaoPonto,
+        nome: this.state.nomePonto,
+        descricao: this.state.descricaoPonto,
         admin: this.props.adminId
       };
       pontos.push(ponto);
       this.setState({
         ...this.state,
-        pontos: pontos,
+        pontosTuristicos: pontos,
         nomePonto: "",
         descricaoPonto: "",
         clear: true
@@ -195,15 +286,44 @@ class Cities extends React.Component {
       });
   }
   deletaPonto(ponto) {
-    var pontos = arrayRemove(this.state.pontosTuristicos, ponto);
-    this.setState({ ...this.state, pontosTuristicos: pontos });
+    if (typeof ponto.id !== "undefined")
+      api
+        .delete(`/ponto/${ponto.id}`)
+        .then(resp => {
+          var pts = arrayRemove(this.state.pontosTuristicos, ponto);
+          this.setState({
+            ...this.state,
+            pontosTuristicos: pts
+          });
+        })
+        .then(res => {
+          api
+            .get(`/ponto?where={"deletedAt":0,"cidade":"${ponto.cidade.id}"}`)
+            .then(res => {
+              const pontos = res.data;
+              if (pontos.length !== 0) {
+                this.setState({
+                  ...this.state,
+                  pontosTuristicos: pontos
+                });
+              }
+            });
+        });
+    else {
+      var pts = arrayRemove(this.state.pontosTuristicos, ponto);
+      this.setState({
+        ...this.state,
+        pontosTuristicos: pts
+      });
+    }
   }
-
   render() {
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
+    let editPontoClose = () => this.setState({ editPontoShow: false });
     const renderCity = () => {
+      console.log(this.state.cidades);
       return this.state.cidades.map((city, number) => (
         <Col key={number} lg="3" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
@@ -238,7 +358,7 @@ class Cities extends React.Component {
               />
               <h5 className="card-title d-block mb-1  ">Pontos Turisticos:</h5>
               <ul className="pl-4">
-                {city.pontos.map(ponto => (
+                {city.pontos.filter(this.filtro.bind(this)).map(ponto => (
                   <Row lg="12">
                     <Col lg="11">
                       <li className="mb-4">{ponto.nome}</li>
@@ -248,7 +368,6 @@ class Cities extends React.Component {
               </ul>
             </CardBody>
           </Card>
-
           <Modal
             size="lg"
             show={this.state.editShow === city.nome}
@@ -355,41 +474,170 @@ class Cities extends React.Component {
                                     minHeight: "10vh"
                                   }}
                                 >
-                                  {this.state.pontosTuristicos.map(ponto => (
-                                    <ListGroupItem>
-                                      <Row lg="12">
-                                        <Col lg="2">
-                                          <p className="text-fiord-blue">
-                                            <strong>Nome:</strong>{" "}
-                                            {ponto.nomePonto}
-                                          </p>
-                                        </Col>
-                                        <Col lg="9">
-                                          <p className="text-fiord-blue">
-                                            <strong>Descrição:</strong>{" "}
+                                  {this.state.pontosTuristicos
+                                    .filter(this.filtro.bind(this))
+                                    .map(ponto => (
+                                      <ListGroupItem>
+                                        <Row lg="12">
+                                          <Col lg="2">
+                                            <p className="text-fiord-blue">
+                                              <strong>Nome:</strong>{" "}
+                                              {ponto.nome}
+                                            </p>
+                                          </Col>
+                                          <Col lg="8">
+                                            <p className="text-fiord-blue">
+                                              <strong>Descrição:</strong>{" "}
+                                              <div
+                                                className="card-text d-block mb-2"
+                                                dangerouslySetInnerHTML={{
+                                                  __html: ponto.descricao
+                                                }}
+                                              />
+                                            </p>
+                                          </Col>
+                                          <Col lg="1">
                                             <div
-                                              className="card-text d-block mb-2"
-                                              dangerouslySetInnerHTML={{
-                                                __html: ponto.descricaoPonto
-                                              }}
-                                            />
-                                          </p>
-                                        </Col>
-                                        <Col lg="1">
-                                          <div
-                                            style={{ marginLeft: "auto" }}
-                                            pill
-                                            className={`card-post__category bg-danger iconDelete`}
-                                            onClick={() =>
-                                              this.deletaPonto(ponto)
-                                            }
-                                          >
-                                            <i className={`fas fa-times`} />
-                                          </div>
-                                        </Col>
-                                      </Row>
-                                    </ListGroupItem>
-                                  ))}
+                                              style={{ marginLeft: "auto" }}
+                                              pill
+                                              className={`card-post__category bg-danger iconDelete`}
+                                              onClick={() =>
+                                                this.deletaPonto(ponto)
+                                              }
+                                            >
+                                              <i className={`fas fa-times`} />
+                                            </div>
+                                          </Col>
+                                          <Col lg="1">
+                                            <div
+                                              pill
+                                              className={`card-post__category bg-primary iconDelete`}
+                                              onClick={() =>
+                                                this.handleClick3(ponto)
+                                              }
+                                            >
+                                              <i
+                                                className={`fas fa-pen iconDelete`}
+                                              />
+                                            </div>
+                                          </Col>
+                                        </Row>
+
+                                        <Modal
+                                          size="md"
+                                          show={
+                                            this.state.editPontoShow ===
+                                            ponto.nome
+                                          }
+                                          onHide={editPontoClose}
+                                          dialogClassName="modal-100w"
+                                          aria-labelledby="example-custom-modal-styling-title"
+                                        >
+                                          <Modal.Header closeButton>
+                                            <Modal.Title id="example-custom-modal-styling-title">
+                                              Editar Ponto turistico
+                                            </Modal.Title>
+                                          </Modal.Header>
+                                          <Modal.Body>
+                                            <ListGroup flush>
+                                              <ListGroupItem className="p-3">
+                                                <Form>
+                                                  <Row form>
+                                                    <Col
+                                                      lg="12"
+                                                      className="form-group"
+                                                    >
+                                                      <h5 htmlFor="feCursos">
+                                                        Pontos Turisticos
+                                                      </h5>
+                                                      <p>
+                                                        Preencha os campos
+                                                        abaixo para editar o
+                                                        ponto turistico
+                                                      </p>
+                                                    </Col>
+                                                    <Col
+                                                      lg="12"
+                                                      className="form-group"
+                                                    >
+                                                      <Row form>
+                                                        <Col
+                                                          md="12"
+                                                          className="form-group"
+                                                        >
+                                                          <label htmlFor="feCursos">
+                                                            Nome do Ponto
+                                                            turistico
+                                                          </label>
+                                                          <FormInput
+                                                            value={
+                                                              this.state
+                                                                .nomePontoEdit
+                                                            }
+                                                            onChange={e =>
+                                                              this.setState({
+                                                                nomePontoEdit:
+                                                                  e.target.value
+                                                              })
+                                                            }
+                                                            id="feCursos"
+                                                            type="name"
+                                                          />
+                                                        </Col>
+                                                        <Col
+                                                          className="mb-3"
+                                                          md="12"
+                                                        >
+                                                          <FormGroup>
+                                                            <strong className="text-muted d-block mb-2">
+                                                              Descrição do Ponto
+                                                              turistico
+                                                            </strong>
+                                                            <FormTextarea
+                                                              value={
+                                                                this.state
+                                                                  .descricaoPontoEdit
+                                                              }
+                                                              onChange={e =>
+                                                                this.setState({
+                                                                  descricaoPontoEdit:
+                                                                    e.target
+                                                                      .value
+                                                                })
+                                                              }
+                                                              id="feResumo"
+                                                              rows="5"
+                                                            />
+                                                          </FormGroup>
+                                                        </Col>
+                                                      </Row>
+                                                    </Col>
+                                                  </Row>
+                                                </Form>
+                                              </ListGroupItem>
+                                            </ListGroup>
+                                          </Modal.Body>
+                                          <Modal.Footer>
+                                            <Button
+                                              variant="secondary"
+                                              onClick={this.handleClose3.bind(
+                                                this
+                                              )}
+                                            >
+                                              Close
+                                            </Button>
+                                            <Button
+                                              variant="danger"
+                                              onClick={() =>
+                                                this.editPonto(ponto)
+                                              }
+                                            >
+                                              Confirm
+                                            </Button>
+                                          </Modal.Footer>
+                                        </Modal>
+                                      </ListGroupItem>
+                                    ))}
                                 </ListGroupItem>
                               </Col>
                             </Row>
@@ -407,9 +655,6 @@ class Cities extends React.Component {
                           </strong>
                           <CustomFileUpload />
                         </FormGroup>
-                        <Button className="ml-1" type="submit">
-                          Adicionar nova cidade
-                        </Button>
                       </Form>
                     </Col>
                   </Row>
@@ -417,7 +662,10 @@ class Cities extends React.Component {
               </ListGroup>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose.bind(this)}>
+              <Button
+                variant="secondary"
+                onClick={this.handleClose2.bind(this)}
+              >
                 Close
               </Button>
               <Button variant="danger" onClick={() => this.editCity(city)}>

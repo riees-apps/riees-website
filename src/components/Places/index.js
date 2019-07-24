@@ -85,14 +85,21 @@ const DivBtn = styled.div`
 
 
 class Places extends Component {
+  
+filtro = place => {
+  if (place.deletedAt === 0) {
+    return true;
+  }
+  else return false
+};
+
   render() {
     const {places} = this.props
     const renderPlaces = () => {
-      return places.map(place => (
+      return places.filter(this.filtro.bind(this)).map(place => (
         <Carousel.Item >  
         <Image
         image={img}
-
         >
         <Text>
         <Heading>
@@ -107,7 +114,7 @@ class Places extends Component {
         </Text>
       </Image>
       </Carousel.Item>
-      ));
+      ))
     };
     return (
       <Carousel  interval='2500' indicators={false} fade className='container4' >

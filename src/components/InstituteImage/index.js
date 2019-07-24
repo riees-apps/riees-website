@@ -55,8 +55,9 @@ class InstituteImage extends Component {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
   componentWillMount() {
+    
     this.props.unidades.map(unidade => {
-      api.get(`/curso?unidade=${unidade.id}`).then(res => {
+      api.get(`/curso?where={"deletedAt":0,"unidade":"${unidade.id}"}`).then(res => {
         const cursos = res.data;
         const newArea = this.state.areas
         cursos.map(curso => {
@@ -66,7 +67,7 @@ class InstituteImage extends Component {
       }).then( res => {
         let u = []
         api
-          .get(`unidade?instituicao=${this.props.unidades[0].instituicao}`)
+          .get(`unidade?where={"deletedAt":0,"instituicao":"${this.props.unidades[0].instituicao}"}`)
           .then(res => {
             u = res.data
             this.setState({unidades: u})

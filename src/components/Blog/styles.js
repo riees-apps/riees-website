@@ -26,7 +26,7 @@ export const Card = styled.div`
     padding-bottom:10vh;
     border-bottom: 1px solid #999;
     background-color: #f4f4f4;
-    width:85%;
+    width:80%;
     height: 30vh;
     display: flex;
     flex-direction: row;

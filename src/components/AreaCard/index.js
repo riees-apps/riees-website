@@ -58,13 +58,19 @@ const DivHeading = styled.div`
   height: 20%;
 `;
 const Heading = styled.h1`
-  font-family: "Poppins", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", serif;
   color: ${props => props.color};
-  font-size: calc(25px + 1vw);
-  line-height: calc(25px + 1vw);
+  font-weight: bolder;
+  font-size: calc(15px + 1.75vw);
+  line-height: calc(15px + 1.75vw);
   letter-spacing: 1px;
-  padding: 2.5vh 5px 2.5vh 0;
+  padding: 2.5vh 0.75vw 2.5vh 0;
   width: max-content;
+  @media (max-width: 768px) {
+    font-size: calc(1em +2vh);
+    line-height: calc(1em +2vh);
+    padding: 2.5vh 1.5vw 2.5vh 0;
+  }
 `;
 
 function icon(area) {

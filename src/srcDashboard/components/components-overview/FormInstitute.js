@@ -147,10 +147,10 @@ class FormInstitute extends Component {
                               smShow: true,
                               error: "Instituição criada com sucesso!"
                             });
-                          });
+                          })
                       });
                     });
-                  });
+                  })
               })
             );
           })

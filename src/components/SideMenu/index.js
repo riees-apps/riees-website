@@ -179,7 +179,6 @@ class SideMenu extends Component {
     });
   }
   handleClick2(i) {
-    console.log(i);
     this.setState({
       ...this.state,
       active2: i
@@ -200,7 +199,11 @@ class SideMenu extends Component {
     text = decodeURI(text);
     return text;
   }
-
+  filtro = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
   componentWillMount() {
     var path = this.especialCharMask(window.location.pathname.split("/")[3]);
     this.setState({
@@ -233,7 +236,7 @@ class SideMenu extends Component {
       ));
     };
     const renderUnidade = link => {
-      return link.unidades.map((unidade, i) => (
+      return link.unidades.filter(this.filtro.bind(this)).map((unidade, i) => (
         <StyledLink2
           onClick={() => this.handleClick2(i)}
           active={this.state.active2 === i}

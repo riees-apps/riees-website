@@ -4,6 +4,7 @@ import Footer from "../components/Footer/index";
 import SideMenu from "../components/SideMenu/index";
 import AreaCard from "../components/AreaCard/index";
 import Button from "../components/Button/index";
+import { Link } from "react-router-dom";
 import "./institute.css";
 
 import api from "../api/api";
@@ -39,8 +40,10 @@ const Title = styled.h1`
   margin: auto;
   width: 100%;
   text-align: center;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     position: absolute;
+    font-size: calc(1em + 5vh);
+    line-height: 1em;
   }
 `;
 const DivText = styled.div`
@@ -63,11 +66,16 @@ const Heading = styled.h1`
   font-family: "Poppins", serif;
   color: ${props => props.color};
   font-weight: bolder;
-  font-size: calc(30px + 0.6vw);
-  line-height: calc(30px + 0.6vw);
+  font-size: calc(15px + 1.75vw);
+  line-height: calc(15px + 1.75vw);
   letter-spacing: 1px;
   padding: 0 0.75vw 5vh 0;
   width: max-content;
+  @media (max-width: 768px) {
+    font-size: calc(1em +2vh);
+    line-height: calc(1em +2vh);
+    padding: 0 1.5vw 5vh 0;
+  }
 `;
 const Subheading = styled.h4`
   position: fixed;
@@ -84,8 +92,11 @@ const Subheading = styled.h4`
   letter-spacing: 1px;
   font-weight: lighter;
   line-height: calc(20px + 0.5vw);
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     position: absolute;
+    margin-top: calc(1em + 4.5vh);
+    font-size: calc(1em + 1vh);
+    line-height: calc(1em);
   }
 `;
 const Text = styled.h1`
@@ -97,8 +108,10 @@ const Text = styled.h1`
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
-    font-size: calc(6px + 1vh);
-    line-height: calc(7px + 1vh);
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing: 0.5px;
+    color: #505050;
     text-align: justify;
     padding: 0 0 0.5vh 0;
   }
@@ -114,12 +127,30 @@ const Text2 = styled.li`
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
-    font-size: calc(6px + 1vh);
-    line-height: calc(7px + 1vh);
-    text-align: justify;
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing: 0.5px;
+    color: #505050;
     padding: 0 0 0.5vh 0;
   }
   padding: 0 0 2.5vh 0;
+`;
+const Campus = styled.h1`
+  font-family: "Poppins", sans-serif;
+  color: #003b81;
+  font-weight: lighter;
+  margin-bottom: 1vh;
+  font-size: calc(9px + 1.6vw);
+  line-height: calc(10px + 1.6vw);
+  width: 100%;
+  text-align: start;
+  @media (max-width: 768px) {
+    font-size: calc(10px + 3vw);
+    line-height: calc(11px + 3vw);
+    letter-spacing: 1px;
+    color: #003b81;
+    margin-bottom: 5vh;
+  }
 `;
 const Div = styled.div`
   display: flex;
@@ -172,6 +203,7 @@ const Logo = styled.img`
     height: 10vh;
   }
 `;
+
 class Institute extends Component {
   constructor(props, context) {
     super(props, context);
@@ -185,16 +217,19 @@ class Institute extends Component {
   onChildChanged(New) {
     this.setState({ unidade: New });
   }
-
+  filtro = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
   componentDidMount() {
     let u = [];
-
-    api.get(`unidade?instituicao=${this.props.id}`).then(res => {
+    api.get(`unidade?where={"deletedAt":0,"instituicao":"${this.props.id}"}`).then(res => {
       u = res.data;
       this.setState({ unidadesComCursos: u });
     });
     this.props.unidades.map(unidade => {
-      api.get(`/curso?unidade=${unidade.id}`).then(res => {
+      api.get(`/curso?where={"deletedAt":0,"unidade":"${unidade.id}"}`).then(res => {
         const cursos = res.data;
         const newArea = this.state.areas;
         cursos.map(curso => {
@@ -212,13 +247,14 @@ class Institute extends Component {
   }
 
   render() {
-    const { sub, img, logo, url, institutes, pontosFortes } = this.props;
+    const { img, logo, url, institutes, pontosFortes } = this.props;
     const unidades = this.props.unidades;
     const areas = this.state.areas;
     const cursos = this.state.cursos;
     const unidadesComCursos = this.state.unidadesComCursos;
-
+    console.log(unidadesComCursos)
     const name = this.props.name.split("-")[0];
+    const sub = this.props.name.split("-")[1];
     return (
       <div>
         <Image x="0.5" height="80vh" image={img}>
@@ -350,8 +386,10 @@ class Institute extends Component {
               <Heading color="#003b81">Courses</Heading>
             </Div>
             {unidadesComCursos.length > 0
-              ? unidadesComCursos[this.state.unidade].cursos.map(curso => (
-                  <Text2>{`${curso.nome} (${curso.niveis.map(nivel =>` ${nivel} `)}) `}</Text2>
+              ? unidadesComCursos[this.state.unidade].cursos.filter(this.filtro.bind(this)).map(curso => (
+                  <Text2>{`${curso.nome} (${curso.niveis.map(
+                    nivel => ` ${nivel} `
+                  )}) `}</Text2>
                 ))
               : ""}
             <Div justify="flex-start">
@@ -365,14 +403,14 @@ class Institute extends Component {
               {unidades[this.state.unidade].logradouro},{" "}
               {unidades[this.state.unidade].numero}
             </Text>
-            <Text>
+            <Text2 style={{ listStyle: "none" }}>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
               {unidades[this.state.unidade].bairro},{" "}
               {unidadesComCursos.length > 0
                 ? unidadesComCursos[this.state.unidade].cidade.nome
                 : unidades[this.state.unidade].cidade.nome}{" "}
               - Espirito Santo - {unidades[this.state.unidade].cep}
-            </Text>
+            </Text2>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
               {unidades[this.state.unidade].complemento}
@@ -384,6 +422,18 @@ class Institute extends Component {
               />{" "}
               {unidades[this.state.unidade].telefone}
             </Text>
+            <Div className="DivMobile" justify="flex-start">
+              <Heading color="#303033">All</Heading>
+              <Heading color="#003b81">Campus</Heading>
+            </Div>
+            <div
+              style={{ display: "flex", flexDirection: "column" }}
+              className="DivMobile"
+            >
+              {unidades.map((unidade,index) => (
+                <Campus className="DivMobile" onClick={() =>  this.setState({unidade: index})}>{`Campus ${unidade.nome}`}</Campus>
+              ))}
+            </div>
             <br />
             <br />
             <Button
@@ -394,7 +444,7 @@ class Institute extends Component {
             <Button
               return={true}
               color="#FF1493"
-              url="/Institutes"
+              url="/Members"
               name="All institutes"
             />
           </DivText>

@@ -28,30 +28,35 @@ const DivText = styled.div`
   }
 `;
 const Heading = styled.h1`
-  font-family: 'Poppins', serif;
+  font-family: "Poppins", serif;
   color: ${props => props.color};
-  font-size: calc(30px + 0.6vw);
-  line-height: calc(30px + 0.6vw);
-  letter-spacing: 0px;
-  padding: 0 12px 5vh 0;
+  font-weight: bolder;
+  font-size: calc(15px + 1.75vw);
+  line-height: calc(15px + 1.75vw);
+  letter-spacing: 1px;
+  padding: 0 0.75vw 5vh 0;
   width: max-content;
+  @media (max-width: 768px) {
+    font-size: calc(1em +2vh);
+    line-height: calc(1em +2vh);
+    padding: 0 1.5vw 5vh 0;
+  }
 `;
 const Text = styled.h1`
-  font-family: "Raleway", Helvetica, Arial, sans-serif;
-  color: #202022;
+  font-family: "Raleway", serif;
+  color: #303032;
   font-weight: lighter;
   font-size: calc(7px + 1vw);
-  line-height: calc(9px + 1vw);
-  letter-spacing: 0.25px;
+  line-height: calc(8px + 1vw);
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
-    font-size: calc(6px + 1vh);
-    line-height: calc(8px + 1vh);
-    letter-spacing: 0.4px;
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing: 0.5px;
+    color: #505050;
     text-align: justify;
     padding: 0 0 0.5vh 0;
-    color: #151515;
   }
   padding: 0 0 2.5vh 0;
 `;
@@ -130,7 +135,7 @@ class City extends Component {
           <SideMenu page="City" links={Cidades} />
           <DivText>
             <Div justify="flex-start">
-              <Heading>{name}</Heading>
+              <Heading color='#303033'>{name}</Heading>
               <Heading  color="#003b81"><FormattedMessage id="Description"/></Heading>
             </Div>
             <DivImg>
@@ -139,12 +144,12 @@ class City extends Component {
             
             <div className="innerHTMLCidade" dangerouslySetInnerHTML={{ __html: descricao }}/>
             <Div justify="flex-start">
-              <Heading><FormattedMessage id="Top"/></Heading>
+              <Heading color='#303033'><FormattedMessage id="Top"/></Heading>
               <Heading color="#003b81"><FormattedMessage id="Visit"/></Heading>
             </Div>
             <Places places={places}/>
             <Div style={{background:'#f4f4f4'}} justify="flex-start">
-              <Heading>{name}</Heading>
+              <Heading color='#303033'>{name}</Heading>
               <Heading color="#003b81"><FormattedMessage id="Institutes"/></Heading>
             </Div>
             <InstituteImages Institutos={this.props.institutes}  cityInstitute city={id}/>
