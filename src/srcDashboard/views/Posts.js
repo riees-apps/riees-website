@@ -117,7 +117,7 @@ class Posts extends React.Component {
                 tags: tags,
                 admin: admin.id
               },
-              { headers: { "Access-Control-Allow-Origin": "*" } }
+              
             )
             .then(res =>
               api.get('/postagem?where={"deletedAt":0}').then(res => {

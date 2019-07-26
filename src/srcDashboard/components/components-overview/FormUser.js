@@ -63,8 +63,7 @@ class FormUser extends Component {
               nome: nome,
               email: email,
               senha: senha
-            },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            }         
           )
           .then(response => {
             this.setState({

@@ -78,8 +78,8 @@ class FormEvent extends Component {
               localizacao: localizacao,
               link: link,
               admin: admin
-            },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            }
+            
           )
           .then(response => {
             this.setState({

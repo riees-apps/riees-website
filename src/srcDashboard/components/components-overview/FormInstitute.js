@@ -97,7 +97,7 @@ class FormInstitute extends Component {
               capa: capa,
               logo: null
             },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            
           )
           .then(response => {
             const idInstituicao = response.data.id;
@@ -121,7 +121,7 @@ class FormInstitute extends Component {
                       admin: response.data.admin.id,
                       instituicao: idInstituicao
                     },
-                    { headers: { "Access-Control-Allow-Origin": "*" } }
+                    
                   )
                   .then(response => {
                     const idUnidade = response.data.id;
@@ -140,7 +140,7 @@ class FormInstitute extends Component {
                               area: area,
                               unidade: idUnidade
                             },
-                            { headers: { "Access-Control-Allow-Origin": "*" } }
+                            
                           )
                           .then(response => {
                             this.setState({

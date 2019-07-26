@@ -71,7 +71,7 @@ class FormCity extends Component {
               descricao: descricao,
               admin: admin
             },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            
           )
           .then(response => {
             const idCidade = response.data.id;
@@ -85,7 +85,7 @@ class FormCity extends Component {
                     cidade: idCidade,
                     admin: response.data.admin.id
                   },
-                  { headers: { "Access-Control-Allow-Origin": "*" } }
+                  
                 )
                 .then(res => {
                   console.log(res);

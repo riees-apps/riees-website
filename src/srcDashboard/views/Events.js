@@ -121,7 +121,7 @@ class Events extends React.Component {
                 link: link,
                 admin: admin.id
               },
-              { headers: { "Access-Control-Allow-Origin": "*" } }
+              
             )
             .then(res =>
               api.get('/evento?where={"deletedAt":0}').then(res => {

@@ -248,7 +248,7 @@ class Institute extends Component {
 
   render() {
     const { img, logo, url, institutes, pontosFortes } = this.props;
-    const unidades = this.props.unidades;
+    const unidades = this.props.unidades.filter(this.filtro.bind(this));
     const areas = this.state.areas;
     const cursos = this.state.cursos;
     const unidadesComCursos = this.state.unidadesComCursos;
@@ -430,7 +430,7 @@ class Institute extends Component {
               style={{ display: "flex", flexDirection: "column" }}
               className="DivMobile"
             >
-              {unidades.map((unidade,index) => (
+              {unidades.filter(this.filtro.bind(this)).map((unidade,index) => (
                 <Campus className="DivMobile" onClick={() =>  this.setState({unidade: index})}>{`Campus ${unidade.nome}`}</Campus>
               ))}
             </div>

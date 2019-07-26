@@ -76,7 +76,7 @@ class Users extends React.Component {
                 email: email,
                 senha: senha
               },
-              { headers: { "Access-Control-Allow-Origin": "*" } }
+              
             )
             .then(res =>
               api.get('/admin?where={"deletedAt":0}').then(res => {

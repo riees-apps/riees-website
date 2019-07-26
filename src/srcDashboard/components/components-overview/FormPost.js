@@ -91,8 +91,7 @@ class FormPost extends Component {
               conteudo: conteudo,
               tags: tags,
               admin: admin
-            },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            }
           )
           .then(response => {
             this.setState({

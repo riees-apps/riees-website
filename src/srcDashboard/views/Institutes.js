@@ -127,7 +127,7 @@ class Institutes extends React.Component {
                 capa: null,
                 logo: null
               },
-              { headers: { "Access-Control-Allow-Origin": "*" } }
+              
             )
             .then(res => {
               const idInstituto = res.data.id;
@@ -294,7 +294,7 @@ class Institutes extends React.Component {
               nome: nomePontoEdit,
               descricao: descricaoPontoEdit
             },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            
           )
           .then(res => {
             api

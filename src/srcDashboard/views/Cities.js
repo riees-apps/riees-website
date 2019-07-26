@@ -100,7 +100,7 @@ class Cities extends React.Component {
                 admin: admin.id,
                 custoMedio: custoMedio
               },
-              { headers: { "Access-Control-Allow-Origin": "*" } }
+              
             )
             .then(res => {
               const idCidade = res.data.id;
@@ -117,7 +117,7 @@ class Cities extends React.Component {
                             descricao: ponto.descricao,
                             deletedAt: 0
                           },
-                          { headers: { "Access-Control-Allow-Origin": "*" } }
+                          
                         );
                       } else
                         api.post(
@@ -128,7 +128,7 @@ class Cities extends React.Component {
                             cidade: idCidade,
                             admin: admin.id
                           },
-                          { headers: { "Access-Control-Allow-Origin": "*" } }
+                          
                         )
                   })
                   .then(res => {
@@ -174,7 +174,7 @@ class Cities extends React.Component {
               nome: nomePontoEdit,
               descricao: descricaoPontoEdit
             },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            
           )
           .then(res => {
             api
