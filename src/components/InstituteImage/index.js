@@ -49,6 +49,7 @@ class InstituteImage extends Component {
     cursos: []
   };
   changeHover() {
+    if(window.screen.width >= 768)
     this.setState({ ...this.state, hover: !this.state.hover });
   }
   changeOut() {

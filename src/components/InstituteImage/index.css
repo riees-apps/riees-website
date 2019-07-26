@@ -213,3 +213,16 @@
   transition: all 1000ms,color 300ms;
   height:100%;
 }
+@media screen and (max-width: 768px) {
+  .titleInstitute{
+    transition: all 1000ms;
+    text-transform: uppercase;
+    color:white;
+    font-size: 2.5em;
+    line-height:0.7em;
+    width: max-content;
+    margin-left: 10%;
+    text-decoration: none;
+    margin-top:33vh;
+  }
+}

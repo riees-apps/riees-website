@@ -29,7 +29,7 @@ const DivEvents = styled.div`
     props.larger &&
     `
     margin: auto;
-    width:90%
+    width:85%
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

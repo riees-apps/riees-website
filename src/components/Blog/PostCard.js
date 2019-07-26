@@ -19,14 +19,14 @@ const Badge = styled.h1`
   height: max-content;
   letter-spacing: 1px;
   padding: 1vh 1.5vh;
-  margin: -1% 0 0 1%;
+  margin: -1% 0 1% 1%;
   background-color: #0077ff;
   color: #fafafa;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
+    padding: 1vh 0;
     font-size: 1.2em;
     line-height: 1.2em;
-    letter-spacing: 3px;
-    padding: 0;
+    letter-spacing: 1px;
     margin: 0;
     color: #0077ff;
     background-color: transparent;
@@ -66,8 +66,9 @@ const Title = styled.h1`
   height: max-content;
   text-align: start;
   padding: 1vh 0 1vh 1vh;
-  @media (max-width: 600px) {
-    margin: 1% 0;
+  margin-bottom:1%;
+  @media (max-width: 768px) {
+    margin-bottom: 1.5vh;
     width: 100%;
     padding: 0;
     font-size: calc(13px + 1.3vh);
@@ -94,11 +95,11 @@ const Text = styled.h1`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4; /* Number of lines displayed before it truncate */
   overflow: hidden;
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     width: 100%;
     padding: 0;
-    font-size: calc(6px + 1.3vh);
-    line-height: calc(6px + 1.3vh);
+    font-size: calc(6px + 1.5vh);
+    line-height: calc(6px + 1.5vh);
   }
 `;
 

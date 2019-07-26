@@ -7,13 +7,18 @@ import fapes from "./oie_transparent2.png";
 import governo from "./Brasao_Governo_horizontal_white_right_small.png";
 
 const Logo = styled.img`
-  width: 90%;
-  margin-left:-10%;
+  width: 65%;
+  margin-left:-35%;
   transition: all 0.2s linear;
   :hover {
     cursor:pointer;
     transition: all 0.2s linear;
     transform:scale(1.03)
+  }
+  @media (max-width: 768px) {
+    width: calc(100% - 5vw);
+    height:115%;
+    margin-left:-5vw;
   }
 `;
 
@@ -33,7 +38,9 @@ const StyledLink = styled(Link)`
   transition: all 0.15s linear;
   margin-bottom: 10px;
   @media (max-width: 768px) {
-    width: 100%;
+    width: 90%;
+    font-size: calc(5px + 2vw);
+    line-height: calc(6px + 2vw);
   }
   :hover {
     text-decoration: none;
@@ -55,7 +62,7 @@ const Image = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   filter: contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
@@ -69,25 +76,31 @@ const DivText = styled.div`
   justify-content: flex-start;
   width: 33vw;
   margin: 40px 0 40px 40px;
-  padding-right: 3vw;
+  padding-left: 3vw;
   @media (max-width: 768px) {
-    width: 44vw;
+    width: 33vw;
+    margin: 5vh 0;
+    padding-left: 5vw;
   }
   ${props =>
     props.active &&
     `
     @media (max-width: 768px) {
-    display:none
+      padding-left: 0;
   }
   `}
 `;
 const DivLogo = styled.div`
   color: #f1f1f1;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   height:40vh;
   align-items: space-between;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    height:20vh;
+  }
+  
 `;
 const Title = styled.h1`
   text-align: start;
@@ -97,6 +110,10 @@ const Title = styled.h1`
   line-height: calc(30px + 1vw);
   width: 100%;
   margin-bottom: 7.5vh;
+  @media (max-width: 768px) {
+    font-size: calc(5px + 3vw);
+    line-height: calc(6px + 3vw);
+  }
 `;
 const Text = styled.h1`
   font-family: "Poppins", sans-serif;
@@ -108,6 +125,10 @@ const Text = styled.h1`
   letter-spacing: 0.1vh;
   width: 100%;
   margin-bottom: 20px;
+  @media (max-width: 768px) {
+    font-size: calc(3px + 2vw);
+    line-height: calc(5px + 2vw);
+  }
 `;
 
 class Footer extends Component {
@@ -122,7 +143,8 @@ class Footer extends Component {
             Universidade Federal do Espirito Santo - Secretaria de Relações
             Internacionais
           </Text>
-          <Text>Avenida Fernando Ferrari,514.Vitória/ES-Brasil.</Text>
+          <Text>Avenida Fernando Ferrari,514</Text>
+          <Text>Vitória/ES-Brasil.</Text>
           <Text>CEP 29075-910</Text>
           <Text>+55 27 40092046 / +55 27 31459205</Text>
           <StyledLink

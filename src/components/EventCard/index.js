@@ -13,7 +13,7 @@ const Card = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  width: 30%;
+  width: 27.5%;
   height: 65vh;
   transition: all 600ms;
   background-color: #fafafa;

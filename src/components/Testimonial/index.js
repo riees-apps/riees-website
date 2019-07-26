@@ -37,11 +37,11 @@ class Testimonial extends Component {
         align="center"
         justify="flex-start"
       >
-        <h1 className="head2"><FormattedMessage id="Testimonial"/></h1>
+        <div className="head2"><FormattedMessage id="Testimonial"/></div>
         <div className='divTestimonial'>
-          <p className="paragraph2">{this.props.p}</p>
-          <h1 className="autor">{this.props.author}</h1>
-          <h1 className="city">{this.props.city}</h1>
+          <div className="paragraph2">{this.props.p}</div>
+          <div className="autor">{this.props.author}</div>
+          <div className="city">{this.props.city}</div>
         </div>
       </Image>
     );

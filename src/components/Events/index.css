@@ -1,42 +1,52 @@
-h1{
-    font-family: "Poppins", sans-serif;
+h1 {
+  font-family: "Poppins", sans-serif;
 }
-.iconEvent{
-    transition: all 300ms;
-    font-size: 40px;
-    cursor: pointer;
-
+.iconEvent {
+  transition: all 300ms;
+  font-size: 40px;
+  cursor: pointer;
 }
-.iconEvent:hover{
-    transition: all 300ms;
-    transform: scale(1.05);
-    cursor: pointer;
-    color:#0077ff;
-
+.iconEvent:hover {
+  transition: all 300ms;
+  transform: scale(1.05);
+  cursor: pointer;
+  color: #0077ff;
 }
-.pages{
-    width:100%;
-    display: flex;
+.pages {
+  width: 100%;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-top:5%;
+  margin-top: 5%;
 }
-.h1Pages{
-    color:#303033;
-    font-size: 2em;
-    margin: 0 3vw;
+.h1Pages {
+  color: #303033;
+  font-size: 2em;
+  margin: 0 3vw;
 }
-.iconEvent2{
-    color:#303033;
+.iconEvent2 {
+  color: #303033;
+  font-size: 2em;
+  transition: all 100ms;
+}
+.iconEvent2:hover {
+  color: #0077ff;
+  transition: all 300ms;
+  transform: scale(1.09);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .iconEvent2 {
+    color: #303033;
     font-size: 2em;
     transition: all 100ms;
-}
-.iconEvent2:hover{
-    color:#0077ff;
+  }
+  .iconEvent {
     transition: all 300ms;
-    transform: scale(1.09);
+    font-size: 5vh;
     cursor: pointer;
-
+  }
 }

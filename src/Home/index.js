@@ -6,7 +6,7 @@ import "./home.css";
 import styled from "styled-components";
 import img from "./opa.jpg";
 import img2 from "./ei.jpg";
-import img6 from "./esMapa.png";
+import img6 from "./mapa.png";
 import img3 from "./ee.jpg";
 import img4 from "./oi.jpg";
 import img5 from "./ola.jpg";
@@ -15,9 +15,57 @@ import Events from "../components/Events/index";
 import Testimonial from "../components/Testimonial/index";
 import { FormattedMessage } from "react-intl";
 
+import { keyframes } from "styled-components";
+import { fadeInDownBig, fadeInUpBig } from "react-animations";
+
+const bounceAnimation = keyframes`${fadeInDownBig}`;
+const bounceAnimation2 = keyframes`${fadeInUpBig}`;
+
+const BouncyDiv = styled.div`
+
+  animation: 1s ${bounceAnimation};
+`;
+const BouncyDiv2 = styled.div`
+
+
+  animation: 1.3s ${bounceAnimation};
+`;
+const BouncyDiv3 = styled.div`
+
+
+  animation: 1.6s ${bounceAnimation};
+`;
+const BouncyDiv4 = styled.div`
+
+
+  animation: 1.9s ${bounceAnimation};
+`;
+const BouncyDiv5 = styled.div`
+
+
+  animation: 2.3s ${bounceAnimation2};
+`;
+const BouncyDiv6 = styled.div`
+
+  
+  animation: 2.6s ${bounceAnimation2};
+`;
+
+const DivTitle = styled.div`
+  
+  width: 70%;
+  justify-content: center;
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  margin-top: calc(40px + 4vw);
+
+`;
+
 const Imagee = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
+  box-shadow: 0px 150vh rgba(10, 0, 10, ${props => props.x}) inset;
   position: relative;
   height: ${props => props.height};
   background-attachment: fixed;
@@ -32,6 +80,9 @@ const Imagee = styled.div`
   @media (max-width: 600px) {
     box-shadow: 0px 150vh rgba(0, 0, 0, calc(${props => props.x} - 0.05)) inset;
     height: calc(91.7vh);
+    background: url(${props => props.image}) no-repeat center center fixed ;
+    background-size: cover;
+
   }
 `;
 const Title = styled.h1`
@@ -43,7 +94,7 @@ const Title = styled.h1`
   line-height: calc(50px + 4vw);
   letter-spacing: 1px;
   margin: 0;
-  margin-top: calc(40px + 4vw);
+  padding:0 15px;
 `;
 const Subheading = styled.h4`
   font-family: "Poppins", sans-serif;
@@ -96,59 +147,94 @@ const DivText = styled.div`
   width: 80%;
   margin: 0 auto;
   padding-bottom: 7.5vh;
-  
 `;
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      render: false //Set render state to false
+    };
+  }
   componentDidMount() {
     document.documentElement.scrollTop = 0;
   }
+
   render() {
+
     return (
       <div style={{ backgroundColor: "#f4f4f4", textAlign: "center" }}>
-        <Carousel>
+        <Carousel fade>
           <Carousel.Item>
             <Imagee
-              x="0.3"
+              x="0.35"
               height="100vh"
               image={img}
               brightness="120%"
               align="center"
               justify="center"
             >
-              <div className="m-2">
-                <Title>
-                  <FormattedMessage id="HomeTitle" />
-                </Title>
+              <DivTitle>
+                <BouncyDiv>
+                  <Title><FormattedMessage id="Come" /></Title>
+                </BouncyDiv>
+                <BouncyDiv2>
+                  <Title><FormattedMessage id="to" /></Title>
+                </BouncyDiv2>
+                <BouncyDiv3>
+                  <Title><FormattedMessage id="meet" /></Title>
+                </BouncyDiv3>
+                <BouncyDiv4 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
+                  <Title><FormattedMessage id="us" /></Title>
+                </BouncyDiv4>
+              </DivTitle>
+
+              <BouncyDiv5>
                 <Subheading>
-                  <FormattedMessage id="HomeSubHeading" />
+                  Etiam cursus elementum ante a porttitor.
                 </Subheading>
-              </div>
-              <Button
-                url="/Institutes"
-                className="m-4"
-                name={<FormattedMessage id="Button" />}
-              />
+              </BouncyDiv5>
+              <BouncyDiv6>
+                <Button
+                  url="/Institutes"
+                  name={<FormattedMessage id="Button" />}
+                />
+              </BouncyDiv6>
             </Imagee>
           </Carousel.Item>
           <Carousel.Item>
             <Imagee
-              x="0.3"
+              x="0.35"
               height="100vh"
-              image={img}
+              image={img3}
               brightness="145%"
               align="center"
               justify="center"
             >
-              <div>
-                <Title>Lorem ipsum dolor</Title>
+              <DivTitle>
+                <BouncyDiv>
+                  <Title><FormattedMessage id="Come" /></Title>
+                </BouncyDiv>
+                <BouncyDiv2>
+                  <Title><FormattedMessage id="to" /></Title>
+                </BouncyDiv2>
+                <BouncyDiv3>
+                  <Title><FormattedMessage id="meet" /></Title>
+                </BouncyDiv3>
+                <BouncyDiv4 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
+                  <Title><FormattedMessage id="us" /></Title>
+                </BouncyDiv4>
+              </DivTitle>
+              <BouncyDiv5>
                 <Subheading>
                   Etiam cursus elementum ante a porttitor.
                 </Subheading>
-              </div>
-              <Button
-                url="/Institutes"
-                name={<FormattedMessage id="Button" />}
-              />
+              </BouncyDiv5>
+              <BouncyDiv6>
+                <Button
+                  url="/Institutes"
+                  name={<FormattedMessage id="Button" />}
+                />
+              </BouncyDiv6>
             </Imagee>
           </Carousel.Item>
         </Carousel>
@@ -177,7 +263,7 @@ class Home extends Component {
           </Text>
           <Button url="/About" name={<FormattedMessage id="Button" />} />
         </DivText>
-        
+
         <Carousel fade>
           <Carousel.Item>
             <Imagee
@@ -186,13 +272,13 @@ class Home extends Component {
               brightness="100%"
               contrast="100%"
               image={img2}
-              align="space-around"
-              justify="space-around"
+              align="flex-start"
+              justify="flex-start"
             >
-              <h1 className="head">
+              <div className="head">
                 <FormattedMessage id="Coming" />
-              </h1>
-              <p className="paragraph">
+              </div>
+              <div className="paragraph">
                 Aut molestiae velit id maxime accusantium. Dolorem qui ab
                 accusantium qui et et tenetur facilis. Quia odio hic ea qui
                 molestias minima. Asperiores corrupti id qui rem. Ea a
@@ -205,7 +291,7 @@ class Home extends Component {
                 aliquid nisi. Placeat voluptatem corporis ea ipsam alias. Et sit
                 consequatur in nisi voluptatum tempore est sequi. Eos aspernatur
                 hic. Nobis autem vel non.
-              </p>
+              </div>
               <div className="margin">
                 <Button url="/Coming" name={<FormattedMessage id="Button" />} />
               </div>
@@ -218,15 +304,15 @@ class Home extends Component {
               brightness="100%"
               contrast="100%"
               image={img5}
-              align="space-around"
-              justify={window.screen.width > 600 ? "center" :'space-around'}
+              align="flex-start"
+              justify={window.screen.width > 600 ? "flex-start" : "flex-start"}
             >
-              <h1 className="head">
+              <div className="head">
                 <FormattedMessage id="Living" />
-              </h1>
+              </div>
               <div className="living">
-                <img className="imgLiving" alt='' src={img6}/>
-                <p className="paragraphLiving">
+                <img className="imgLiving" alt="" src={img6} />
+                <div className="paragraphLiving">
                   Ea a consectetur sequi. Voluptatem reiciendis sed
                   perspiciatis. Aut molestiae velit id maxime accusantium.
                   Dolorem qui ab accusantium qui et et tenetur facilis. Quia
@@ -239,7 +325,7 @@ class Home extends Component {
                   reiciendis aliquid nisi. Placeat voluptatem corporis ea ipsam
                   alias. Et sit consequatur in nisi voluptatum tempore est
                   sequi. Eos aspernatur hic. Nobis autem vel non.
-                </p>
+                </div>
               </div>
 
               <div className="margin">
@@ -254,13 +340,13 @@ class Home extends Component {
               brightness="100%"
               contrast="100%"
               image={img4}
-              align="space-around"
-              justify="space-around"
+              align="flex-start"
+              justify="flex-start"
             >
-              <h1 className="head">
+              <div className="head">
                 <FormattedMessage id="Cities" />
-              </h1>
-              <p className="paragraph">
+              </div>
+              <div className="paragraph">
                 Temporibus sed ut voluptas. Est temporibus nisi quaerat ea et.
                 Quaerat cumque sit eveniet cum consequuntur suscipit. Error
                 maiores voluptatem totam sint. Illum ab laudantium culpa
@@ -273,12 +359,12 @@ class Home extends Component {
                 aliquid nisi. Placeat voluptatem corporis ea ipsam alias. Et sit
                 consequatur in nisi voluptatum tempore est sequi. Eos aspernatur
                 hic. Nobis autem vel non.
-              </p>
+              </div>
               <div className="margin">
                 <Button url="/Cities" name={<FormattedMessage id="Button" />} />
               </div>
             </Imagee>
-          </Carousel.Item> 
+          </Carousel.Item>
         </Carousel>
 
         <DivText>
@@ -339,7 +425,10 @@ class Home extends Component {
           <Heading background="#f4f4f4">
             <FormattedMessage id="News" />
           </Heading>
-          <Events eventos={this.props.Eventos}  final={window.screen.width >= 768 ? 3 : 1} />
+          <Events
+            eventos={this.props.Eventos}
+            final={window.screen.width >= 768 ? 3 : 1}
+          />
           <Button
             url="/News-Events"
             name={<FormattedMessage id="ButtonEvents" />}

@@ -41,7 +41,11 @@
         "Time": "Monday to Friday from 8 AM to 5 PM",
         "Atendimento": "Opening hours",
         "Contact3": "Contact us sending an email or filling out the form below.",
-        "See all ...": "See all ..."
+        "See all ...": "See all ...",
+        "Come": "Come",
+        "to": "to",
+        "meet": "meet",
+        "us": "us"
     },
     "pt-BR": {
         "HomeTitle": "Venha nos conhecer",
@@ -88,6 +92,10 @@
         "Submit": "Enviar",
         "Subject": "Assunto",
         "Your Message": "Sua mensagem",
-        "See all ...": "Veja tudo..."
+        "See all ...": "Veja tudo...",
+        "Come": "Venha",
+        "to": "nos",
+        "meet": "conhecer",
+        "us": " "
     }
 }
