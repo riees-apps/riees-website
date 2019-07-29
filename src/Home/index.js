@@ -21,8 +21,8 @@ import { fadeInDownBig, fadeInUpBig } from "react-animations";
 const bounceAnimation = keyframes`${fadeInDownBig}`;
 const bounceAnimation2 = keyframes`${fadeInUpBig}`;
 
-const BouncyDiv = styled.div`
 
+const BouncyDiv = styled.div`
   animation: 1s ${bounceAnimation};
 `;
 const BouncyDiv2 = styled.div`
@@ -46,9 +46,7 @@ const BouncyDiv5 = styled.div`
   animation: 2.3s ${bounceAnimation2};
 `;
 const BouncyDiv6 = styled.div`
-
-  
-  animation: 2.6s ${bounceAnimation2};
+  animation: 2.5s ${bounceAnimation2};
 `;
 
 const DivTitle = styled.div`

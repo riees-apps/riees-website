@@ -160,7 +160,6 @@ class Header extends Component {
     });
   }
   render() {
-    console.log(window.location.pathname.split("/")[2])
     return (
       <div
         shadow={this.state.menu ? true : false}

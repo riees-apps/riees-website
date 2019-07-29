@@ -1,12 +1,6 @@
 export default function() {
   return [
     {
-      title: "Blog Dashboard",
-      to: "/en/dashboard/blog-overview",
-      htmlBefore: '<i class="material-icons">edit</i>',
-      htmlAfter: ""
-    },
-    {
       title: "Visualizar Instituições",
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/en/dashboard/show-institutes",

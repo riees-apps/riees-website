@@ -42,6 +42,7 @@ class FormPost extends Component {
       conteudo: "",
       tag: "",
       tags: [],
+      img: null,
       admin: this.props.adminId
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
@@ -64,7 +65,7 @@ class FormPost extends Component {
     e.preventDefault();
     const { titulo, data, resumo, conteudo, tags, admin } = this.state;
     let dataV = data.split("-");
-    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2]).getTime()
+    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2]).getTime();
     if (
       !(
         titulo !== "" &&
@@ -82,17 +83,25 @@ class FormPost extends Component {
     } else {
       try {
         await api
-          .post(
-            "/postagem",
-            {
-              titulo: titulo,
-              resumo: resumo,
-              data: newDate,
-              conteudo: conteudo,
-              tags: tags,
-              admin: admin
-            }
-          )
+          .post("/postagem", {
+            titulo: titulo,
+            resumo: resumo,
+            data: newDate,
+            conteudo: conteudo,
+            tags: tags,
+            admin: admin
+          })
+          .then(res => {
+            fetch('https://riees-api.herokuapp.com/bucket', {
+              headers: {
+                "content-type": this.state.img.type,
+                "filename": this.state.img.name
+              },
+              method: "post",
+              body: this.state.img
+            });
+          })
+          .catch(error => console.log(error))
           .then(response => {
             this.setState({
               smShow: true,
@@ -123,6 +132,8 @@ class FormPost extends Component {
         this.props.history.push("/en/dashboard/show-posts");
       else return;
     };
+    console.log("value input");
+    if (!(this.state.img === null)) console.log(this.state.img);
     return (
       <form onSubmit={this.addPostagem}>
         <ListGroup flush>
@@ -230,7 +241,10 @@ class FormPost extends Component {
                     <strong className="text-muted d-block mb-2">
                       Imagem do postagem
                     </strong>
-                    <CustomFileUpload />
+                    <input
+                      onChange={e => this.setState({ img: e.target.files[0] })}
+                      type="file"
+                    />
                   </FormGroup>
 
                   <Button className="ml-1" type="submit">

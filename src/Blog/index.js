@@ -8,12 +8,10 @@ import api from '../api/api'
 
 class NewsEvents extends Component {
   componentWillMount() {
-    document.documentElement.scrollTop = 0;
+    window.scrollTo(0, 0)
   }
 
   render() {
-    console.log('posts')
-      console.log(this.props.Posts)
     return (
       <div style={{ backgroundColor: "#f4f4f4" }}>
         <ImageIndex x='0.5' height="80vh" image={img3} >
