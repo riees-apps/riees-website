@@ -22,7 +22,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import api from "../../api/api";
 import Editor from "../components/components-overview/editor";
-import "./index.css"
+import "./index.css";
 
 import PageTitle from "../components/common/PageTitle";
 
@@ -55,6 +55,7 @@ class Posts extends React.Component {
       smShow: false,
       editShow: false,
       id: "",
+      img:null,
       postagens: [],
       titulo: "",
       data: "",
@@ -82,7 +83,7 @@ class Posts extends React.Component {
     api.get('/postagem?where={"deletedAt":0}').then(res => {
       const posts = res.data;
       this.setState({ postagens: posts });
-      console.log(this.state.postagens)
+      console.log(this.state.postagens);
     });
   }
   editPost(post) {
@@ -107,33 +108,39 @@ class Posts extends React.Component {
       } else {
         try {
           api
-            .patch(
-              `/postagem/${id}`,
-              {
-                titulo: titulo,
-                resumo: resumo,
-                data: newDate,
-                conteudo: conteudo,
-                tags: tags,
-                admin: admin.id
-              },
-              
-            )
-            .then(res =>
-              api.get('/postagem?where={"deletedAt":0}').then(res => {
-                const posts = res.data;
-                this.setState({
-                  ...this.state,
-                  postagens: posts,
-                  editShow: false
+            .post("/bucket", this.state.img, {
+              headers: {
+                "content-type": this.state.img.type,
+                filename: this.state.img.name
+              }
+            })
+            .then(res => {
+              api
+                .patch(`/postagem/${id}`, {
+                  titulo: titulo,
+                  resumo: resumo,
+                  data: newDate,
+                  conteudo: conteudo,
+                  tags: tags,
+                  capa: res.data._id,
+                  admin: admin.id
+                })
+                .then(res =>
+                  api.get('/postagem?where={"deletedAt":0}').then(res => {
+                    const posts = res.data;
+                    this.setState({
+                      ...this.state,
+                      postagens: posts,
+                      editShow: false
+                    });
+                  })
+                )
+                .catch(error => {
+                  this.setState({
+                    smShow: post.id,
+                    error: "Houve um problema com a edição, tente novamente"
+                  });
                 });
-              })
-            )
-            .catch(error => {
-              this.setState({
-                smShow: post.id,
-                error: "Houve um problema com a edição, tente novamente"
-              });
             });
         } catch (err) {
           this.setState({
@@ -194,6 +201,7 @@ class Posts extends React.Component {
     this.setState({ conteudo: html });
   }
   render() {
+    console.log(this.state.postagens);
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
@@ -203,7 +211,11 @@ class Posts extends React.Component {
           <Card small className="card-post card-post--1">
             <div
               className="card-post__image"
-              style={{ backgroundImage: `url(${post.img})` }}
+              style={{
+                backgroundImage: `url('https://riees-api.herokuapp.com/bucket/${
+                  post.capa !== null ? post.capa : ""
+                }'`
+              }}
             >
               <div
                 pill
@@ -228,7 +240,10 @@ class Posts extends React.Component {
               <h5 className="card-title d-block mb-1  ">Resumo</h5>
               <p className="card-text d-block mb-2">{post.resumo}</p>
               <h5 className="card-title d-block mb-1  ">Conteudo</h5>
-              <div className="InnerHTML" dangerouslySetInnerHTML={{ __html: post.conteudo }}/>
+              <div
+                className="InnerHTML"
+                dangerouslySetInnerHTML={{ __html: post.conteudo }}
+              />
               <h5 className="card-title d-block mb-1  ">Tags:</h5>
               <ul className="px-4">
                 {post.tags.map(tag => (
@@ -364,9 +379,15 @@ class Posts extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem do postagem
+                            Imagem da postagem
                           </strong>
-                          <CustomFileUpload />
+                          <input
+                            className="inputFile"
+                            onChange={e =>
+                              this.setState({ img: e.target.files[0] })
+                            }
+                            type="file"
+                          />
                         </FormGroup>
                       </Form>
                     </Col>

@@ -39,11 +39,10 @@ class LatestPost extends Component {
           style={{textDecoration:'none'}} 
           side={this.props.side}
           to={`/${window.location.pathname.split('/')[1]}/Post/${this.props.id}`}
-          input={this.props.img}
           height={this.props.height}
           width={this.props.width}
           x="0.6"
-          image={this.props.img}
+          image={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}
         >
           <div>
             <Details secAndTrd={this.props.secAndTrd}>

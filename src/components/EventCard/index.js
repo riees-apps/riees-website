@@ -200,7 +200,7 @@ class EventCard extends Component {
           to={`/${window.location.pathname.split("/")[1]}/Events/${
             this.props.id
           }`}
-          input={img}
+          input={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}
         >
           <Date className={this.props.placeEvent !== "" ? "" : "displayNone"}>
             <i className={`far fa-calendar-check iconDate`} />

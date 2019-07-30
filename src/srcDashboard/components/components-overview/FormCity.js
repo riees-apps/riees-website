@@ -37,7 +37,8 @@ class FormCity extends Component {
       smShow: false,
       nome: "",
       descricao: "",
-      capa: null,
+      img: null,
+      imgPonto: null,
       custoMedio: "",
       admin: this.props.adminId,
       nomePonto: "",
@@ -54,6 +55,8 @@ class FormCity extends Component {
     this.setState({ descricaoPonto: html });
   }
   addCidade = async e => {
+    var capaID;
+    var capaPontoID;
     e.preventDefault();
     const { nome, descricao, admin, pontosTuristicos } = this.state;
     if (!(nome !== "" && descricao !== "" && admin !== "")) {
@@ -64,38 +67,51 @@ class FormCity extends Component {
     } else {
       try {
         await api
-          .post(
-            "/cidade",
-            {
-              nome: nome,
-              descricao: descricao,
-              admin: admin
-            },
-            
-          )
-          .then(response => {
-            const idCidade = response.data.id;
-            pontosTuristicos.map(ponto => {
-              api
-                .post(
-                  "/ponto",
-                  {
-                    nome: ponto.nomePonto,
-                    descricao: ponto.descricaoPonto,
-                    cidade: idCidade,
-                    admin: response.data.admin.id
-                  },
-                  
-                )
-                .then(res => {
-                  console.log(res);
-                  this.setState({
-                    smShow: true,
-                    error: "Cidade adicionada com sucesso!"
-                  });
-                });
-            });
+          .post("/bucket", this.state.img, {
+            headers: {
+              "content-type": this.state.img.type,
+              filename: this.state.img.name
+            }
           })
+          .then(res => {
+            api
+              .post("/cidade", {
+                nome: nome,
+                descricao: descricao,
+                capa:  res.data._id,
+                admin: admin
+              })
+              .then(response => {
+                const idCidade = response.data.id;
+                pontosTuristicos.map(ponto => {
+                  api
+                    .post("/bucket", ponto.imgPonto, {
+                      headers: {
+                        "content-type": ponto.imgPonto.type,
+                        filename: ponto.imgPonto.name
+                      }
+                    })
+                    .then(res => {
+                      api
+                        .post("/ponto", {
+                          nome: ponto.nomePonto,
+                          descricao: ponto.descricaoPonto,
+                          //capa: res.data._id,
+                          cidade: idCidade,
+                          admin: response.data.admin.id
+                        })
+                        .then(res => {
+                          console.log(res);
+                          this.setState({
+                            smShow: true,
+                            error: "Cidade adicionada com sucesso!"
+                          });
+                        });
+                    });
+                });
+              });
+          })
+
           .catch(error => {
             console.log(error);
             this.setState({
@@ -119,6 +135,7 @@ class FormCity extends Component {
       var ponto = {
         nomePonto: this.state.nomePonto,
         descricaoPonto: this.state.descricaoPonto,
+        imgPonto: this.state.imgPonto,
         admin: this.props.adminId
       };
       pontos.push(ponto);
@@ -206,10 +223,24 @@ class FormCity extends Component {
                             <FormTextarea
                               value={this.state.descricaoPonto}
                               onChange={e =>
-                                this.setState({ descricaoPonto: e.target.value })
+                                this.setState({
+                                  descricaoPonto: e.target.value
+                                })
                               }
                               id="feResumo"
                               rows="5"
+                            />
+                          </FormGroup>
+                          <FormGroup>
+                            <strong className="text-muted d-block mb-2">
+                              Imagem do Ponto Turistico
+                            </strong>
+                            <input
+                              className="inputFile"
+                              onChange={e =>
+                                this.setState({ imgPonto: e.target.files[0] })
+                              }
+                              type="file"
                             />
                           </FormGroup>
                         </Col>
@@ -276,15 +307,13 @@ class FormCity extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem da cidade
+                      Imagem da Cidade
                     </strong>
-                    <CustomFileUpload />
-                  </FormGroup>
-                  <FormGroup>
-                    <strong className="text-muted d-block mb-2">
-                      Imagem da descrição
-                    </strong>
-                    <CustomFileUpload />
+                    <input
+                      className="inputFile"
+                      onChange={e => this.setState({ img: e.target.files[0] })}
+                      type="file"
+                    />
                   </FormGroup>
                   <Button className="ml-1" type="submit">
                     Adicionar nova cidade

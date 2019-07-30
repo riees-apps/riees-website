@@ -55,6 +55,7 @@ class FormInstitute extends Component {
     this.setState({ missao: html });
   }
   createInstitute = async e => {
+    var capaID;
     e.preventDefault();
     const {
       nome,
@@ -67,6 +68,7 @@ class FormInstitute extends Component {
       pontosFortes,
       unidades
     } = this.state;
+
     if (
       !(
         nome !== "" &&
@@ -85,80 +87,91 @@ class FormInstitute extends Component {
     } else {
       try {
         await api
-          .post(
-            "/instituicao",
-            {
-              nome: nome,
-              missao: missao,
-              descricao: descricao,
-              admin: admin,
-              pontosFortes: pontosFortes,
-              link: link,
-              capa: capa,
-              logo: null
-            },
-            
-          )
-          .then(response => {
-            const idInstituicao = response.data.id;
-            unidades.map(unidade =>
-              api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
-                let cidade;
-                if (res.data.length > 0) cidade = res.data[0].id;
-                api
-                  .post(
-                    "/unidade",
-                    {
-                      nome: unidade.nome,
-                      telefone: unidade.telefone,
-                      descricao: unidade.descricao,
-                      logradouro: unidade.logradouro,
-                      numero: unidade.numero,
-                      complemento: unidade.complemento,
-                      bairro: unidade.bairro,
-                      cidade: cidade,
-                      cep: unidade.cep,
-                      admin: response.data.admin.id,
-                      instituicao: idInstituicao
-                    },
-                    
-                  )
-                  .then(response => {
-                    const idUnidade = response.data.id;
-                    unidade.cursos.map(curso => {
-                      console.log(curso.area);
-                      api.get(`/area?nome=${curso.area}`).then(res => {
-                        let area;
-                        if (res.data.length > 0) area = res.data[0].id;
-                        api
-                          .post(
-                            "/curso",
-                            {
-                              nome: curso.nome,
-                              niveis: curso.niveis,
-                              admin: response.data.admin.id,
-                              area: area,
-                              unidade: idUnidade
-                            },
-                            
-                          )
-                          .then(response => {
-                            this.setState({
-                              smShow: true,
-                              error: "Instituição criada com sucesso!"
-                            });
-                          })
-                      });
-                    });
-                  })
-              })
-            );
+          .post("/bucket", capa, {
+            headers: {
+              "content-type": capa.type,
+              filename: capa.name
+            }
           })
-          .catch(error => {
-            this.setState({
-              smShow: true,
-              error: "Houve um problema com a criação, tente novamente"
-            });
+          .then(res => {
+            capaID = res.data._id;
+            api
+              .post("/bucket", logo, {
+                headers: {
+                  "content-type": logo.type,
+                  filename: logo.name
+                }
+              })
+              .then(res => {
+                console.log(capaID);
+                console.log(res.data._id);
+                api
+                  .post("/instituicao", {
+                    nome: nome,
+                    missao: missao,
+                    descricao: descricao,
+                    admin: admin,
+                    pontosFortes: pontosFortes,
+                    link: link,
+                    capa: capaID,
+                    logo: res.data._id
+                  })
+                  .then(response => {
+                    const idInstituicao = response.data.id;
+                    unidades.map(unidade =>
+                      api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
+                        let cidade = '';
+                        if (res.data.length > 0) cidade = res.data[0].id;
+
+                        console.log(cidade)
+                        api
+                          .post("/unidade", {
+                            nome: unidade.nome,
+                            telefone: unidade.telefone,
+                            descricao: unidade.descricao,
+                            logradouro: unidade.logradouro,
+                            numero: unidade.numero,
+                            complemento: unidade.complemento,
+                            bairro: unidade.bairro,
+                            cidade: cidade,
+                            cep: unidade.cep,
+                            admin: response.data.admin.id,
+                            instituicao: idInstituicao
+                          })
+                          .then(response => {
+                            const idUnidade = response.data.id;
+                            unidade.cursos.map(curso => {
+                              console.log(curso.area);
+                              api.get(`/area?nome=${curso.area}`).then(res => {
+                                let area;
+                                if (res.data.length > 0) area = res.data[0].id;
+                                api
+                                  .post("/curso", {
+                                    nome: curso.nome,
+                                    niveis: curso.niveis,
+                                    admin: response.data.admin.id,
+                                    area: area,
+                                    unidade: idUnidade
+                                  })
+                                  .then(response => {
+                                    this.setState({
+                                      smShow: true,
+                                      error: "Instituição criada com sucesso!"
+                                    });
+                                  });
+                              });
+                            });
+                          });
+                      })
+                    );
+                  });
+              })
+              .catch(error => {
+                this.setState({
+                  smShow: true,
+                  error: "Houve um problema com a criação, tente novamente"
+                });
+              });
           });
       } catch (err) {
         this.setState({
@@ -305,22 +318,23 @@ class FormInstitute extends Component {
 
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Capa do instituto
+                      Capa da Instituição
                     </strong>
                     <input
-                      onChange={e => this.setState({ capa: e.target.value })}
+                      className="inputFile"
+                      onChange={e => this.setState({ capa: e.target.files[0] })}
                       type="file"
-                      name="files"
                     />
-                    <br />
-                    <button type="submit" value="Upload" />
                   </FormGroup>
-
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Logo do instituto
+                      Logo da Instituição
                     </strong>
-                    <CustomFileUpload />
+                    <input
+                      className="inputFile"
+                      onChange={e => this.setState({ logo: e.target.files[0] })}
+                      type="file"
+                    />
                   </FormGroup>
 
                   <Button type="submit">Criar nova intituição</Button>

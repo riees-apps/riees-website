@@ -50,6 +50,7 @@ class Events extends React.Component {
     super(props, context);
 
     this.state = {
+      imgs: [],
       closeShow: false,
       smShow: false,
       editShow: false,
@@ -60,13 +61,14 @@ class Events extends React.Component {
       descricao: "",
       horarioEvento: "",
       link: "",
+      img: null,
       capa: null,
       admin: "5d1a1daaaf9fc5001737e7af"
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     api.get('/evento?where={"deletedAt":0}').then(res => {
       const events = res.data;
       this.setState({ eventos: events });
@@ -111,33 +113,39 @@ class Events extends React.Component {
       } else {
         try {
           api
-            .patch(
-              `/evento/${id}`,
-              {
-                nome: nome,
-                descricao: descricao,
-                data: newDate,
-                localizacao: localizacao,
-                link: link,
-                admin: admin.id
-              },
-              
-            )
-            .then(res =>
-              api.get('/evento?where={"deletedAt":0}').then(res => {
-                const events = res.data;
-                this.setState({
-                  ...this.state,
-                  eventos: events,
-                  editShow: false
+            .post("/bucket", this.state.img, {
+              headers: {
+                "content-type": this.state.img.type,
+                filename: this.state.img.name
+              }
+            })
+            .then(res => {
+              api
+                .patch(`/evento/${id}`, {
+                  nome: nome,
+                  descricao: descricao,
+                  data: newDate,
+                  localizacao: localizacao,
+                  link: link,
+                  capa: res.data._id,
+                  admin: admin.id
+                })
+                .then(res =>
+                  api.get('/evento?where={"deletedAt":0}').then(res => {
+                    const events = res.data;
+                    this.setState({
+                      ...this.state,
+                      eventos: events,
+                      editShow: false
+                    });
+                  })
+                )
+                .catch(error => {
+                  this.setState({
+                    smShow: event.nome,
+                    error: "Houve um problema com a edição, tente novamente"
+                  });
                 });
-              })
-            )
-            .catch(error => {
-              this.setState({
-                smShow: event.nome,
-                error: "Houve um problema com a edição, tente novamente"
-              });
             });
         } catch (err) {
           this.setState({
@@ -203,6 +211,7 @@ class Events extends React.Component {
   }
 
   render() {
+    console.log(this.state.imgs);
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
@@ -212,7 +221,11 @@ class Events extends React.Component {
           <Card small className="card-post card-post--1">
             <div
               className="card-post__image"
-              style={{ backgroundImage: `url(${event.img})` }}
+              style={{
+                backgroundImage: `url('https://riees-api.herokuapp.com/bucket/${
+                  event.capa !== null ? event.capa : ""
+                }'`
+              }}
             >
               <div
                 pill
@@ -262,7 +275,9 @@ class Events extends React.Component {
                 </div>
               ) : (
                 <div>
-                  <h5 className="card-title d-block mb-1 ">Data de publicação:</h5>
+                  <h5 className="card-title d-block mb-1 ">
+                    Data de publicação:
+                  </h5>
                   <p className="card-text d-block mb-2 ">{`${
                     months[new Date(event.data).getMonth()]
                   } ${new Date(event.data).getDate()}, ${new Date(
@@ -282,7 +297,7 @@ class Events extends React.Component {
           >
             <Modal.Header closeButton>
               <Modal.Title id="example-custom-modal-styling-title">
-                Editar Evento
+                Editar Evento/Noticia
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -320,7 +335,7 @@ class Events extends React.Component {
                           </Col>
                           <Col className="mb-3" md="12">
                             <strong className="text-muted d-block mb-2">
-                              Link do evento
+                              Link
                             </strong>
                             <FormInput
                               value={this.state.link}
@@ -332,7 +347,7 @@ class Events extends React.Component {
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feDataInicio">Data do evento</label>
+                            <label htmlFor="feDataInicio">Data</label>
                             <FormInput
                               value={this.state.data}
                               onChange={e =>
@@ -342,27 +357,31 @@ class Events extends React.Component {
                               type="date"
                             />
                           </Col>
-                          <Col className="mb-3" md="12">
+                          <Col className={`${this.state.localizacao === '' ? 'displayNone' : 'mb-3'}`} md="12">
                             <label htmlFor="feDataInicio">
                               Horário do evento
                             </label>
                             <FormInput
                               value={this.state.horarioEvento}
                               onChange={e =>
-                                this.setState({ horarioEvento: e.target.value })
+                                this.setState({
+                                  horarioEvento: e.target.value
+                                })
                               }
                               id="feCustoMedio"
                               type="time"
                             />
                           </Col>
-                          <Col className="mb-3" md="12">
+                          <Col className={`${this.state.localizacao === '' ? 'displayNone' : 'mb-3'}`} md="12">
                             <strong className="text-muted d-block mb-2">
                               Local do evento
                             </strong>
                             <FormInput
                               value={this.state.localizacao}
                               onChange={e =>
-                                this.setState({ localizacao: e.target.value })
+                                this.setState({
+                                  localizacao: e.target.value
+                                })
                               }
                               id="feName"
                               type="name"
@@ -371,9 +390,15 @@ class Events extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem do evento
+                            Imagem do Evento
                           </strong>
-                          <CustomFileUpload />
+                          <input
+                            className="inputFile"
+                            onChange={e =>
+                              this.setState({ img: e.target.files[0] })
+                            }
+                            type="file"
+                          />
                         </FormGroup>
                       </Form>
                     </Col>
@@ -425,8 +450,8 @@ class Events extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="4"
-            title="Visualizar Eventos"
-            subtitle="Eventos"
+            title="Visualizar Noticias & Eventos"
+            subtitle="Noticias & Eventos"
             className="text-sm-left"
           />
         </Row>

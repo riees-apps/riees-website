@@ -19,6 +19,7 @@ import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
 import api from "../../../api/api";
 import Editor from "./editor";
+import "../../views/index.css"
 
 import CustomFileUpload from "../components-overview/CustomFileUpload";
 
@@ -83,22 +84,21 @@ class FormPost extends Component {
     } else {
       try {
         await api
-          .post("/postagem", {
-            titulo: titulo,
-            resumo: resumo,
-            data: newDate,
-            conteudo: conteudo,
-            tags: tags,
-            admin: admin
+          .post("/bucket", this.state.img, {
+            headers: {
+              "content-type": this.state.img.type,
+              filename: this.state.img.name
+            }
           })
           .then(res => {
-            fetch('https://riees-api.herokuapp.com/bucket', {
-              headers: {
-                "content-type": this.state.img.type,
-                "filename": this.state.img.name
-              },
-              method: "post",
-              body: this.state.img
+            api.post("/postagem", {
+              titulo: titulo,
+              resumo: resumo,
+              data: newDate,
+              conteudo: conteudo,
+              tags: tags,
+              admin: admin,
+              capa: res.data._id
             });
           })
           .catch(error => console.log(error))
@@ -239,9 +239,10 @@ class FormPost extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem do postagem
+                      Imagem da postagem
                     </strong>
                     <input
+                      className="inputFile"
                       onChange={e => this.setState({ img: e.target.files[0] })}
                       type="file"
                     />

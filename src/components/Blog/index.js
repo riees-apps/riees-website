@@ -81,6 +81,7 @@ class Blog extends Component {
         <PostCard
           side="true"
           id={post.id}
+          capa={post.capa}
           title={post.titulo}
           text={post.resumo}
           tag={post.tags[0]}
@@ -202,6 +203,7 @@ class Blog extends Component {
             width="50%"
             height="80vh"
             larger={this.props.larger}
+            capa={posts[0].capa}
             title={posts[0].titulo}
             text={posts[0].resumo}
             tag={posts[0].tags[0]}
@@ -218,6 +220,7 @@ class Blog extends Component {
               side={this.props.side}
               larger={this.props.larger}
               id={posts[1].id}
+              capa={posts[1].capa}
               title={posts[1].titulo}
               text={posts[1].resumo}
               tag={posts[1].tags[0]}
@@ -233,6 +236,7 @@ class Blog extends Component {
               side={this.props.side}
               larger={this.props.larger}
               id={posts[2].id}
+              capa={posts[2].capa}
               title={posts[2].titulo}
               text={posts[2].resumo}
               tag={posts[2].tags[0]}
@@ -250,6 +254,7 @@ class Blog extends Component {
               side={this.props.side}
               larger={this.props.larger}
               id={posts[3].id}
+              capa={posts[3].capa}
               title={posts[3].titulo}
               text={posts[3].resumo}
               tag={posts[3].tags[0]}
@@ -265,6 +270,7 @@ class Blog extends Component {
               side={this.props.side}
               larger={this.props.larger}
               id={posts[4].id}
+              capa={posts[4].capa}
               title={posts[4].titulo}
               text={posts[4].resumo}
               tag={posts[4].tags[0]}

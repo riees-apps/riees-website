@@ -39,6 +39,7 @@ class FormEvent extends Component {
       localizacao: "",
       descricao: "",
       link: "",
+      img: null,
       admin: this.props.adminId
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
@@ -48,10 +49,24 @@ class FormEvent extends Component {
   }
   addEvento = async e => {
     e.preventDefault();
-    const { nome, data, localizacao, descricao, link, horarioEvento, admin } = this.state;
+    const {
+      nome,
+      data,
+      localizacao,
+      descricao,
+      link,
+      horarioEvento,
+      admin
+    } = this.state;
     let dataV = data.split("-");
     let horarioV = horarioEvento.split(":");
-    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2], horarioV[0], horarioV[1]).getTime()
+    let newDate = new Date(
+      dataV[0],
+      dataV[1] - 1,
+      dataV[2],
+      horarioV[0],
+      horarioV[1]
+    ).getTime();
     if (
       !(
         nome !== "" &&
@@ -69,18 +84,24 @@ class FormEvent extends Component {
     } else {
       try {
         await api
-          .post(
-            "/evento",
-            {
+          .post("/bucket", this.state.img, {
+            headers: {
+              "content-type": this.state.img.type,
+              filename: this.state.img.name
+            }
+          })
+          .then(res => {
+            api.post("/evento", {
               nome: nome,
               descricao: descricao,
               data: newDate,
               localizacao: localizacao,
               link: link,
+              capa: res.data._id,
               admin: admin
-            }
-            
-          )
+            });
+          })
+
           .then(response => {
             this.setState({
               smShow: true,
@@ -165,7 +186,9 @@ class FormEvent extends Component {
                       <label htmlFor="feDataInicio">Horário do evento</label>
                       <FormInput
                         value={this.state.horarioEvento}
-                        onChange={e => this.setState({ horarioEvento: e.target.value })}
+                        onChange={e =>
+                          this.setState({ horarioEvento: e.target.value })
+                        }
                         id="feCustoMedio"
                         type="time"
                       />
@@ -176,7 +199,9 @@ class FormEvent extends Component {
                       </strong>
                       <FormInput
                         value={this.state.localizacao}
-                        onChange={e => this.setState({ localizacao: e.target.value })}
+                        onChange={e =>
+                          this.setState({ localizacao: e.target.value })
+                        }
                         id="feName"
                         type="name"
                       />
@@ -184,9 +209,13 @@ class FormEvent extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem do evento
+                      Imagem do Evento
                     </strong>
-                    <CustomFileUpload />
+                    <input
+                      className="inputFile"
+                      onChange={e => this.setState({ img: e.target.files[0] })}
+                      type="file"
+                    />
                   </FormGroup>
 
                   <Button className="ml-1" type="submit">

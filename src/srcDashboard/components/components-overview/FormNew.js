@@ -10,7 +10,7 @@ import {
   Button,
   FormTextarea
 } from "shards-react";
-
+import "../../views/index.css"
 import { withRouter } from "react-router-dom";
 
 import Modal from "react-bootstrap/Modal";
@@ -37,6 +37,7 @@ class FormNew extends Component {
       data: "",
       descricao: "",
       link: "",
+      img:null,
       admin: this.props.adminId
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
@@ -46,9 +47,9 @@ class FormNew extends Component {
   }
   addNoticia = async e => {
     e.preventDefault();
-    const { nome, data,  descricao, link, admin } = this.state;
+    const { nome, data, descricao, link, admin } = this.state;
     let dataV = data.split("-");
-    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2]).getTime()
+    let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2]).getTime();
     if (
       !(
         nome !== "" &&
@@ -65,16 +66,25 @@ class FormNew extends Component {
     } else {
       try {
         await api
-          .post(
-            "/evento",
-            {
+          .post("/bucket", this.state.img, {
+            headers: {
+              "content-type": this.state.img.type,
+              filename: this.state.img.name
+            }
+          })
+          .then(res => {
+            console.log(res.data)
+            console.log(res.data.id)
+            console.log(res.data._id)
+            api.post("/evento", {
               nome: nome,
               descricao: descricao,
               data: newDate,
               link: link,
-              admin: admin
-            }
-          )
+              admin: admin,
+              capa: res.data._id
+            });
+          })
           .then(response => {
             this.setState({
               smShow: true,
@@ -147,22 +157,27 @@ class FormNew extends Component {
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Data de publicação</label>
+                    <strong className="text-muted d-block mb-2">
+                     Data de publicação
+                    </strong>
                       <FormInput
                         value={this.state.data}
                         onChange={e => this.setState({ data: e.target.value })}
                         id="feCustoMedio"
                         type="date"
                       />
-                    </Col>                               
+                    </Col>
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem da noticia
+                      Imagem da Noticia
                     </strong>
-                    <CustomFileUpload />
+                    <input
+                      className="inputFile"
+                      onChange={e => this.setState({ img: e.target.files[0] })}
+                      type="file"
+                    />
                   </FormGroup>
-
                   <Button className="ml-1" type="submit">
                     Criar nova noticia
                   </Button>

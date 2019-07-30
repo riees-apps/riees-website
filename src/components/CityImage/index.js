@@ -57,7 +57,7 @@ class InstituteImage extends Component {
         onMouseOut={this.changeOut.bind(this)}
         className="rootCity"
       >
-        <Img input={this.props.img}>
+        <Img input={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}>
           <h1 className={this.state.hover ? "titleCity2" : "titleCity"}>
             {this.props.name}
           </h1>

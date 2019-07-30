@@ -85,8 +85,7 @@ class Admin extends Component {
       try {
         await api.post(
             "/admin/auth",
-            { senha: password, email: email },
-            { headers: { "Access-Control-Allow-Origin": "*" } }
+            { senha: password, email: email }
           ).then(response => {
 				login(response.data.token);
 				this.props.history.push({

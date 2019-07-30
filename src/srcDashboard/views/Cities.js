@@ -48,8 +48,8 @@ class Cities extends React.Component {
       pontosTuristicos: [],
       nomePonto: "",
       descricaoPonto: "",
-      capa: null,
-      logo: null,
+      img: null,
+      imgPonto: null,
       admin: "5d1a1daaaf9fc5001737e7af",
       pontoEdit: "",
       nomePontoEdit: "",
@@ -75,7 +75,6 @@ class Cities extends React.Component {
   componentWillMount() {
     api.get('/cidade?where={"deletedAt":0}').then(res => {
       const cities = res.data;
-      console.log(cities);
       this.setState({ cidades: cities });
     });
   }
@@ -92,62 +91,60 @@ class Cities extends React.Component {
       } else {
         try {
           api
-            .patch(
-              `/cidade/${id}`,
-              {
-                nome: nome,
-                descricao: descricao,
-                admin: admin.id,
-                custoMedio: custoMedio
-              },
-              
-            )
-            .then(res => {
-              const idCidade = res.data.id;
-              this.state.pontosTuristicos.map(ponto => {
-                api
-                  .get(`/ponto?where={"nome":"${ponto.nome}"}`)
-                  .then(res => {
-                    console.log(res.data);
-                    if (typeof ponto.createdAt === "undefined")
-                      if (res.data.length > 0) {
-                        api.patch(
-                          `/ponto/${res.data[0].id}`,
-                          {
-                            descricao: ponto.descricao,
-                            deletedAt: 0
-                          },
-                          
-                        );
-                      } else
-                        api.post(
-                          `/ponto`,
-                          {
-                            nome: ponto.nome,
-                            descricao: ponto.descricao,
-                            cidade: idCidade,
-                            admin: admin.id
-                          },
-                          
-                        )
-                  })
-                  .then(res => {
-                    api.get('/cidade?where={"deletedAt":0}').then(res => {
-                      const cities = res.data;
-                      this.setState({
-                        ...this.state,
-                        cidades: cities,
-                        editShow: false
-                      });
-                    });
-                  })
-              });
+            .post("/bucket", this.state.img, {
+              headers: {
+                "content-type": this.state.img.type,
+                filename: this.state.img.name
+              }
             })
-            .catch(error => {
-              this.setState({
-                smShow: city.nome,
-                error: "Houve um problema com a edição, tente novamente"
-              });
+            .then(res => {
+              api
+                .patch(`/cidade/${id}`, {
+                  nome: nome,
+                  descricao: descricao,
+                  admin: admin.id,
+                  capa:res.data._id,
+                  custoMedio: custoMedio
+                })
+                .then(res => {
+                  const idCidade = res.data.id;
+                  this.state.pontosTuristicos.map(ponto => {
+                    api
+                      .get(`/ponto?where={"nome":"${ponto.nome}"}`)
+                      .then(res => {
+                        console.log(res.data);
+                        if (typeof ponto.createdAt === "undefined")
+                          if (res.data.length > 0) {
+                            api.patch(`/ponto/${res.data[0].id}`, {
+                              descricao: ponto.descricao,
+                              deletedAt: 0
+                            });
+                          } else
+                            api.post(`/ponto`, {
+                              nome: ponto.nome,
+                              descricao: ponto.descricao,
+                              cidade: idCidade,
+                              admin: admin.id
+                            });
+                      })
+                      .then(res => {
+                        api.get('/cidade?where={"deletedAt":0}').then(res => {
+                          const cities = res.data;
+                          this.setState({
+                            ...this.state,
+                            cidades: cities,
+                            editShow: false
+                          });
+                        });
+                      });
+                  });
+                })
+                .catch(error => {
+                  this.setState({
+                    smShow: city.nome,
+                    error: "Houve um problema com a edição, tente novamente"
+                  });
+                });
             });
         } catch (err) {
           this.setState({
@@ -168,36 +165,43 @@ class Cities extends React.Component {
     } else {
       try {
         api
-          .patch(
-            `/ponto/${pontoEdit.id}`,
-            {
-              nome: nomePontoEdit,
-              descricao: descricaoPontoEdit
-            },
-            
-          )
+          .post("/bucket", this.state.img, {
+            headers: {
+              "content-type": this.state.img.type,
+              filename: this.state.img.name
+            }
+          })
           .then(res => {
             api
-              .get(
-                `/ponto?where={"deletedAt":0,"cidade":"${res.data.cidade.id}"}`
-              )
+              .patch(`/ponto/${pontoEdit.id}`, {
+                nome: nomePontoEdit,
+                descricao: descricaoPontoEdit
+              })
               .then(res => {
-                const pontos = res.data;
-                console.log(pontos);
-                if (pontos.length !== 0) {
-                  this.setState({
-                    ...this.state,
-                    pontosTuristicos: pontos,
-                    editPontoShow: false
+                api
+                  .get(
+                    `/ponto?where={"deletedAt":0,"cidade":"${
+                      res.data.cidade.id
+                    }"}`
+                  )
+                  .then(res => {
+                    const pontos = res.data;
+                    console.log(pontos);
+                    if (pontos.length !== 0) {
+                      this.setState({
+                        ...this.state,
+                        pontosTuristicos: pontos,
+                        editPontoShow: false
+                      });
+                    }
                   });
-                }
+              })
+              .catch(error => {
+                this.setState({
+                  smShow: pontoEdit.nome,
+                  error: "Houve um problema com a edição, tente novamente"
+                });
               });
-          })
-          .catch(error => {
-            this.setState({
-              smShow: pontoEdit.nome,
-              error: "Houve um problema com a edição, tente novamente"
-            });
           });
       } catch (err) {
         this.setState({
@@ -248,6 +252,7 @@ class Cities extends React.Component {
       pontoEdit: ponto,
       nomePontoEdit: ponto.nome,
       descricaoPontoEdit: ponto.descricao,
+      //imgPontoEdit: ponto.capa,
       editPontoShow: ponto.nome
     });
   }
@@ -269,6 +274,7 @@ class Cities extends React.Component {
       var ponto = {
         nome: this.state.nomePonto,
         descricao: this.state.descricaoPonto,
+        //capa: this.state.imgPonto,
         admin: this.props.adminId
       };
       pontos.push(ponto);
@@ -277,6 +283,7 @@ class Cities extends React.Component {
         pontosTuristicos: pontos,
         nomePonto: "",
         descricaoPonto: "",
+        imgPonto: null,
         clear: true
       });
     } else
@@ -329,7 +336,11 @@ class Cities extends React.Component {
           <Card small className="card-post card-post--1">
             <div
               className="card-post__image"
-              style={{ backgroundImage: `url(${city.img})` }}
+              style={{
+                backgroundImage: `url('https://riees-api.herokuapp.com/bucket/${
+                  city.capa !== null ? city.capa : ""
+                }'`
+              }}
             >
               <div
                 pill
@@ -590,6 +601,23 @@ class Cities extends React.Component {
                                                         >
                                                           <FormGroup>
                                                             <strong className="text-muted d-block mb-2">
+                                                              Imagem do Ponto
+                                                              Turistico
+                                                            </strong>
+                                                            <input
+                                                              className="inputFile"
+                                                              onChange={e =>
+                                                                this.setState({
+                                                                  imgPonto:
+                                                                    e.target
+                                                                      .files[0]
+                                                                })
+                                                              }
+                                                              type="file"
+                                                            />
+                                                          </FormGroup>
+                                                          <FormGroup>
+                                                            <strong className="text-muted d-block mb-2">
                                                               Descrição do Ponto
                                                               turistico
                                                             </strong>
@@ -645,15 +673,15 @@ class Cities extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem da cidade
+                            Imagem da Cidade
                           </strong>
-                          <CustomFileUpload />
-                        </FormGroup>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Imagem da descrição
-                          </strong>
-                          <CustomFileUpload />
+                          <input
+                            className="inputFile"
+                            onChange={e =>
+                              this.setState({ img: e.target.files[0] })
+                            }
+                            type="file"
+                          />
                         </FormGroup>
                       </Form>
                     </Col>

@@ -116,7 +116,7 @@ export default class EventCard extends Component {
           to={`/${window.location.pathname.split("/")[1]}/Post/${
             this.props.id
           }`}
-          input={this.props.img}
+          input={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}
         >
           <Date>
             <i className={`fas fa-clock iconDate`} />

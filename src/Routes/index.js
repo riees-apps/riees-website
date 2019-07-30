@@ -1282,6 +1282,7 @@ class Routes extends Component {
           component={props => (
             <Post
               {...props}
+              capa={post.capa}
               posts={Posts}
               titulo={post.titulo}
               conteudo={post.conteudo}
@@ -1302,6 +1303,7 @@ class Routes extends Component {
           component={props => (
             <Event
               {...props}
+              capa={event.capa}
               eventos={Eventos}
               title={event.nome}
               text={event.descricao}
@@ -1348,90 +1350,13 @@ class Routes extends Component {
           component={props => (
             <City
               {...props}
+              capa={city.capa}
               institutes={Institutes}
               Cidades={Cidades}
               name={city.nome}
               id={city.id}
-              img={img1}
               places={city.pontos}
               descricao={city.descricao}
-            />
-          )}
-        />
-      ));
-    };
-
-    //////////////////////////////////////
-
-    const renderPosts = () => {
-      return posts.map(post => (
-        <MultiLanguageRoute
-          path={`/:lang/Post/${post.title}`}
-          component={props => (
-            <Post
-              {...props}
-              title={post.title}
-              text={post.text}
-              date={post.date}
-              tag={post.tag}
-              img={post.img}
-            />
-          )}
-        />
-      ));
-    };
-    const renderEvents = () => {
-      return eventos.map(event => (
-        <MultiLanguageRoute
-          path={`/:lang/Events/${event.title}`}
-          component={props => (
-            <Event
-              {...props}
-              title={event.title}
-              text={event.text}
-              date={event.date}
-              dateEvent={event.dateEvent}
-              placeEvent={event.placeEvent}
-              timeEvent={event.timeEvent}
-              img={event.img}
-              img2={event.img2}
-            />
-          )}
-        />
-      ));
-    };
-    const renderInstitutes = () => {
-      return institutes.map(institute => (
-        <MultiLanguageRoute
-          path={`/:lang/Institute/${institute.name}`}
-          component={props => (
-            <Institute
-              {...props}
-              url={institute.url}
-              name={institute.name}
-              sub={institute.subheading}
-              img={institute.img}
-              areas={institute.areas}
-              logo={institute.logo}
-              unidades={institute.unidades}
-              institutes={institutes}
-            />
-          )}
-        />
-      ));
-    };
-    const renderCities = () => {
-      return cities.map(city => (
-        <MultiLanguageRoute
-          path={`/:lang/City/${city.name.trim()}`}
-          component={props => (
-            <City
-              {...props}
-              url={city.url}
-              name={city.name}
-              img={city.img}
-              places={city.places}
-              cities={cities}
             />
           )}
         />

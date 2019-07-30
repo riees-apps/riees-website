@@ -207,7 +207,7 @@ class Event extends Component {
   render() {
     const {
       title,
-      img,
+      capa,
       link,
       date,
       dateEvent,
@@ -224,7 +224,7 @@ class Event extends Component {
 
     return (
       <div>
-        <Image x="0.6" height="75vh" image={img}>
+        <Image x="0.6" height="75vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa.id : ''}`}>
           <div>
             <Badge>{ placeEvent !== "" ? "Event" : "New"}</Badge>
             <Title>{title}</Title>

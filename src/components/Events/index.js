@@ -221,6 +221,7 @@ class Events extends Component {
       return eventos.map(evento => (
         <EventCard
           id={evento.id}
+          capa={evento.capa}
           side={this.props.side}
           larger={this.props.larger}
           title={evento.nome}

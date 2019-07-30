@@ -85,6 +85,7 @@ class Institutes extends React.Component {
     });
   }
   editInstitute(institute) {
+    var capaID;
     const {
       nome,
       missao,
@@ -115,158 +116,174 @@ class Institutes extends React.Component {
       } else {
         try {
           api
-            .patch(
-              `/instituicao/${id}`,
-              {
-                nome: nome,
-                missao: missao,
-                descricao: descricao,
-                admin: admin.id,
-                pontosFortes: pontosFortes,
-                link: link,
-                capa: null,
-                logo: null
-              },
-              
-            )
+            .post("/bucket", capa, {
+              headers: {
+                "content-type": capa.type,
+                filename: capa.name
+              }
+            })            
             .then(res => {
-              const idInstituto = res.data.id;
-              this.state.unidades.map(unidade => {
-                api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
-                  let cidade;
-                  if (res.data.length > 0) cidade = res.data[0].id;
-                  api
-                    .get(
-                      `/unidade?where={"nome":"${
-                        unidade.nome
-                      }","instituicao":"${idInstituto}"}`
-                    )
-                    .then(res => {
-                      if (typeof unidade.createdAt === "undefined")
-                        if (res.data.length > 0) {
-                          api
-                            .patch(
-                              `/unidade/${res.data[0].id}`,
-                              {
-                                descricao: unidade.descricao,
-                                telefone: unidade.telefone,
-                                logradouro: unidade.logradouro,
-                                numero: unidade.numero,
-                                complemento: unidade.complemento,
-                                bairro: unidade.bairro,
-                                cep: unidade.cep,
-                                cidade: cidade,
-                                deletedAt: 0
-                              },
-                              {
-                                headers: { "Access-Control-Allow-Origin": "*" }
-                              }
-                            )
-                            .then(response => {
-                              const idUnidade = response.data.id;
-                              unidade.cursos.map(curso => {
-                                api
-                                  .get(`/area?nome=${curso.area}`)
-                                  .then(res => {
-                                    let area;
-                                    if (res.data.length > 0)
-                                      area = res.data[0].id;
-                                    api.post(
-                                      "/curso",
-                                      {
-                                        nome: curso.nome,
-                                        niveis: curso.niveis,
-                                        admin: response.data.admin.id,
-                                        area: area,
-                                        unidade: idUnidade
-                                      },
-                                      {
-                                        headers: {
-                                          "Access-Control-Allow-Origin": "*"
-                                        }
-                                      }
-                                    );
-                                  });
-                              });
-                            })
-                        } else
-                          api
-                            .post(
-                              `/unidade`,
-                              {
-                                nome: unidade.nome,
-                                descricao: unidade.descricao,
-                                telefone: unidade.telefone,
-                                logradouro: unidade.logradouro,
-                                numero: unidade.numero,
-                                complemento: unidade.complemento,
-                                bairro: unidade.bairro,
-                                cep: unidade.cep,
-                                cidade: cidade,
-                                instituicao: idInstituto,
-                                admin: admin.id
-                              },
-                              {
-                                headers: {
-                                  "Access-Control-Allow-Origin": "*"
-                                }
-                              }
-                            )
-                            .then(response => {
-                              const idUnidade = response.data.id;
-                              unidade.cursos.map(curso => {
-                                console.log(curso.area);
-                                api
-                                  .get(`/area?nome=${curso.area}`)
-                                  .then(res => {
-                                    let area;
-                                    if (res.data.length > 0)
-                                      area = res.data[0].id;
-                                    api.post(
-                                      "/curso",
-                                      {
-                                        nome: curso.nome,
-                                        niveis: curso.niveis,
-                                        admin: response.data.admin.id,
-                                        area: area,
-                                        unidade: idUnidade
-                                      },
-                                      {
-                                        headers: {
-                                          "Access-Control-Allow-Origin": "*"
-                                        }
-                                      }
-                                    );
-                                  });
-                              });
-                            })
-                    })
-                    .then(res => {
-                      api
-                        .get('/instituicao?where={"deletedAt":0}')
-                        .then(res => {
-                          const institutos = res.data;
-                          this.setState({
-                            ...this.state,
-                            institutes: institutos,
-                            editShow: false
-                          });
-                        });
-                    })
-                    .catch(error => {
-                      this.setState({
-                        smShow: inst.nome,
-                        error: "Cidade não cadastrada no sistema"
-                      });
-                    });
-                });
+              capaID = res.data._id;
+              api.post("/bucket", logo, {
+                headers: {
+                  "content-type": logo.type,
+                  filename: logo.name
+                }
               });
             })
-            .catch(error => {
-              this.setState({
-                smShow: inst.nome,
-                error: "Houve um problema com a edição, tente novamente1"
-              });
+            .then(res => {
+              api
+                .patch(`/instituicao/${id}`, {
+                  nome: nome,
+                  missao: missao,
+                  descricao: descricao,
+                  admin: admin.id,
+                  pontosFortes: pontosFortes,
+                  link: link,
+                  capa: typeof capa.type !== 'undefined' ? capaID : capa,
+                  logo: typeof logo.type !== 'undefined' ? res.data._ID : logo
+                })
+                .then(res => {
+                  const idInstituto = res.data.id;
+                  this.state.unidades.map(unidade => {
+                    api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
+                      let cidade;
+                      if (res.data.length > 0) cidade = res.data[0].id;
+                      api
+                        .get(
+                          `/unidade?where={"nome":"${
+                            unidade.nome
+                          }","instituicao":"${idInstituto}"}`
+                        )
+                        .then(res => {
+                          if (typeof unidade.createdAt === "undefined")
+                            if (res.data.length > 0) {
+                              api
+                                .patch(
+                                  `/unidade/${res.data[0].id}`,
+                                  {
+                                    descricao: unidade.descricao,
+                                    telefone: unidade.telefone,
+                                    logradouro: unidade.logradouro,
+                                    numero: unidade.numero,
+                                    complemento: unidade.complemento,
+                                    bairro: unidade.bairro,
+                                    cep: unidade.cep,
+                                    cidade: cidade,
+                                    deletedAt: 0
+                                  },
+                                  {
+                                    headers: {
+                                      "Access-Control-Allow-Origin": "*"
+                                    }
+                                  }
+                                )
+                                .then(response => {
+                                  const idUnidade = response.data.id;
+                                  unidade.cursos.map(curso => {
+                                    api
+                                      .get(`/area?nome=${curso.area}`)
+                                      .then(res => {
+                                        let area;
+                                        if (res.data.length > 0)
+                                          area = res.data[0].id;
+                                        api.post(
+                                          "/curso",
+                                          {
+                                            nome: curso.nome,
+                                            niveis: curso.niveis,
+                                            admin: response.data.admin.id,
+                                            area: area,
+                                            unidade: idUnidade
+                                          },
+                                          {
+                                            headers: {
+                                              "Access-Control-Allow-Origin": "*"
+                                            }
+                                          }
+                                        );
+                                      });
+                                  });
+                                });
+                            } else
+                              api
+                                .post(
+                                  `/unidade`,
+                                  {
+                                    nome: unidade.nome,
+                                    descricao: unidade.descricao,
+                                    telefone: unidade.telefone,
+                                    logradouro: unidade.logradouro,
+                                    numero: unidade.numero,
+                                    complemento: unidade.complemento,
+                                    bairro: unidade.bairro,
+                                    cep: unidade.cep,
+                                    cidade: cidade,
+                                    instituicao: idInstituto,
+                                    admin: admin.id
+                                  },
+                                  {
+                                    headers: {
+                                      "Access-Control-Allow-Origin": "*"
+                                    }
+                                  }
+                                )
+                                .then(response => {
+                                  const idUnidade = response.data.id;
+                                  unidade.cursos.map(curso => {
+                                    console.log(curso.area);
+                                    api
+                                      .get(`/area?nome=${curso.area}`)
+                                      .then(res => {
+                                        let area;
+                                        if (res.data.length > 0)
+                                          area = res.data[0].id;
+                                        api.post(
+                                          "/curso",
+                                          {
+                                            nome: curso.nome,
+                                            niveis: curso.niveis,
+                                            admin: response.data.admin.id,
+                                            area: area,
+                                            unidade: idUnidade
+                                          },
+                                          {
+                                            headers: {
+                                              "Access-Control-Allow-Origin": "*"
+                                            }
+                                          }
+                                        );
+                                      });
+                                  });
+                                });
+                        })
+                        .then(res => {
+                          api
+                            .get('/instituicao?where={"deletedAt":0}')
+                            .then(res => {
+                              const institutos = res.data;
+                              this.setState({
+                                ...this.state,
+                                institutes: institutos,
+                                editShow: false
+                              });
+                            });
+                        })
+                        .catch(error => {
+                          this.setState({
+                            smShow: inst.nome,
+                            error: "Cidade não cadastrada no sistema"
+                          });
+                        });
+                    });
+                  });
+                })
+                .catch(error => {
+                  this.setState({
+                    smShow: inst.nome,
+                    error: "Houve um problema com a edição, tente novamente1"
+                  });
+                });
             });
         } catch (err) {
           this.setState({
@@ -288,14 +305,10 @@ class Institutes extends React.Component {
     } else {
       try {
         api
-          .patch(
-            `/unidade/${pontoEdit.id}`,
-            {
-              nome: nomePontoEdit,
-              descricao: descricaoPontoEdit
-            },
-            
-          )
+          .patch(`/unidade/${pontoEdit.id}`, {
+            nome: nomePontoEdit,
+            descricao: descricaoPontoEdit
+          })
           .then(res => {
             api
               .get(
@@ -363,8 +376,8 @@ class Institutes extends React.Component {
       admin: institute.admin,
       pontosFortes: institute.pontosFortes,
       link: institute.link,
-      capa: null,
-      logo: null,
+      capa: institute.capa,
+      logo: institute.logo,
       unidades: institute.unidades
     });
   }
@@ -414,7 +427,11 @@ class Institutes extends React.Component {
           <Card small className="card-post card-post--1">
             <div
               className="card-post__image"
-              style={{ backgroundImage: `url(${institute.capa})` }}
+              style={{
+                backgroundImage: `url('https://riees-api.herokuapp.com/bucket/${
+                  institute.capa !== null ? institute.capa : ""
+                }'`
+              }}
             >
               <div
                 pill
@@ -598,24 +615,27 @@ class Institutes extends React.Component {
 
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Capa do instituto
+                            Capa da Instituição
                           </strong>
                           <input
+                            className="inputFile"
                             onChange={e =>
-                              this.setState({ capa: e.target.value })
+                              this.setState({ capa: e.target.files[0] })
                             }
                             type="file"
-                            name="files"
                           />
-                          <br />
-                          <button type="submit" value="Upload" />
                         </FormGroup>
-
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Logo do instituto
+                            Logo da Instituição
                           </strong>
-                          <CustomFileUpload />
+                          <input
+                            className="inputFile"
+                            onChange={e =>
+                              this.setState({ logo: e.target.files[0] })
+                            }
+                            type="file"
+                          />
                         </FormGroup>
                       </Form>
                     </Col>

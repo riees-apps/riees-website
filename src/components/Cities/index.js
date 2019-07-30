@@ -31,6 +31,7 @@ class CitiesImages extends Component {
           <CityImage
             name={city.nome}
             img={img1}
+            capa={city.capa}
             id={city.id}
             places={city.places}
             descricao={city.descricao}

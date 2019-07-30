@@ -126,11 +126,11 @@ class City extends Component {
     console.log(url);
   }
   render() {
-    const { name, id, img, Cidades, places, descricao } = this.props;
-    console.log('0k')
+    const { name, id, capa, Cidades, places, descricao } = this.props;
+    console.log(capa)
     return (
       <div style={{background:'#f4f4f4'}}>
-        <Image title={name} height="100vh" image={img} />
+        <Image title={name} height="100vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa.id : ''}`} />
         <Container >
           <SideMenu page="City" links={Cidades} />
           <DivText>

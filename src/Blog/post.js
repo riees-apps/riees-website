@@ -38,14 +38,14 @@ class Post extends Component {
     document.documentElement.scrollTop = 0;
   }
   render() {
-    const { titulo, img, tags, url, data, conteudo, resumo } = this.props;
+    const { titulo, img, tags, url, capa, data, conteudo, resumo } = this.props;
 
     const ano = new Date(data).getFullYear();
     const mes = months[new Date(data).getMonth()];
     const dia = new Date(data).getDate();
     return (
       <div>
-        <Image x="0.6" height="75vh" image={img}>
+        <Image x="0.6" height="75vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa.id : ''}`}>
           <div>
             <Badge>{tags[0]}</Badge>
             <Title>{titulo}</Title>
