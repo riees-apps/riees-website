@@ -88,6 +88,7 @@ class Institutes extends React.Component {
   }
   editInstitute(institute) {
     var capaID;
+    var logoID;
     var idInstituto;
     const {
       nome,
@@ -135,109 +136,112 @@ class Institutes extends React.Component {
             })
             .then(res => {
               capaID = res.data._id;
-              api.post("/bucket", logo, {
-                headers: {
-                  "content-type": logo.type,
-                  filename: logo.name
-                }
-              });
-            })
-            .then(res => {
               api
-                .patch(`/instituicao/${id}`, {
-                  nome: nome,
-                  missao: missao,
-                  descricao: descricao,
-                  pontosFortes: pontosFortes,
-                  site: site,
-                  telefone: telefone,
-                  telefone2: telefone2,
-                  facebook: facebook,
-                  instagram: instagram,
-                  twitter: twitter,
-                  linkedin: linkedin,
-                  admin: admin.id,
-                  capa: typeof capa.type !== "undefined" ? capaID : capa,
-                  logo: typeof logo.type !== "undefined" ? res.data._ID : logo
+                .post("/bucket", logo, {
+                  headers: {
+                    "content-type": logo.type,
+                    filename: logo.name
+                  }
                 })
                 .then(res => {
-                  idInstituto = res.data.id;
-                  console.log(cursos);
-                  console.log(idInstituto);
-                  cursos.map(curso => {
-                    if (typeof curso.createdAt === "undefined") {
-                      api.post("/curso", {
-                        nome: curso.nome,
-                        nivel: curso.nivel,
-                        admin: res.data.admin.id,
-                        area: curso.area,
-                        instituicao: idInstituto
-                      });
-                    }
-                  });
-                })
-                .then(res => {
-                  this.state.unidades.map(unidade => {
-                    api
-                      .get(`/cidade?nome=${unidade.cidade}`)
-                      .then(res => {
-                        let cidade;
-                        if (res.data.length > 0) cidade = res.data[0].id;
-                        api
-                          .get(
-                            `/unidade?where={"nome":"${
-                              unidade.nome
-                            }","instituicao":"${idInstituto}"}`
-                          )
-                          .then(res => {
-                            if (typeof unidade.createdAt === "undefined")
-                              if (res.data.length > 0) {
-                                api.patch(`/unidade/${res.data[0].id}`, {
-                                  logradouro: unidade.logradouro,
-                                  numero: unidade.numero,
-                                  complemento: unidade.complemento,
-                                  bairro: unidade.bairro,
-                                  cep: unidade.cep,
-                                  cidade: cidade,
-                                  deletedAt: 0
-                                });
-                              } else
-                                api.post(`/unidade`, {
-                                  nome: unidade.nome,
-                                  logradouro: unidade.logradouro,
-                                  numero: unidade.numero,
-                                  complemento: unidade.complemento,
-                                  bairro: unidade.bairro,
-                                  cep: unidade.cep,
-                                  cidade: cidade,
-                                  instituicao: idInstituto,
-                                  admin: admin.id
-                                });
+                  console.log(res.data._id);
+                  api
+                    .patch(`/instituicao/${id}`, {
+                      nome: nome,
+                      missao: missao,
+                      descricao: descricao,
+                      pontosFortes: pontosFortes,
+                      site: site,
+                      telefone: telefone,
+                      telefone2: telefone2,
+                      facebook: facebook,
+                      instagram: instagram,
+                      twitter: twitter,
+                      linkedin: linkedin,
+                      admin: admin.id,
+                      capa: typeof capa.type !== "undefined" ? capaID : capa,
+                      logo: typeof logo.type !== "undefined" ? res.data._id : logo
+                    })
+                    .then(res => {
+                      idInstituto = res.data.id;
+                      cursos.map(curso => {
+                        if (typeof curso.createdAt === "undefined") {
+                          api.post("/curso", {
+                            nome: curso.nome,
+                            nivel: curso.nivel,
+                            admin: res.data.admin.id,
+                            area: curso.area,
+                            instituicao: idInstituto
                           });
-                      })
-                      .catch(error => {
-                        this.setState({
-                          smShow: inst.nome,
-                          error: "Cidade não cadastrada no sistema"
-                        });
+                        }
                       });
-                  });
-                })
-                .then(res => {
-                  api.get('/instituicao?where={"deletedAt":0}').then(res => {
-                    const institutos = res.data;
-                    this.setState({
-                      ...this.state,
-                      institutes: institutos,
-                      editShow: false
+                    })
+                    .then(res => {
+                      this.state.unidades.map(unidade => {
+                        api
+                          .get(`/cidade?nome=${unidade.cidade}`)
+                          .then(res => {
+                            let cidade;
+                            if (res.data.length > 0) cidade = res.data[0].id;
+                            api
+                              .get(
+                                `/unidade?where={"nome":"${
+                                  unidade.nome
+                                }","instituicao":"${idInstituto}"}`
+                              )
+                              .then(res => {
+                                if (typeof unidade.createdAt === "undefined")
+                                  if (res.data.length > 0) {
+                                    api.patch(`/unidade/${res.data[0].id}`, {
+                                      logradouro: unidade.logradouro,
+                                      numero: unidade.numero,
+                                      complemento: unidade.complemento,
+                                      bairro: unidade.bairro,
+                                      cep: unidade.cep,
+                                      cidade: cidade,
+                                      deletedAt: 0
+                                    });
+                                  } else
+                                    api.post(`/unidade`, {
+                                      nome: unidade.nome,
+                                      logradouro: unidade.logradouro,
+                                      numero: unidade.numero,
+                                      complemento: unidade.complemento,
+                                      bairro: unidade.bairro,
+                                      cep: unidade.cep,
+                                      cidade: cidade,
+                                      instituicao: idInstituto,
+                                      admin: admin.id
+                                    });
+                              });
+                          })
+                          .catch(error => {
+                            this.setState({
+                              smShow: inst.nome,
+                              error: "Cidade não cadastrada no sistema"
+                            });
+                          });
+                      });
+                    })
+                    .then(res => {
+                      api
+                        .get('/instituicao?where={"deletedAt":0}')
+                        .then(res => {
+                          const institutos = res.data;
+                          this.setState({
+                            ...this.state,
+                            institutes: institutos,
+                            editShow: false
+                          });
+                        });
+                    })
+                    .catch(error => {
+                      this.setState({
+                        smShow: inst.nome,
+                        error:
+                          "Houve um problema com a edição, tente novamente1"
+                      });
                     });
-                  });
-                })
-                .catch(error => {
-                  this.setState({
-                    smShow: inst.nome,
-                    error: "Houve um problema com a edição, tente novamente1"
-                  });
                 });
             });
         } catch (err) {

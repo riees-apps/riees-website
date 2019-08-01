@@ -196,7 +196,7 @@ const Img = styled.div`
 `;
 const Logo = styled.img`
   width: 30vh;
-  height: 15vh;
+  height: 10vh;
   z-index: 100;
   position: relative;
   @media (max-width: 768px) {
@@ -245,7 +245,7 @@ class Institute extends Component {
   }
 
   render() {
-    const { img, logo, url, institutes, pontosFortes } = this.props;
+    const { capa, logo, url, institutes, pontosFortes } = this.props;
     const unidades = this.props.unidades.filter(this.filtro.bind(this));
     const areas = this.state.areas;
     const cursos = this.props.cursos.filter(this.filtro.bind(this));
@@ -255,14 +255,14 @@ class Institute extends Component {
     
     return (
       <div>
-        <Image x="0.5" height="80vh" image={img}>
+        <Image x="0.5" height="80vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`}>
           <div>
             <Title>{name}</Title>
             <Subheading>{sub}</Subheading>
           </div>
         </Image>
         <Img>
-          <Logo src={logo} alt="" />
+          <Logo src={`https://riees-api.herokuapp.com/bucket/${logo !== null ? logo : ''}`} alt="" />
         </Img>
         <Container>
           <SideMenu

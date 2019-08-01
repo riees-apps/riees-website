@@ -181,7 +181,7 @@ class Routes extends Component {
               descricao={institute.descricao}
               missao={institute.missao}
               id={institute.id}
-              img={img1}
+              capa={institute.capa}
               logo={institute.logo}
               unidades={institute.unidades}
               cursos={institute.cursos}
