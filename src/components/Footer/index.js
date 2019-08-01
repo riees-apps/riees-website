@@ -8,7 +8,6 @@ import governo from "./Brasao_Governo_horizontal_white_right_small.png";
 
 const Logo = styled.img`
   width: 65%;
-  margin-left:-35%;
   transition: all 0.2s linear;
   :hover {
     cursor:pointer;
@@ -18,7 +17,6 @@ const Logo = styled.img`
   @media (max-width: 768px) {
     width: calc(100% - 5vw);
     height:115%;
-    margin-left:-5vw;
   }
 `;
 

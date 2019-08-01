@@ -1,6 +1,7 @@
 .iconInstitute{
     color: #003b81;
-    margin-right: 1vw;
+    margin-right: 0.5vw;
+    width: 1.5vw;
 }
 
 @media screen and (min-width: 769px) {

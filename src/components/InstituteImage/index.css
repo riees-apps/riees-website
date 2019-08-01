@@ -97,7 +97,7 @@
   transition: all 1000ms;
   margin-left: 2.7vw;
   color:transparent;
-  width:90%;
+  width:95%;
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;
@@ -115,7 +115,7 @@
   transition: all 1000ms;
   margin-left: 2.7vw;
   color:white;
-  width:90%;
+  width:95%;
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;

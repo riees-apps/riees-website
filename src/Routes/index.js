@@ -169,8 +169,14 @@ class Routes extends Component {
           component={props => (
             <Institute
               {...props}
-              url={institute.link}
+              url={institute.site}
               name={institute.nome}
+              telefone={institute.telefone}
+              telefone2={institute.telefone2}
+              facebook={institute.facebook}
+              twitter={institute.twitter}
+              instagram={institute.instagram}
+              linkedin={institute.linkedin}
               pontosFortes={institute.pontosFortes}
               descricao={institute.descricao}
               missao={institute.missao}
@@ -178,6 +184,7 @@ class Routes extends Component {
               img={img1}
               logo={institute.logo}
               unidades={institute.unidades}
+              cursos={institute.cursos}
               institutes={Institutes}
             />
           )}

@@ -105,6 +105,7 @@ const Text = styled.h1`
   font-weight: lighter;
   font-size: calc(7px + 1vw);
   line-height: calc(8px + 1vw);
+  letter-spacing: 0.05px;
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
@@ -209,9 +210,8 @@ class Institute extends Component {
     super(props, context);
     this.state = {
       unidade: 0,
-      areas: [],
-      cursos: [],
-      unidadesComCursos: []
+      cidade: "",
+      areas: []
     };
   }
   onChildChanged(New) {
@@ -223,38 +223,36 @@ class Institute extends Component {
     } else return true;
   };
   componentDidMount() {
-    let u = [];
-    api.get(`unidade?where={"deletedAt":0,"instituicao":"${this.props.id}"}`).then(res => {
-      u = res.data;
-      this.setState({ unidadesComCursos: u });
+    this.props.cursos.filter(this.filtro.bind(this)).map(curso => {
+      const newArea = this.state.areas;
+
+      if (newArea.indexOf(curso.area) === -1) newArea.push(curso.area);
+
+      this.setState({ areas: newArea });
     });
-    this.props.unidades.map(unidade => {
-      api.get(`/curso?where={"deletedAt":0,"unidade":"${unidade.id}"}`).then(res => {
-        const cursos = res.data;
-        const newArea = this.state.areas;
-        cursos.map(curso => {
-          if (newArea.indexOf(curso.area.nome) === -1)
-            newArea.push(curso.area.nome);
-        });
-        this.setState({ areas: newArea, cursos: cursos });
+  }
+  componentDidUpdate(){
+    api
+      .get(
+        `/unidade?where={"nome":"${
+          this.props.unidades.filter(this.filtro.bind(this))[this.state.unidade].nome
+        }","deletedAt":0,"instituicao":"${this.props.id}"}`
+      )
+      .then(res => {
+        this.setState({ cidade: res.data[0].cidade.nome });
       });
-    });
-    if (typeof this.props.location.state != "undefined") {
-      if (this.props.location.state.scrollTop === 0) {
-        document.documentElement.scrollTop = this.props.location.state.scrollTop;
-      }
-    }
+
   }
 
   render() {
     const { img, logo, url, institutes, pontosFortes } = this.props;
     const unidades = this.props.unidades.filter(this.filtro.bind(this));
     const areas = this.state.areas;
-    const cursos = this.state.cursos;
-    const unidadesComCursos = this.state.unidadesComCursos;
-    console.log(unidadesComCursos)
+    const cursos = this.props.cursos.filter(this.filtro.bind(this));
     const name = this.props.name.split("-")[0];
     const sub = this.props.name.split("-")[1];
+    var cidade;
+    
     return (
       <div>
         <Image x="0.5" height="80vh" image={img}>
@@ -271,7 +269,7 @@ class Institute extends Component {
             callbackParent={New => this.onChildChanged(New)}
             page="Institute"
             links={institutes}
-            unidades={unidadesComCursos}
+            unidades={unidades}
             areas={areas}
             cursos={cursos}
           />
@@ -358,11 +356,73 @@ class Institute extends Component {
             </Text>
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
+              <Heading color="#003b81">information</Heading>
+            </Div>
+            <Text>
+              <i
+                style={{ transform: "rotate(90deg)" }}
+                className={`fas fa-phone iconInstitute`}
+              />{" "}
+              {this.props.telefone}
+              {this.props.telefone2 !== "" ? ` / ${this.props.telefone2}` : ""}
+            </Text>
+            <Text>
+              <i
+                className={
+                  this.props.facebook !== ""
+                    ? `fab fa-facebook-f iconInstitute`
+                    : "displayNone"
+                }
+              />{" "}
+              {this.props.facebook}
+            </Text>
+            <Text>
+              <i
+                className={
+                  this.props.instagram !== ""
+                    ? `fab fa-instagram iconInstitute`
+                    : "displayNone"
+                }
+              />{" "}
+              {this.props.instagram}
+            </Text>
+            <Text>
+              <i
+                className={
+                  this.props.twitter !== ""
+                    ? `fab fa-twitter iconInstitute`
+                    : "displayNone"
+                }
+              />{" "}
+              {this.props.twitter}
+            </Text>
+            <Text>
+              <i
+                className={
+                  this.props.linkedin !== ""
+                    ? `fab fa-linkedin iconInstitute`
+                    : "displayNone"
+                }
+              />{" "}
+              {this.props.linkedin}
+            </Text>
+
+            <Div justify="flex-start">
+              <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">strengths</Heading>
             </Div>
             {pontosFortes.map(ponto => (
               <Text2>{ponto}</Text2>
             ))}
+
+            <Div justify="flex-start">
+            <Heading color="#303033">{name}</Heading>
+              <Heading color="#003b81">courses</Heading>
+            </Div>
+            {cursos.map(curso => (
+              <Text2>{`${curso.nome} (${curso.nivel})`}</Text2>
+            ))}
+
             <AreaCard name={name} areas={areas} />
             <Div justify="flex-start">
               <Heading color="#303033">Campus</Heading>
@@ -377,21 +437,8 @@ class Institute extends Component {
               consectetur adipiscing elit. Sit amet ipsum dolor , consectetur
               adipiscing elit. Curabitur a ante ante consectetur adipiscing
               elit. Curabitur a ante ante consectetur adipiscing elit.
-            </Text>
+            </Text>           
 
-            <Div justify="flex-start">
-              <Heading color="#303033">
-                {unidades[this.state.unidade].nome}
-              </Heading>
-              <Heading color="#003b81">Courses</Heading>
-            </Div>
-            {unidadesComCursos.length > 0
-              ? unidadesComCursos[this.state.unidade].cursos.filter(this.filtro.bind(this)).map(curso => (
-                  <Text2>{`${curso.nome} (${curso.niveis.map(
-                    nivel => ` ${nivel} `
-                  )}) `}</Text2>
-                ))
-              : ""}
             <Div justify="flex-start">
               <Heading color="#303033">
                 {unidades[this.state.unidade].nome}
@@ -405,22 +452,12 @@ class Institute extends Component {
             </Text>
             <Text2 style={{ listStyle: "none" }}>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].bairro},{" "}
-              {unidadesComCursos.length > 0
-                ? unidadesComCursos[this.state.unidade].cidade.nome
-                : unidades[this.state.unidade].cidade.nome}{" "}
-              - Espirito Santo - {unidades[this.state.unidade].cep}
+              {unidades[this.state.unidade].bairro}, {this.state.cidade} - Espirito Santo -{" "}
+              {unidades[this.state.unidade].cep}
             </Text2>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
               {unidades[this.state.unidade].complemento}
-            </Text>
-            <Text>
-              <i
-                style={{ transform: "rotate(90deg)" }}
-                className={`fas fa-phone iconInstitute`}
-              />{" "}
-              {unidades[this.state.unidade].telefone}
             </Text>
             <Div className="DivMobile" justify="flex-start">
               <Heading color="#303033">All</Heading>
@@ -430,8 +467,11 @@ class Institute extends Component {
               style={{ display: "flex", flexDirection: "column" }}
               className="DivMobile"
             >
-              {unidades.filter(this.filtro.bind(this)).map((unidade,index) => (
-                <Campus className="DivMobile" onClick={() =>  this.setState({unidade: index})}>{`Campus ${unidade.nome}`}</Campus>
+              {unidades.filter(this.filtro.bind(this)).map((unidade, index) => (
+                <Campus
+                  className="DivMobile"
+                  onClick={() => this.setState({ unidade: index })}
+                >{`Campus ${unidade.nome}`}</Campus>
               ))}
             </div>
             <br />

@@ -56,6 +56,7 @@ class InstitutesImages extends Component {
           <InstituteImage
             cityInstitute={this.props.cityInstitute}
             unidades={institute.unidades}
+            cursos={institute.cursos}
             capa={institute.capa}
             name={institute.nome}
             descricao={institute.descricao}

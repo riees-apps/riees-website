@@ -12,7 +12,7 @@ import {
   ListGroupItem,
   Form,
   FormGroup,
-  FormTextarea
+  FormSelect
 } from "shards-react";
 
 import ReactQuill from "react-quill";
@@ -47,13 +47,23 @@ class Institutes extends React.Component {
       nome: "",
       missao: "",
       descricao: "",
+      telefone: "",
+      telefone2: "",
+      facebook: "",
+      instagram: "",
+      twitter: "",
+      linkedin: "",
+      nomeCurso: "",
+      area: "",
+      nivel: "",
       capa: null,
       logo: null,
-      link: "",
+      site: "",
       admin: "5d1a1daaaf9fc5001737e7af",
       ponto: "",
       pontosFortes: [],
-      unidades: []
+      unidades: [],
+      cursos: []
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
     this.handleChangeEditor2 = this.handleChangeEditor2.bind(this);
@@ -78,16 +88,24 @@ class Institutes extends React.Component {
   }
   editInstitute(institute) {
     var capaID;
+    var idInstituto;
     const {
       nome,
       missao,
       descricao,
       capa,
       logo,
-      link,
+      site,
       admin,
       pontosFortes,
       unidades,
+      telefone,
+      telefone2,
+      facebook,
+      instagram,
+      twitter,
+      linkedin,
+      cursos,
       id
     } = this.state;
     api.get(`/instituicao/${institute.id}`).then(inst => {
@@ -96,9 +114,10 @@ class Institutes extends React.Component {
           nome !== "" &&
           missao !== "" &&
           descricao !== "" &&
+          telefone !== "" &&
           admin !== "" &&
-          pontosFortes.length !== 0 &&
-          link !== ""
+          unidades.length !== 0 &&
+          cursos.length !== 0
         )
       ) {
         this.setState({
@@ -113,7 +132,7 @@ class Institutes extends React.Component {
                 "content-type": capa.type,
                 filename: capa.name
               }
-            })            
+            })
             .then(res => {
               capaID = res.data._id;
               api.post("/bucket", logo, {
@@ -129,144 +148,88 @@ class Institutes extends React.Component {
                   nome: nome,
                   missao: missao,
                   descricao: descricao,
-                  admin: admin.id,
                   pontosFortes: pontosFortes,
-                  link: link,
-                  capa: typeof capa.type !== 'undefined' ? capaID : capa,
-                  logo: typeof logo.type !== 'undefined' ? res.data._ID : logo
+                  site: site,
+                  telefone: telefone,
+                  telefone2: telefone2,
+                  facebook: facebook,
+                  instagram: instagram,
+                  twitter: twitter,
+                  linkedin: linkedin,
+                  admin: admin.id,
+                  capa: typeof capa.type !== "undefined" ? capaID : capa,
+                  logo: typeof logo.type !== "undefined" ? res.data._ID : logo
                 })
                 .then(res => {
-                  const idInstituto = res.data.id;
+                  idInstituto = res.data.id;
+                  console.log(cursos);
+                  console.log(idInstituto);
+                  cursos.map(curso => {
+                    if (typeof curso.createdAt === "undefined") {
+                      api.post("/curso", {
+                        nome: curso.nome,
+                        nivel: curso.nivel,
+                        admin: res.data.admin.id,
+                        area: curso.area,
+                        instituicao: idInstituto
+                      });
+                    }
+                  });
+                })
+                .then(res => {
                   this.state.unidades.map(unidade => {
-                    api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
-                      let cidade;
-                      if (res.data.length > 0) cidade = res.data[0].id;
-                      api
-                        .get(
-                          `/unidade?where={"nome":"${
-                            unidade.nome
-                          }","instituicao":"${idInstituto}"}`
-                        )
-                        .then(res => {
-                          if (typeof unidade.createdAt === "undefined")
-                            if (res.data.length > 0) {
-                              api
-                                .patch(
-                                  `/unidade/${res.data[0].id}`,
-                                  {
-                                    descricao: unidade.descricao,
-                                    telefone: unidade.telefone,
-                                    logradouro: unidade.logradouro,
-                                    numero: unidade.numero,
-                                    complemento: unidade.complemento,
-                                    bairro: unidade.bairro,
-                                    cep: unidade.cep,
-                                    cidade: cidade,
-                                    deletedAt: 0
-                                  },
-                                  {
-                                    headers: {
-                                      "Access-Control-Allow-Origin": "*"
-                                    }
-                                  }
-                                )
-                                .then(response => {
-                                  const idUnidade = response.data.id;
-                                  unidade.cursos.map(curso => {
-                                    api
-                                      .get(`/area?nome=${curso.area}`)
-                                      .then(res => {
-                                        let area;
-                                        if (res.data.length > 0)
-                                          area = res.data[0].id;
-                                        api.post(
-                                          "/curso",
-                                          {
-                                            nome: curso.nome,
-                                            niveis: curso.niveis,
-                                            admin: response.data.admin.id,
-                                            area: area,
-                                            unidade: idUnidade
-                                          },
-                                          {
-                                            headers: {
-                                              "Access-Control-Allow-Origin": "*"
-                                            }
-                                          }
-                                        );
-                                      });
-                                  });
+                    api
+                      .get(`/cidade?nome=${unidade.cidade}`)
+                      .then(res => {
+                        let cidade;
+                        if (res.data.length > 0) cidade = res.data[0].id;
+                        api
+                          .get(
+                            `/unidade?where={"nome":"${
+                              unidade.nome
+                            }","instituicao":"${idInstituto}"}`
+                          )
+                          .then(res => {
+                            if (typeof unidade.createdAt === "undefined")
+                              if (res.data.length > 0) {
+                                api.patch(`/unidade/${res.data[0].id}`, {
+                                  logradouro: unidade.logradouro,
+                                  numero: unidade.numero,
+                                  complemento: unidade.complemento,
+                                  bairro: unidade.bairro,
+                                  cep: unidade.cep,
+                                  cidade: cidade,
+                                  deletedAt: 0
                                 });
-                            } else
-                              api
-                                .post(
-                                  `/unidade`,
-                                  {
-                                    nome: unidade.nome,
-                                    descricao: unidade.descricao,
-                                    telefone: unidade.telefone,
-                                    logradouro: unidade.logradouro,
-                                    numero: unidade.numero,
-                                    complemento: unidade.complemento,
-                                    bairro: unidade.bairro,
-                                    cep: unidade.cep,
-                                    cidade: cidade,
-                                    instituicao: idInstituto,
-                                    admin: admin.id
-                                  },
-                                  {
-                                    headers: {
-                                      "Access-Control-Allow-Origin": "*"
-                                    }
-                                  }
-                                )
-                                .then(response => {
-                                  const idUnidade = response.data.id;
-                                  unidade.cursos.map(curso => {
-                                    console.log(curso.area);
-                                    api
-                                      .get(`/area?nome=${curso.area}`)
-                                      .then(res => {
-                                        let area;
-                                        if (res.data.length > 0)
-                                          area = res.data[0].id;
-                                        api.post(
-                                          "/curso",
-                                          {
-                                            nome: curso.nome,
-                                            niveis: curso.niveis,
-                                            admin: response.data.admin.id,
-                                            area: area,
-                                            unidade: idUnidade
-                                          },
-                                          {
-                                            headers: {
-                                              "Access-Control-Allow-Origin": "*"
-                                            }
-                                          }
-                                        );
-                                      });
-                                  });
+                              } else
+                                api.post(`/unidade`, {
+                                  nome: unidade.nome,
+                                  logradouro: unidade.logradouro,
+                                  numero: unidade.numero,
+                                  complemento: unidade.complemento,
+                                  bairro: unidade.bairro,
+                                  cep: unidade.cep,
+                                  cidade: cidade,
+                                  instituicao: idInstituto,
+                                  admin: admin.id
                                 });
-                        })
-                        .then(res => {
-                          api
-                            .get('/instituicao?where={"deletedAt":0}')
-                            .then(res => {
-                              const institutos = res.data;
-                              this.setState({
-                                ...this.state,
-                                institutes: institutos,
-                                editShow: false
-                              });
-                            });
-                        })
-                        .catch(error => {
-                          this.setState({
-                            smShow: inst.nome,
-                            error: "Cidade não cadastrada no sistema"
                           });
+                      })
+                      .catch(error => {
+                        this.setState({
+                          smShow: inst.nome,
+                          error: "Cidade não cadastrada no sistema"
                         });
+                      });
+                  });
+                })
+                .then(res => {
+                  api.get('/instituicao?where={"deletedAt":0}').then(res => {
+                    const institutos = res.data;
+                    this.setState({
+                      ...this.state,
+                      institutes: institutos,
+                      editShow: false
                     });
                   });
                 })
@@ -358,6 +321,7 @@ class Institutes extends React.Component {
     });
   }
   handleClick2(institute) {
+    console.log(institute.unidades);
     this.setState({
       ...this.state,
       editShow: institute.nome,
@@ -367,14 +331,20 @@ class Institutes extends React.Component {
       descricao: institute.descricao,
       admin: institute.admin,
       pontosFortes: institute.pontosFortes,
-      link: institute.link,
+      site: institute.site,
+      telefone: institute.telefone,
+      telefone2: institute.telefone2,
+      facebook: institute.facebook,
+      instagram: institute.instagram,
+      twitter: institute.twitter,
+      linkedin: institute.linkedin,
       capa: institute.capa,
       logo: institute.logo,
-      unidades: institute.unidades
+      unidades: institute.unidades,
+      cursos: institute.cursos
     });
   }
   handleClick3(unidade) {
-    console.log(unidade);
     this.setState({
       ...this.state,
       pontoEdit: unidade,
@@ -408,6 +378,66 @@ class Institutes extends React.Component {
   deletaPontoForte(ponto) {
     var pf = arrayRemove(this.state.pontosFortes, ponto);
     this.setState({ ...this.state, pontosFortes: pf });
+  }
+  adicionaCurso() {
+    var cursos = this.state.cursos;
+    console.log(this.state.cursos);
+    if (
+      this.state.nomeCurso !== "" &&
+      this.state.area !== "" &&
+      this.state.nivel !== ""
+    ) {
+      var curso = {
+        nome: this.state.nomeCurso,
+        area: this.state.area,
+        nivel: this.state.nivel,
+        admin: this.props.adminId
+      };
+      cursos.push(curso);
+      this.setState({
+        ...this.state,
+        cursos: cursos,
+        nomeCurso: "",
+        area: "",
+        nivel: "",
+        clear: true
+      });
+    } else
+      this.setState({
+        smShow: true,
+        error: "Preencha todos os campos"
+      });
+  }
+
+  deletaCurso(curso) {
+    if (typeof curso.id !== "undefined")
+      api
+        .delete(`/curso/${curso.id}`)
+        .then(res => {
+          var cursos = arrayRemove(this.state.cursos, curso);
+          this.setState({ ...this.state, cursos: cursos });
+        })
+        .then(res => {
+          api
+            .get(
+              `/curso?where={"deletedAt":0,"instituicao":"${
+                curso.instituicao.id
+              }"}`
+            )
+            .then(res => {
+              const cursos = res.data;
+              if (cursos.length !== 0) {
+                this.setState({
+                  ...this.state,
+                  cursos: cursos
+                });
+              }
+            });
+        });
+    else {
+      var cursos = arrayRemove(this.state.cursos, curso);
+      this.setState({ ...this.state, cursos: cursos });
+    }
   }
   render() {
     let smClose = () => this.setState({ smShow: false });
@@ -446,7 +476,7 @@ class Institutes extends React.Component {
                 <p className="text-fiord-blue">{institute.nome}</p>
               </h4>
               <h5 className="card-title d-block mb-1  ">Endereço web:</h5>
-              <p className="card-text d-block mb-2">{institute.link}</p>
+              <p className="card-text d-block mb-2">{institute.site}</p>
               <h5 className="card-title d-block mb-1  ">Missão: </h5>
               <p
                 className="card-text d-block mb-2"
@@ -496,6 +526,11 @@ class Institutes extends React.Component {
                         <Row form>
                           <Col md="12" className="form-group">
                             <strong className="text-muted d-block mb-2">
+                              Campos com * são obrigatórios
+                            </strong>
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <strong className="text-muted d-block mb-2">
                               Nome <strong className="text-danger">*</strong>
                             </strong>
                             <FormInput
@@ -511,7 +546,8 @@ class Institutes extends React.Component {
                           <Col className="mb-3" md="12">
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
-                                Descrição <strong className="text-danger">*</strong>
+                                Descrição{" "}
+                                <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor}
@@ -524,7 +560,8 @@ class Institutes extends React.Component {
                           <Col className="mb-3" md="12">
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
-                                Missão <strong className="text-danger">*</strong>
+                                Missão{" "}
+                                <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor2}
@@ -535,7 +572,35 @@ class Institutes extends React.Component {
                             </FormGroup>
                           </Col>
                         </Row>
-
+                        <FormGroup lg="12">
+                          <Row form>
+                            <Col md="6" className="form-group">
+                              <strong className="text-muted d-block mb-2">
+                                Telefone{" "}
+                                <strong className="text-danger">*</strong>
+                              </strong>
+                              <FormInput
+                                type="text"
+                                value={this.state.telefone}
+                                onChange={e =>
+                                  this.setState({ telefone: e.target.value })
+                                }
+                              />
+                            </Col>
+                            <Col md="6" className="form-group">
+                              <strong className="text-muted d-block mb-2">
+                                Telefone 2
+                              </strong>
+                              <FormInput
+                                type="text"
+                                value={this.state.telefone2}
+                                onChange={e =>
+                                  this.setState({ telefone2: e.target.value })
+                                }
+                              />
+                            </Col>
+                          </Row>
+                        </FormGroup>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
                             Endereço do site
@@ -543,12 +608,58 @@ class Institutes extends React.Component {
                           <FormInput
                             id="feUrl"
                             type="url"
-                            value={this.state.link}
+                            value={this.state.site}
                             onChange={e =>
-                              this.setState({ link: e.target.value })
+                              this.setState({ site: e.target.value })
                             }
-                            placeholder="Ex.: http://www.ufes.br/"
                           />
+                        </FormGroup>
+                        <strong className="text-muted d-block mb-4">
+                          Mídias Sociais
+                        </strong>
+                        <FormGroup lg="12">
+                          <Row form>
+                            <Col md="3" className="form-group">
+                              <label htmlFor="feCursos">Facebook </label>
+                              <FormInput
+                                type="text"
+                                value={this.state.facebook}
+                                onChange={e =>
+                                  this.setState({ facebook: e.target.value })
+                                }
+                              />
+                            </Col>
+                            <Col md="3" className="form-group">
+                              <label htmlFor="feCursos">Instagram </label>
+                              <FormInput
+                                type="text"
+                                value={this.state.instagram}
+                                onChange={e =>
+                                  this.setState({ instagram: e.target.value })
+                                }
+                              />
+                            </Col>
+                            <Col md="3" className="form-group">
+                              <label htmlFor="feCursos">Twitter </label>
+                              <FormInput
+                                type="text"
+                                value={this.state.twitter}
+                                onChange={e =>
+                                  this.setState({ twitter: e.target.value })
+                                }
+                              />
+                            </Col>
+                            <Col md="3" className="form-group">
+                              <label htmlFor="feCursos">Linkedin </label>
+                              <FormInput
+                                type="text"
+                                value={this.state.linkedin}
+                                onChange={e =>
+                                  this.setState({ linkedin: e.target.value })
+                                }
+                              />
+                            </Col>
+                          </Row>
                         </FormGroup>
                         <strong className="text-muted d-block mb-2">
                           Pontos Fortes
@@ -574,7 +685,6 @@ class Institutes extends React.Component {
                             </Row>
                           ))}
                         </ul>
-
                         <Row form>
                           <Col md="11" className="form-group">
                             <FormInput
@@ -597,17 +707,163 @@ class Institutes extends React.Component {
                             </div>
                           </Col>
                         </Row>
-
+                        <h4 className="d-block mb-1">Cursos</h4>
+                        <p>
+                          Preencha os campos abaixo para adicionar um novo curso
+                          a instituição
+                        </p>
+                        <Row form>
+                          <Col md="4" className="form-group">
+                            <label htmlFor="feCursos">
+                              Nome do Curso{" "}
+                              <strong className="text-danger">*</strong>
+                            </label>
+                            <FormInput
+                              value={this.state.nomeCurso}
+                              onChange={e =>
+                                this.setState({ nomeCurso: e.target.value })
+                              }
+                              id="feCursos"
+                              type="name"
+                            />
+                          </Col>
+                          <Col md="3" className="form-group">
+                            <label htmlFor="feCursos">
+                              Área do Curso{" "}
+                              <strong className="text-danger">*</strong>
+                            </label>
+                            <FormSelect
+                              onChange={e =>
+                                this.setState({ area: e.target.value })
+                              }
+                              value={this.state.area}
+                            >
+                              <option value="">Escolha...</option>
+                              <option value="Ciências Exatas e da Terra">
+                                Ciências Exatas e da Terra
+                              </option>
+                              <option value="Ciências Biológicas">
+                                Ciências Biológicas
+                              </option>
+                              <option value="Engenharias">Engenharias</option>
+                              <option value="Ciências da Saude">
+                                Ciências da Saude
+                              </option>
+                              <option value="Ciências Agrárias">
+                                Ciências Agrárias
+                              </option>
+                              <option value="Ciências Sociais e Aplicadas">
+                                Ciências Sociais e Aplicadas
+                              </option>
+                              <option value="Ciências Humanas">
+                                Ciências Humanas
+                              </option>
+                              <option value="Liguística, Letras e Artes">
+                                Liguística, Letras e Artes
+                              </option>
+                            </FormSelect>
+                          </Col>
+                          <Col md="3" className="form-group">
+                            <label htmlFor="feCursos">
+                              Nivel do Curso{" "}
+                              <strong className="text-danger">*</strong>
+                            </label>
+                            <FormSelect
+                              onChange={e =>
+                                this.setState({ nivel: e.target.value })
+                              }
+                              value={this.state.nivel}
+                            >
+                              <option value="">Escolha...</option>
+                              <option value="Graduação">Graduação</option>
+                              <option value="Pós-graduação lato sensu">
+                                Pós-graduação lato sensu
+                              </option>
+                              <option value="Pós-graduação stricto sensu">
+                                Pós-graduação stricto sensu
+                              </option>
+                            </FormSelect>
+                          </Col>
+                          <Col
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignContent: "center",
+                              justifyContent: "center"
+                            }}
+                            md="2"
+                          >
+                            <strong
+                              style={{ color: "transparent" }}
+                              htmlFor="feCursos"
+                            >
+                              Deletarsdasdasdasdsad
+                            </strong>
+                            <Button
+                              style={{ marginLeft: "auto" }}
+                              onClick={() => this.adicionaCurso()}
+                              theme="primary"
+                            >
+                              Adicionar Curso
+                            </Button>
+                          </Col>
+                          <Col md="12">
+                            <ListGroupItem
+                              style={{
+                                borderBottom: "1px solid lightgray",
+                                borderTop: "1px solid lightgray",
+                                minHeight: "10vh",
+                                marginBottom: "2.5vh"
+                              }}
+                            >
+                              {this.state.cursos
+                                .filter(this.filtro.bind(this))
+                                .map(curso => (
+                                  <ListGroupItem>
+                                    <Row lg="12">
+                                      <Col lg="3">
+                                        <p className="text-fiord-blue">
+                                          <strong>Nome:</strong> {curso.nome}
+                                        </p>
+                                      </Col>
+                                      <Col lg="4">
+                                        <p className="text-fiord-blue">
+                                          <strong>Área:</strong> {curso.area}
+                                        </p>
+                                      </Col>
+                                      <Col lg="4">
+                                        <p className="text-fiord-blue">
+                                          <strong>Nível:</strong> {curso.nivel}
+                                        </p>
+                                      </Col>
+                                      <Col lg="1">
+                                        <div
+                                          style={{ marginLeft: "auto" }}
+                                          pill
+                                          className={`card-post__category bg-danger iconDelete`}
+                                          onClick={() =>
+                                            this.deletaCurso(curso)
+                                          }
+                                        >
+                                          <i className={`fas fa-times`} />
+                                        </div>
+                                      </Col>
+                                    </Row>
+                                  </ListGroupItem>
+                                ))}
+                            </ListGroupItem>
+                          </Col>
+                        </Row>
                         <UnidadesInstitute
                           callbackParent={New => this.onChildChanged(New)}
                           unidades={institute.unidades}
                           adminId={institute.admin.id}
                           edit="true"
                         />
-
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Capa da Instituição <strong className="text-danger">*</strong>
+                            Capa da Instituição{" "}
+                            <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"
@@ -619,7 +875,8 @@ class Institutes extends React.Component {
                         </FormGroup>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Logo da Instituição <strong className="text-danger">*</strong>
+                            Logo da Instituição{" "}
+                            <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"

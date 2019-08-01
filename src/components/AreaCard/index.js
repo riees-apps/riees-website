@@ -24,7 +24,7 @@ const Card = styled.div`
   align-items: center;
   justify-content: space-around;
   background: white;
-  height: 150px;
+  height: 25vh;
   margin-bottom: 3%;
   margin-left: 2.5%;
   margin-right: 1.5%;
@@ -33,7 +33,7 @@ const Card = styled.div`
   box-shadow: 0px 0px 5px 0.3px rgba(0, 0, 0, 0.8);
   position: relative;
   @media (max-width: 768px) {
-    height: 15vh;
+    height: 30vw;
     width: 45%;
   }
 `;
@@ -75,21 +75,21 @@ const Heading = styled.h1`
 
 function icon(area) {
   switch (area) {
-    case "Ciências da Saúde":
+    case "Ciências da Saude":
       return "user-md";
-      case "Ciências Exatas":
+      case "Ciências Exatas e da Terra":
       return "flask";
-      case "Ciências Biologicas":
+      case "Ciências Biológicas":
       return "microscope";
-      case "Ciências Sociais":
+      case "Ciências Sociais e Aplicadas":
       return "user-tie";
       case "Ciências Humanas":
       return "users";
       case "Ciências Agrárias":
       return "tractor";
-      case "Engenharia":
+      case "Engenharias":
       return "cog";
-      case "Linguística":
+      case "Liguística, Letras e Artes":
       return "comments";
       default: return "asterisk"
   }

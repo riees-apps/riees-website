@@ -49,31 +49,24 @@ class InstituteImage extends Component {
     cursos: []
   };
   changeHover() {
-    if(window.screen.width >= 768)
-    this.setState({ ...this.state, hover: !this.state.hover });
+    if (window.screen.width >= 768)
+      this.setState({ ...this.state, hover: !this.state.hover });
   }
+  filtro = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
   changeOut() {
     this.setState({ ...this.state, hover: !this.state.hover });
   }
   componentWillMount() {
-    
-    this.props.unidades.map(unidade => {
-      api.get(`/curso?where={"deletedAt":0,"unidade":"${unidade.id}"}`).then(res => {
-        const cursos = res.data;
-        const newArea = this.state.areas
-        cursos.map(curso => {
-          if (newArea.indexOf(curso.area.nome) === -1) newArea.push(curso.area.nome);
-        });
-        this.setState({areas:newArea,cursos:cursos})
-      }).then( res => {
-        let u = []
-        api
-          .get(`unidade?where={"deletedAt":0,"instituicao":"${this.props.unidades[0].instituicao}"}`)
-          .then(res => {
-            u = res.data
-            this.setState({unidades: u})
-          });
-      })
+    this.props.cursos.filter(this.filtro.bind(this)).map(curso => {
+      const newArea = this.state.areas;
+
+      if (newArea.indexOf(curso.area) === -1) newArea.push(curso.area);
+
+      this.setState({ areas: newArea});
     });
   }
   render() {
@@ -110,10 +103,12 @@ class InstituteImage extends Component {
           {row}
         </h1>
       ));
-      
     };
-    const sigla = this.props.name.split('-')[0]
-    const nomeCompleto = typeof this.props.name.split('-')[1] !== "undefined" ? this.props.name.split('-')[1] :  ''
+    const sigla = this.props.name.split("-")[0];
+    const nomeCompleto =
+      typeof this.props.name.split("-")[1] !== "undefined"
+        ? this.props.name.split("-")[1]
+        : "";
     return (
       <DivLink
         style={{ textDecoration: "none" }}
@@ -123,7 +118,7 @@ class InstituteImage extends Component {
           }`,
           state: {
             scrollTop: 0,
-            areas:this.state.areas,
+            areas: this.state.areas,
             unidades: this.state.unidades,
             institutos: this.props.institutos,
             cursos: this.state.cursos
@@ -133,22 +128,49 @@ class InstituteImage extends Component {
         onMouseOut={this.changeOut.bind(this)}
         className="root"
       >
-        <Img cityInstitute={this.props.cityInstitute} input={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}>
-          <h1 className={this.state.hover ? "title2Institute" : "titleInstitute"}>
+        <Img
+          cityInstitute={this.props.cityInstitute}
+          input={`https://riees-api.herokuapp.com/bucket/${
+            this.props.capa !== null ? this.props.capa : ""
+          }`}
+        >
+          <h1
+            className={this.state.hover ? "title2Institute" : "titleInstitute"}
+          >
             {sigla}
           </h1>
-          <div className={this.state.hover ? "divInfo2Institute" : "divInfoInstitute"}>
-            <h1 className={this.state.hover ? "sub2Institute" : "sub1Institute"}>
+          <div
+            className={
+              this.state.hover ? "divInfo2Institute" : "divInfoInstitute"
+            }
+          >
+            <h1
+              className={this.state.hover ? "sub2Institute" : "sub1Institute"}
+            >
               {nomeCompleto}
             </h1>
-            <h1 className={this.state.hover ? "info2Institute" : "info1Institute"}>
+            <h1
+              className={this.state.hover ? "info2Institute" : "info1Institute"}
+            >
               <FormattedMessage id="Campus" />:
             </h1>
-            <div className={this.state.hover ? "cities2Institute" : "cities1Institute"}>
+            <div
+              className={
+                this.state.hover ? "cities2Institute" : "cities1Institute"
+              }
+            >
               {renderUnidades()}
             </div>
-            <h1 className={this.state.hover ? "info2Institute" : "info1Institute"}>Areas:</h1>
-            <div className={this.state.hover ? "cities2Institute" : "cities1Institute"}>
+            <h1
+              className={this.state.hover ? "info2Institute" : "info1Institute"}
+            >
+              Areas:
+            </h1>
+            <div
+              className={
+                this.state.hover ? "cities2Institute" : "cities1Institute"
+              }
+            >
               {renderAreas()}
             </div>
           </div>
