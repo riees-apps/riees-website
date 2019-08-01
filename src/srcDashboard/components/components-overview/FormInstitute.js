@@ -18,11 +18,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
 import api from "../../../api/api";
-import Editor from "./editor";
+import Editor from "./editor2";
 
-import Checkboxes from "./CheckboxesInstitute";
 import UnidadesInstitute from "./UnidadesInstitute";
-import CustomFileUpload from "../components-overview/CustomFileUpload";
 
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
@@ -75,8 +73,6 @@ class FormInstitute extends Component {
         missao !== "" &&
         descricao !== "" &&
         admin !== "" &&
-        pontosFortes.length !== 0 &&
-        link !== "" &&
         unidades.length !== 0
       )
     ) {
@@ -103,8 +99,6 @@ class FormInstitute extends Component {
                 }
               })
               .then(res => {
-                console.log(capaID);
-                console.log(res.data._id);
                 api
                   .post("/instituicao", {
                     nome: nome,
@@ -122,8 +116,6 @@ class FormInstitute extends Component {
                       api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
                         let cidade = '';
                         if (res.data.length > 0) cidade = res.data[0].id;
-
-                        console.log(cidade)
                         api
                           .post("/unidade", {
                             nome: unidade.nome,
@@ -141,14 +133,14 @@ class FormInstitute extends Component {
                           .then(response => {
                             const idUnidade = response.data.id;
                             unidade.cursos.map(curso => {
-                              console.log(curso.area);
+
                               api.get(`/area?nome=${curso.area}`).then(res => {
                                 let area;
                                 if (res.data.length > 0) area = res.data[0].id;
                                 api
                                   .post("/curso", {
                                     nome: curso.nome,
-                                    niveis: curso.niveis,
+                                    nivel: curso.nivel,
                                     admin: response.data.admin.id,
                                     area: area,
                                     unidade: idUnidade
@@ -216,8 +208,12 @@ class FormInstitute extends Component {
               <Col>
                 <Form>
                   <Row form>
+                  <Col md="12" className="form-group">
+                      <strong className="text-muted d-block mb-2">Campos com * são obrigatórios</strong>
+                      
+                    </Col>
                     <Col md="12" className="form-group">
-                      <strong className="text-muted d-block mb-2">Nome</strong>
+                      <strong className="text-muted d-block mb-2">Nome <strong className="text-danger">*</strong></strong>
                       <FormInput
                         value={this.state.nome}
                         onChange={e => this.setState({ nome: e.target.value })}
@@ -229,7 +225,7 @@ class FormInstitute extends Component {
                     <Col className="mb-3" md="12">
                       <FormGroup>
                         <strong className="text-muted d-block mb-2">
-                          Descrição
+                          Descrição <strong className="text-danger">*</strong>
                         </strong>
                         <ReactQuill
                           onChange={this.handleChangeEditor}
@@ -242,7 +238,7 @@ class FormInstitute extends Component {
                     <Col className="mb-3" md="12">
                       <FormGroup>
                         <strong className="text-muted d-block mb-2">
-                          Missão
+                          Missão <strong className="text-danger">*</strong>
                         </strong>
                         <ReactQuill
                           onChange={this.handleChangeEditor2}
@@ -318,7 +314,7 @@ class FormInstitute extends Component {
 
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Capa da Instituição
+                      Capa da Instituição <strong className="text-danger">*</strong>
                     </strong>
                     <input
                       className="inputFile"
@@ -328,7 +324,7 @@ class FormInstitute extends Component {
                   </FormGroup>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Logo da Instituição
+                      Logo da Instituição <strong className="text-danger">*</strong>
                     </strong>
                     <input
                       className="inputFile"

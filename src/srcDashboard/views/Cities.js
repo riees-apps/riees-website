@@ -54,6 +54,7 @@ class Cities extends React.Component {
       pontoEdit: "",
       nomePontoEdit: "",
       descricaoPontoEdit: "",
+      imgPontoEdit: "",
       editPontoShow: ""
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
@@ -103,39 +104,55 @@ class Cities extends React.Component {
                   nome: nome,
                   descricao: descricao,
                   admin: admin.id,
-                  capa:res.data._id,
-                  custoMedio: custoMedio
+                  capa:
+                    typeof this.state.img.type !== "undefined"
+                      ? res.data._id
+                      : this.state.img,
                 })
                 .then(res => {
                   const idCidade = res.data.id;
                   this.state.pontosTuristicos.map(ponto => {
                     api
-                      .get(`/ponto?where={"nome":"${ponto.nome}"}`)
-                      .then(res => {
-                        console.log(res.data);
-                        if (typeof ponto.createdAt === "undefined")
-                          if (res.data.length > 0) {
-                            api.patch(`/ponto/${res.data[0].id}`, {
-                              descricao: ponto.descricao,
-                              deletedAt: 0
-                            });
-                          } else
-                            api.post(`/ponto`, {
-                              nome: ponto.nome,
-                              descricao: ponto.descricao,
-                              cidade: idCidade,
-                              admin: admin.id
-                            });
+                      .post("/bucket", ponto.capa, {
+                        headers: {
+                          "content-type": ponto.capa.type,
+                          filename: ponto.capa.name
+                        }
                       })
                       .then(res => {
-                        api.get('/cidade?where={"deletedAt":0}').then(res => {
-                          const cities = res.data;
-                          this.setState({
-                            ...this.state,
-                            cidades: cities,
-                            editShow: false
+                        const capaID = res.data._id;
+                        api
+                          .get(`/ponto?where={"nome":"${ponto.nome}"}`)
+                          .then(res => {
+                            if (typeof ponto.createdAt === "undefined")
+                              if (res.data.length > 0) {
+                                api.patch(`/ponto/${res.data[0].id}`, {
+                                  capa: capaID,
+                                  descricao: ponto.descricao,
+                                  cidade: idCidade,
+                                  deletedAt: 0
+                                });
+                              } else
+                                api.post(`/ponto`, {
+                                  capa: capaID,
+                                  nome: ponto.nome,
+                                  descricao: ponto.descricao,
+                                  cidade: idCidade,
+                                  admin: admin.id
+                                });
+                          })
+                          .then(res => {
+                            api
+                              .get('/cidade?where={"deletedAt":0}')
+                              .then(res => {
+                                const cities = res.data;
+                                this.setState({
+                                  ...this.state,
+                                  cidades: cities,
+                                  editShow: false
+                                });
+                              });
                           });
-                        });
                       });
                   });
                 })
@@ -165,17 +182,21 @@ class Cities extends React.Component {
     } else {
       try {
         api
-          .post("/bucket", this.state.img, {
+          .post("/bucket", this.state.imgPontoEdit, {
             headers: {
-              "content-type": this.state.img.type,
-              filename: this.state.img.name
+              "content-type": this.state.imgPontoEdit.type,
+              filename: this.state.imgPontoEdit.name
             }
           })
           .then(res => {
             api
               .patch(`/ponto/${pontoEdit.id}`, {
                 nome: nomePontoEdit,
-                descricao: descricaoPontoEdit
+                descricao: descricaoPontoEdit,
+                capa:
+                  typeof this.state.imgPontoEdit.type !== "undefined"
+                    ? res.data._id
+                    : this.state.imgPontoEdit
               })
               .then(res => {
                 api
@@ -186,7 +207,6 @@ class Cities extends React.Component {
                   )
                   .then(res => {
                     const pontos = res.data;
-                    console.log(pontos);
                     if (pontos.length !== 0) {
                       this.setState({
                         ...this.state,
@@ -239,6 +259,7 @@ class Cities extends React.Component {
       ...this.state,
       id: city.id,
       editShow: city.nome,
+      img: city.capa,
       nome: city.nome,
       descricao: city.descricao,
       admin: city.admin,
@@ -252,7 +273,7 @@ class Cities extends React.Component {
       pontoEdit: ponto,
       nomePontoEdit: ponto.nome,
       descricaoPontoEdit: ponto.descricao,
-      //imgPontoEdit: ponto.capa,
+      imgPontoEdit: ponto.capa,
       editPontoShow: ponto.nome
     });
   }
@@ -269,12 +290,15 @@ class Cities extends React.Component {
     );
   }
   adicionaPonto() {
+    console.log(this.state.imgPonto);
+    console.log(this.state.nomePonto);
+    console.log(this.state.descricaoPonto);
     var pontos = this.state.pontosTuristicos;
     if (this.state.nomePonto !== "" && this.state.descricaoPonto !== "") {
       var ponto = {
         nome: this.state.nomePonto,
         descricao: this.state.descricaoPonto,
-        //capa: this.state.imgPonto,
+        capa: this.state.imgPonto,
         admin: this.props.adminId
       };
       pontos.push(ponto);
@@ -330,7 +354,9 @@ class Cities extends React.Component {
     let editClose = () => this.setState({ editShow: false });
     let editPontoClose = () => this.setState({ editPontoShow: false });
     const renderCity = () => {
-      console.log(this.state.cidades);
+      console.log(this.state.imgPonto);
+      console.log(this.state.nomePonto);
+      console.log(this.state.descricaoPonto);
       return this.state.cidades.map((city, number) => (
         <Col key={number} lg="3" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
@@ -399,7 +425,9 @@ class Cities extends React.Component {
                       <Form>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Nome</label>
+                            <strong className="text-muted d-block mb-2">
+                              Nome <strong className="text-danger">*</strong>
+                            </strong>
                             <FormInput
                               value={this.state.nome}
                               onChange={e =>
@@ -412,7 +440,8 @@ class Cities extends React.Component {
                           <Col className="mb-3" md="12">
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
-                                Descrição
+                                Descrição{" "}
+                                <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor}
@@ -433,7 +462,8 @@ class Cities extends React.Component {
                             <Row form>
                               <Col md="12" className="form-group">
                                 <label htmlFor="feCursos">
-                                  Nome do Ponto turistico
+                                  Nome do Ponto turistico{" "}
+                                  <strong className="text-danger">*</strong>
                                 </label>
                                 <FormInput
                                   value={this.state.nomePonto}
@@ -447,7 +477,8 @@ class Cities extends React.Component {
                               <Col className="mb-3" md="12">
                                 <FormGroup>
                                   <strong className="text-muted d-block mb-2">
-                                    Descrição do Ponto turistico
+                                    Descrição do Ponto turistico{" "}
+                                    <strong className="text-danger">*</strong>
                                   </strong>
                                   <FormTextarea
                                     value={this.state.descricaoPonto}
@@ -458,6 +489,21 @@ class Cities extends React.Component {
                                     }
                                     id="feResumo"
                                     rows="5"
+                                  />
+                                </FormGroup>
+                                <FormGroup>
+                                  <strong className="text-muted d-block mb-2">
+                                    Imagem do Ponto Turistico{" "}
+                                    <strong className="text-danger">*</strong>
+                                  </strong>
+                                  <input
+                                    className="inputFile"
+                                    onChange={e =>
+                                      this.setState({
+                                        imgPonto: e.target.files[0]
+                                      })
+                                    }
+                                    type="file"
                                   />
                                 </FormGroup>
                               </Col>
@@ -490,13 +536,24 @@ class Cities extends React.Component {
                                     .map(ponto => (
                                       <ListGroupItem>
                                         <Row lg="12">
+                                          <Col lg="4">
+                                            <img
+                                              src={`https://riees-api.herokuapp.com/bucket/${
+                                                ponto.capa !== null
+                                                  ? ponto.capa
+                                                  : ""
+                                              }`}
+                                              alt=''
+                                              className="imgPonto"
+                                            />
+                                          </Col>
                                           <Col lg="2">
                                             <p className="text-fiord-blue">
                                               <strong>Nome:</strong>{" "}
                                               {ponto.nome}
                                             </p>
                                           </Col>
-                                          <Col lg="8">
+                                          <Col lg="4">
                                             <p className="text-fiord-blue">
                                               <strong>Descrição:</strong>{" "}
                                               <div
@@ -578,7 +635,10 @@ class Cities extends React.Component {
                                                         >
                                                           <label htmlFor="feCursos">
                                                             Nome do Ponto
-                                                            turistico
+                                                            turistico{" "}
+                                                            <strong className="text-danger">
+                                                              *
+                                                            </strong>
                                                           </label>
                                                           <FormInput
                                                             value={
@@ -601,25 +661,11 @@ class Cities extends React.Component {
                                                         >
                                                           <FormGroup>
                                                             <strong className="text-muted d-block mb-2">
-                                                              Imagem do Ponto
-                                                              Turistico
-                                                            </strong>
-                                                            <input
-                                                              className="inputFile"
-                                                              onChange={e =>
-                                                                this.setState({
-                                                                  imgPonto:
-                                                                    e.target
-                                                                      .files[0]
-                                                                })
-                                                              }
-                                                              type="file"
-                                                            />
-                                                          </FormGroup>
-                                                          <FormGroup>
-                                                            <strong className="text-muted d-block mb-2">
                                                               Descrição do Ponto
-                                                              turistico
+                                                              turistico{" "}
+                                                              <strong className="text-danger">
+                                                                *
+                                                              </strong>
                                                             </strong>
                                                             <FormTextarea
                                                               value={
@@ -635,6 +681,26 @@ class Cities extends React.Component {
                                                               }
                                                               id="feResumo"
                                                               rows="5"
+                                                            />
+                                                          </FormGroup>
+                                                          <FormGroup>
+                                                            <strong className="text-muted d-block mb-2">
+                                                              Imagem do Ponto
+                                                              Turistico{" "}
+                                                              <strong className="text-danger">
+                                                                *
+                                                              </strong>
+                                                            </strong>
+                                                            <input
+                                                              className="inputFile"
+                                                              onChange={e =>
+                                                                this.setState({
+                                                                  imgPontoEdit:
+                                                                    e.target
+                                                                      .files[0]
+                                                                })
+                                                              }
+                                                              type="file"
                                                             />
                                                           </FormGroup>
                                                         </Col>
@@ -673,7 +739,8 @@ class Cities extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem da Cidade
+                            Imagem da Cidade{" "}
+                            <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"

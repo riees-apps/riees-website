@@ -42,7 +42,7 @@ export default class unidadesInstitute extends React.Component {
       cursos: [],
       nomeCurso: "",
       area: "",
-      niveis: [],
+      nivel: '',
       smShow: false,
       closeShow: false,
       editUnidadeShow: false,
@@ -83,7 +83,10 @@ export default class unidadesInstitute extends React.Component {
   handleClick2(unidade) {
     console.log(unidade.cursos);
 
-    const cidade = typeof unidade.cidade.id === 'undefined' ? unidade.cidade : unidade.cidade.id
+    const cidade =
+      typeof unidade.cidade.id === "undefined"
+        ? unidade.cidade
+        : unidade.cidade.id;
 
     api.get(`/cidade/${cidade}`).then(res => {
       this.setState({
@@ -149,7 +152,7 @@ export default class unidadesInstitute extends React.Component {
         cursos: [],
         nomeCurso: "",
         area: "",
-        niveis: [],
+        nivel: '',
         clear: false,
         unidades: newunidades,
         nomeEdit: "",
@@ -221,12 +224,12 @@ export default class unidadesInstitute extends React.Component {
     if (
       this.state.nomeCurso !== "" &&
       this.state.area !== "" &&
-      this.state.niveis.length > 0
+      this.state.nivel !== ""
     ) {
       var curso = {
         nome: this.state.nomeCurso,
         area: this.state.area,
-        niveis: this.state.niveis,
+        nivel: this.state.nivel,
         admin: this.props.adminId
       };
       cursos.push(curso);
@@ -235,7 +238,7 @@ export default class unidadesInstitute extends React.Component {
         cursos: cursos,
         nomeCurso: "",
         area: "",
-        niveis: [],
+        nivel: '',
         clear: true
       });
     } else
@@ -249,12 +252,12 @@ export default class unidadesInstitute extends React.Component {
     if (
       this.state.nomeCurso !== "" &&
       this.state.area !== "" &&
-      this.state.niveis.length > 0
+      this.state.nivel !== ""
     ) {
       var curso = {
         nome: this.state.nomeCurso,
         area: this.state.area,
-        niveis: this.state.niveis,
+        nivel: this.state.nivel,
         admin: this.props.adminId
       };
       cursos.push(curso);
@@ -263,7 +266,7 @@ export default class unidadesInstitute extends React.Component {
         cursosEdit: cursos,
         nomeCurso: "",
         area: "",
-        niveis: [],
+        nivel: '',
         clear: true
       });
     } else
@@ -300,14 +303,12 @@ export default class unidadesInstitute extends React.Component {
     }
   }
   deletaCursoEdit(curso) {
-    console.log(curso)
+    console.log(curso);
     if (typeof curso.id !== "undefined")
-      api
-        .delete(`/curso/${curso.id}`)
-        .then(res => {
-          var Cursos = arrayRemove(this.state.cursosEdit, curso);
-          this.setState({ ...this.state, cursosEdit: Cursos });
-        })
+      api.delete(`/curso/${curso.id}`).then(res => {
+        var Cursos = arrayRemove(this.state.cursosEdit, curso);
+        this.setState({ ...this.state, cursosEdit: Cursos });
+      });
     else {
       var Cursos = arrayRemove(this.state.cursosEdit, curso);
       this.setState({ ...this.state, cursosEdit: Cursos });
@@ -320,7 +321,7 @@ export default class unidadesInstitute extends React.Component {
     } else return true;
   };
   onChildChanged(New, clear) {
-    this.setState({ niveis: New, clear: !clear });
+    this.setState({ nivel: New, clear: !clear });
   }
 
   editUnidade(unidade) {
@@ -379,7 +380,6 @@ export default class unidadesInstitute extends React.Component {
                 cursosEdit.map(curso => {
                   if (typeof curso.createdAt === "undefined")
                     api.get(`/area?nome=${curso.area}`).then(res => {
-                      console.log(curso);
                       let area;
                       if (res.data.length > 0) area = res.data[0].id;
                       api
@@ -394,7 +394,7 @@ export default class unidadesInstitute extends React.Component {
                               `/curso/${res.data[0].id}`,
                               {
                                 nome: curso.nome,
-                                niveis: curso.niveis,
+                                nivel: curso.nivel,
                                 admin: response.data.admin.id,
                                 area: area,
                                 deletedAt: 0
@@ -410,7 +410,7 @@ export default class unidadesInstitute extends React.Component {
                               "/curso",
                               {
                                 nome: curso.nome,
-                                niveis: curso.niveis,
+                                nivel: curso.nivel,
                                 admin: response.data.admin.id,
                                 area: area,
                                 unidade: idUnidade
@@ -420,15 +420,13 @@ export default class unidadesInstitute extends React.Component {
                                   "Access-Control-Allow-Origin": "*"
                                 }
                               }
-                            )
-                        })
-                        
-                    })
-                })
-              })              
+                            );
+                        });
+                    });
+                });
+              });
           })
           .then(res => {
-            console.log('saiu3')
             api
               .get(
                 `/unidade?where={"deletedAt":0,"instituicao":"${
@@ -437,16 +435,15 @@ export default class unidadesInstitute extends React.Component {
               )
               .then(res => {
                 const unidades = res.data;
-                console.log(unidades);
-                if (unidades.length !== 0) 
+                if (unidades.length !== 0)
                   this.setState({
                     ...this.state,
-                    unidades: unidades,
-                  })
-                  this.setState({
-                    ...this.state,
-                    editUnidadeShow: false
+                    unidades: unidades
                   });
+                this.setState({
+                  ...this.state,
+                  editUnidadeShow: false
+                });
               });
           })
           .catch(error => {
@@ -503,6 +500,118 @@ export default class unidadesInstitute extends React.Component {
     let editUnidadeClose = () => this.setState({ editUnidadeShow: false });
     return (
       <FormGroup lg="12">
+        <h4 className="d-block mb-1">Cursos</h4>
+        <p>Preencha os campos abaixo para adicionar um novo curso a instituição</p>
+        <Row form>
+          <Col md="4" className="form-group">
+            <label htmlFor="feCursos">
+              Nome do Curso <strong className="text-danger">*</strong>
+            </label>
+            <FormInput
+              value={this.state.nomeCurso}
+              onChange={e => this.setState({ nomeCurso: e.target.value })}
+              id="feCursos"
+              type="name"
+            />
+          </Col>
+          <Col md="3" className="form-group">
+            <label htmlFor="feCursos">
+              Área do Curso <strong className="text-danger">*</strong>
+            </label>
+            <FormSelect
+              onChange={e => this.setState({ area: e.target.value })}
+              value={this.state.area}
+            >
+              <option value="">Escolha...</option>
+              <option value="Ciências Exatas e da Terra">
+                Ciências Exatas e da Terra
+              </option>
+              <option value="Ciências Biológicas">Ciências Biológicas</option>
+              <option value="Engenharias">Engenharias</option>
+              <option value="Ciências da Saude">Ciências da Saude</option>
+              <option value="Ciências Agrárias">Ciências Agrárias</option>
+              <option value="Ciências Sociais e Aplicadas">
+                Ciências Sociais e Aplicadas
+              </option>
+              <option value="Ciências Humanas">Ciências Humanas</option>
+              <option value="Liguística, Letras e Artes">
+                Liguística, Letras e Artes
+              </option>
+            </FormSelect>
+          </Col>
+          <Col md="3" className="form-group">
+            <label htmlFor="feCursos">
+              Nivel do Curso <strong className="text-danger">*</strong>
+            </label>
+            <FormSelect
+              onChange={e => this.setState({ nivel: e.target.value })}
+              value={this.state.nivel}
+            >
+              <option value="">Escolha...</option>
+              <option value="Graduação">Graduação</option>
+              <option value="Pós-graduação lato sensu">
+                Pós-graduação lato sensu
+              </option>
+              <option value="Pós-graduação stricto sensu">
+                Pós-graduação stricto sensu
+              </option>
+            </FormSelect>
+          </Col>
+          <Col style={{ display: "flex",flexDirection:'column',alignContent:'center',justifyContent:'center' }} md="2">
+            <strong style={{ color: "transparent" }} htmlFor="feCursos">
+              Deletarsdasdasdasdsad
+            </strong>
+            <Button
+              style={{ marginLeft: "auto" }}
+              onClick={() => this.adicionaCurso()}
+              theme="primary"
+            >
+              Adicionar Curso
+            </Button>
+          </Col>
+          <Col md="12">
+            <ListGroupItem
+              style={{
+                borderBottom: "1px solid lightgray",
+                borderTop: "1px solid lightgray",
+                minHeight: "10vh",
+                marginBottom:'2.5vh'
+              }}
+            >
+              {this.state.cursos.filter(this.filtro.bind(this)).map(curso => (
+                <ListGroupItem>
+                  <Row lg="12">
+                    <Col lg="3">
+                      <p className="text-fiord-blue">
+                        <strong>Nome:</strong> {curso.nome}
+                      </p>
+                    </Col>
+                    <Col lg="4">
+                      <p className="text-fiord-blue">
+                        <strong>Área:</strong> {curso.area}
+                      </p>
+                    </Col>
+                    <Col lg="4">
+                      <p className="text-fiord-blue">
+                        <strong>Nível:</strong> {curso.nivel}
+                      </p>
+                    </Col>
+                    <Col lg="1">
+                      <div
+                        style={{ marginLeft: "auto" }}
+                        pill
+                        className={`card-post__category bg-danger iconDelete`}
+                        onClick={() => this.deletaCurso(curso)}
+                      >
+                        <i className={`fas fa-times`} />
+                      </div>
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))}
+            </ListGroupItem>
+          </Col>
+        </Row>
         <h4 className="d-block mb-1">Unidades</h4>
         <p>
           Preencha os campos abaixo para adicionar uma nova unidade a
@@ -510,7 +619,9 @@ export default class unidadesInstitute extends React.Component {
         </p>
         <Row lg="12" form>
           <Col lg="6" className="form-group">
-            <label htmlFor="feCampus">Nome</label>
+            <label htmlFor="feCampus">
+              Nome <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.nome}
               onChange={e => this.setState({ nome: e.target.value })}
@@ -520,7 +631,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fecidade">Cidade</label>
+            <label htmlFor="fecidade">
+              Cidade <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.cidade}
               onChange={e => this.setState({ cidade: e.target.value })}
@@ -529,7 +642,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="febairro">Bairro</label>
+            <label htmlFor="febairro">
+              Bairro <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.bairro}
               onChange={e => this.setState({ bairro: e.target.value })}
@@ -538,7 +653,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="feRua">Logradouro</label>
+            <label htmlFor="feRua">
+              Logradouro <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.logradouro}
               onChange={e => this.setState({ logradouro: e.target.value })}
@@ -547,7 +664,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fenumero">Número</label>
+            <label htmlFor="fenumero">
+              Número <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.numero}
               onChange={e => this.setState({ numero: e.target.value })}
@@ -556,7 +675,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fecomplemento">Complemento</label>
+            <label htmlFor="fecomplemento">
+              Complemento <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.complemento}
               onChange={e => this.setState({ complemento: e.target.value })}
@@ -565,7 +686,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fecep">Cep</label>
+            <label htmlFor="fecep">
+              Cep <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.cep}
               onChange={e => this.setState({ cep: e.target.value })}
@@ -574,7 +697,9 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fecep">Telefone</label>
+            <label htmlFor="fecep">
+              Telefone <strong className="text-danger">*</strong>
+            </label>
             <FormInput
               value={this.state.telefone}
               onChange={e => this.setState({ telefone: e.target.value })}
@@ -585,7 +710,7 @@ export default class unidadesInstitute extends React.Component {
           <Col className="mb-3" md="12">
             <FormGroup>
               <strong className="text-muted d-block mb-2">
-                Descrição da unidade
+                Descrição da unidade <strong className="text-danger">*</strong>
               </strong>
               <ReactQuill
                 onChange={this.handleChangeEditor}
@@ -595,112 +720,7 @@ export default class unidadesInstitute extends React.Component {
               />
             </FormGroup>
           </Col>
-          <Col lg="12" className="form-group">
-            <h5 htmlFor="feCursos">Cursos da Unidade</h5>
-            <p>
-              Preencha os campos abaixo para adicionar um novo curso a unidade
-            </p>
-          </Col>
-          <Col lg="12" className="form-group">
-            <Row form>
-              <Col md="6" className="form-group">
-                <label htmlFor="feCursos">Nome do Curso</label>
-                <FormInput
-                  value={this.state.nomeCurso}
-                  onChange={e => this.setState({ nomeCurso: e.target.value })}
-                  id="feCursos"
-                  type="name"
-                />
-              </Col>
-              <Col md="6" className="form-group">
-                <label htmlFor="feCursos">Área do Curso</label>
-                <FormSelect
-                  onChange={e => this.setState({ area: e.target.value })}
-                  value={this.state.area}
-                >
-                  <option value="">Escolha...</option>
-                  <option value="Medicina">Medicina</option>
-                  <option value="Ciências Exatas">Ciências Exatas</option>
-                  <option value="Ciências Biologicas">
-                    Ciências Biológicas
-                  </option>
-                  <option value="Ciências Sociais">Ciências Sociais</option>
-                  <option value="Administração">Administração</option>
-                  <option value="Direito">Direito</option>
-                  <option value="Engenharia">Engenharia</option>
-                  <option value="Matemática">Matemática</option>
-                  <option value="T.I.">T.I.</option>
-                </FormSelect>
-              </Col>
-              <Col md="10" className="form-group">
-                <label htmlFor="feCursos">Níveis</label>
-                <FormGroup className="p-0 px-3">
-                  <Row>
-                    <Checkboxes
-                      callbackParent={(New, clear) =>
-                        this.onChildChanged(New, clear)
-                      }
-                      clear={this.state.clear}
-                    />
-                  </Row>
-                </FormGroup>
-              </Col>
-              <Col md="2">
-                <label style={{ color: "transparent" }} htmlFor="feCursos">
-                  Deletarsdasdasdasdsad
-                </label>
-                <Button
-                  style={{ marginLeft: "auto" }}
-                  onClick={() => this.adicionaCurso()}
-                  theme="primary"
-                >
-                  Adicionar Curso
-                </Button>
-              </Col>
-              <Col md="12">
-                <ListGroupItem
-                  style={{
-                    borderBottom: "1px solid lightgray",
-                    borderTop: "1px solid lightgray",
-                    minHeight: "10vh"
-                  }}
-                >
-                  {this.state.cursos.filter(this.filtro.bind(this)).map(curso => (
-                    <ListGroupItem>
-                      <Row lg="12">
-                        <Col lg="4">
-                          <p className="text-fiord-blue">
-                            <strong>Nome:</strong> {curso.nome}
-                          </p>
-                        </Col>
-                        <Col lg="2">
-                          <p className="text-fiord-blue">
-                            <strong>Área:</strong> {curso.area.nome}
-                          </p>
-                        </Col>
-                        <Col lg="5">
-                          <p className="text-fiord-blue">
-                            <strong>Nivel:</strong>
-                            {curso.niveis.map(nivel => ` ${nivel} `)}
-                          </p>
-                        </Col>
-                        <Col lg="1">
-                          <div
-                            style={{ marginLeft: "auto" }}
-                            pill
-                            className={`card-post__category bg-danger iconDelete`}
-                            onClick={() => this.deletaCurso(curso)}
-                          >
-                            <i className={`fas fa-times`} />
-                          </div>
-                        </Col>
-                      </Row>
-                    </ListGroupItem>
-                  ))}
-                </ListGroupItem>
-              </Col>
-            </Row>
-          </Col>
+
           <Button
             className="ml-1 mb-3"
             onClick={this.createUnidade.bind(this)}
@@ -1012,15 +1032,13 @@ export default class unidadesInstitute extends React.Component {
                                       <Col lg="12">
                                         <p className="text-fiord-blue">
                                           <strong>Área:</strong>{" "}
-                                          {curso.area.nome || curso.area}
+                                          curso.area
                                         </p>
                                       </Col>
                                       <Col lg="12">
-                                        <p className="text-fiord-blue">
-                                          <strong>Nivel:</strong>
-                                          {curso.niveis.map(
-                                            nivel => ` ${nivel} `
-                                          )}
+                                      <p className="text-fiord-blue">
+                                          <strong>Nível:</strong>{" "}
+                                          curso.nivel
                                         </p>
                                       </Col>
                                     </Row>

@@ -66,7 +66,7 @@ const Title = styled.h1`
   height: max-content;
   text-align: start;
   padding: 1vh 0 1vh 1vh;
-  margin-bottom:1%;
+  margin-bottom: 1%;
   @media (max-width: 768px) {
     margin-bottom: 1.5vh;
     width: 100%;
@@ -105,38 +105,37 @@ const Text = styled.h1`
 
 export default class EventCard extends Component {
   render() {
-    console.log(`/${window.location.pathname.split("/")[1]}/Post/${
-      this.props.title
-    }`);
     return (
-      <Card side={this.props.side}>
+      <Card side={this.props.side} larger={this.props.larger}>
         <CardImg
           style={{ textDecoration: "none" }}
-          side={this.props.side}
+          side={this.props.side} 
+          larger={this.props.larger}
           to={`/${window.location.pathname.split("/")[1]}/Post/${
             this.props.id
           }`}
-          input={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}
+          input={`https://riees-api.herokuapp.com/bucket/${
+            this.props.capa !== null ? this.props.capa : ""
+          }`}
         >
           <Date>
             <i className={`fas fa-clock iconDate`} />
             {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}
           </Date>
         </CardImg>
-        <CardBody side={this.props.side}>
+        <CardBody side={this.props.side} 
+          larger={this.props.larger}>
           <Badge>{this.props.tag}</Badge>
           <Title>{this.props.title}</Title>
 
-          <div>
+          <div style={{width:'100%'}}>
             <Text>{this.props.text}</Text>
           </div>
 
           <Button
             card
             className="displayNoneMobile"
-            url={`/Post/${
-            this.props.id
-          }`}
+            url={`/Post/${this.props.id}`}
             name={<FormattedMessage id="Button" />}
           />
         </CardBody>

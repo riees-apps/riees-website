@@ -73,13 +73,11 @@ class Blog extends Component {
 
   render() {
     const posts = this.props.postagens;
-    console.log(this.props.postagens);
-    console.log(1);
-    console.log(posts);
     const renderPosts = () => {
       return posts.map(post => (
         <PostCard
-          side="true"
+          side={this.props.side} 
+          larger={this.props.larger}
           id={post.id}
           capa={post.capa}
           title={post.titulo}
@@ -188,7 +186,6 @@ class Blog extends Component {
         })
       );
     };
-    console.log(posts);
     return (
       <div style={{ zIndex: "100", position: "relative" }}>
         <DivLatests className={this.props.larger ? "" : "displayNone"}>
@@ -316,7 +313,7 @@ class Blog extends Component {
             </div>
           </Form>
         </DivHeading>
-        <DivPosts side>
+        <DivPosts side={this.props.side} larger={this.props.larger}>
           <h3 className={` ${events.length === 0 ? "" : "displayNone"}`}>
             <FormattedMessage id="Result" />
           </h3>

@@ -12,6 +12,7 @@ export const Card = styled.div`
   background-color: #fafafa;
   margin-bottom: 5%;
   box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.51);
+  
   border-radius: 5px;
   @media (max-width: 600px) {
     width: 70%;
@@ -21,12 +22,14 @@ export const Card = styled.div`
   ${props =>
     props.side &&
     `
+    
     box-shadow: none;
     border-radius:0;
     padding-bottom:10vh;
     border-bottom: 1px solid #999;
     background-color: #f4f4f4;
-    width:80%;
+    width:100%;
+    margin-left:10%;
     height: 30vh;
     display: flex;
     flex-direction: row;
@@ -38,11 +41,36 @@ export const Card = styled.div`
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      width: 95%;
+      width: 100%;
       height: 50vh;
   }
-  `
+  `}
+  ${props =>
+    props.larger &&
+    `
+    
+    box-shadow: none;
+    border-radius:0;
+    padding-bottom:10vh;
+    border-bottom: 1px solid #999;
+    background-color: #f4f4f4;
+    width:90%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 600px) {
+      padding-bottom:5vh;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+      margin-right:-12.5%;
+      height: 50vh;
   }
+  `}
 `;
 export const CardImg = styled(Link)`
   transition: all 150ms ease-in;
@@ -86,6 +114,23 @@ export const CardImg = styled(Link)`
       height: 50vh;
     }
   `}
+  ${props =>
+    props.larger &&
+    `
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    width:40%;
+    height: 30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    @media (max-width: 600px) {
+      width: 100%;
+      height: 50vh;
+    }
+  `}
 `;
 
 export const CardBody = styled.div`
@@ -101,13 +146,22 @@ export const CardBody = styled.div`
     height: 22.5vh;
   }
   ${props =>
-    props.larger &&
-    `
-    margin-left:2vh;
-  `}
-  ${props =>
     props.side &&
     `
+    width:60%
+    height: 30vh;
+    align-items: flex-start;
+    justify-content: center;
+    @media (max-width: 600px) {
+      padding-left:0;
+    width: 100%;
+    height: 25vh;
+  }
+  `}
+  ${props =>
+    props.larger &&
+    `
+    
     width:60%
     height: 30vh;
     align-items: flex-start;
@@ -134,10 +188,10 @@ export const Image = styled.div`
   transition: all 250ms;
   width: ${props => props.width};
   @media (max-width: 600px) {
-  background-size: 100% 100%;
-  height: ${props => props.height};
-  justify-content: center;
-  align-content: center;
+    background-size: 100% 100%;
+    height: ${props => props.height};
+    justify-content: center;
+    align-content: center;
   }
   :hover {
     transition: all 250ms;
@@ -192,7 +246,7 @@ export const Details = styled.div`
   font-weight: 500;
   display: flex;
   flex-direction: row;
-  align-items: center ;
+  align-items: center;
   justify-content: flex-start;
   font-size: calc(7.5px + 1vw);
   line-height: calc(7.5px + 1vw);
@@ -227,9 +281,9 @@ export const Badge = styled.h1`
   color: #303033;
   font-weight: bold;
   border-radius: 5%;
-  margin-right:2.5vh;
+  margin-right: 2.5vh;
   @media (max-width: 600px) {
-    margin-top:20%;
+    margin-top: 20%;
   }
 `;
 export const SubTitle = styled.h1`
@@ -244,9 +298,9 @@ export const SubTitle = styled.h1`
   text-align: start;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;  /* Number of lines displayed before it truncate */
+  -webkit-line-clamp: 3; /* Number of lines displayed before it truncate */
   overflow: hidden;
-  margin-bottom:5%;
+  margin-bottom: 5%;
   @media (max-width: 600px) {
     margin-bottom: 2.5%;
   }
@@ -270,15 +324,12 @@ export const DivPosts = styled.div`
   width: 120%;
   padding: 5% 2.5%;
   margin-left: -10%;
-  @media (max-width: 600px) {
-
-  }
   ${props =>
     props.side &&
     `
-    width: 100%;
-    margin: 0;
-    padding: 0;
+    width: 90vw;
+    padding-left:12.5%;
+    
     padding-bottom: 5%;
     padding-top: 10vh;
     display: flex;
@@ -291,6 +342,24 @@ export const DivPosts = styled.div`
     width: 100%;
     justify-content: center;
   }
+  `}
+  ${props =>
+    props.larger &&
+    `
+    width: 110%;
+    padding-left:12.5%;
+    
+    padding-bottom: 5%;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 600px) {
+    
+    width: 100%;
+    justify-content: center;
   }
   `}
 `;
@@ -304,10 +373,10 @@ export const DivLatests = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 85%;
-  margin:auto;
+  margin: auto;
   padding-top: 5%;
   @media (max-width: 600px) {
-    display:none;
+    display: none;
   }
   ${props =>
     props.secAndTrd &&
@@ -381,13 +450,12 @@ export const DivHeading = styled.h1`
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 2.5%;
-  margin-bottom:0;
+  margin-bottom: 0;
   @media (max-width: 600px) {
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-    
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 `;
 export const Form = styled.div`
@@ -397,13 +465,13 @@ export const Form = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   width: 80%;
   margin: 0;
   margin-left: auto;
-  
+
   @media (max-width: 600px) {
-    width:100%;
-    margin-top:5%;
+    width: 100%;
+    margin-top: 5%;
   }
 `;

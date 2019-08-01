@@ -75,24 +75,22 @@ const Heading = styled.h1`
 
 function icon(area) {
   switch (area) {
-    case "Medicina":
+    case "Ciências da Saúde":
       return "user-md";
       case "Ciências Exatas":
       return "flask";
       case "Ciências Biologicas":
       return "microscope";
       case "Ciências Sociais":
-      return "users";
-      case "Administração":
       return "user-tie";
-      case "Direito":
-      return "balance-scale";
+      case "Ciências Humanas":
+      return "users";
+      case "Ciências Agrárias":
+      return "tractor";
       case "Engenharia":
       return "cog";
-      case "Matemática":
-      return "square-root-alt";
-      case "T.I.":
-      return "laptop-code";
+      case "Linguística":
+      return "comments";
       default: return "asterisk"
   }
 }

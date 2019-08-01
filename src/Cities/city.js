@@ -130,7 +130,7 @@ class City extends Component {
     console.log(capa)
     return (
       <div style={{background:'#f4f4f4'}}>
-        <Image title={name} height="100vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa.id : ''}`} />
+        <Image title={name} height="100vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`} />
         <Container >
           <SideMenu page="City" links={Cidades} />
           <DivText>

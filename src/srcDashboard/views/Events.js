@@ -45,6 +45,12 @@ const months = [
   "Nov",
   "Dec"
 ];
+function addZero(i) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  return i;
+}
 class Events extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -57,6 +63,7 @@ class Events extends React.Component {
       eventos: [],
       nome: "",
       data: "",
+      dataFim: "",
       localizacao: "",
       descricao: "",
       horarioEvento: "",
@@ -79,6 +86,7 @@ class Events extends React.Component {
       nome,
       descricao,
       data,
+      dataFim,
       localizacao,
       horarioEvento,
       link,
@@ -94,7 +102,12 @@ class Events extends React.Component {
       horarioV[0],
       horarioV[1]
     ).getTime();
-
+    let dataFimV = dataFim.split("-");
+    let newDateFim = new Date(
+      dataFimV[0],
+      dataFimV[1] - 1,
+      dataFimV[2]
+    ).getTime();
     api.get(`/evento/${event.id}`).then(event => {
       if (
         !(
@@ -102,7 +115,6 @@ class Events extends React.Component {
           descricao !== "" &&
           admin !== "" &&
           data !== "" &&
-          localizacao !== "" &&
           link !== ""
         )
       ) {
@@ -124,10 +136,14 @@ class Events extends React.Component {
                 .patch(`/evento/${id}`, {
                   nome: nome,
                   descricao: descricao,
-                  data: newDate,
+                  dataInicio: newDate,
+                  dataFim: isNaN(newDateFim) ? 0 : newDateFim,
                   localizacao: localizacao,
                   link: link,
-                  capa: res.data._id,
+                  capa:
+                    typeof this.state.img.type !== "undefined"
+                      ? res.data._id
+                      : this.state.img,
                   admin: admin.id
                 })
                 .then(res =>
@@ -174,21 +190,31 @@ class Events extends React.Component {
     });
   }
   handleClick2(event) {
-    let newDate = `${new Date(event.data).getFullYear()}-0${new Date(
-      event.data
-    ).getMonth() + 1}-${new Date(event.data).getDate()}`;
+    let newDate = `${new Date(event.dataInicio).getFullYear()}-${addZero(
+      new Date(event.dataInicio).getMonth() + 1
+    )}-${addZero(new Date(event.dataInicio).getDate())}`;
 
-    let newTime = `${new Date(event.data).getHours()}:${new Date(
-      event.data
-    ).getMinutes()}`;
+    let newTime = `${addZero(new Date(event.dataInicio).getHours())}:${addZero(
+      new Date(event.dataInicio).getMinutes()
+    )}`;
+    var newDateFim;
+    if (event.dataFim !== 0) {
+      newDateFim = `${new Date(event.dataFim).getFullYear()}-${addZero(
+        new Date(event.dataFim).getMonth() + 1
+      )}-${addZero(new Date(event.dataFim).getDate())}`;
+    } else newDateFim = "";
+    console.log(newDateFim);
+    console.log(newDate);
     this.setState({
       ...this.state,
       editShow: event.nome,
       id: event.id,
+      img:event.capa,
       nome: event.nome,
       descricao: event.descricao,
       admin: event.admin,
       data: newDate,
+      dataFim: newDateFim,
       horarioEvento: newTime,
       localizacao: event.localizacao,
       link: event.link
@@ -211,7 +237,6 @@ class Events extends React.Component {
   }
 
   render() {
-    console.log(this.state.imgs);
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
     let editClose = () => this.setState({ editShow: false });
@@ -258,16 +283,40 @@ class Events extends React.Component {
                 <div>
                   <h5 className="card-title d-block mb-1 ">Data do evento:</h5>
                   <p className="card-text d-block mb-2 ">{`${
-                    months[new Date(event.data).getMonth()]
-                  } ${new Date(event.data).getDate()}, ${new Date(
-                    event.data
+                    months[new Date(event.dataInicio).getMonth()]
+                  } ${new Date(event.dataInicio).getDate()}, ${new Date(
+                    event.dataInicio
                   ).getFullYear()}`}</p>
+
+                  <h5
+                    className={
+                      event.dataFim === 0
+                        ? "displayNone"
+                        : "card-title d-block mb-1"
+                    }
+                  >
+                    Data do fim do evento:
+                  </h5>
+                  <p
+                    className={
+                      event.dataFim === 0
+                        ? "displayNone"
+                        : "card-text d-block mb-2 "
+                    }
+                  >
+                    {" "}
+                    {`${months[new Date(event.dataFim).getMonth()]} ${new Date(
+                      event.dataFim
+                    ).getDate()}, ${new Date(event.dataFim).getFullYear()}`}
+                  </p>
+
                   <h5 className="card-title d-block mb-1  ">
                     Horário do evento:
                   </h5>
                   <p className="card-text d-block mb-2">{`${new Date(
-                    event.data
-                  ).getHours()}:${new Date(event.data).getMinutes()}`}</p>
+                    event.dataInicio
+                  ).getHours()}:${new Date(event.dataInicio).getMinutes()}`}</p>
+
                   <h5 className="card-title d-block mb-1  ">
                     Localização do evento
                   </h5>
@@ -279,9 +328,9 @@ class Events extends React.Component {
                     Data de publicação:
                   </h5>
                   <p className="card-text d-block mb-2 ">{`${
-                    months[new Date(event.data).getMonth()]
-                  } ${new Date(event.data).getDate()}, ${new Date(
-                    event.data
+                    months[new Date(event.dataInicio).getMonth()]
+                  } ${new Date(event.dataInicio).getDate()}, ${new Date(
+                    event.dataInicio
                   ).getFullYear()}`}</p>
                 </div>
               )}
@@ -309,7 +358,7 @@ class Events extends React.Component {
                         <Row form>
                           <Col md="12" className="form-group">
                             <strong className="text-muted d-block mb-2">
-                              Nome
+                              Nome <strong className="text-danger">*</strong>
                             </strong>
                             <FormInput
                               value={this.state.nome}
@@ -323,7 +372,8 @@ class Events extends React.Component {
                           <Col className="mb-3" md="12">
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
-                                Descrição
+                                Descrição{" "}
+                                <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor}
@@ -335,7 +385,7 @@ class Events extends React.Component {
                           </Col>
                           <Col className="mb-3" md="12">
                             <strong className="text-muted d-block mb-2">
-                              Link
+                              Link <strong className="text-danger">*</strong>
                             </strong>
                             <FormInput
                               value={this.state.link}
@@ -347,7 +397,9 @@ class Events extends React.Component {
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feDataInicio">Data</label>
+                            <strong className="text-muted d-block mb-2">
+                              Data <strong className="text-danger">*</strong>
+                            </strong>
                             <FormInput
                               value={this.state.data}
                               onChange={e =>
@@ -357,9 +409,37 @@ class Events extends React.Component {
                               type="date"
                             />
                           </Col>
-                          <Col className={`${this.state.localizacao === '' ? 'displayNone' : 'mb-3'}`} md="12">
+                          <Col
+                            className={`${
+                              this.state.localizacao === ""
+                                ? "displayNone"
+                                : "mb-3"
+                            }`}
+                            md="12"
+                          >
+                            <strong className="text-muted d-block mb-2">
+                              Data do fim do evento
+                            </strong>
+                            <FormInput
+                              value={this.state.dataFim}
+                              onChange={e =>
+                                this.setState({ dataFim: e.target.value })
+                              }
+                              id="feCustoMedio"
+                              type="date"
+                            />
+                          </Col>
+                          <Col
+                            className={`${
+                              this.state.localizacao === ""
+                                ? "displayNone"
+                                : "mb-3"
+                            }`}
+                            md="12"
+                          >
                             <label htmlFor="feDataInicio">
-                              Horário do evento
+                              Horário do evento{" "}
+                              <strong className="text-danger">*</strong>
                             </label>
                             <FormInput
                               value={this.state.horarioEvento}
@@ -372,9 +452,17 @@ class Events extends React.Component {
                               type="time"
                             />
                           </Col>
-                          <Col className={`${this.state.localizacao === '' ? 'displayNone' : 'mb-3'}`} md="12">
+                          <Col
+                            className={`${
+                              this.state.localizacao === ""
+                                ? "displayNone"
+                                : "mb-3"
+                            }`}
+                            md="12"
+                          >
                             <strong className="text-muted d-block mb-2">
-                              Local do evento
+                              Local do evento{" "}
+                              <strong className="text-danger">*</strong>
                             </strong>
                             <FormInput
                               value={this.state.localizacao}
@@ -390,7 +478,7 @@ class Events extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem do Evento
+                            Imagem <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"

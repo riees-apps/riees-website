@@ -210,6 +210,7 @@ class Event extends Component {
       capa,
       link,
       date,
+      dateFim,
       dateEvent,
       placeEvent,
       text,
@@ -222,9 +223,13 @@ class Event extends Component {
     const hora=addZero(new Date(date).getHours())
     const minuto=addZero(new Date(date).getMinutes())
 
+    const anoFim = new Date(dateFim).getFullYear()
+    const mesFim =months[new Date(dateFim).getMonth()]
+    const diaFim =new Date(dateFim).getDate()
+
     return (
       <div>
-        <Image x="0.6" height="75vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa.id : ''}`}>
+        <Image x="0.6" height="75vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`}>
           <div>
             <Badge>{ placeEvent !== "" ? "Event" : "New"}</Badge>
             <Title>{title}</Title>
@@ -240,7 +245,7 @@ class Event extends Component {
               className={ placeEvent !== "" ? "" : "displayNone"}
             >
               <Details>
-                <i className={`fas fa-calendar iconDate`} /> {`${dia} ${mes}, ${ano}`}
+                <i className={`fas fa-calendar iconDate`} /> {`${dia} ${mes}, ${ano}`}  {dateFim !== 0 ? `~ ${diaFim} ${mesFim}, ${anoFim}` : ''}
               </Details>
               <Details>
                 <i className={`fas fa-clock iconDate`} /> {`${hora} : ${minuto}`}

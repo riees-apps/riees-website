@@ -192,6 +192,7 @@ const CardBody = styled.div`
 
 class EventCard extends Component {
   render() {
+    console.log(this.props.anoFim)
     return (
       <Card side={this.props.side}>
         <CardImg
@@ -208,7 +209,7 @@ class EventCard extends Component {
           </Date>
           <Date className={this.props.placeEvent === "" ? "" : "displayNone"}>
             <i className={`fas fa-clock iconDate`} />
-            {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}
+            {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`} 
           </Date>
         </CardImg>
         <CardBody side={this.props.side}>
@@ -224,7 +225,7 @@ class EventCard extends Component {
               className={this.props.placeEvent !== "" ? "" : "displayNone"}
             >
               <i className={`fas fa-calendar iconDate`} />{" "}
-              {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}
+              {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`} {this.props.anoFim !== 0 ? `~ ${this.props.diaFim} ${this.props.mesFim}, ${this.props.anoFim}` : ''}
             </Text>
             <Text
               icon

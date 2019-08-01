@@ -85,10 +85,10 @@ export const ImageParagraph = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   width: 100%;
-  margin-bottom: 1%;
+  margin-bottom: 5vh;
   @media (max-width: 600px) {
     background-size: center;
-  height: 40vh;
+  height: 30vh;
   }
 `;
 export const Img = styled.img`
@@ -152,10 +152,6 @@ export const DivText = styled.div`
   justify-content: center;
   width: 100%;
   padding: 10vh 15%;
-
-  @media (max-width: 768px) {
-    width: 90%;
-  }
 `;
 export const Subheading = styled.div`
   display: flex;

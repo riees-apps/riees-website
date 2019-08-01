@@ -73,9 +73,6 @@ class FormNew extends Component {
             }
           })
           .then(res => {
-            console.log(res.data)
-            console.log(res.data.id)
-            console.log(res.data._id)
             api.post("/evento", {
               nome: nome,
               descricao: descricao,
@@ -123,8 +120,13 @@ class FormNew extends Component {
               <Col>
                 <Form>
                   <Row form>
+                  <Col md="12" className="form-group">
+                      <strong className="text-muted d-block mb-2">
+                        Campos com * são obrigatórios
+                      </strong>
+                    </Col>
                     <Col md="12" className="form-group">
-                      <strong className="text-muted d-block mb-2">Nome</strong>
+                      <strong className="text-muted d-block mb-2">Nome <strong className="text-danger">*</strong></strong>
                       <FormInput
                         value={this.state.nome}
                         onChange={e => this.setState({ nome: e.target.value })}
@@ -135,7 +137,7 @@ class FormNew extends Component {
                     <Col className="mb-3" md="12">
                       <FormGroup>
                         <strong className="text-muted d-block mb-2">
-                          Descrição
+                          Descrição <strong className="text-danger">*</strong>
                         </strong>
                         <ReactQuill
                           onChange={this.handleChangeEditor}
@@ -158,7 +160,7 @@ class FormNew extends Component {
                     </Col>
                     <Col className="mb-3" md="12">
                     <strong className="text-muted d-block mb-2">
-                     Data de publicação
+                     Data de publicação <strong className="text-danger">*</strong>
                     </strong>
                       <FormInput
                         value={this.state.data}
@@ -170,7 +172,7 @@ class FormNew extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem da Noticia
+                      Imagem da Noticia <strong className="text-danger">*</strong>
                     </strong>
                     <input
                       className="inputFile"

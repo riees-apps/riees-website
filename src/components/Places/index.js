@@ -99,7 +99,7 @@ filtro = place => {
       return places.filter(this.filtro.bind(this)).map(place => (
         <Carousel.Item >  
         <Image
-        image={img}
+        image={`https://riees-api.herokuapp.com/bucket/${place.capa !== null ? place.capa : ''}`}
         >
         <Text>
         <Heading>

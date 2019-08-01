@@ -20,9 +20,6 @@ import "../../assets/quill.css";
 import api from "../../../api/api";
 import Editor from "./editor";
 
-import Places from "./Places";
-import CustomFileUpload from "../components-overview/CustomFileUpload";
-
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
     return ele !== value;
@@ -59,7 +56,14 @@ class FormCity extends Component {
     var capaPontoID;
     e.preventDefault();
     const { nome, descricao, admin, pontosTuristicos } = this.state;
-    if (!(nome !== "" && descricao !== "" && admin !== "")) {
+    if (
+      !(
+        nome !== "" &&
+        descricao !== "" &&
+        pontosTuristicos.length > 0 &&
+        admin !== ""
+      )
+    ) {
       this.setState({
         error: "Preencha todos os campos!",
         smShow: true
@@ -78,7 +82,7 @@ class FormCity extends Component {
               .post("/cidade", {
                 nome: nome,
                 descricao: descricao,
-                capa:  res.data._id,
+                capa: res.data._id,
                 admin: admin
               })
               .then(response => {
@@ -96,12 +100,11 @@ class FormCity extends Component {
                         .post("/ponto", {
                           nome: ponto.nomePonto,
                           descricao: ponto.descricaoPonto,
-                          //capa: res.data._id,
+                          capa: res.data._id,
                           cidade: idCidade,
                           admin: response.data.admin.id
                         })
                         .then(res => {
-                          console.log(res);
                           this.setState({
                             smShow: true,
                             error: "Cidade adicionada com sucesso!"
@@ -172,7 +175,14 @@ class FormCity extends Component {
                 <Form>
                   <Row form>
                     <Col md="12" className="form-group">
-                      <label htmlFor="feName">Nome</label>
+                      <strong className="text-muted d-block mb-2">
+                        Campos com * são obrigatórios
+                      </strong>
+                    </Col>
+                    <Col md="12" className="form-group">
+                      <strong className="text-muted d-block mb-2">
+                        Nome <strong className="text-danger">*</strong>
+                      </strong>
                       <FormInput
                         value={this.state.nome}
                         onChange={e => this.setState({ nome: e.target.value })}
@@ -183,7 +193,7 @@ class FormCity extends Component {
                     <Col className="mb-3" md="12">
                       <FormGroup>
                         <strong className="text-muted d-block mb-2">
-                          Descrição
+                          Descrição <strong className="text-danger">*</strong>
                         </strong>
                         <ReactQuill
                           onChange={this.handleChangeEditor}
@@ -204,7 +214,8 @@ class FormCity extends Component {
                       <Row form>
                         <Col md="12" className="form-group">
                           <label htmlFor="feCursos">
-                            Nome do Ponto turistico
+                            Nome do Ponto turistico{" "}
+                            <strong className="text-danger">*</strong>
                           </label>
                           <FormInput
                             value={this.state.nomePonto}
@@ -218,7 +229,8 @@ class FormCity extends Component {
                         <Col className="mb-3" md="12">
                           <FormGroup>
                             <strong className="text-muted d-block mb-2">
-                              Descrição do Ponto turistico
+                              Descrição do Ponto turistico{" "}
+                              <strong className="text-danger">*</strong>
                             </strong>
                             <FormTextarea
                               value={this.state.descricaoPonto}
@@ -233,7 +245,8 @@ class FormCity extends Component {
                           </FormGroup>
                           <FormGroup>
                             <strong className="text-muted d-block mb-2">
-                              Imagem do Ponto Turistico
+                              Imagem do Ponto Turistico{" "}
+                              <strong className="text-danger">*</strong>
                             </strong>
                             <input
                               className="inputFile"
@@ -307,7 +320,8 @@ class FormCity extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem da Cidade
+                      Imagem da Cidade{" "}
+                      <strong className="text-danger">*</strong>
                     </strong>
                     <input
                       className="inputFile"

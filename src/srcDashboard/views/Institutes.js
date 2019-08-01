@@ -20,21 +20,13 @@ import "react-quill/dist/quill.snow.css";
 import "../assets/quill.css";
 
 import api from "../../api/api";
-import Editor from "../components/components-overview/editor";
+import Editor from "../components/components-overview/editor2";
 
-import Checkboxes from "../components/components-overview/CheckboxesInstitute";
 import UnidadesInstitute from "../components/components-overview/UnidadesInstitute";
-import CustomFileUpload from "../components/components-overview/CustomFileUpload";
+
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-import ufes from "../../Institutes/imgs/ufes.jpg";
-import uvv from "../../Institutes/imgs/uvv.jpg";
-import fdv from "../../Institutes/imgs/fdv.png";
-import emescam from "../../Institutes/imgs/emescam.jpg";
-import unesc from "../../Institutes/imgs/unesc.jpg";
-import ifes from "../../Institutes/imgs/ifes.jpg";
-import ucl from "../../Institutes/imgs/ucl.jpg";
 import PageTitle from "../components/common/PageTitle";
 
 function arrayRemove(arr, value) {
@@ -504,7 +496,7 @@ class Institutes extends React.Component {
                         <Row form>
                           <Col md="12" className="form-group">
                             <strong className="text-muted d-block mb-2">
-                              Nome
+                              Nome <strong className="text-danger">*</strong>
                             </strong>
                             <FormInput
                               value={this.state.nome}
@@ -519,7 +511,7 @@ class Institutes extends React.Component {
                           <Col className="mb-3" md="12">
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
-                                Descrição
+                                Descrição <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor}
@@ -532,7 +524,7 @@ class Institutes extends React.Component {
                           <Col className="mb-3" md="12">
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
-                                Missão
+                                Missão <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor2}
@@ -615,7 +607,7 @@ class Institutes extends React.Component {
 
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Capa da Instituição
+                            Capa da Instituição <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"
@@ -627,7 +619,7 @@ class Institutes extends React.Component {
                         </FormGroup>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Logo da Instituição
+                            Logo da Instituição <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"

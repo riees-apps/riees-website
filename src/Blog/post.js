@@ -17,7 +17,7 @@ import {
 import Footer from "../components/Footer/index";
 import Blog from "../components/Blog/index";
 import Button from "../components/Button/index";
-import "./post.css"
+import "./post.css";
 
 const months = [
   "Jan",
@@ -45,15 +45,22 @@ class Post extends Component {
     const dia = new Date(data).getDate();
     return (
       <div>
-        <Image x="0.6" height="75vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa.id : ''}`}>
+        <Image
+          x="0.6"
+          height="75vh"
+          image={`https://riees-api.herokuapp.com/bucket/${
+            capa !== null ? capa : ""
+          }`}
+        >
           <div>
             <Badge>{tags[0]}</Badge>
             <Title>{titulo}</Title>
             <Subheading
               className={typeof dateEvent === "undefined" ? "" : "displayNone"}
             >
-             <Details>
-                <i className={`fas fa-calendar iconDate`} />   {`${dia} ${mes}, ${ano}`}
+              <Details>
+                <i className={`fas fa-calendar iconDate`} />{" "}
+                {`${dia} ${mes}, ${ano}`}
               </Details>
             </Subheading>
 
@@ -66,9 +73,9 @@ class Post extends Component {
               className={typeof dateEvent !== "undefined" ? "" : "displayNone"}
             >
               <Details>
-                <i className={`fas fa-calendar iconDate`} />   {`${dia} ${mes}, ${ano}`}
+                <i className={`fas fa-calendar iconDate`} />{" "}
+                {`${dia} ${mes}, ${ano}`}
               </Details>
-             
             </Subheading>
           </div>
         </Image>
@@ -76,11 +83,16 @@ class Post extends Component {
           <DivText>
             <Resume>{resumo}</Resume>
             <ImageParagraph height="60vh" image={img} />
-            <div className="innerHTMLPost" dangerouslySetInnerHTML={{ __html: conteudo }}/>
+            <div
+              className="innerHTMLPost"
+              dangerouslySetInnerHTML={{ __html: conteudo }}
+            />
           </DivText>
           <Heading>Latest posts</Heading>
           <Blog postagens={this.props.posts} side final={9} />
-          <Button url="/Blog" name="Return to blog" />
+          <div className="divBtnPost">
+            <Button url="/Blog" name="Return to blog" />
+          </div>
         </Container>
         <Footer />
       </div>

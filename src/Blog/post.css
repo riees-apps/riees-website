@@ -1,3 +1,10 @@
+.divBtnPost{
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center
+}
 .innerHTMLPost  {
     width:100%;
 }
@@ -43,8 +50,8 @@
     width: 100%;
     text-align: start;
     padding: 0 0 1vh 0;
-    font-size: calc(12px + 1vw);
-    line-height: calc(12px + 1vw);
+    font-size: calc(12px + 1.2vw);
+    line-height: calc(12px + 1.2vw);
   }
   .innerHTMLPost h1 {
     font-family: "Poppins", sans-serif;

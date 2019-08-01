@@ -55,7 +55,7 @@ class Posts extends React.Component {
       smShow: false,
       editShow: false,
       id: "",
-      img:null,
+      img: null,
       postagens: [],
       titulo: "",
       data: "",
@@ -80,7 +80,7 @@ class Posts extends React.Component {
   }
 
   componentWillMount() {
-    api.get('/postagem?where={"deletedAt":0}').then(res => {
+    api.get('/publicacao?where={"deletedAt":0}').then(res => {
       const posts = res.data;
       this.setState({ postagens: posts });
       console.log(this.state.postagens);
@@ -90,7 +90,7 @@ class Posts extends React.Component {
     const { titulo, resumo, data, conteudo, admin, tags, id } = this.state;
     let dataV = data.split("-");
     let newDate = new Date(dataV[0], dataV[1] - 1, dataV[2]).getTime();
-    api.get(`/postagem/${post.id}`).then(post => {
+    api.get(`/publicacao/${post.id}`).then(post => {
       if (
         !(
           titulo !== "" &&
@@ -116,17 +116,20 @@ class Posts extends React.Component {
             })
             .then(res => {
               api
-                .patch(`/postagem/${id}`, {
+                .patch(`/publicacao/${id}`, {
                   titulo: titulo,
                   resumo: resumo,
                   data: newDate,
                   conteudo: conteudo,
                   tags: tags,
-                  capa: res.data._id,
+                  capa:
+                    typeof this.state.img.type !== "undefined"
+                      ? res.data._id
+                      : this.state.img,
                   admin: admin.id
                 })
                 .then(res =>
-                  api.get('/postagem?where={"deletedAt":0}').then(res => {
+                  api.get('/publicacao?where={"deletedAt":0}').then(res => {
                     const posts = res.data;
                     this.setState({
                       ...this.state,
@@ -178,6 +181,7 @@ class Posts extends React.Component {
       editShow: post.titulo,
       id: post.id,
       titulo: post.titulo,
+      img: post.capa,
       resumo: post.resumo,
       admin: post.admin,
       data: newDate,
@@ -186,8 +190,8 @@ class Posts extends React.Component {
     });
   }
   deleteUnidade(post) {
-    api.delete(`/postagem/${post.id}`).then(resp =>
-      api.get('/postagem?where={"deletedAt":0}').then(res => {
+    api.delete(`/publicacao/${post.id}`).then(resp =>
+      api.get('/publicacao?where={"deletedAt":0}').then(res => {
         const posts = res.data;
         this.setState({
           ...this.state,
@@ -279,7 +283,9 @@ class Posts extends React.Component {
                       <Form>
                         <Row form>
                           <Col md="12" className="form-group">
-                            <label htmlFor="feName">Titulo</label>
+                            <strong className="text-muted d-block mb-2">
+                              Titulo <strong className="text-danger">*</strong>
+                            </strong>
                             <FormInput
                               value={this.state.titulo}
                               onChange={e =>
@@ -290,7 +296,9 @@ class Posts extends React.Component {
                             />
                           </Col>
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feResumo">Resumo</label>
+                            <strong className="text-muted d-block mb-2">
+                              Resumo <strong className="text-danger">*</strong>
+                            </strong>
                             <FormTextarea
                               value={this.state.resumo}
                               onChange={e =>
@@ -304,6 +312,7 @@ class Posts extends React.Component {
                             <FormGroup>
                               <strong className="text-muted d-block mb-2">
                                 Conteudo
+                                <strong className="text-danger">*</strong>
                               </strong>
                               <ReactQuill
                                 onChange={this.handleChangeEditor}
@@ -315,7 +324,7 @@ class Posts extends React.Component {
                           </Col>
                           <Col className="mb-2" md="12">
                             <strong className="text-muted d-block mb-2">
-                              Tags
+                              Tags <strong className="text-danger">*</strong>
                             </strong>
 
                             <Row form>
@@ -366,7 +375,9 @@ class Posts extends React.Component {
                           </Col>
 
                           <Col className="mb-3" md="12">
-                            <label htmlFor="feDataInicio">Data</label>
+                            <label htmlFor="feDataInicio">
+                              Data <strong className="text-danger">*</strong>
+                            </label>
                             <FormInput
                               value={this.state.data}
                               onChange={e =>
@@ -379,7 +390,8 @@ class Posts extends React.Component {
                         </Row>
                         <FormGroup>
                           <strong className="text-muted d-block mb-2">
-                            Imagem da postagem
+                            Imagem da postagem{" "}
+                            <strong className="text-danger">*</strong>
                           </strong>
                           <input
                             className="inputFile"

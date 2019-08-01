@@ -226,14 +226,17 @@ class Events extends Component {
           larger={this.props.larger}
           title={evento.nome}
           placeEvent={evento.localizacao}
-          dateEvent={evento.data}
+          dateEvent={evento.dataInicio}
           text={evento.descricao}
           img={evento.img}
-          ano={new Date(evento.data).getFullYear()}
-          mes={months[new Date(evento.data).getMonth()]}
-          dia={new Date(evento.data).getDate()}
-          hora={addZero(new Date(evento.data).getHours())}
-          minuto={addZero(new Date(evento.data).getMinutes())}
+          ano={new Date(evento.dataInicio).getFullYear()}
+          mes={months[new Date(evento.dataInicio).getMonth()]}
+          dia={new Date(evento.dataInicio).getDate()}
+          anoFim={evento.dataFim !== 0 ? new Date(evento.dataFim).getFullYear() : 0 }
+          mesFim={evento.dataFim !== 0 ?  months[new Date(evento.dataFim).getMonth()] : 0}
+          diaFim={evento.dataFim !== 0 ?  new Date(evento.dataFim).getDate() : 0}
+          hora={addZero(new Date(evento.dataInicio).getHours())}
+          minuto={addZero(new Date(evento.dataInicio).getMinutes())}
         />
       ));
     };

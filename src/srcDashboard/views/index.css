@@ -1,3 +1,7 @@
+.imgPonto{
+  width:100%
+}
+
 .inputFile{
   width:100%;
   background: white;
@@ -13,6 +17,7 @@ input[type=file]::-webkit-file-upload-button {
   background: rgb(221, 221, 221);
   height: calc(2.0625rem + 2px);
   font-size: 14px;
+  cursor: pointer;
 }
 .displayNone{
   display:none

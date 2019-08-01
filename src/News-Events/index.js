@@ -47,8 +47,6 @@ class NewsEvents extends Component {
     document.documentElement.scrollTop = 0;
   }
   render() {
-    console.log(2);
-    console.log(this.props.Eventos);
     return (
       <div style={{ backgroundColor: "#f4f4f4" }}>
         <Image x='0.5' height="80vh" image={img3} >

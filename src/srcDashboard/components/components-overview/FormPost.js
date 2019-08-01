@@ -19,7 +19,7 @@ import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
 import api from "../../../api/api";
 import Editor from "./editor";
-import "../../views/index.css"
+import "../../views/index.css";
 
 import CustomFileUpload from "../components-overview/CustomFileUpload";
 
@@ -91,7 +91,7 @@ class FormPost extends Component {
             }
           })
           .then(res => {
-            api.post("/postagem", {
+            api.post("/publicacao", {
               titulo: titulo,
               resumo: resumo,
               data: newDate,
@@ -132,8 +132,8 @@ class FormPost extends Component {
         this.props.history.push("/en/dashboard/show-posts");
       else return;
     };
-    console.log("value input");
-    if (!(this.state.img === null)) console.log(this.state.img);
+    console.log(this.state.conteudo);
+
     return (
       <form onSubmit={this.addPostagem}>
         <ListGroup flush>
@@ -143,7 +143,14 @@ class FormPost extends Component {
                 <Form>
                   <Row form>
                     <Col md="12" className="form-group">
-                      <label htmlFor="feName">Titulo</label>
+                      <strong className="text-muted d-block mb-2">
+                        Campos com * são obrigatórios
+                      </strong>
+                    </Col>
+                    <Col md="12" className="form-group">
+                      <strong className="text-muted d-block mb-2">
+                        Titulo <strong className="text-danger">*</strong>
+                      </strong>
                       <FormInput
                         value={this.state.titulo}
                         onChange={e =>
@@ -154,7 +161,9 @@ class FormPost extends Component {
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feResumo">Resumo</label>
+                      <strong className="text-muted d-block mb-2">
+                        Resumo <strong className="text-danger">*</strong>
+                      </strong>
                       <FormTextarea
                         value={this.state.resumo}
                         onChange={e =>
@@ -167,7 +176,7 @@ class FormPost extends Component {
                     <Col className="mb-3" md="12">
                       <FormGroup>
                         <strong className="text-muted d-block mb-2">
-                          Conteudo
+                          Conteudo <strong className="text-danger">*</strong>
                         </strong>
                         <ReactQuill
                           onChange={this.handleChangeEditor}
@@ -178,7 +187,9 @@ class FormPost extends Component {
                       </FormGroup>
                     </Col>
                     <Col className="mb-2" md="12">
-                      <strong className="text-muted d-block mb-2">Tags</strong>
+                      <strong className="text-muted d-block mb-2">
+                        Tags <strong className="text-danger">*</strong>
+                      </strong>
 
                       <Row form>
                         <Col md="11" className="form-group">
@@ -228,7 +239,9 @@ class FormPost extends Component {
                     </Col>
 
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Data</label>
+                      <label htmlFor="feDataInicio">
+                        Data <strong className="text-danger">*</strong>
+                      </label>
                       <FormInput
                         value={this.state.data}
                         onChange={e => this.setState({ data: e.target.value })}
@@ -239,7 +252,8 @@ class FormPost extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem da postagem
+                      Imagem da postagem{" "}
+                      <strong className="text-danger">*</strong>
                     </strong>
                     <input
                       className="inputFile"

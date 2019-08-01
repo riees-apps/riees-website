@@ -35,6 +35,7 @@ class FormEvent extends Component {
       smShow: false,
       nome: "",
       data: "",
+      dataFim: "",
       horarioEvento: "",
       localizacao: "",
       descricao: "",
@@ -52,6 +53,7 @@ class FormEvent extends Component {
     const {
       nome,
       data,
+      dataFim,
       localizacao,
       descricao,
       link,
@@ -59,6 +61,7 @@ class FormEvent extends Component {
       admin
     } = this.state;
     let dataV = data.split("-");
+    let dataFimV = dataFim.split("-");
     let horarioV = horarioEvento.split(":");
     let newDate = new Date(
       dataV[0],
@@ -67,10 +70,16 @@ class FormEvent extends Component {
       horarioV[0],
       horarioV[1]
     ).getTime();
+    let newDateFim = new Date(
+      dataFimV[0],
+      dataFimV[1] - 1,
+      dataFimV[2]
+    ).getTime();
+
+
     if (
       !(
         nome !== "" &&
-        link !== "" &&
         descricao !== "" &&
         data !== "" &&
         localizacao !== "" &&
@@ -94,7 +103,8 @@ class FormEvent extends Component {
             api.post("/evento", {
               nome: nome,
               descricao: descricao,
-              data: newDate,
+              dataInicio: newDate,
+              dataFim: isNaN(newDateFim) ? 0 : newDateFim,
               localizacao: localizacao,
               link: link,
               capa: res.data._id,
@@ -141,7 +151,14 @@ class FormEvent extends Component {
                 <Form>
                   <Row form>
                     <Col md="12" className="form-group">
-                      <strong className="text-muted d-block mb-2">Nome</strong>
+                      <strong className="text-muted d-block mb-2">
+                        Campos com * são obrigatórios
+                      </strong>
+                    </Col>
+                    <Col md="12" className="form-group">
+                      <strong className="text-muted d-block mb-2">
+                        Nome <strong className="text-danger">*</strong>
+                      </strong>
                       <FormInput
                         value={this.state.nome}
                         onChange={e => this.setState({ nome: e.target.value })}
@@ -152,7 +169,7 @@ class FormEvent extends Component {
                     <Col className="mb-3" md="12">
                       <FormGroup>
                         <strong className="text-muted d-block mb-2">
-                          Descrição
+                          Descrição <strong className="text-danger">*</strong>
                         </strong>
                         <ReactQuill
                           onChange={this.handleChangeEditor}
@@ -174,7 +191,10 @@ class FormEvent extends Component {
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Data do evento</label>
+                      <strong className="text-muted d-block mb-2">
+                        Data do evento{" "}
+                        <strong className="text-danger">*</strong>
+                      </strong>
                       <FormInput
                         value={this.state.data}
                         onChange={e => this.setState({ data: e.target.value })}
@@ -183,7 +203,21 @@ class FormEvent extends Component {
                       />
                     </Col>
                     <Col className="mb-3" md="12">
-                      <label htmlFor="feDataInicio">Horário do evento</label>
+                      <strong className="text-muted d-block mb-2">
+                        Data do fim do evento{" "}                       
+                      </strong>
+                      <FormInput
+                        value={this.state.dataFim}
+                        onChange={e => this.setState({ dataFim: e.target.value })}
+                        id="feCustoMedio"
+                        type="date"
+                      />
+                    </Col>
+                    <Col className="mb-3" md="12">
+                      <strong className="text-muted d-block mb-2">
+                        Horário do evento{" "}
+                        <strong className="text-danger">*</strong>
+                      </strong>
                       <FormInput
                         value={this.state.horarioEvento}
                         onChange={e =>
@@ -195,7 +229,8 @@ class FormEvent extends Component {
                     </Col>
                     <Col className="mb-3" md="12">
                       <strong className="text-muted d-block mb-2">
-                        Local do evento
+                        Local do evento{" "}
+                        <strong className="text-danger">*</strong>
                       </strong>
                       <FormInput
                         value={this.state.localizacao}
@@ -209,7 +244,8 @@ class FormEvent extends Component {
                   </Row>
                   <FormGroup>
                     <strong className="text-muted d-block mb-2">
-                      Imagem do Evento
+                      Imagem do Evento{" "}
+                      <strong className="text-danger">*</strong>
                     </strong>
                     <input
                       className="inputFile"
