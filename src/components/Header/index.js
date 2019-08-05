@@ -173,16 +173,26 @@ class Header extends Component {
         }
       >
         <div className="div">
-          <img
-            className={this.state.scroll ? "logo1Scroll" : "logo1"}
-            src={logo1}
-            alt=""
-          />
-          <img
-            className={this.state.scroll ? "logo2Scroll" : "logo2"}
-            src={logo2}
-            alt=""
-          />
+          <Link
+            onClick={() => this.handleClick(`/${this.state.lang}`)}
+            to={`/${this.state.lang}`}
+          >
+            <img
+              className={this.state.scroll ? "logo1Scroll" : "logo1"}
+              src={logo1}
+              alt=""
+            />
+          </Link>
+          <Link
+            onClick={() => this.handleClick(`/${this.state.lang}`)}
+            to={`/${this.state.lang}`}
+          >
+            <img
+              className={this.state.scroll ? "logo2Scroll" : "logo2"}
+              src={logo2}
+              alt=""
+            />
+          </Link>
         </div>
 
         <div
@@ -211,7 +221,8 @@ class Header extends Component {
             <StyledLink
               onClick={() => this.handleClick(`/${this.state.lang}`)}
               active={
-                typeof(window.location.pathname.split("/")[2]) === `undefined` || window.location.pathname.split("/")[2] === ""
+                typeof window.location.pathname.split("/")[2] === `undefined` ||
+                window.location.pathname.split("/")[2] === ""
               }
               className={this.state.scroll ? "scroll" : ""}
               to={`/${this.state.lang}`}
@@ -224,7 +235,8 @@ class Header extends Component {
               active={
                 this.state.active === `/${this.state.lang}/Members`
                   ? true
-                  : false || window.location.pathname.split("/")[2] === "Institute"
+                  : false ||
+                    window.location.pathname.split("/")[2] === "Institute"
               }
               className={this.state.scroll ? "scroll" : ""}
               to={`/${this.state.lang}/Members`}
@@ -466,7 +478,7 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.changeLang("pt")}
-              className={this.state.lang === 'pt' ? 'displayNone' : ''}
+              className={this.state.lang === "pt" ? "displayNone" : ""}
             >
               <img src={br} className="flagMobile" alt="" />
             </StyledLink>
@@ -474,7 +486,7 @@ class Header extends Component {
             <StyledLink
               li
               onClick={() => this.changeLang("en")}
-              className={this.state.lang === 'en' ? 'displayNone' : ''}
+              className={this.state.lang === "en" ? "displayNone" : ""}
             >
               <img src={us} className="flagMobile" alt="" />
             </StyledLink>

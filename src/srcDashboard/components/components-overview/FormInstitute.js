@@ -19,8 +19,13 @@ import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
 import api from "../../../api/api";
 import Editor from "./editor2";
-
 import UnidadesInstitute from "./UnidadesInstitute";
+
+function IsEmail(email) {
+  if (email === "" || email.indexOf("@") === -1 || email.indexOf(".") === -1) {
+    return false;
+  } else return true;
+}
 
 function arrayRemove(arr, value) {
   return arr.filter(function(ele) {
@@ -49,6 +54,7 @@ class FormInstitute extends Component {
       nomeCurso: "",
       area: "",
       nivel: "",
+      email: "",
       pontosFortes: [],
       unidades: [],
       cursos: []
@@ -81,6 +87,7 @@ class FormInstitute extends Component {
       instagram,
       twitter,
       linkedin,
+      email,
       cursos
     } = this.state;
 
@@ -98,6 +105,7 @@ class FormInstitute extends Component {
         descricao !== "" &&
         telefone !== "" &&
         admin !== "" &&
+        IsEmail(email) &&
         unidades.length !== 0 &&
         cursos.length !== 0
       )
@@ -138,13 +146,14 @@ class FormInstitute extends Component {
                     instagram: instagram,
                     twitter: twitter,
                     linkedin: linkedin,
+                    email: email,
                     capa: capaID,
                     logo: res.data._id,
                     admin: admin
                   })
                   .then(response => {
                     const idInstituicao = response.data.id;
-                    console.log(unidades)
+                    console.log(unidades);
                     unidades.map(unidade =>
                       api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
                         let cidade = "";
@@ -162,7 +171,7 @@ class FormInstitute extends Component {
                             instituicao: idInstituicao
                           })
                           .then(response => {
-                            console.log(cursos)
+                            console.log(cursos);
                             cursos.map(curso => {
                               api
                                 .post("/curso", {
@@ -372,20 +381,37 @@ class FormInstitute extends Component {
                       </Col>
                     </Row>
                   </FormGroup>
-                  <FormGroup>
-                    <strong className="text-muted d-block mb-2">
-                      Endereço do site
-                    </strong>
-                    <FormInput
-                      id="feUrl"
-                      type="url"
-                      value={this.state.site}
-                      onChange={e => this.setState({ site: e.target.value })}
-                    />
-                  </FormGroup>
-                  <strong className="text-muted d-block mb-4">
-                    Mídias Sociais
-                  </strong>
+                  <Row className="mb-4" form>
+                    <Col md="6" >
+                      <strong className="text-muted d-block mb-2">
+                        Endereço do site <strong className="text-danger">*</strong>
+                      </strong>
+                      <FormInput
+                        id="feUrl"
+                        type="url"
+                        value={this.state.site}
+                        onChange={e => this.setState({ site: e.target.value })}
+                      />
+                    </Col>
+
+                    <Col md="6" >
+                      <strong className="text-muted d-block mb-2">
+                        Endereço de Email{" "}
+                        <strong className="text-danger">*</strong>
+                      </strong>
+                      <FormInput
+                        value={this.state.email}
+                        onChange={e => this.setState({ email: e.target.value })}
+                        id="feEmail"
+                        type="email"
+                      />
+                    </Col>
+                  </Row>
+
+                  <h4 className="d-block mb-1">Mídias Sociais</h4>
+                  <p>
+                  Insira a URL completa das mídias sociais
+                  </p>
                   <FormGroup lg="12">
                     <Row form>
                       <Col md="3" className="form-group">
@@ -396,6 +422,7 @@ class FormInstitute extends Component {
                           onChange={e =>
                             this.setState({ facebook: e.target.value })
                           }
+                          placeholder="Ex.: https://www.facebook.com/NomeDaInstituição"
                         />
                       </Col>
                       <Col md="3" className="form-group">
@@ -406,6 +433,7 @@ class FormInstitute extends Component {
                           onChange={e =>
                             this.setState({ instagram: e.target.value })
                           }
+                          placeholder="Ex.: https://www.instagram.com/NomeDaInstituição"
                         />
                       </Col>
                       <Col md="3" className="form-group">
@@ -416,6 +444,7 @@ class FormInstitute extends Component {
                           onChange={e =>
                             this.setState({ twitter: e.target.value })
                           }
+                          placeholder="Ex.: https://www.twitter.com/NomeDaInstituição"
                         />
                       </Col>
                       <Col md="3" className="form-group">
@@ -426,6 +455,7 @@ class FormInstitute extends Component {
                           onChange={e =>
                             this.setState({ linkedin: e.target.value })
                           }
+                          placeholder="Ex.: https://www.linkedin.com/NomeDaInstituição"
                         />
                       </Col>
                     </Row>

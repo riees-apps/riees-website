@@ -34,6 +34,13 @@ function arrayRemove(arr, value) {
     return ele !== value;
   });
 }
+
+function IsEmail(email) {
+  if (email === "" || email.indexOf("@") === -1 || email.indexOf(".") === -1) {
+    return false;
+  } else return true;
+}
+
 class Institutes extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -53,6 +60,7 @@ class Institutes extends React.Component {
       instagram: "",
       twitter: "",
       linkedin: "",
+      email: "",
       nomeCurso: "",
       area: "",
       nivel: "",
@@ -106,6 +114,7 @@ class Institutes extends React.Component {
       instagram,
       twitter,
       linkedin,
+      email,
       cursos,
       id
     } = this.state;
@@ -117,6 +126,7 @@ class Institutes extends React.Component {
           descricao !== "" &&
           telefone !== "" &&
           admin !== "" &&
+          IsEmail(email) &&
           unidades.length !== 0 &&
           cursos.length !== 0
         )
@@ -158,9 +168,11 @@ class Institutes extends React.Component {
                       instagram: instagram,
                       twitter: twitter,
                       linkedin: linkedin,
+                      email: email,
                       admin: admin.id,
                       capa: typeof capa.type !== "undefined" ? capaID : capa,
-                      logo: typeof logo.type !== "undefined" ? res.data._id : logo
+                      logo:
+                        typeof logo.type !== "undefined" ? res.data._id : logo
                     })
                     .then(res => {
                       idInstituto = res.data.id;
@@ -342,6 +354,7 @@ class Institutes extends React.Component {
       instagram: institute.instagram,
       twitter: institute.twitter,
       linkedin: institute.linkedin,
+      email: institute.email,
       capa: institute.capa,
       logo: institute.logo,
       unidades: institute.unidades,
@@ -479,24 +492,6 @@ class Institutes extends React.Component {
               <h4 className="card-title">
                 <p className="text-fiord-blue">{institute.nome}</p>
               </h4>
-              <h5 className="card-title d-block mb-1  ">Endereço web:</h5>
-              <p className="card-text d-block mb-2">{institute.site}</p>
-              <h5 className="card-title d-block mb-1  ">Missão: </h5>
-              <p
-                className="card-text d-block mb-2"
-                dangerouslySetInnerHTML={{ __html: institute.missao }}
-              />
-              <h5 className="card-title d-block mb-1  ">Descrição: </h5>
-              <p
-                className="card-text d-block mb-2"
-                dangerouslySetInnerHTML={{ __html: institute.descricao }}
-              />
-              <h5 className="card-title d-block mb-1  ">Pontos fortes:</h5>
-              <ul className="px-4">
-                {institute.pontosFortes.map(pontoForte => (
-                  <li className="mb-1">{pontoForte}</li>
-                ))}
-              </ul>
               <h5 className="card-title d-block mb-1  ">Unidades:</h5>
               <ul className="px-4">
                 {institute.unidades
@@ -605,19 +600,36 @@ class Institutes extends React.Component {
                             </Col>
                           </Row>
                         </FormGroup>
-                        <FormGroup>
-                          <strong className="text-muted d-block mb-2">
-                            Endereço do site
-                          </strong>
-                          <FormInput
-                            id="feUrl"
-                            type="url"
-                            value={this.state.site}
-                            onChange={e =>
-                              this.setState({ site: e.target.value })
-                            }
-                          />
-                        </FormGroup>
+                        <Row className="mb-4" form>
+                          <Col md="6">
+                            <strong className="text-muted d-block mb-2">
+                              Endereço do site
+                            </strong>
+                            <FormInput
+                              id="feUrl"
+                              type="url"
+                              value={this.state.site}
+                              onChange={e =>
+                                this.setState({ site: e.target.value })
+                              }
+                            />
+                          </Col>
+
+                          <Col md="6">
+                            <strong className="text-muted d-block mb-2">
+                              Endereço de Email{" "}
+                              <strong className="text-danger">*</strong>
+                            </strong>
+                            <FormInput
+                              value={this.state.email}
+                              onChange={e =>
+                                this.setState({ email: e.target.value })
+                              }
+                              id="feEmail"
+                              type="email"
+                            />
+                          </Col>
+                        </Row>
                         <strong className="text-muted d-block mb-4">
                           Mídias Sociais
                         </strong>
@@ -901,13 +913,13 @@ class Institutes extends React.Component {
                 variant="secondary"
                 onClick={this.handleClose2.bind(this)}
               >
-                Close
+                Fechar
               </Button>
               <Button
                 variant="danger"
                 onClick={() => this.editInstitute(institute)}
               >
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>
@@ -925,13 +937,13 @@ class Institutes extends React.Component {
             <Modal.Body>{this.state.error}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-                Close
+                Fechar
               </Button>
               <Button
                 variant="danger"
                 onClick={() => this.deleteInstitute(institute)}
               >
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>

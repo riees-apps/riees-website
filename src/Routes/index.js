@@ -177,6 +177,7 @@ class Routes extends Component {
               twitter={institute.twitter}
               instagram={institute.instagram}
               linkedin={institute.linkedin}
+              email={institute.email}
               pontosFortes={institute.pontosFortes}
               descricao={institute.descricao}
               missao={institute.missao}

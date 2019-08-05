@@ -412,10 +412,10 @@ class Posts extends React.Component {
                 variant="secondary"
                 onClick={this.handleClose2.bind(this)}
               >
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.editPost(post)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>
@@ -433,10 +433,10 @@ class Posts extends React.Component {
             <Modal.Body>{this.state.error}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.deleteUnidade(post)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>

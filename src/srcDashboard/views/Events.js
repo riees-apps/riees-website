@@ -499,10 +499,10 @@ class Events extends React.Component {
                 variant="secondary"
                 onClick={this.handleClose2.bind(this)}
               >
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.editCity(event)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>
@@ -520,13 +520,13 @@ class Events extends React.Component {
             <Modal.Body>{this.state.error}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-                Close
+                Fechar
               </Button>
               <Button
                 variant="danger"
                 onClick={() => this.deleteUnidade(event)}
               >
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>

@@ -718,7 +718,7 @@ class Cities extends React.Component {
                                                 this
                                               )}
                                             >
-                                              Close
+                                              Fechar
                                             </Button>
                                             <Button
                                               variant="danger"
@@ -726,7 +726,7 @@ class Cities extends React.Component {
                                                 this.editPonto(ponto)
                                               }
                                             >
-                                              Confirm
+                                              Confirmar
                                             </Button>
                                           </Modal.Footer>
                                         </Modal>
@@ -761,10 +761,10 @@ class Cities extends React.Component {
                 variant="secondary"
                 onClick={this.handleClose2.bind(this)}
               >
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.editCity(city)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>
@@ -782,10 +782,10 @@ class Cities extends React.Component {
             <Modal.Body>{this.state.error}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.deleteUnidade(city)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>

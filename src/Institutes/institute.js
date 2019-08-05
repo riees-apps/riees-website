@@ -205,6 +205,28 @@ const Logo = styled.img`
   }
 `;
 
+const Icon = styled.i`
+  color: #003b81;
+  margin-right: 5vw;
+  font-size: 4.25vh;
+  width: 6.5vh;
+  height: 6.5vh;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 100ms;
+  :hover {
+    transition: all 300ms;
+    color: #fff;
+    background-color: #3a589e;
+    transform: scale(1.05);
+    background-color: ${props => props.color};
+    cursor: pointer;
+  }
+`;
+
 class Institute extends Component {
   constructor(props, context) {
     super(props, context);
@@ -231,38 +253,57 @@ class Institute extends Component {
       this.setState({ areas: newArea });
     });
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     api
       .get(
         `/unidade?where={"nome":"${
-          this.props.unidades.filter(this.filtro.bind(this))[this.state.unidade].nome
+          this.props.unidades.filter(this.filtro.bind(this))[this.state.unidade]
+            .nome
         }","deletedAt":0,"instituicao":"${this.props.id}"}`
       )
       .then(res => {
         this.setState({ cidade: res.data[0].cidade.nome });
       });
-
   }
 
   render() {
-    const { capa, logo, url, institutes, pontosFortes } = this.props;
+    const {
+      capa,
+      logo,
+      url,
+      institutes,
+      pontosFortes,
+      descricao,
+      missao
+    } = this.props;
     const unidades = this.props.unidades.filter(this.filtro.bind(this));
     const areas = this.state.areas;
     const cursos = this.props.cursos.filter(this.filtro.bind(this));
     const name = this.props.name.split("-")[0];
     const sub = this.props.name.split("-")[1];
     var cidade;
-    
+
     return (
       <div>
-        <Image x="0.5" height="80vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`}>
+        <Image
+          x="0.5"
+          height="80vh"
+          image={`https://riees-api.herokuapp.com/bucket/${
+            capa !== null ? capa : ""
+          }`}
+        >
           <div>
             <Title>{name}</Title>
             <Subheading>{sub}</Subheading>
           </div>
         </Image>
         <Img>
-          <Logo src={`https://riees-api.herokuapp.com/bucket/${logo !== null ? logo : ''}`} alt="" />
+          <Logo
+            src={`https://riees-api.herokuapp.com/bucket/${
+              logo !== null ? logo : ""
+            }`}
+            alt=""
+          />
         </Img>
         <Container>
           <SideMenu
@@ -278,85 +319,21 @@ class Institute extends Component {
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">description</Heading>
             </Div>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
+            <div
+              className="innerHTMLInstitute"
+              dangerouslySetInnerHTML={{ __html: descricao }}
+            />
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">mission</Heading>
             </Div>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante. Praesent lorem dolor, congue ut finibus in, porta ut
-              nulla. Nunc venenatis, neque vel sollicitudin facilisis, nibh nunc
-              fringilla massa, eget sagittis dolor risus quis purus. Curabitur
-              vitae ligula tristique, finibus tortor id, viverra nibh. Lorem
-              ipsum dolor sit amet, consectetur adipiscing elit. Mauris mollis
-              purus facilisis purus volutpat, in tempus mauris consequat. Mauris
-              tempor non magna vitae condimentum. Phasellus commodo vitae eros
-              ut ullamcorper. Pellentesque non egestas urna. Duis finibus dolor
-              mollis placerat imperdiet. Suspendisse in velit m
-            </Text>
+            <div
+              className="innerHTMLInstitute"
+              dangerouslySetInnerHTML={{ __html: missao }}
+            />
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81">information</Heading>
+              <Heading color="#003b81">contact</Heading>
             </Div>
             <Text>
               <i
@@ -364,48 +341,79 @@ class Institute extends Component {
                 className={`fas fa-phone iconInstitute`}
               />{" "}
               {this.props.telefone}
-              {this.props.telefone2 !== "" ? ` / ${this.props.telefone2}` : ""}
             </Text>
             <Text>
               <i
                 className={
-                  this.props.facebook !== ""
-                    ? `fab fa-facebook-f iconInstitute`
+                  this.props.telefone2 !== ""
+                    ? `fas fa-envelope iconInstitute`
                     : "displayNone"
                 }
               />{" "}
-              {this.props.facebook}
+              {this.props.telefone2}
             </Text>
             <Text>
-              <i
-                className={
-                  this.props.instagram !== ""
-                    ? `fab fa-instagram iconInstitute`
-                    : "displayNone"
-                }
-              />{" "}
-              {this.props.instagram}
+              <i className={`fas fa-envelope iconInstitute`} />{" "}
+              {this.props.email}
             </Text>
-            <Text>
-              <i
-                className={
-                  this.props.twitter !== ""
-                    ? `fab fa-twitter iconInstitute`
-                    : "displayNone"
-                }
-              />{" "}
-              {this.props.twitter}
-            </Text>
-            <Text>
-              <i
-                className={
-                  this.props.linkedin !== ""
-                    ? `fab fa-linkedin iconInstitute`
-                    : "displayNone"
-                }
-              />{" "}
-              {this.props.linkedin}
-            </Text>
+
+            <Div justify="flex-start">
+              <Heading color="#303033">{name}</Heading>
+              <Heading color="#003b81">social media</Heading>
+            </Div>
+            <div className="divIcons">
+              <a
+                href={this.props.facebook}
+                target="_blank"
+              >
+                <Icon
+                  color="#3a589e"
+                  className={
+                    this.props.facebook !== ""
+                      ? `fab fa-facebook-f`
+                      : "displayNone"
+                  }
+                />{" "}
+              </a>
+              <a
+                href={this.props.instagram}
+                target="_blank"
+              >
+                <Icon
+                  color="#e4405f"
+                  className={
+                    this.props.instagram !== ""
+                      ? `fab fa-instagram`
+                      : "displayNone"
+                  }
+                />{" "}
+              </a>
+              <a
+                href={this.props.twitter}
+                target="_blank"
+              >
+                <Icon
+                  color="#00acee"
+                  className={
+                    this.props.twitter !== "" ? `fab fa-twitter` : "displayNone"
+                  }
+                />{" "}
+              </a>
+
+              <a
+                href={this.props.linkedin}
+                target="_blank"
+              >
+                <Icon
+                  color="#0e76a8"
+                  className={
+                    this.props.linkedin !== ""
+                      ? `fab fa-linkedin-in`
+                      : "displayNone"
+                  }
+                />{" "}
+              </a>
+            </div>
 
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
@@ -416,7 +424,7 @@ class Institute extends Component {
             ))}
 
             <Div justify="flex-start">
-            <Heading color="#303033">{name}</Heading>
+              <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">courses</Heading>
             </Div>
             {cursos.map(curso => (
@@ -437,7 +445,7 @@ class Institute extends Component {
               consectetur adipiscing elit. Sit amet ipsum dolor , consectetur
               adipiscing elit. Curabitur a ante ante consectetur adipiscing
               elit. Curabitur a ante ante consectetur adipiscing elit.
-            </Text>           
+            </Text>
 
             <Div justify="flex-start">
               <Heading color="#303033">
@@ -452,8 +460,8 @@ class Institute extends Component {
             </Text>
             <Text2 style={{ listStyle: "none" }}>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].bairro}, {this.state.cidade} - Espirito Santo -{" "}
-              {unidades[this.state.unidade].cep}
+              {unidades[this.state.unidade].bairro}, {this.state.cidade} -
+              Espirito Santo - {unidades[this.state.unidade].cep}
             </Text2>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}

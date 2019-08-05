@@ -268,10 +268,10 @@ class Users extends React.Component {
                 variant="secondary"
                 onClick={this.handleClose2.bind(this)}
               >
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.editUser(user)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>
@@ -289,10 +289,10 @@ class Users extends React.Component {
             <Modal.Body>{this.state.error}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose.bind(this)}>
-                Close
+                Fechar
               </Button>
               <Button variant="danger" onClick={() => this.deleteUnidade(user)}>
-                Confirm
+                Confirmar
               </Button>
             </Modal.Footer>
           </Modal>

@@ -112,7 +112,6 @@ export default class unidadesInstitute extends React.Component {
       newUnidade.cidade !== "" &&
       newUnidade.bairro !== "" &&
       newUnidade.logradouro !== "" &&
-      newUnidade.numero !== "" &&
       newUnidade.complemento !== "" &&
       newUnidade.cep !== ""
     ) {
@@ -168,7 +167,8 @@ export default class unidadesInstitute extends React.Component {
               if (unidades.length !== 0) {
                 this.setState({
                   ...this.state,
-                  unidade: unidades
+                  unidade: unidades,
+                  closeShow:false
                 });
                 this.props.callbackParent(unidades);
               }
@@ -178,7 +178,8 @@ export default class unidadesInstitute extends React.Component {
       var unidades = arrayRemove(this.state.unidades, unidade);
       this.setState({
         ...this.state,
-        unidades: unidades
+        unidades: unidades,
+        closeShow:false
       });
       this.props.callbackParent(unidades);
     }
@@ -208,8 +209,7 @@ export default class unidadesInstitute extends React.Component {
         bairroEdit !== "" &&
         logradouroEdit !== "" &&
         complementoEdit !== "" &&
-        cepEdit !== "" &&
-        numeroEdit !== ""
+        cepEdit !== ""
       )
     ) {
       this.setState({
@@ -328,7 +328,7 @@ export default class unidadesInstitute extends React.Component {
           </Col>
           <Col lg="6" className="form-group">
             <label htmlFor="fenumero">
-              Número <strong className="text-danger">*</strong>
+              Número
             </label>
             <FormInput
               value={this.state.numero}
@@ -439,13 +439,13 @@ export default class unidadesInstitute extends React.Component {
                         variant="secondary"
                         onClick={this.handleClose.bind(this)}
                       >
-                        Close
+                        Fechar
                       </Button>
                       <Button
                         variant="danger"
                         onClick={() => this.deleteUnidade(unidade)}
                       >
-                        Confirm
+                        Confirmar
                       </Button>
                     </Modal.Footer>
                   </Modal>
@@ -548,13 +548,13 @@ export default class unidadesInstitute extends React.Component {
                         variant="secondary"
                         onClick={this.handleClose2.bind(this)}
                       >
-                        Close
+                        Fechar
                       </Button>
                       <Button
                         variant="danger"
                         onClick={() => this.editUnidade(unidade)}
                       >
-                        Confirm
+                        Confirmar
                       </Button>
                     </Modal.Footer>
                   </Modal>
