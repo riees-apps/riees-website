@@ -30,6 +30,9 @@ const DivImage = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
+  @media (max-width: 600px) {
+    background-attachment: scroll
+  }
 `;
 const Heading = styled.h1`
 font-family: 'Poppins', sans-serif;

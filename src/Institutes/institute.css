@@ -1,11 +1,11 @@
-.divIcons{
-  width:100%;
+.divIcons {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   margin-bottom: 2.5vh;
-  margin-left:-3.25vh
+  margin-left: -3.25vh;
 }
 
 .iconInstitute {
@@ -14,10 +14,10 @@
   width: 1.5vw;
 }
 
-.iconInstitute2{
+.iconInstitute2 {
   color: #003b81;
   margin-right: 5vw;
-  font-size:5vh;
+  font-size: 5vh;
   width: 5vh;
 }
 
@@ -57,21 +57,37 @@
   margin-top: 4%;
   margin-bottom: 5%;
 }
-
-@media screen and (max-width: 769px) {
+@media screen and (min-width: 769px) {
+  .DivMobile {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .divIcons {
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .iconInstitute {
+    color: #003b81;
+    margin-right: 2vw;
+    width: max-content;
+  }
   .innerHTMLInstitute p {
     font-family: "Raleway", Helvetica, Arial, sans-serif;
     color: #444;
     font-weight: lighter;
     width: 100%;
-    text-align: start;
+    text-align: justify;
     padding: 0 0 1vh 0;
     font-size: calc(12px + 1.2vw);
-    line-height: calc(12px + 1.2vw);
+    line-height: calc(17px + 1.2vw);
   }
   .innerHTMLInstitute h1 {
     font-family: "Poppins", sans-serif;
-    text-align: center;
+    text-align: justify;
     color: #101011;
     margin: auto;
     width: 100%;
@@ -83,7 +99,7 @@
   }
   .innerHTMLInstitute h2 {
     font-family: "Poppins", sans-serif;
-    text-align: center;
+    text-align: justify;
     color: #101011;
     margin: auto;
     width: 100%;
@@ -92,8 +108,5 @@
     font-size: calc(15px + 2vw);
     line-height: calc(15px + 2vw);
     margin-bottom: 10%;
-  }
-  .DivMobile {
-    display: none;
   }
 }

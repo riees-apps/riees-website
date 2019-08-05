@@ -14,6 +14,7 @@ const Image = styled.div`
   @media (max-width: 600px) {
     height: 82vh;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.4 ) inset;
+    background-attachment: scroll
   }
   background-attachment: fixed;
   background-position: center;
@@ -72,6 +73,9 @@ z-index:100;
   align-items: center;
   justify-content: center;
   width: 100%;
+  @media (max-width: 600px) {
+    background-attachment: scroll
+  }
 `;
 const Heading = styled.h1`
   font-family: 'Poppins', sans-serif;

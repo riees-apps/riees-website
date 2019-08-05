@@ -65,6 +65,9 @@ const Image = styled.div`
   filter: contrast(${props => props.contrast});
   filter: brightness(${props => props.brightness});
   z-index: 9999;
+  @media (max-width: 600px) {
+    background-attachment: scroll
+  }
 `;
 const DivText = styled.div`
   color: #f1f1f1;

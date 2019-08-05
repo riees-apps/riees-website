@@ -17,6 +17,7 @@ const Image = styled.div`
   @media (max-width: 600px) {
     height: 82vh;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
+    background-attachment: scroll
   }
   background-attachment: fixed;
   background-position: center;
@@ -109,8 +110,8 @@ const Text = styled.h1`
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
-    font-size: calc(10px + 1vw);
-    line-height: calc(11px + 1vw);
+    font-size: calc(12px + 1.2vw);
+    line-height: calc(13px + 1.2vw);
     letter-spacing: 0.5px;
     color: #505050;
     text-align: justify;
@@ -128,8 +129,8 @@ const Text2 = styled.li`
   width: 100%;
   text-align: start;
   @media (max-width: 768px) {
-    font-size: calc(10px + 1vw);
-    line-height: calc(11px + 1vw);
+    font-size: calc(12px + 1.2vw);
+    line-height: calc(13px + 1.2vw);
     letter-spacing: 0.5px;
     color: #505050;
     padding: 0 0 0.5vh 0;
@@ -232,7 +233,7 @@ class Institute extends Component {
     super(props, context);
     this.state = {
       unidade: 0,
-      cidade: "",
+      unidadesComCidades: [],
       areas: []
     };
   }
@@ -252,17 +253,12 @@ class Institute extends Component {
 
       this.setState({ areas: newArea });
     });
-  }
-  componentDidUpdate() {
     api
       .get(
-        `/unidade?where={"nome":"${
-          this.props.unidades.filter(this.filtro.bind(this))[this.state.unidade]
-            .nome
-        }","deletedAt":0,"instituicao":"${this.props.id}"}`
+        `/unidade?where={"deletedAt":0,"instituicao":"${this.props.id}"}`
       )
       .then(res => {
-        this.setState({ cidade: res.data[0].cidade.nome });
+        this.setState({ unidadesComCidades: res.data});
       });
   }
 
@@ -281,7 +277,6 @@ class Institute extends Component {
     const cursos = this.props.cursos.filter(this.filtro.bind(this));
     const name = this.props.name.split("-")[0];
     const sub = this.props.name.split("-")[1];
-    var cidade;
 
     return (
       <div>
@@ -335,6 +330,7 @@ class Institute extends Component {
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">contact</Heading>
             </Div>
+
             <Text>
               <i
                 style={{ transform: "rotate(90deg)" }}
@@ -363,6 +359,7 @@ class Institute extends Component {
             </Div>
             <div className="divIcons">
               <a
+                style={{ textDecoration: "none" }}
                 href={this.props.facebook}
                 target="_blank"
               >
@@ -376,6 +373,7 @@ class Institute extends Component {
                 />{" "}
               </a>
               <a
+                style={{ textDecoration: "none" }}
                 href={this.props.instagram}
                 target="_blank"
               >
@@ -389,6 +387,7 @@ class Institute extends Component {
                 />{" "}
               </a>
               <a
+                style={{ textDecoration: "none" }}
                 href={this.props.twitter}
                 target="_blank"
               >
@@ -401,6 +400,7 @@ class Institute extends Component {
               </a>
 
               <a
+                style={{ textDecoration: "none" }}
                 href={this.props.linkedin}
                 target="_blank"
               >
@@ -455,12 +455,14 @@ class Institute extends Component {
             </Div>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].logradouro},{" "}
-              {unidades[this.state.unidade].numero}
+              {unidades[this.state.unidade].logradouro}
+              {unidades[this.state.unidade].numero === ""
+                ? ", S/N"
+                : `, ${unidades[this.state.unidade].numero}`}
             </Text>
             <Text2 style={{ listStyle: "none" }}>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].bairro}, {this.state.cidade} -
+              {unidades[this.state.unidade].bairro}, {this.state.unidadesComCidades.length === 0 ? '' : this.state.unidadesComCidades[this.state.unidade].cidade.nome} -
               Espirito Santo - {unidades[this.state.unidade].cep}
             </Text2>
             <Text>

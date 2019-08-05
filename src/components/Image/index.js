@@ -8,6 +8,7 @@ const Image = styled.div`
   height: ${props => props.height};
   @media (max-width: 600px) {
     height: calc(91.7vh);
+    background-attachment: scroll
   }
   background-attachment: fixed;
   background-position: center;

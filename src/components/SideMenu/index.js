@@ -87,9 +87,6 @@ const StyledLink2 = styled(Link)`
 `;
 
 const DivMenu = styled.div`
-  @media (max-width: 768px) {
-    display: none;
-  }
   background-color: #d6d4df;
   position: sticky;
   top: 12vh;
@@ -108,7 +105,11 @@ const DivMenu = styled.div`
   margin-bottom: 10vh;
   border: 1px solid #e4e3ea;
   margin-top: 2.5vh;
-`;
+  @media (max-width: 768px) {
+    display: none;
+    background-attachment: scroll
+  }
+  `;
 const Heading = styled.h1`
   font-family: "Poppins", Helvetica, Arial, sans-serif;
   color: #fff;

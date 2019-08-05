@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const ImageIndex = styled.div`
   background-image: url(${props => props.image});
-  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x} ) inset;
+  box-shadow: 0px 150vh rgba(0, 0, 0, ${props => props.x}) inset;
   position: relative;
   height: ${props => props.height};
   @media (max-width: 600px) {
     height: 82vh;
-    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4 ) inset;
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
+    background-attachment: scroll;
   }
   background-attachment: fixed;
   background-position: center;
@@ -19,20 +20,20 @@ export const ImageIndex = styled.div`
   width: 100%;
 `;
 export const TitleIndex = styled.h1`
-  position:fixed;
-  font-family: 'Poppins', serif;
+  position: fixed;
+  font-family: "Poppins", serif;
   text-shadow: 3px 3px black;
   text-transform: uppercase;
   color: white;
   font-size: calc(80px + 1vw);
   line-height: calc(80px + 1vw);
   letter-spacing: 5px;
-  margin:auto;
+  margin: auto;
   margin-top: calc(30px + 2vw);
-  width:100%;
-  text-align:center;
+  width: 100%;
+  text-align: center;
   @media (max-width: 600px) {
-    position:absolute;
+    position: absolute;
   }
 `;
 
@@ -50,14 +51,15 @@ export const Image = styled.div`
   justify-content: flex-end;
   width: 100%;
   @media (max-width: 600px) {
-  background-size: 100% 100%;
-  height: 70vh;
-  justify-content: center;
-  align-content: center;
-  box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
+    background-size: 100% 100%;
+    height: 70vh;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
+    background-attachment: scroll;
   }
 `;
-export const Resume= styled.h1`
+export const Resume = styled.h1`
   font-family: "Raleway", sans-serif;
   color: #191919;
   font-weight: lighter;
@@ -88,14 +90,14 @@ export const ImageParagraph = styled.div`
   margin-bottom: 5vh;
   @media (max-width: 600px) {
     background-size: center;
-  height: 30vh;
+    height: 30vh;
   }
 `;
 export const Img = styled.img`
   width: 65%;
-  height:50vh;
-  margin-right:auto; 
-  margin-bottom:5vh;
+  height: 50vh;
+  margin-right: auto;
+  margin-bottom: 5vh;
 `;
 export const Title = styled.h1`
   font-family: "Poppins", sans-serif;
@@ -128,15 +130,15 @@ export const SubTitle = styled.h1`
     margin-bottom: 2.5%;
   }
 `;
-export const SubTitleParagraph= styled.h1`
+export const SubTitleParagraph = styled.h1`
   font-family: "Poppins", sans-serif;
-  text-align:center;
+  text-align: center;
   color: #101011;
   font-size: calc(15px + 1vw);
   line-height: calc(15px + 1vw);
   margin: auto;
   width: 100%;
-  margin-top:4%;
+  margin-top: 4%;
   margin-bottom: 5%;
   @media (max-width: 600px) {
     font-size: calc(15px + 3vw);
@@ -185,7 +187,7 @@ export const Text = styled.h1`
   padding: 0 0 1vh 0;
 `;
 export const Container = styled.div`
-   background-color: #f4f4f4;
+  background-color: #f4f4f4;
   padding-bottom: 10vh;
   display: flex;
   flex-direction: column;
@@ -205,7 +207,7 @@ export const Details = styled.h1`
   font-size: calc(8px + 1.2vw);
   line-height: calc(8px + 1.2vw);
   font-weight: bolder;
-  letter-spacing:0.5px;
+  letter-spacing: 0.5px;
   width: max-content;
   color: #f4f4f4;
   height: max-content;
@@ -231,12 +233,12 @@ export const Badge = styled.h1`
   font-weight: bold;
   border-radius: 5%;
   @media (max-width: 600px) {
-    margin-top:20%;
+    margin-top: 20%;
   }
 `;
 export const Heading = styled.h1`
   font-family: "Poppins", sans-serif;
-  text-transform:uppercase;
+  text-transform: uppercase;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
   color: #0077ff;
@@ -249,7 +251,7 @@ export const Heading = styled.h1`
   text-align: start;
   padding-bottom: 1.5vh;
   margin-top: 5vh;
-  margin-left:10%;
+  margin-left: 10%;
   border-bottom: 1vh solid pink;
   @media (max-width: 600px) {
     padding-left: 2.5%;

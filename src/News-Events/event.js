@@ -4,7 +4,7 @@ import Footer from "../components/Footer/index";
 import Events from "../components/Events/index";
 import Button from "../components/Button/index";
 
-import "./event.css"
+import "./event.css";
 
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -20,18 +20,19 @@ const Image = styled.div`
   justify-content: flex-end;
   width: 100%;
   @media (max-width: 600px) {
-  background-size: 100% 100%;
-  height: 70vh;
-  justify-content: center;
-  align-content: center;
-  box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
+    background-attachment: scroll;
+    background-size: 100% 100%;
+    height: 70vh;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
   }
 `;
 const Img = styled.img`
   width: 65%;
-  height:50vh;
-  margin-right:auto; 
-  margin-bottom:5vh;
+  height: 50vh;
+  margin-right: auto;
+  margin-bottom: 5vh;
 `;
 const Title = styled.h1`
   font-family: "Poppins", sans-serif;
@@ -129,7 +130,7 @@ const Details = styled.h1`
   justify-content: flex-start;
   font-size: calc(9px + 1vw);
   line-height: calc(9px + 1vw);
-  letter-spacing:0.5px;
+  letter-spacing: 0.5px;
   font-weight: 400;
   width: max-content;
   color: #f4f4f4;
@@ -156,12 +157,12 @@ const Badge = styled.h1`
   font-weight: bold;
   border-radius: 5%;
   @media (max-width: 600px) {
-    margin-top:20%;
+    margin-top: 20%;
   }
 `;
 const Heading = styled.h1`
   font-family: "Poppins", sans-serif;
-  margin-left:10%;
+  margin-left: 10%;
   background: ${props => props.background || "#fafafa"};
   color: #0077ff;
   background-color: #f4f4f4;
@@ -202,7 +203,7 @@ function addZero(i) {
 }
 class Event extends Component {
   componentWillMount() {
-        document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
   render() {
     const {
@@ -217,38 +218,44 @@ class Event extends Component {
       eventos
     } = this.props;
 
-    const ano= new Date(date).getFullYear()
-    const mes=months[new Date(date).getMonth()]
-    const dia=new Date(date).getDate()
-    const hora=addZero(new Date(date).getHours())
-    const minuto=addZero(new Date(date).getMinutes())
+    const ano = new Date(date).getFullYear();
+    const mes = months[new Date(date).getMonth()];
+    const dia = new Date(date).getDate();
+    const hora = addZero(new Date(date).getHours());
+    const minuto = addZero(new Date(date).getMinutes());
 
-    const anoFim = new Date(dateFim).getFullYear()
-    const mesFim =months[new Date(dateFim).getMonth()]
-    const diaFim =new Date(dateFim).getDate()
+    const anoFim = new Date(dateFim).getFullYear();
+    const mesFim = months[new Date(dateFim).getMonth()];
+    const diaFim = new Date(dateFim).getDate();
 
     return (
       <div>
-        <Image x="0.6" height="75vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`}>
+        <Image
+          x="0.6"
+          height="75vh"
+          image={`https://riees-api.herokuapp.com/bucket/${
+            capa !== null ? capa : ""
+          }`}
+        >
           <div>
-            <Badge>{ placeEvent !== "" ? "Event" : "New"}</Badge>
+            <Badge>{placeEvent !== "" ? "Event" : "New"}</Badge>
             <Title>{title}</Title>
-            <Subheading
-              className={ placeEvent === "" ? "" : "displayNone"}
-            >
+            <Subheading className={placeEvent === "" ? "" : "displayNone"}>
               <Details>
-                <i className={`fas fa-clock iconDate`} /> {`${dia} ${mes}, ${ano}`}
+                <i className={`fas fa-clock iconDate`} />{" "}
+                {`${dia} ${mes}, ${ano}`}
               </Details>
             </Subheading>
 
-            <Subheading
-              className={ placeEvent !== "" ? "" : "displayNone"}
-            >
+            <Subheading className={placeEvent !== "" ? "" : "displayNone"}>
               <Details>
-                <i className={`fas fa-calendar iconDate`} /> {`${dia} ${mes}, ${ano}`}  {dateFim !== 0 ? `~ ${diaFim} ${mesFim}, ${anoFim}` : ''}
+                <i className={`fas fa-calendar iconDate`} />{" "}
+                {`${dia} ${mes}, ${ano}`}{" "}
+                {dateFim !== 0 ? `~ ${diaFim} ${mesFim}, ${anoFim}` : ""}
               </Details>
               <Details>
-                <i className={`fas fa-clock iconDate`} /> {`${hora} : ${minuto}`}
+                <i className={`fas fa-clock iconDate`} />{" "}
+                {`${hora} : ${minuto}`}
               </Details>
               <Details>
                 <i className={`fas fa-map-marker-alt iconDate`} /> {placeEvent}
@@ -258,15 +265,26 @@ class Event extends Component {
         </Image>
         <Container>
           <DivText>
-            <div className="innerHTMLEvent" dangerouslySetInnerHTML={{ __html: text }}/>
-            <Button institute="true" className={ placeEvent !== "" ? "" : "displayNone"}  url={link} name="sign up here" />
+            <div
+              className="innerHTMLEvent"
+              dangerouslySetInnerHTML={{ __html: text }}
+            />
+            <Button
+              institute="true"
+              className={placeEvent !== "" ? "" : "displayNone"}
+              url={link}
+              name="sign up here"
+            />
           </DivText>
           <Heading>Latest news</Heading>
           <Events eventos={eventos} side final={9} />
-          <div className='divButton'>
-          <Button style={{margin:'0 auto'}} url="/News-Events" name="All news and events" />
+          <div className="divButton">
+            <Button
+              style={{ margin: "0 auto" }}
+              url="/News-Events"
+              name="All news and events"
+            />
           </div>
-          
         </Container>
         <Footer />
       </div>

@@ -22,6 +22,7 @@ const Image = styled.div`
   filter: brightness(${props => props.brightness});
   @media (max-height: 600px) {
     height: 100vh;
+    background-attachment: scroll
   }
 `;
 

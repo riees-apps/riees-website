@@ -135,7 +135,7 @@ const Text = styled.h1`
   text-align: center;
   @media (max-width: 600px) {
     font-size: calc(10px + 1vw);
-    line-height: calc(11px + 1vw);
+    line-height: calc(15px + 1vw);
     letter-spacing: 0.5px;
     color: #505050;
   }
