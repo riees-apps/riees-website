@@ -78,7 +78,11 @@ const Imagee = styled.div`
   @media (max-width: 600px) {
     box-shadow: 0px 150vh rgba(0, 0, 0, calc(${props => props.x} - 0.05)) inset;
     height: calc(91.7vh);
-    background: url(${props => props.image}) no-repeat center center fixed ;
+    width: 100vw;
+    background-image: url(${props => props.image});
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 
   }

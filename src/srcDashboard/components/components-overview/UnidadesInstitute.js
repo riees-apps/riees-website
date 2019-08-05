@@ -112,7 +112,6 @@ export default class unidadesInstitute extends React.Component {
       newUnidade.cidade !== "" &&
       newUnidade.bairro !== "" &&
       newUnidade.logradouro !== "" &&
-      newUnidade.complemento !== "" &&
       newUnidade.cep !== ""
     ) {
       newunidades.push(newUnidade);
@@ -208,7 +207,6 @@ export default class unidadesInstitute extends React.Component {
         cidadeEdit !== "" &&
         bairroEdit !== "" &&
         logradouroEdit !== "" &&
-        complementoEdit !== "" &&
         cepEdit !== ""
       )
     ) {
@@ -339,7 +337,7 @@ export default class unidadesInstitute extends React.Component {
           </Col>
           <Col lg="6" className="form-group">
             <label htmlFor="fecomplemento">
-              Complemento <strong className="text-danger">*</strong>
+              Complemento
             </label>
             <FormInput
               value={this.state.complemento}
