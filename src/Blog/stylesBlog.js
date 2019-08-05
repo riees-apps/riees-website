@@ -52,8 +52,9 @@ export const Image = styled.div`
   width: 100%;
   @media (max-width: 600px) {
     background-size: 100% 100%;
+    border:1px solid red;
     height: 70vh;
-    justify-content: center;
+    padding-bottom: 10%;
     align-content: center;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
     background-attachment: scroll;

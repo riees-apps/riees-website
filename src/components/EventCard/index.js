@@ -119,7 +119,7 @@ const Title = styled.h1`
   margin: 0;
   height: max-content;
   text-align: start;
-  padding: 1vh 0 1vh 1vh;
+  padding: 0 0 1vh 1vh;
   @media (max-width: 600px) {
     font-size: calc(8px + 1.3vh);
     line-height: calc(5px + 1.3vh);
@@ -134,7 +134,7 @@ const Text = styled.h1`
   align-items: flex-start;
   justify-content: flex-start;
   font-size: calc(4.5px + 1vw);
-  line-height: calc(5.5px + 1vw);
+  line-height: calc(7px + 1vw);
   width: 98%;
   color: #606060;
   height: max-content;
@@ -146,7 +146,8 @@ const Text = styled.h1`
   overflow: hidden;
   @media (max-width: 600px) {
     font-size: calc(5px + 1.3vh);
-    line-height: calc(5px + 1.3vh);
+    line-height: calc(8px + 1.3vh);
+    margin-bottom:1vh;
   }
   ${props =>
     props.icon &&
@@ -161,12 +162,12 @@ const Text = styled.h1`
 const CardBody = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: space-between;
   justify-content: space-around;
   height: 31vh;
   padding-left: 1vh;
-  padding-top: 1vh;
   width: 100%;
+  padding-top:2vh;
   @media (max-width: 600px) {
     background-size: cover;
     height: 22.5vh;
@@ -179,6 +180,7 @@ const CardBody = styled.div`
   ${props =>
     props.side &&
     `
+    padding-top:0;
     width:60%
     height: 30vh;
     align-items: flex-start;
@@ -192,7 +194,6 @@ const CardBody = styled.div`
 
 class EventCard extends Component {
   render() {
-    console.log(this.props.anoFim)
     return (
       <Card side={this.props.side}>
         <CardImg

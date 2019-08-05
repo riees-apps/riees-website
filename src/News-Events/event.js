@@ -23,7 +23,7 @@ const Image = styled.div`
     background-attachment: scroll;
     background-size: 100% 100%;
     height: 70vh;
-    justify-content: center;
+    padding-bottom:10%;
     align-content: center;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
   }

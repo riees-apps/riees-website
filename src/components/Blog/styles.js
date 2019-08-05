@@ -11,8 +11,7 @@ export const Card = styled.div`
   transition: all 600ms;
   background-color: #fafafa;
   margin-bottom: 5%;
-  box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.51);
-  
+  box-shadow: 0px 0px 4px 0px rgba(50, 50, 50, 0.51); 
   border-radius: 5px;
   @media (max-width: 600px) {
     width: 70%;
@@ -28,7 +27,7 @@ export const Card = styled.div`
     padding-bottom:10vh;
     border-bottom: 1px solid #999;
     background-color: #f4f4f4;
-    width:100%;
+    width:105%;
     margin-left:10%;
     height: 30vh;
     display: flex;
@@ -36,12 +35,13 @@ export const Card = styled.div`
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    margin-bottom:6%;
     @media (max-width: 600px) {
       padding-bottom:5vh;
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      width: 100%;
+      width: 110%;
       height: 50vh;
   }
   `}

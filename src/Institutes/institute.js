@@ -17,7 +17,7 @@ const Image = styled.div`
   @media (max-width: 600px) {
     height: 82vh;
     box-shadow: 0px 150vh rgba(0, 0, 0, 0.4) inset;
-    background-attachment: scroll
+    background-attachment: scroll;
   }
   background-attachment: fixed;
   background-position: center;
@@ -254,12 +254,16 @@ class Institute extends Component {
       this.setState({ areas: newArea });
     });
     api
-      .get(
-        `/unidade?where={"deletedAt":0,"instituicao":"${this.props.id}"}`
-      )
+      .get(`/unidade?where={"deletedAt":0,"instituicao":"${this.props.id}"}`)
       .then(res => {
-        this.setState({ unidadesComCidades: res.data});
+        this.setState({ unidadesComCidades: res.data });
       });
+
+    if (typeof this.props.location.state != "undefined") {
+      if (this.props.location.state.scrollTop === 0) {
+        document.documentElement.scrollTop = this.props.location.state.scrollTop;
+      }
+    }
   }
 
   render() {
@@ -462,8 +466,12 @@ class Institute extends Component {
             </Text>
             <Text2 style={{ listStyle: "none" }}>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].bairro}, {this.state.unidadesComCidades.length === 0 ? '' : this.state.unidadesComCidades[this.state.unidade].cidade.nome} -
-              Espirito Santo - {unidades[this.state.unidade].cep}
+              {unidades[this.state.unidade].bairro},{" "}
+              {this.state.unidadesComCidades.length === 0
+                ? ""
+                : this.state.unidadesComCidades[this.state.unidade].cidade
+                    .nome}{" "}
+              - Espirito Santo - {unidades[this.state.unidade].cep}
             </Text2>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}

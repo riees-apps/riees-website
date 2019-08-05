@@ -96,7 +96,7 @@ const Btn = styled.div`
     text-align:center;
     justify-content: space-between;
     margin-top:auto;
-    margin-bottom:1%;
+    margin-bottom:0;
     @media (max-width: 600px) {
       font-size: calc(6px + 0.9vw);
     }
