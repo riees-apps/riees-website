@@ -180,6 +180,12 @@ class SideMenu extends Component {
     });
   }
   handleClick2(i) {
+    if(this.props.myDivToFocus.current){
+      this.props.myDivToFocus.current.scrollIntoView({ 
+         behavior: "smooth", 
+         block: "nearest"
+      })
+  }
     this.setState({
       ...this.state,
       active2: i

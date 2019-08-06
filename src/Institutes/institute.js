@@ -236,6 +236,7 @@ class Institute extends Component {
       unidadesComCidades: [],
       areas: []
     };
+    this.myDivToFocus = React.createRef()
   }
   onChildChanged(New) {
     this.setState({ unidade: New });
@@ -245,6 +246,7 @@ class Institute extends Component {
       return false;
     } else return true;
   };
+
   componentDidMount() {
     this.props.cursos.filter(this.filtro.bind(this)).map(curso => {
       const newArea = this.state.areas;
@@ -306,6 +308,7 @@ class Institute extends Component {
         </Img>
         <Container>
           <SideMenu
+              myDivToFocus={this.myDivToFocus}
             callbackParent={New => this.onChildChanged(New)}
             page="Institute"
             links={institutes}
@@ -313,7 +316,7 @@ class Institute extends Component {
             areas={areas}
             cursos={cursos}
           />
-          <DivText>
+          <DivText >
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">description</Heading>
@@ -357,7 +360,7 @@ class Institute extends Component {
               {this.props.email}
             </Text>
 
-            <Div justify="flex-start">
+            <Div  justify="flex-start">
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">social media</Heading>
             </Div>
@@ -426,23 +429,14 @@ class Institute extends Component {
             {pontosFortes.length === 0 ? '' : pontosFortes.map(ponto => (
               <Text2>{ponto}</Text2>
             ))}
-
-            <Div justify="flex-start">
-              <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81">courses</Heading>
-            </Div>
-            {cursos.length === 0 ? '' :cursos.map(curso => (
-              <Text2>{`${curso.nome} (${curso.nivel})`}</Text2>
-            ))}
-
-            <AreaCard name={name} areas={areas} />
+            <AreaCard  name={name} areas={areas} instituicao={this.props.id} />
             <Div justify="flex-start">
               <Heading color="#303033">Campus</Heading>
               <Heading color="#003b81">
                 {unidades.length === 0 ? '' : unidades[this.state.unidade].nome}
               </Heading>
             </Div>
-            <Text>
+            <Text ref={this.myDivToFocus}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
               a ante ante consectetur adipiscing elit. Lorem ipsum dolor sit
               amet, curabitur a ante ante. Lorem ipsum dolor sit amet,
