@@ -88,7 +88,13 @@ class Institutes extends React.Component {
     } else return true;
   };
 
-  componentWillMount() {
+  componentDidMount() {
+    api.get('/instituicao?where={"deletedAt":0}').then(res => {
+      const inst = res.data;
+      this.setState({ institutes: inst });
+    });
+  }
+  componentDidUpdate() {
     api.get('/instituicao?where={"deletedAt":0}').then(res => {
       const inst = res.data;
       this.setState({ institutes: inst });
@@ -186,7 +192,7 @@ class Institutes extends React.Component {
                             instituicao: idInstituto
                           });
                         }
-                      });
+                      })
                     })
                     .then(res => {
                       this.state.unidades.map(unidade => {
@@ -225,7 +231,7 @@ class Institutes extends React.Component {
                                       instituicao: idInstituto,
                                       admin: admin.id
                                     });
-                              });
+                              })
                           })
                           .catch(error => {
                             this.setState({
@@ -233,19 +239,7 @@ class Institutes extends React.Component {
                               error: "Cidade não cadastrada no sistema"
                             });
                           });
-                      });
-                    })
-                    .then(res => {
-                      api
-                        .get('/instituicao?where={"deletedAt":0}')
-                        .then(res => {
-                          const institutos = res.data;
-                          this.setState({
-                            ...this.state,
-                            institutes: institutos,
-                            editShow: false
-                          });
-                        });
+                      })
                     })
                     .catch(error => {
                       this.setState({
@@ -255,7 +249,13 @@ class Institutes extends React.Component {
                       });
                     });
                 });
-            });
+            })
+            .then(res => {
+              api.get('/instituicao?where={"deletedAt":0}').then(res => {
+                const inst = res.data;
+                this.setState({ institutes: inst,editShow:false });
+              });
+            })
         } catch (err) {
           this.setState({
             smShow: inst.nome,

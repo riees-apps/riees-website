@@ -93,6 +93,11 @@ export default class unidadesInstitute extends React.Component {
       });
     });
   }
+  filtro = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
 
   createUnidade() {
     const newunidades = this.state.unidades;
@@ -144,7 +149,9 @@ export default class unidadesInstitute extends React.Component {
       });
   }
   deleteUnidade(unidade) {
-    if (typeof unidade.id !== "undefined")
+    console.log(unidade);
+    console.log(typeof unidade.id !== "undefined");
+    if (typeof unidade.id !== "undefined") {
       api
         .delete(`/unidade/${unidade.id}`)
         .then(resp => {
@@ -167,18 +174,19 @@ export default class unidadesInstitute extends React.Component {
                 this.setState({
                   ...this.state,
                   unidade: unidades,
-                  closeShow:false
+                  closeShow: false
                 });
                 this.props.callbackParent(unidades);
               }
             });
         });
-    else {
+    } else {
       var unidades = arrayRemove(this.state.unidades, unidade);
+      console.log(unidades);
       this.setState({
         ...this.state,
         unidades: unidades,
-        closeShow:false
+        closeShow: false
       });
       this.props.callbackParent(unidades);
     }
@@ -226,7 +234,7 @@ export default class unidadesInstitute extends React.Component {
               complemento: complementoEdit,
               bairro: bairroEdit,
               cidade: res.data.id,
-              cep: cidadeEdit
+              cep: cepEdit
             });
           })
           .then(res => {
@@ -243,6 +251,7 @@ export default class unidadesInstitute extends React.Component {
                     ...this.state,
                     unidades: unidades
                   });
+                this.props.callbackParent(unidades);
                 this.setState({
                   ...this.state,
                   editUnidadeShow: false
@@ -263,9 +272,12 @@ export default class unidadesInstitute extends React.Component {
       }
     }
   }
-  componentDidMount(){
-    this.setState({unidades:this.props.unidades})
+  componentDidMount() {
+    this.setState({
+      unidades: this.props.unidades.filter(this.filtro.bind(this))
+    });
   }
+
 
   render() {
     let smClose = () => this.setState({ smShow: false });
@@ -325,9 +337,7 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fenumero">
-              Número
-            </label>
+            <label htmlFor="fenumero">Número</label>
             <FormInput
               value={this.state.numero}
               onChange={e => this.setState({ numero: e.target.value })}
@@ -336,9 +346,7 @@ export default class unidadesInstitute extends React.Component {
             />
           </Col>
           <Col lg="6" className="form-group">
-            <label htmlFor="fecomplemento">
-              Complemento
-            </label>
+            <label htmlFor="fecomplemento">Complemento</label>
             <FormInput
               value={this.state.complemento}
               onChange={e => this.setState({ complemento: e.target.value })}
@@ -372,7 +380,7 @@ export default class unidadesInstitute extends React.Component {
                 minHeight: "15vh"
               }}
             >
-              {this.state.unidades.map(unidade => (
+              {this.props.unidades.filter(this.filtro.bind(this)).map(unidade => (
                 <ListGroupItem>
                   <h5 className="card-title mb-1">
                     <p className="text-fiord-blue">Campus {unidade.nome}</p>

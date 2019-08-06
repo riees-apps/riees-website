@@ -423,7 +423,7 @@ class Institute extends Component {
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">strengths</Heading>
             </Div>
-            {pontosFortes.map(ponto => (
+            {pontosFortes.length === 0 ? '' : pontosFortes.map(ponto => (
               <Text2>{ponto}</Text2>
             ))}
 
@@ -431,7 +431,7 @@ class Institute extends Component {
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">courses</Heading>
             </Div>
-            {cursos.map(curso => (
+            {cursos.length === 0 ? '' :cursos.map(curso => (
               <Text2>{`${curso.nome} (${curso.nivel})`}</Text2>
             ))}
 
@@ -439,7 +439,7 @@ class Institute extends Component {
             <Div justify="flex-start">
               <Heading color="#303033">Campus</Heading>
               <Heading color="#003b81">
-                {unidades[this.state.unidade].nome}
+                {unidades.length === 0 ? '' : unidades[this.state.unidade].nome}
               </Heading>
             </Div>
             <Text>
@@ -453,29 +453,29 @@ class Institute extends Component {
 
             <Div justify="flex-start">
               <Heading color="#303033">
-                {unidades[this.state.unidade].nome}
+                {unidades.length === 0 ? '' : unidades[this.state.unidade].nome}
               </Heading>
               <Heading color="#003b81">Location</Heading>
             </Div>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].logradouro}
-              {unidades[this.state.unidade].numero === ""
+              {unidades.length === 0 ? '' : unidades[this.state.unidade].logradouro}
+              {unidades.length === 0 ? '' : unidades[this.state.unidade].numero === ""
                 ? ", S/N"
                 : `, ${unidades[this.state.unidade].numero}`}
             </Text>
             <Text2 style={{ listStyle: "none" }}>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].bairro},{" "}
+              {unidades.length === 0 ? '' : unidades[this.state.unidade].bairro},{" "}
               {this.state.unidadesComCidades.length === 0
                 ? ""
                 : this.state.unidadesComCidades[this.state.unidade].cidade
                     .nome}{" "}
-              - Espirito Santo - {unidades[this.state.unidade].cep}
+              - Espirito Santo - {unidades.length === 0 ? '' : unidades[this.state.unidade].cep}
             </Text2>
             <Text>
               <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades[this.state.unidade].complemento}
+              {unidades.length === 0 ? '' : unidades[this.state.unidade].complemento}
             </Text>
             <Div className="DivMobile" justify="flex-start">
               <Heading color="#303033">All</Heading>
@@ -485,7 +485,7 @@ class Institute extends Component {
               style={{ display: "flex", flexDirection: "column" }}
               className="DivMobile"
             >
-              {unidades.filter(this.filtro.bind(this)).map((unidade, index) => (
+              {unidades.length === 0 ? '' : unidades.filter(this.filtro.bind(this)).map((unidade, index) => (
                 <Campus
                   className="DivMobile"
                   onClick={() => this.setState({ unidade: index })}

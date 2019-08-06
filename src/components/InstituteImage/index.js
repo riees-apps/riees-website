@@ -12,7 +12,7 @@ const Img = styled.div`
   box-shadow: 0px 45vh rgba(0, 0, 0, 0.35) inset;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 150% 150%;
+  background-size: cover;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -71,7 +71,7 @@ class InstituteImage extends Component {
   }
   render() {
     const renderUnidades = () => {
-      return this.props.unidades.map(row => (
+      return this.props.unidades.filter(this.filtro.bind(this)).map(row => (
         <h1
           className={
             this.props.cityInstitute

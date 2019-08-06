@@ -165,7 +165,7 @@ class Home extends Component {
 
     return (
       <div style={{ backgroundColor: "#f4f4f4", textAlign: "center" }}>
-        <Carousel fade>
+        <Carousel slide pauseOnHover>
           <Carousel.Item>
             <Imagee
               x="0.35"

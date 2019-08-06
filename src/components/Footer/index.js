@@ -7,7 +7,7 @@ import fapes from "./oie_transparent2.png";
 import governo from "./Brasao_Governo_horizontal_white_right_small.png";
 
 const Logo = styled.img`
-  width: 65%;
+  width: 100%;
   transition: all 0.2s linear;
   :hover {
     cursor:pointer;
@@ -15,8 +15,7 @@ const Logo = styled.img`
     transform:scale(1.03)
   }
   @media (max-width: 768px) {
-    width: calc(100% - 5vw);
-    height:115%;
+    width: 120%;
   }
 `;
 
@@ -96,7 +95,8 @@ const DivLogo = styled.div`
   display: flex;
   flex-direction: column-reverse;
   height:40vh;
-  align-items: space-between;
+  width:65%;
+  align-items: flex-start;
   justify-content: space-between;
   @media (max-width: 768px) {
     height:20vh;
