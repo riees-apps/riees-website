@@ -122,6 +122,11 @@ class City extends Component {
       }
     }
   }
+  filtro = item => {
+    if (item.descricao === 'generico') {
+      return false;
+    } else return true;
+  };
   handleClick(url) {
     console.log(url);
   }
@@ -132,7 +137,7 @@ class City extends Component {
       <div style={{background:'#f4f4f4'}}>
         <Image title={name} height="100vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`} />
         <Container >
-          <SideMenu page="City" links={Cidades} />
+          <SideMenu page="City" links={Cidades.filter(this.filtro.bind(this))} />
           <DivText>
             <Div justify="flex-start">
               <Heading color='#303033'>{name}</Heading>

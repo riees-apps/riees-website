@@ -73,7 +73,13 @@ class Cities extends React.Component {
   handleChangeEditor2(html) {
     this.setState({ descricaoPonto: html });
   }
-  componentWillMount() {
+  componentDidMount() {
+    api.get('/cidade?where={"deletedAt":0}').then(res => {
+      const cities = res.data;
+      this.setState({ cidades: cities });
+    });
+  }
+  componentDidUpdate() {
     api.get('/cidade?where={"deletedAt":0}').then(res => {
       const cities = res.data;
       this.setState({ cidades: cities });
@@ -107,7 +113,7 @@ class Cities extends React.Component {
                   capa:
                     typeof this.state.img.type !== "undefined"
                       ? res.data._id
-                      : this.state.img,
+                      : this.state.img
                 })
                 .then(res => {
                   const idCidade = res.data.id;
@@ -140,20 +146,18 @@ class Cities extends React.Component {
                                   cidade: idCidade,
                                   admin: admin.id
                                 });
-                          })
-                          .then(res => {
-                            api
-                              .get('/cidade?where={"deletedAt":0}')
-                              .then(res => {
-                                const cities = res.data;
-                                this.setState({
-                                  ...this.state,
-                                  cidades: cities,
-                                  editShow: false
-                                });
-                              });
                           });
                       });
+                  });
+                })
+                .then(res => {
+                  api.get('/cidade?where={"deletedAt":0}').then(res => {
+                    const cities = res.data;
+                    this.setState({
+                      ...this.state,
+                      cidades: cities,
+                      editShow: false
+                    });
                   });
                 })
                 .catch(error => {
@@ -290,9 +294,6 @@ class Cities extends React.Component {
     );
   }
   adicionaPonto() {
-    console.log(this.state.imgPonto);
-    console.log(this.state.nomePonto);
-    console.log(this.state.descricaoPonto);
     var pontos = this.state.pontosTuristicos;
     if (this.state.nomePonto !== "" && this.state.descricaoPonto !== "") {
       var ponto = {
@@ -354,9 +355,6 @@ class Cities extends React.Component {
     let editClose = () => this.setState({ editShow: false });
     let editPontoClose = () => this.setState({ editPontoShow: false });
     const renderCity = () => {
-      console.log(this.state.imgPonto);
-      console.log(this.state.nomePonto);
-      console.log(this.state.descricaoPonto);
       return this.state.cidades.map((city, number) => (
         <Col key={number} lg="3" md="6" sm="12" className="mb-4">
           <Card small className="card-post card-post--1">
@@ -543,7 +541,7 @@ class Cities extends React.Component {
                                                   ? ponto.capa
                                                   : ""
                                               }`}
-                                              alt=''
+                                              alt=""
                                               className="imgPonto"
                                             />
                                           </Col>

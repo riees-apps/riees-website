@@ -149,13 +149,13 @@ export default class unidadesInstitute extends React.Component {
       });
   }
   deleteUnidade(unidade) {
-    console.log(unidade);
+    var unidades
     console.log(typeof unidade.id !== "undefined");
     if (typeof unidade.id !== "undefined") {
       api
         .delete(`/unidade/${unidade.id}`)
         .then(resp => {
-          var unidades = arrayRemove(this.state.unidades, unidade);
+          unidades = arrayRemove(this.state.unidades, unidade);
           this.setState({
             ...this.state,
             unidades: unidades
@@ -169,20 +169,15 @@ export default class unidadesInstitute extends React.Component {
               }"}`
             )
             .then(res => {
-              const unidades = res.data;
-              if (unidades.length !== 0) {
-                this.setState({
-                  ...this.state,
-                  unidade: unidades,
-                  closeShow: false
-                });
-                this.props.callbackParent(unidades);
-              }
+              this.setState({
+                ...this.state,
+                closeShow: false
+              });
+              this.props.callbackParent(unidades);
             });
         });
     } else {
-      var unidades = arrayRemove(this.state.unidades, unidade);
-      console.log(unidades);
+      unidades = arrayRemove(this.state.unidades, unidade);
       this.setState({
         ...this.state,
         unidades: unidades,
@@ -278,7 +273,6 @@ export default class unidadesInstitute extends React.Component {
     });
   }
 
-
   render() {
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
@@ -300,7 +294,6 @@ export default class unidadesInstitute extends React.Component {
               onChange={e => this.setState({ nome: e.target.value })}
               id="feCampus"
               type="name"
-              placeholder="Ex.: Campus Goiabeiras"
             />
           </Col>
           <Col lg="6" className="form-group">
@@ -380,192 +373,198 @@ export default class unidadesInstitute extends React.Component {
                 minHeight: "15vh"
               }}
             >
-              {this.props.unidades.filter(this.filtro.bind(this)).map(unidade => (
-                <ListGroupItem>
-                  <h5 className="card-title mb-1">
-                    <p className="text-fiord-blue">Campus {unidade.nome}</p>
-                  </h5>
-                  <Row lg="12">
-                    <Col lg="2">
-                      <p className="text-fiord-blue">
-                        <strong>Bairro:</strong> {unidade.bairro}
-                      </p>
-                    </Col>
-                    <Col lg="3">
-                      <p className="text-fiord-blue">
-                        <strong>Logradouro:</strong> {unidade.logradouro}
-                      </p>
-                    </Col>
-                    <Col lg="2">
-                      <p className="text-fiord-blue">
-                        <strong>Numero:</strong> {unidade.numero}
-                      </p>
-                    </Col>
-                    <Col lg="3">
-                      <p className="text-fiord-blue">
-                        <strong>Cep:</strong> {unidade.cep}
-                      </p>
-                    </Col>
-                    <Col lg="1">
-                      <div
-                        pill
-                        className={`card-post__category bg-danger iconDelete ml-auto`}
-                        onClick={() => this.handleClick(unidade)}
-                      >
-                        <i className={`fas fa-times iconDelete`} />
-                      </div>
-                    </Col>
-                    <Col lg="1">
-                      <div
-                        pill
-                        className={
-                          this.props.edit === "true"
-                            ? `card-post__category bg-primary iconDelete ml-auto`
-                            : "displayNone"
-                        }
-                        onClick={() => this.handleClick2(unidade)}
-                      >
-                        <i className={`fas fa-pen iconDelete`} />
-                      </div>
-                    </Col>
-                  </Row>
-                  <Modal
-                    show={this.state.closeShow === unidade.id}
-                    onHide={deleteClose}
-                    aria-labelledby="example-modal-sizes-title-sm"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title id="example-modal-sizes-title-sm">
-                        Você tem certeza?
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>{this.state.error}</Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={this.handleClose.bind(this)}
-                      >
-                        Fechar
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={() => this.deleteUnidade(unidade)}
-                      >
-                        Confirmar
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+              {this.state.unidades
+                .filter(this.filtro.bind(this))
+                .map(unidade => (
+                  <ListGroupItem>
+                    <h5 className="card-title mb-1">
+                      <p className="text-fiord-blue">Campus {unidade.nome}</p>
+                    </h5>
+                    <Row lg="12">
+                      <Col lg="2">
+                        <p className="text-fiord-blue">
+                          <strong>Bairro:</strong> {unidade.bairro}
+                        </p>
+                      </Col>
+                      <Col lg="3">
+                        <p className="text-fiord-blue">
+                          <strong>Logradouro:</strong> {unidade.logradouro}
+                        </p>
+                      </Col>
+                      <Col lg="2">
+                        <p className="text-fiord-blue">
+                          <strong>Numero:</strong> {unidade.numero}
+                        </p>
+                      </Col>
+                      <Col lg="3">
+                        <p className="text-fiord-blue">
+                          <strong>Cep:</strong> {unidade.cep}
+                        </p>
+                      </Col>
+                      <Col lg="1">
+                        <div
+                          pill
+                          className={`card-post__category bg-danger iconDelete ml-auto`}
+                          onClick={() => this.handleClick(unidade)}
+                        >
+                          <i className={`fas fa-times iconDelete`} />
+                        </div>
+                      </Col>
+                      <Col lg="1">
+                        <div
+                          pill
+                          className={
+                            this.props.edit === "true"
+                              ? `card-post__category bg-primary iconDelete ml-auto`
+                              : "displayNone"
+                          }
+                          onClick={() => this.handleClick2(unidade)}
+                        >
+                          <i className={`fas fa-pen iconDelete`} />
+                        </div>
+                      </Col>
+                    </Row>
+                    <Modal
+                      show={this.state.closeShow === unidade.id}
+                      onHide={deleteClose}
+                      aria-labelledby="example-modal-sizes-title-sm"
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-sm">
+                          Você tem certeza?
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>{this.state.error}</Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={this.handleClose.bind(this)}
+                        >
+                          Fechar
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => this.deleteUnidade(unidade)}
+                        >
+                          Confirmar
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
 
-                  <Modal
-                    size="md"
-                    show={this.state.editUnidadeShow === unidade.nome}
-                    onHide={editUnidadeClose}
-                    dialogClassName="modal-100w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title id="example-custom-modal-styling-title">
-                        Editar unidade
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <FormGroup>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="feCampus">Nome</label>
-                          <FormInput
-                            value={this.state.nomeEdit}
-                            onChange={e =>
-                              this.setState({ nomeEdit: e.target.value })
-                            }
-                            id="feCampus"
-                            type="name"
-                          />
-                        </Col>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="fecidade">Cidade</label>
-                          <FormInput
-                            value={this.state.cidadeEdit}
-                            onChange={e =>
-                              this.setState({ cidadeEdit: e.target.value })
-                            }
-                            id="fecidade"
-                            type="text"
-                          />
-                        </Col>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="febairro">Bairro</label>
-                          <FormInput
-                            value={this.state.bairroEdit}
-                            onChange={e =>
-                              this.setState({ bairroEdit: e.target.value })
-                            }
-                            id="febairro"
-                            type="texxt"
-                          />
-                        </Col>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="feRua">Logradouro</label>
-                          <FormInput
-                            value={this.state.logradouroEdit}
-                            onChange={e =>
-                              this.setState({ logradouroEdit: e.target.value })
-                            }
-                            id="feComplefeRuateName"
-                            type="text"
-                          />
-                        </Col>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="fenumero">Número</label>
-                          <FormInput
-                            value={this.state.numeroEdit}
-                            onChange={e =>
-                              this.setState({ numeroEdit: e.target.value })
-                            }
-                            id="fenumero"
-                            type="text"
-                          />
-                        </Col>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="fecomplemento">Complemento</label>
-                          <FormInput
-                            value={this.state.complementoEdit}
-                            onChange={e =>
-                              this.setState({ complementoEdit: e.target.value })
-                            }
-                            id="fecomplemento"
-                            type="text"
-                          />
-                        </Col>
-                        <Col md="12" className="form-group">
-                          <label htmlFor="fecep">Cep</label>
-                          <FormInput
-                            value={this.state.cepEdit}
-                            onChange={e =>
-                              this.setState({ cepEdit: e.target.value })
-                            }
-                            id="fecep"
-                            type="text"
-                          />
-                        </Col>
-                      </FormGroup>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="secondary"
-                        onClick={this.handleClose2.bind(this)}
-                      >
-                        Fechar
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={() => this.editUnidade(unidade)}
-                      >
-                        Confirmar
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </ListGroupItem>
-              ))}
+                    <Modal
+                      size="md"
+                      show={this.state.editUnidadeShow === unidade.nome}
+                      onHide={editUnidadeClose}
+                      dialogClassName="modal-100w"
+                      aria-labelledby="example-custom-modal-styling-title"
+                    >
+                      <Modal.Header closeButton>
+                        <Modal.Title id="example-custom-modal-styling-title">
+                          Editar unidade
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <FormGroup>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="feCampus">Nome</label>
+                            <FormInput
+                              value={this.state.nomeEdit}
+                              onChange={e =>
+                                this.setState({ nomeEdit: e.target.value })
+                              }
+                              id="feCampus"
+                              type="name"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fecidade">Cidade</label>
+                            <FormInput
+                              value={this.state.cidadeEdit}
+                              onChange={e =>
+                                this.setState({ cidadeEdit: e.target.value })
+                              }
+                              id="fecidade"
+                              type="text"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="febairro">Bairro</label>
+                            <FormInput
+                              value={this.state.bairroEdit}
+                              onChange={e =>
+                                this.setState({ bairroEdit: e.target.value })
+                              }
+                              id="febairro"
+                              type="texxt"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="feRua">Logradouro</label>
+                            <FormInput
+                              value={this.state.logradouroEdit}
+                              onChange={e =>
+                                this.setState({
+                                  logradouroEdit: e.target.value
+                                })
+                              }
+                              id="feComplefeRuateName"
+                              type="text"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fenumero">Número</label>
+                            <FormInput
+                              value={this.state.numeroEdit}
+                              onChange={e =>
+                                this.setState({ numeroEdit: e.target.value })
+                              }
+                              id="fenumero"
+                              type="text"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fecomplemento">Complemento</label>
+                            <FormInput
+                              value={this.state.complementoEdit}
+                              onChange={e =>
+                                this.setState({
+                                  complementoEdit: e.target.value
+                                })
+                              }
+                              id="fecomplemento"
+                              type="text"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fecep">Cep</label>
+                            <FormInput
+                              value={this.state.cepEdit}
+                              onChange={e =>
+                                this.setState({ cepEdit: e.target.value })
+                              }
+                              id="fecep"
+                              type="text"
+                            />
+                          </Col>
+                        </FormGroup>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={this.handleClose2.bind(this)}
+                        >
+                          Fechar
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => this.editUnidade(unidade)}
+                        >
+                          Confirmar
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </ListGroupItem>
+                ))}
             </ListGroupItem>
           </Col>
         </Row>

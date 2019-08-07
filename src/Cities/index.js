@@ -64,6 +64,11 @@ class Cities extends Component {
   componentDidMount() {
     document.documentElement.scrollTop = 0
   }
+  filtro = item => {
+    if (item.descricao === 'generico') {
+      return false;
+    } else return true;
+  };
   render() {
     return (
       <div style={{background:'#fafafa'}}>
@@ -82,7 +87,7 @@ class Cities extends Component {
             dignissimos.
           </Heading>
         </DivText>
-      <CitiesImages Cities={this.props.Cidades} />
+      <CitiesImages Cities={this.props.Cidades.filter(this.filtro.bind(this))} />
       <Footer/>
       </div>
     )

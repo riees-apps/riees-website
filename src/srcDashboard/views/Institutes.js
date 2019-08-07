@@ -192,15 +192,67 @@ class Institutes extends React.Component {
                             instituicao: idInstituto
                           });
                         }
-                      })
+                      });
                     })
                     .then(res => {
                       this.state.unidades.map(unidade => {
                         api
                           .get(`/cidade?nome=${unidade.cidade}`)
                           .then(res => {
-                            let cidade;
+                            console.log(res);
+                            let cidade = "";
                             if (res.data.length > 0) cidade = res.data[0].id;
+                            console.log(cidade);
+                            if (cidade === "") {
+                              api
+                                .post("/cidade", {
+                                  nome: unidade.cidade,
+                                  descricao: "generica",
+                                  capa: capaID,
+                                  admin: admin.id
+                                })
+                                .then(res => {
+                                  console.log(res.data);
+                                  cidade = res.data.id;
+                                  api
+                                    .get(
+                                      `/unidade?where={"nome":"${
+                                        unidade.nome
+                                      }","instituicao":"${idInstituto}"}`
+                                    )
+                                    .then(res => {
+                                      if (
+                                        typeof unidade.createdAt === "undefined"
+                                      )
+                                        if (res.data.length > 0) {
+                                          api.patch(
+                                            `/unidade/${res.data[0].id}`,
+                                            {
+                                              logradouro: unidade.logradouro,
+                                              numero: unidade.numero,
+                                              complemento: unidade.complemento,
+                                              bairro: unidade.bairro,
+                                              cep: unidade.cep,
+                                              cidade: cidade,
+                                              deletedAt: 0
+                                            }
+                                          );
+                                        } else
+                                          api.post(`/unidade`, {
+                                            nome: unidade.nome,
+                                            logradouro: unidade.logradouro,
+                                            numero: unidade.numero,
+                                            complemento: unidade.complemento,
+                                            bairro: unidade.bairro,
+                                            cep: unidade.cep,
+                                            cidade: cidade,
+                                            instituicao: idInstituto,
+                                            admin: admin.id
+                                          });
+                                    });
+                                });
+                            }
+                            else
                             api
                               .get(
                                 `/unidade?where={"nome":"${
@@ -231,15 +283,16 @@ class Institutes extends React.Component {
                                       instituicao: idInstituto,
                                       admin: admin.id
                                     });
-                              })
+                              });
                           })
                           .catch(error => {
+                            console.log("Cidade não cadastrada no sistema");
                             this.setState({
                               smShow: inst.nome,
                               error: "Cidade não cadastrada no sistema"
                             });
                           });
-                      })
+                      });
                     })
                     .catch(error => {
                       this.setState({
@@ -253,9 +306,9 @@ class Institutes extends React.Component {
             .then(res => {
               api.get('/instituicao?where={"deletedAt":0}').then(res => {
                 const inst = res.data;
-                this.setState({ institutes: inst,editShow:false });
+                this.setState({ institutes: inst, editShow: false });
               });
-            })
+            });
         } catch (err) {
           this.setState({
             smShow: inst.nome,
@@ -337,7 +390,6 @@ class Institutes extends React.Component {
     });
   }
   handleClick2(institute) {
-    console.log(institute.unidades);
     this.setState({
       ...this.state,
       editShow: institute.nome,
@@ -872,7 +924,7 @@ class Institutes extends React.Component {
                         </Row>
                         <UnidadesInstitute
                           callbackParent={New => this.onChildChanged(New)}
-                          unidades={institute.unidades}
+                          unidades={this.state.unidades}
                           adminId={institute.admin.id}
                           edit="true"
                         />
