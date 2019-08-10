@@ -1,0 +1,20 @@
+.Map {
+  width: 58vw !important;
+  height: 50vh !important;
+  position: relative !important;
+  margin-bottom: 5% !important;
+  border: 0.5px solid #aaa;
+  border-radius: 5px;
+  overflow: hidden;
+}
+@media screen and (max-width: 769px) {
+  .Map {
+    width: 90vw !important;
+    height: 40vh !important;
+    position: relative !important;
+    margin-bottom: 15% !important;
+    border:0.5px solid #aaa;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+}

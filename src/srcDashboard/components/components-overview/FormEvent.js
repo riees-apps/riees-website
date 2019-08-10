@@ -10,7 +10,7 @@ import {
   Button,
   FormTextarea
 } from "shards-react";
-
+import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
 
 import Modal from "react-bootstrap/Modal";
@@ -32,6 +32,7 @@ class FormEvent extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      isLoading: false,
       smShow: false,
       nome: "",
       data: "",
@@ -92,6 +93,7 @@ class FormEvent extends Component {
       });
     } else {
       try {
+        this.setState({ isLoading: true });
         await api
           .post("/bucket", this.state.img, {
             headers: {
@@ -113,6 +115,7 @@ class FormEvent extends Component {
           })
 
           .then(response => {
+            this.setState({ isLoading: false });
             this.setState({
               smShow: true,
               error: "Evento adicionado com sucesso!"
@@ -276,6 +279,16 @@ class FormEvent extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.error}</Modal.Body>
+        </Modal>
+        <Modal
+          size="sm"
+          show={this.state.isLoading}
+          aria-labelledby="example-modal-sizes-title-sm"
+        >
+          <Modal.Body className="spinDivForm">
+            <p>Enviando Formulario...</p>
+            <ReactLoading className="spin" type="spin" color="#357edd" />
+          </Modal.Body>
         </Modal>
       </form>
     );

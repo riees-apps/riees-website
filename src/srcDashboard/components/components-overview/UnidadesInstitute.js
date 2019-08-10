@@ -34,6 +34,8 @@ export default class unidadesInstitute extends React.Component {
       numero: "",
       complemento: "",
       cep: "",
+      lat: "",
+      long: "",
       descricao: "",
       smShow: false,
       closeShow: false,
@@ -45,6 +47,8 @@ export default class unidadesInstitute extends React.Component {
       numeroEdit: "",
       complementoEdit: "",
       cepEdit: "",
+      latEdit: '',
+      longEdit: '',
       cursosEdit: []
     };
     this.handleChangeEditor = this.handleChangeEditor.bind(this);
@@ -89,7 +93,9 @@ export default class unidadesInstitute extends React.Component {
         logradouroEdit: unidade.logradouro,
         numeroEdit: unidade.numero,
         complementoEdit: unidade.complemento,
-        cepEdit: unidade.cep
+        cepEdit: unidade.cep,
+        latEdit: unidade.latitude,
+        longEdit: unidade.longitude,
       });
     });
   }
@@ -109,6 +115,8 @@ export default class unidadesInstitute extends React.Component {
       numero: this.state.numero,
       complemento: this.state.complemento,
       cep: this.state.cep,
+      latitude: this.state.lat,
+      longitude: this.state.long,
       admin: this.props.adminId
     };
 
@@ -130,6 +138,8 @@ export default class unidadesInstitute extends React.Component {
         complemento: "",
         cep: "",
         descricao: "",
+        lat: "",
+        long: "",
         clear: false,
         unidades: newunidades,
         nomeEdit: "",
@@ -139,6 +149,8 @@ export default class unidadesInstitute extends React.Component {
         bairroEdit: "",
         cepEdit: "",
         unidadeEdit: "",
+        latEdit: '',
+        longEdit: '',
         editUnidadeShow: ""
       });
       this.props.callbackParent(newunidades);
@@ -149,7 +161,7 @@ export default class unidadesInstitute extends React.Component {
       });
   }
   deleteUnidade(unidade) {
-    var unidades
+    var unidades;
     console.log(typeof unidade.id !== "undefined");
     if (typeof unidade.id !== "undefined") {
       api
@@ -202,6 +214,8 @@ export default class unidadesInstitute extends React.Component {
       complementoEdit,
       cepEdit,
       numeroEdit,
+      latEdit,
+      longEdit,
       cursosEdit
     } = this.state;
     if (
@@ -227,31 +241,31 @@ export default class unidadesInstitute extends React.Component {
               logradouro: logradouroEdit,
               numero: numeroEdit,
               complemento: complementoEdit,
+              latitude: latEdit,
+              longitude: longEdit,
               bairro: bairroEdit,
               cidade: res.data.id,
               cep: cepEdit
             });
           })
-          .then(res => {
-            api
-              .get(
-                `/unidade?where={"deletedAt":0,"instituicao":"${
-                  unidade.instituicao
-                }"}`
-              )
-              .then(res => {
-                const unidades = res.data;
-                if (unidades.length !== 0)
-                  this.setState({
-                    ...this.state,
-                    unidades: unidades
-                  });
-                this.props.callbackParent(unidades);
-                this.setState({
-                  ...this.state,
-                  editUnidadeShow: false
-                });
+          .then(async response => {
+            const res = await api.get(
+              `/unidade?where={"deletedAt":0,"instituicao":"${
+                unidade.instituicao
+              }"}`
+            );
+            const unidades = res.data;
+            if (unidades.length !== 0) {
+              this.setState({
+                ...this.state,
+                unidades: unidades
               });
+              this.props.callbackParent(unidades);
+              this.setState({
+                ...this.state,
+                editUnidadeShow: false
+              });
+            }
           })
           .catch(error => {
             this.setState({
@@ -272,7 +286,6 @@ export default class unidadesInstitute extends React.Component {
       unidades: this.props.unidades.filter(this.filtro.bind(this))
     });
   }
-
   render() {
     let smClose = () => this.setState({ smShow: false });
     let deleteClose = () => this.setState({ closeShow: false });
@@ -354,6 +367,28 @@ export default class unidadesInstitute extends React.Component {
             <FormInput
               value={this.state.cep}
               onChange={e => this.setState({ cep: e.target.value })}
+              id="fecep"
+              type="text"
+            />
+          </Col>
+          <Col lg="6" className="form-group">
+            <label htmlFor="fecep">
+              Latitude
+            </label>
+            <FormInput
+              value={this.state.lat}
+              onChange={e => this.setState({ lat: e.target.value })}
+              id="fecep"
+              type="text"
+            />
+          </Col>
+          <Col lg="6" className="form-group">
+            <label htmlFor="fecep">
+            Longitude
+            </label>
+            <FormInput
+              value={this.state.long}
+              onChange={e => this.setState({ long: e.target.value })}
               id="fecep"
               type="text"
             />
@@ -541,6 +576,28 @@ export default class unidadesInstitute extends React.Component {
                               value={this.state.cepEdit}
                               onChange={e =>
                                 this.setState({ cepEdit: e.target.value })
+                              }
+                              id="fecep"
+                              type="text"
+                            />
+                          </Col>                         
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fecep">Latitude</label>
+                            <FormInput
+                              value={this.state.latEdit}
+                              onChange={e =>
+                                this.setState({ latEdit: e.target.value })
+                              }
+                              id="fecep"
+                              type="text"
+                            />
+                          </Col>
+                          <Col md="12" className="form-group">
+                            <label htmlFor="fecep">Longitude</label>
+                            <FormInput
+                              value={this.state.longEdit}
+                              onChange={e =>
+                                this.setState({ longEdit: e.target.value })
                               }
                               id="fecep"
                               type="text"

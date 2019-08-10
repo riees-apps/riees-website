@@ -31,9 +31,9 @@ const Btn = styled.div`
     props.return &&
     `
     margin-top:10vh;
-    width:50%;
+    width:100%;
     text-align:center;
-    justify-content: space-between;
+    justify-content: space-around;
     :hover {
     letter-spacing: 4.5px;
     transform: scale(1.01);

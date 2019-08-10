@@ -199,11 +199,12 @@ class Institutes extends React.Component {
                         api
                           .get(`/cidade?nome=${unidade.cidade}`)
                           .then(res => {
-                            console.log(res);
                             let cidade = "";
                             if (res.data.length > 0) cidade = res.data[0].id;
-                            console.log(cidade);
                             if (cidade === "") {
+                              if (
+                                typeof unidade.createdAt === "undefined"
+                              )
                               api
                                 .post("/cidade", {
                                   nome: unidade.cidade,
@@ -251,39 +252,39 @@ class Institutes extends React.Component {
                                           });
                                     });
                                 });
+                            } else {
+                              api
+                                .get(
+                                  `/unidade?where={"nome":"${
+                                    unidade.nome
+                                  }","instituicao":"${idInstituto}"}`
+                                )
+                                .then(res => {
+                                  if (typeof unidade.createdAt === "undefined")
+                                    if (res.data.length > 0) {
+                                      api.patch(`/unidade/${res.data[0].id}`, {
+                                        logradouro: unidade.logradouro,
+                                        numero: unidade.numero,
+                                        complemento: unidade.complemento,
+                                        bairro: unidade.bairro,
+                                        cep: unidade.cep,
+                                        cidade: cidade,
+                                        deletedAt: 0
+                                      });
+                                    } else
+                                      api.post(`/unidade`, {
+                                        nome: unidade.nome,
+                                        logradouro: unidade.logradouro,
+                                        numero: unidade.numero,
+                                        complemento: unidade.complemento,
+                                        bairro: unidade.bairro,
+                                        cep: unidade.cep,
+                                        cidade: cidade,
+                                        instituicao: idInstituto,
+                                        admin: admin.id
+                                      });
+                                });
                             }
-                            else
-                            api
-                              .get(
-                                `/unidade?where={"nome":"${
-                                  unidade.nome
-                                }","instituicao":"${idInstituto}"}`
-                              )
-                              .then(res => {
-                                if (typeof unidade.createdAt === "undefined")
-                                  if (res.data.length > 0) {
-                                    api.patch(`/unidade/${res.data[0].id}`, {
-                                      logradouro: unidade.logradouro,
-                                      numero: unidade.numero,
-                                      complemento: unidade.complemento,
-                                      bairro: unidade.bairro,
-                                      cep: unidade.cep,
-                                      cidade: cidade,
-                                      deletedAt: 0
-                                    });
-                                  } else
-                                    api.post(`/unidade`, {
-                                      nome: unidade.nome,
-                                      logradouro: unidade.logradouro,
-                                      numero: unidade.numero,
-                                      complemento: unidade.complemento,
-                                      bairro: unidade.bairro,
-                                      cep: unidade.cep,
-                                      cidade: cidade,
-                                      instituicao: idInstituto,
-                                      admin: admin.id
-                                    });
-                              });
                           })
                           .catch(error => {
                             console.log("Cidade não cadastrada no sistema");

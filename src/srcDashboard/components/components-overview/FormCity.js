@@ -10,7 +10,7 @@ import {
   Button,
   FormTextarea
 } from "shards-react";
-
+import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
 
 import Modal from "react-bootstrap/Modal";
@@ -30,6 +30,7 @@ class FormCity extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      isLoading: false,
       editorHtml: "",
       smShow: false,
       nome: "",
@@ -70,6 +71,7 @@ class FormCity extends Component {
       });
     } else {
       try {
+        this.setState({ isLoading: true });
         await api
           .post("/bucket", this.state.img, {
             headers: {
@@ -105,6 +107,7 @@ class FormCity extends Component {
                           admin: response.data.admin.id
                         })
                         .then(res => {
+                          this.setState({ isLoading: false });
                           this.setState({
                             smShow: true,
                             error: "Cidade adicionada com sucesso!"
@@ -351,6 +354,16 @@ class FormCity extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.error}</Modal.Body>
+        </Modal>
+        <Modal
+          size="sm"
+          show={this.state.isLoading}
+          aria-labelledby="example-modal-sizes-title-sm"
+        >
+          <Modal.Body className="spinDivForm">
+            <p>Enviando Formulario...</p>
+            <ReactLoading className="spin" type="spin" color="#357edd" />
+          </Modal.Body>
         </Modal>
       </form>
     );

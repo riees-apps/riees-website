@@ -10,13 +10,14 @@ import {
   Button,
   FormSelect
 } from "shards-react";
-
+import ReactLoading from "react-loading";
 import { withRouter } from "react-router-dom";
 
 import Modal from "react-bootstrap/Modal";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
+import "../../views/index.css";
 import api from "../../../api/api";
 import Editor from "./editor2";
 import UnidadesInstitute from "./UnidadesInstitute";
@@ -32,11 +33,13 @@ function arrayRemove(arr, value) {
     return ele !== value;
   });
 }
+
 class FormInstitute extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
+      isLoading: false,
       nome: "",
       missao: "",
       descricao: "",
@@ -115,120 +118,127 @@ class FormInstitute extends Component {
         smShow: true
       });
     } else {
-      api.get(`/instituicao?email=${email}`).then(res => {
-        if (res.data.length !== 0)
-          this.setState({
-            error: "Este email já foi utilizado",
-            smShow: true
-          });
-      });
-      try {
-        await api
-          .post("/bucket", capa, {
-            headers: {
-              "content-type": capa.type,
-              filename: capa.name
-            }
-          })
-          .then(res => {
-            capaID = res.data._id;
-            api
-              .post("/bucket", logo, {
-                headers: {
-                  "content-type": logo.type,
-                  filename: logo.name
-                }
-              })
-              .then(res => {
-                api
-                  .post("/instituicao", {
-                    nome: nome,
-                    missao: missao,
-                    descricao: descricao,
-                    pontosFortes: pontosFortes,
-                    email: email,
-                    telefone: telefone,
-                    telefone2: telefone2,
-                    facebook: facebook,
-                    instagram: instagram,
-                    twitter: twitter,
-                    linkedin: linkedin,
-                    site: site,
-                    capa: capaID,
-                    logo: res.data._id,
-                    admin: admin
-                  })
-                  .then(response => {
-                    const idInstituicao = response.data.id;
-                    unidades.map(unidade =>
-                      api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
-                        let cidade = "";
-                        if (res.data.length > 0) cidade = res.data[0].id;
-
-                        if (cidade === "") {
-                          api
-                            .post("/cidade", {
-                              nome: unidade.cidade,
-                              descricao: "generica",
-                              capa: capaID,
-                              admin: admin
-                            })
-                            .then(res => {
-                              cidade = res.data.id;
-                            })
-                        }
-                        api
-                          .post("/unidade", {
-                            nome: unidade.nome,
-                            logradouro: unidade.logradouro,
-                            numero: unidade.numero,
-                            complemento: unidade.complemento,
-                            bairro: unidade.bairro,
-                            cidade: cidade,
-                            cep: unidade.cep,
-                            admin: response.data.admin.id,
-                            instituicao: idInstituicao
-                          })
-                          .then(response => {
-                            console.log(cursos);
-                            cursos.map(curso => {
-                              api
-                                .post("/curso", {
-                                  nome: curso.nome,
-                                  nivel: curso.nivel,
-                                  admin: response.data.admin.id,
-                                  area: curso.area,
-                                  instituicao: idInstituicao
-                                })
-                                .then(response => {
-                                  this.setState({
-                                    smShow: true,
-                                    error: "Instituição criada com sucesso!"
-                                  });
-                                });
-                            });
-                          })
-                      })
-                    );
-                  })
-                  .catch(error => {
-                    console.log("error");
-                    console.log(error);
-                  });
-              })
-              .catch(error => {
-                this.setState({
-                  smShow: true,
-                  error: "Houve um problema com a criação, tente novamente"
-                });
-              });
-          });
-      } catch (err) {
+      const res = await api.get(`/instituicao?email=${email}`);
+      if (res.data.length !== 0) {
         this.setState({
-          smShow: true,
-          error: "Houve um problema com a criação, tente novamente"
+          error: "Este email já foi utilizado",
+          smShow: true
         });
-      }
+      } else
+        try {
+          this.setState({ isLoading: true });
+          await api
+            .post("/bucket", capa, {
+              headers: {
+                "content-type": capa.type,
+                filename: capa.name
+              }
+            })
+            .then(res => {
+              capaID = res.data._id;
+              api
+                .post("/bucket", logo, {
+                  headers: {
+                    "content-type": logo.type,
+                    filename: logo.name
+                  }
+                })
+                .then(res => {
+                  api
+                    .post("/instituicao", {
+                      nome: nome,
+                      missao: missao,
+                      descricao: descricao,
+                      pontosFortes: pontosFortes,
+                      email: email,
+                      telefone: telefone,
+                      telefone2: telefone2,
+                      facebook: facebook,
+                      instagram: instagram,
+                      twitter: twitter,
+                      linkedin: linkedin,
+                      site: site,
+                      capa: capaID,
+                      logo: res.data._id,
+                      admin: admin
+                    })
+                    .then(response => {
+                      const idInstituicao = response.data.id;
+                      console.log(unidades);
+                      unidades.map(unidade => {
+                        console.log(unidade);
+                        api.get(`/cidade?nome=${unidade.cidade}`).then(res => {
+                          let cidade = "";
+                          if (res.data.length > 0) cidade = res.data[0].id;
+
+                          if (cidade === "") {
+                            api
+                              .post("/cidade", {
+                                nome: unidade.cidade,
+                                descricao: "generica",
+                                capa: capaID,
+                                admin: admin
+                              })
+                              .then(res => {
+                                cidade = res.data.id;
+                              });
+                          }
+                          api
+                            .post("/unidade", {
+                              nome: unidade.nome,
+                              logradouro: unidade.logradouro,
+                              numero: unidade.numero,
+                              complemento: unidade.complemento,
+                              bairro: unidade.bairro,
+                              cidade: cidade,
+                              cep: unidade.cep,
+                              latitude: unidade.latitude,
+                              longitude: unidade.longitude,
+                              admin: response.data.admin.id,
+                              instituicao: idInstituicao
+                            })
+                            .then(response => {
+                              console.log(cursos);
+                              cursos.map(curso => {
+                                api
+                                  .post("/curso", {
+                                    nome: curso.nome,
+                                    nivel: curso.nivel,
+                                    admin: response.data.admin.id,
+                                    area: curso.area,
+                                    instituicao: idInstituicao
+                                  })
+                                  .then(response => {
+                                    this.setState({ isLoading: false });
+                                    this.setState({
+                                      smShow: true,
+                                      error: "Instituição criada com sucesso!"
+                                    });
+                                  });
+                              });
+                            });
+                        });
+                      });
+                    })
+
+                    .catch(error => {
+                      console.log("error");
+                      console.log(error);
+                    });
+                })
+                .catch(error => {
+                  this.setState({
+                    smShow: true,
+                    error: "Houve um problema com a criação, tente novamente"
+                  });
+                });
+            });
+        } catch (err) {
+          this.setState({
+            smShow: true,
+            error: "Houve um problema com a criação, tente novamente"
+          });
+        }
     }
   };
   filtro = item => {
@@ -714,6 +724,16 @@ class FormInstitute extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.error}</Modal.Body>
+        </Modal>
+        <Modal
+          size="sm"
+          show={this.state.isLoading}
+          aria-labelledby="example-modal-sizes-title-sm"
+        >
+          <Modal.Body className="spinDivForm">
+            <p>Enviando Formulario...</p>
+            <ReactLoading className="spin" type="spin" color="#357edd" />
+          </Modal.Body>
         </Modal>
       </form>
     );

@@ -5,9 +5,10 @@ import SideMenu from "../components/SideMenu/index";
 import AreaCard from "../components/AreaCard/index";
 import Button from "../components/Button/index";
 import { Link } from "react-router-dom";
-import "./institute.css";
-
+import Mapa from "../components/Map/Map";
 import api from "../api/api";
+
+import "./institute.css";
 
 const Image = styled.div`
   background-image: url(${props => props.image});
@@ -52,8 +53,8 @@ const DivText = styled.div`
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   z-index: 100;
   width: 60%;
   padding-bottom: 10vh;
@@ -179,6 +180,31 @@ const Container = styled.div`
     justify-content: center;
   }
 `;
+const DivLocation = styled.div`
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: max-content;
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: center;
+  }
+`;
+const DivTextLocation = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 30%;
+  @media (max-width: 768px) {
+    align-items: center;
+    justify-content: center;
+  }
+`;
 const Img = styled.div`
   display: flex;
   flex-direction: row;
@@ -236,7 +262,7 @@ class Institute extends Component {
       unidadesComCidades: [],
       areas: []
     };
-    this.myDivToFocus = React.createRef()
+    this.myDivToFocus = React.createRef();
   }
   onChildChanged(New) {
     this.setState({ unidade: New });
@@ -283,7 +309,7 @@ class Institute extends Component {
     const cursos = this.props.cursos.filter(this.filtro.bind(this));
     const name = this.props.name.split("-")[0];
     const sub = this.props.name.split("-")[1];
-
+    console.log(unidades[this.state.unidade]);
     return (
       <div>
         <Image
@@ -308,7 +334,7 @@ class Institute extends Component {
         </Img>
         <Container>
           <SideMenu
-              myDivToFocus={this.myDivToFocus}
+            myDivToFocus={this.myDivToFocus}
             callbackParent={New => this.onChildChanged(New)}
             page="Institute"
             links={institutes}
@@ -316,7 +342,7 @@ class Institute extends Component {
             areas={areas}
             cursos={cursos}
           />
-          <DivText >
+          <DivText>
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">description</Heading>
@@ -360,7 +386,7 @@ class Institute extends Component {
               {this.props.email}
             </Text>
 
-            <Div  justify="flex-start">
+            <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">social media</Heading>
             </Div>
@@ -426,51 +452,68 @@ class Institute extends Component {
               <Heading color="#303033">{name}</Heading>
               <Heading color="#003b81">strengths</Heading>
             </Div>
-            {pontosFortes.length === 0 ? '' : pontosFortes.map(ponto => (
-              <Text2>{ponto}</Text2>
-            ))}
-            <AreaCard  name={name} areas={areas} instituicao={this.props.id} />
+            {pontosFortes.length === 0
+              ? ""
+              : pontosFortes.map(ponto => <Text2>{ponto}</Text2>)}
+            <AreaCard name={name} areas={areas} instituicao={this.props.id} />
             <Div justify="flex-start">
               <Heading color="#303033">Campus</Heading>
               <Heading color="#003b81">
-                {unidades.length === 0 ? '' : unidades[this.state.unidade].nome}
+                {unidades.length === 0 ? "" : unidades[this.state.unidade].nome}
               </Heading>
             </Div>
-            <Text ref={this.myDivToFocus}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              a ante ante consectetur adipiscing elit. Lorem ipsum dolor sit
-              amet, curabitur a ante ante. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Sit amet ipsum dolor , consectetur
-              adipiscing elit. Curabitur a ante ante consectetur adipiscing
-              elit. Curabitur a ante ante consectetur adipiscing elit.
-            </Text>
+            <DivLocation>
+              <Mapa
+                name={
+                  unidades.length === 0 ? "" : unidades[this.state.unidade].nome
+                }
+                lat={
+                  unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].latitude
+                }
+                long={
+                  unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].longitude
+                }
+              />
+              <DivTextLocation>
+                <Text ref={this.myDivToFocus}>
+                  <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
+                  {unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].logradouro}
+                  {unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].numero === ""
+                    ? ", S/N"
+                    : `, ${unidades[this.state.unidade].numero}`}
+                </Text>
+                <Text2 style={{ listStyle: "none" }}>
+                  <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
+                  {unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].bairro}
+                  ,{" "}
+                  {this.state.unidadesComCidades.length === 0
+                    ? ""
+                    : this.state.unidadesComCidades[this.state.unidade].cidade
+                        .nome}{" "}
+                  - Espirito Santo -{" "}
+                  {unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].cep}
+                </Text2>
+                <Text>
+                  <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
+                  {unidades.length === 0
+                    ? ""
+                    : unidades[this.state.unidade].complemento}
+                </Text>
+              </DivTextLocation>
+            </DivLocation>
 
-            <Div justify="flex-start">
-              <Heading color="#303033">
-                {unidades.length === 0 ? '' : unidades[this.state.unidade].nome}
-              </Heading>
-              <Heading color="#003b81">Location</Heading>
-            </Div>
-            <Text>
-              <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades.length === 0 ? '' : unidades[this.state.unidade].logradouro}
-              {unidades.length === 0 ? '' : unidades[this.state.unidade].numero === ""
-                ? ", S/N"
-                : `, ${unidades[this.state.unidade].numero}`}
-            </Text>
-            <Text2 style={{ listStyle: "none" }}>
-              <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades.length === 0 ? '' : unidades[this.state.unidade].bairro},{" "}
-              {this.state.unidadesComCidades.length === 0
-                ? ""
-                : this.state.unidadesComCidades[this.state.unidade].cidade
-                    .nome}{" "}
-              - Espirito Santo - {unidades.length === 0 ? '' : unidades[this.state.unidade].cep}
-            </Text2>
-            <Text>
-              <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
-              {unidades.length === 0 ? '' : unidades[this.state.unidade].complemento}
-            </Text>
             <Div className="DivMobile" justify="flex-start">
               <Heading color="#303033">All</Heading>
               <Heading color="#003b81">Campus</Heading>
@@ -479,26 +522,32 @@ class Institute extends Component {
               style={{ display: "flex", flexDirection: "column" }}
               className="DivMobile"
             >
-              {unidades.length === 0 ? '' : unidades.filter(this.filtro.bind(this)).map((unidade, index) => (
-                <Campus
-                  className="DivMobile"
-                  onClick={() => this.setState({ unidade: index })}
-                >{`Campus ${unidade.nome}`}</Campus>
-              ))}
+              {unidades.length === 0
+                ? ""
+                : unidades
+                    .filter(this.filtro.bind(this))
+                    .map((unidade, index) => (
+                      <Campus
+                        className="DivMobile"
+                        onClick={() => this.setState({ unidade: index })}
+                      >{`Campus ${unidade.nome}`}</Campus>
+                    ))}
             </div>
             <br />
             <br />
-            <Button
-              url={url}
-              institute="true"
-              name="Visit the institute website"
-            />
-            <Button
-              return={true}
-              color="#FF1493"
-              url="/Members"
-              name="All institutes"
-            />
+            <div className="DivButtonsInstitute">
+              <Button
+                url={url}
+                institute="true"
+                name="Visit the institute website"
+              />
+              <Button
+                return={true}
+                color="#FF1493"
+                url="/Members"
+                name="All institutes"
+              />
+            </div>
           </DivText>
         </Container>
         <Footer />

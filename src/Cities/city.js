@@ -123,7 +123,7 @@ class City extends Component {
     }
   }
   filtro = item => {
-    if (item.descricao === 'generico') {
+    if (item.descricao === 'generica') {
       return false;
     } else return true;
   };

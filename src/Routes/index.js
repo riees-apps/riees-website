@@ -119,7 +119,7 @@ class Routes extends Component {
   render() {
     const { Institutes, Cidades, Eventos, Posts } = this.state;
 
-    const renderPosts2 = () => {
+    const renderPosts = () => {
       return Posts.map(post => (
         <MultiLanguageRoute
           path={`/:lang/Post/${post.id}`}
@@ -140,7 +140,7 @@ class Routes extends Component {
         />
       ));
     };
-    const renderEvents2 = () => {
+    const renderEvents = () => {
       return Eventos.map(event => (
         <MultiLanguageRoute
           path={`/:lang/Events/${event.id}`}
@@ -162,7 +162,7 @@ class Routes extends Component {
         />
       ));
     };
-    const renderInstitutes2 = () => {
+    const renderInstitutes = () => {
       return Institutes.map(institute => (
         <MultiLanguageRoute
           path={`/:lang/Institute/${institute.nome}`}
@@ -192,7 +192,7 @@ class Routes extends Component {
         />
       ));
     };
-    const renderCities2 = () => {
+    const renderCities = () => {
      
       return Cidades.map(city => (
         <MultiLanguageRoute
@@ -263,10 +263,10 @@ class Routes extends Component {
             <MultiLanguageRoute path="/:lang/Es" component={Es} />
             <MultiLanguageRoute path="/:lang/Coming" component={Coming} />
             <MultiLanguageRoute path="/:lang/Living" component={Living} />
-            {renderPosts2()}
-            {renderEvents2()}
-            {renderInstitutes2()}
-            {renderCities2()}
+            {renderPosts()}
+            {renderEvents()}
+            {renderInstitutes()}
+            {renderCities()}
             <Route path="/:lang/Admin" component={Admin} />
             <PrivateRoute
               path="/en/dashboard/show-institutes"

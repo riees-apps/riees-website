@@ -201,8 +201,13 @@ class Header extends Component {
           }
         >
           <div className={this.state.scroll ? "divFlagScroll" : "divFlag"}>
-            <i className={`fab fa-facebook-f iconFace`} />
-            <i className={`fab fa-instagram iconInsta`} />
+            <a href="http://facebook.com/riees.es" target="_blank">
+              <i className={`fab fa-facebook-f iconFace`} />
+            </a>
+            <a href="http://instagram.com/riees.es" target="_blank">
+              <i className={`fab fa-instagram iconInsta`} />
+            </a>
+
             <StyledLink
               onClick={() => this.changeLang("pt")}
               className={this.state.scroll ? "scroll" : ""}

@@ -5,7 +5,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   margin-bottom: 2.5vh;
-  margin-left: -3.25vh;
+  margin-left: -1.5vh;
 }
 
 .iconInstitute {
@@ -56,6 +56,14 @@
   width: 100%;
   margin-top: 4%;
   margin-bottom: 5%;
+}
+.DivMobile {
+  margin-left: auto;
+  margin-right: auto;
+}
+.DivButtonsInstitute {
+  margin-left: auto;
+  margin-right: auto;
 }
 @media screen and (min-width: 769px) {
   .DivMobile {

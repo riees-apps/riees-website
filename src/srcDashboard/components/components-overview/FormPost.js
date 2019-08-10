@@ -12,7 +12,7 @@ import {
 } from "shards-react";
 
 import { withRouter } from "react-router-dom";
-
+import ReactLoading from "react-loading";
 import Modal from "react-bootstrap/Modal";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -33,6 +33,7 @@ class FormPost extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      isLoading: false,
       smShow: false,
       titulo: "",
       dataPostagem: "",
@@ -83,6 +84,7 @@ class FormPost extends Component {
       });
     } else {
       try {
+        this.setState({ isLoading: true });
         await api
           .post("/bucket", this.state.img, {
             headers: {
@@ -103,6 +105,7 @@ class FormPost extends Component {
           })
           .catch(error => console.log(error))
           .then(response => {
+            this.setState({ isLoading: false });
             this.setState({
               smShow: true,
               error: "Postagem adicionada com sucesso!"
@@ -284,6 +287,16 @@ class FormPost extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>{this.state.error}</Modal.Body>
+        </Modal>
+        <Modal
+          size="sm"
+          show={this.state.isLoading}
+          aria-labelledby="example-modal-sizes-title-sm"
+        >
+          <Modal.Body className="spinDivForm">
+            <p>Enviando Formulario...</p>
+            <ReactLoading className="spin" type="spin" color="#357edd" />
+          </Modal.Body>
         </Modal>
       </form>
     );

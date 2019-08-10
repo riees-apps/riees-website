@@ -17,7 +17,7 @@ const DivAreas = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   @media (max-width: 768px) {
-    margin: 2.5vh;
+    margin: 2.5vh 0;
   }
 `;
 const Card = styled.div`
@@ -122,8 +122,6 @@ class AreaCard extends Component {
     };
   }
   handleClick(area) {
-    console.log(area);
-    console.log(this.props.instituicao);
     api
       .get(
         `/curso?where={"deletedAt":0,"instituicao":"${
