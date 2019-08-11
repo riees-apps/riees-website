@@ -62,7 +62,7 @@ const CardImg = styled(Link)`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   @media (max-width: 600px) {
-    background-size: center;
+    background-size: cover;
     height: 24vh;
   }
   :hover {
@@ -83,9 +83,13 @@ const CardImg = styled(Link)`
     flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: space-between;
+    background-size: 110% 110%;
+    :hover {
+    background-size: 115% 115%;
+    }
     @media (max-width: 600px) {
-    width: 50%;
-    height: 25vh;
+      width: 50%;
+      height: 25vh;
   }
   `}
 `;
@@ -147,7 +151,7 @@ const Text = styled.h1`
   @media (max-width: 600px) {
     font-size: calc(5px + 1.3vh);
     line-height: calc(8px + 1.3vh);
-    margin-bottom:1vh;
+    margin-bottom: 1vh;
   }
   ${props =>
     props.icon &&
@@ -167,7 +171,7 @@ const CardBody = styled.div`
   height: 31vh;
   padding-left: 1vh;
   width: 100%;
-  padding-top:2vh;
+  padding-top: 2vh;
   @media (max-width: 600px) {
     background-size: cover;
     height: 22.5vh;
@@ -202,42 +206,51 @@ class EventCard extends Component {
           to={`/${window.location.pathname.split("/")[1]}/Events/${
             this.props.id
           }`}
-          input={`https://riees-api.herokuapp.com/bucket/${this.props.capa !== null ? this.props.capa : ''}`}
+          input={`https://riees-api.herokuapp.com/bucket/${
+            this.props.capa !== null ? this.props.capa : ""
+          }`}
         >
-          <Date className={this.props.placeEvent !== "" ? "" : "displayNone"}>
+          <Date className={this.props.placeEvent !== null ? "" : "displayNone"}>
             <i className={`far fa-calendar-check iconDate`} />
             Event
           </Date>
-          <Date className={this.props.placeEvent === "" ? "" : "displayNone"}>
+          <Date className={this.props.placeEvent === null ? "" : "displayNone"}>
             <i className={`fas fa-clock iconDate`} />
-            {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`} 
+            {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}
           </Date>
         </CardImg>
         <CardBody side={this.props.side}>
           <Title>{this.props.title}</Title>
 
-          <div style={{ margin: "auto 0",width:'100%'}}>
+          <div style={{ margin: "auto 0", width: "100%" }}>
             <div
-              className={this.props.placeEvent === "" ? "innerHTMLCard" : "displayNone"}
+              className={
+                this.props.placeEvent === null ? "innerHTMLCard" : "displayNone"
+              }
               dangerouslySetInnerHTML={{ __html: this.props.text }}
             />
             <Text
               icon
-              className={this.props.placeEvent !== "" ? "" : "displayNone"}
+              className={this.props.placeEvent !== null ? "" : "displayNone"}
             >
               <i className={`fas fa-calendar iconDate`} />{" "}
-              {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`} {this.props.anoFim !== 0 ? `~ ${this.props.diaFim} ${this.props.mesFim}, ${this.props.anoFim}` : ''}
+              {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}{" "}
+              {this.props.anoFim !== 0
+                ? `~ ${this.props.diaFim} ${this.props.mesFim}, ${
+                    this.props.anoFim
+                  }`
+                : ""}
             </Text>
             <Text
               icon
-              className={this.props.placeEvent !== "" ? "" : "displayNone"}
+              className={this.props.placeEvent !== null ? "" : "displayNone"}
             >
               <i className={`fas fa-clock iconDate`} />{" "}
               {`${this.props.hora} : ${this.props.minuto}`}
             </Text>
             <Text
               icon
-              className={this.props.placeEvent !== "" ? "" : "displayNone"}
+              className={this.props.placeEvent !== null ? "" : "displayNone"}
             >
               <i className={`fas fa-map-marker-alt iconDate`} />{" "}
               {this.props.placeEvent}

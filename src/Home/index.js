@@ -51,7 +51,7 @@ const BouncyDiv6 = styled.div`
 
 const DivTitle = styled.div`
   
-  width: 70%;
+  width: 80%;
   justify-content: center;
   align-content: center;
   display: flex;

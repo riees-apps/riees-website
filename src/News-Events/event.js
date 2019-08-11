@@ -176,7 +176,7 @@ const Heading = styled.h1`
   margin-top: 5vh;
   border-bottom: 1vh solid pink;
   @media (max-width: 600px) {
-    padding-left: 2.5%;
+    margin-left:  2.5%;
     font-size: calc(10px + 3vw);
     line-height: calc(10px + 3vw);
   }
@@ -238,16 +238,16 @@ class Event extends Component {
           }`}
         >
           <div>
-            <Badge>{placeEvent !== "" ? "Event" : "New"}</Badge>
+            <Badge>{placeEvent !== null ? "Event" : "New"}</Badge>
             <Title>{title}</Title>
-            <Subheading className={placeEvent === "" ? "" : "displayNone"}>
+            <Subheading className={placeEvent === null ? "" : "displayNone"}>
               <Details>
                 <i className={`fas fa-clock iconDate`} />{" "}
                 {`${dia} ${mes}, ${ano}`}
               </Details>
             </Subheading>
 
-            <Subheading className={placeEvent !== "" ? "" : "displayNone"}>
+            <Subheading className={placeEvent !== null ? "" : "displayNone"}>
               <Details>
                 <i className={`fas fa-calendar iconDate`} />{" "}
                 {`${dia} ${mes}, ${ano}`}{" "}
@@ -271,7 +271,7 @@ class Event extends Component {
             />
             <Button
               institute="true"
-              className={placeEvent !== "" ? "" : "displayNone"}
+              className={placeEvent !== null ? "" : "displayNone"}
               url={link}
               name="sign up here"
             />

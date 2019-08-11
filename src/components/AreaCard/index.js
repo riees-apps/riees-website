@@ -165,6 +165,7 @@ class AreaCard extends Component {
         <Modal
           size="lg"
           show={this.state.showCursos === true}
+          style={{zIndex:999999999999999999}}
           onHide={smClose}
           dialogClassName="modal-100w"
           aria-labelledby="example-modal-sizes-title"

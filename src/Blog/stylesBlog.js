@@ -51,8 +51,7 @@ export const Image = styled.div`
   justify-content: flex-end;
   width: 100%;
   @media (max-width: 600px) {
-    background-size: 100% 100%;
-    border:1px solid red;
+    background-size: cover;
     height: 70vh;
     padding-bottom: 10%;
     align-content: center;
@@ -255,7 +254,7 @@ export const Heading = styled.h1`
   margin-left: 10%;
   border-bottom: 1vh solid pink;
   @media (max-width: 600px) {
-    padding-left: 2.5%;
+    margin-left: 5vw;
     font-size: calc(10px + 3vw);
     line-height: calc(10px + 3vw);
   }

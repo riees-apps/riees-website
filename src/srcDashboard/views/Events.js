@@ -279,7 +279,7 @@ class Events extends React.Component {
               />
               <h5 className="card-title d-block mb-1  ">Link</h5>
               <p className="card-text d-block mb-2">{event.link}</p>
-              {event.localizacao !== "" ? (
+              {event.localizacao !== null ? (
                 <div>
                   <h5 className="card-title d-block mb-1 ">Data do evento:</h5>
                   <p className="card-text d-block mb-2 ">{`${

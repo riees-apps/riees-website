@@ -5,7 +5,7 @@ import uvv from "./imgs/img2.jpg";
 import ifes from "./imgs/vilavelha.jpg";
 import ucl from "./imgs/vitoria.jpg";
 import EventCard from "../EventCard/index";
-import {FormattedMessage} from 'react-intl'
+import { FormattedMessage } from "react-intl";
 
 import "./index.css";
 
@@ -22,7 +22,7 @@ const DivEvents = styled.div`
   padding: 5% 0;
   @media (max-width: 768px) {
     padding: 5% 0;
-    width:  90vw;
+    width: 90vw;
     justify-content: space-between;
   }
   ${props =>
@@ -84,7 +84,7 @@ const Check = styled.div`
 `;
 const Heading = styled.h1`
   font-family: "Poppins", sans-serif;
-  text-transform:uppercase;
+  text-transform: uppercase;
   margin: 0;
   background: ${props => props.background || "#fafafa"};
   text-align: center;
@@ -128,12 +128,12 @@ const Form = styled.div`
   margin: 0;
   margin-left: auto;
   @media (max-width: 768px) {
-    width:100%;
-    margin:auto;
+    width: 100%;
+    margin: auto;
     margin: 2vh 0;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items:center;
+    align-items: center;
     justify-content: center;
   }
   h1 {
@@ -145,7 +145,7 @@ const Form = styled.div`
       font-size: 0.3em;
       line-height: 0.1em;
       margin: auto 2vw auto 0.5vw;
-  }
+    }
   }
   ${props =>
     props.active &&
@@ -189,7 +189,7 @@ class Events extends Component {
   constructor() {
     super();
     this.state = {
-      events:[],
+      events: [],
       page: 1,
       initial: 0,
       final: 3,
@@ -209,14 +209,18 @@ class Events extends Component {
     if (this.state.active === "all") {
       return true;
     } else if (this.state.active === "events") {
-      return event.props.placeEvent !== "";
+      return event.props.placeEvent !== null;
     } else if (this.state.active === "news") {
-      return event.props.placeEvent === "";
+      return event.props.placeEvent === null;
     }
   };
-  
+  filtroDeleted = item => {
+    if (item.deletedAt > 0) {
+      return false;
+    } else return true;
+  };
   render() {
-    const eventos = this.props.eventos;
+    const eventos = this.props.eventos.filter(this.filtroDeleted.bind(this));
     const renderEvents = () => {
       return eventos.map(evento => (
         <EventCard
@@ -232,9 +236,15 @@ class Events extends Component {
           ano={new Date(evento.dataInicio).getFullYear()}
           mes={months[new Date(evento.dataInicio).getMonth()]}
           dia={new Date(evento.dataInicio).getDate()}
-          anoFim={evento.dataFim !== 0 ? new Date(evento.dataFim).getFullYear() : 0 }
-          mesFim={evento.dataFim !== 0 ?  months[new Date(evento.dataFim).getMonth()] : 0}
-          diaFim={evento.dataFim !== 0 ?  new Date(evento.dataFim).getDate() : 0}
+          anoFim={
+            evento.dataFim !== 0 ? new Date(evento.dataFim).getFullYear() : 0
+          }
+          mesFim={
+            evento.dataFim !== 0
+              ? months[new Date(evento.dataFim).getMonth()]
+              : 0
+          }
+          diaFim={evento.dataFim !== 0 ? new Date(evento.dataFim).getDate() : 0}
           hora={addZero(new Date(evento.dataInicio).getHours())}
           minuto={addZero(new Date(evento.dataInicio).getMinutes())}
         />
@@ -309,7 +319,9 @@ class Events extends Component {
     return (
       <div style={{ zIndex: "100", position: "relative" }}>
         <DivHeading className={this.props.larger ? "" : "displayNone"}>
-          <Heading background="#f4f4f4"><FormattedMessage id="News"/></Heading>
+          <Heading background="#f4f4f4">
+            <FormattedMessage id="News" />
+          </Heading>
           <Form>
             <Form
               onClick={() => this.handleClick("all")}
@@ -317,7 +329,9 @@ class Events extends Component {
               style={{ width: "max-content" }}
             >
               <Check active={this.state.active === "all" ? true : false} />
-              <h1><FormattedMessage id="News"/></h1>
+              <h1>
+                <FormattedMessage id="News" />
+              </h1>
             </Form>
             <Form
               onClick={() => this.handleClick("events")}
@@ -325,7 +339,9 @@ class Events extends Component {
               style={{ width: "max-content" }}
             >
               <Check active={this.state.active === "events" ? true : false} />
-              <h1><FormattedMessage id="Events"/></h1>
+              <h1>
+                <FormattedMessage id="Events" />
+              </h1>
             </Form>
             <Form
               onClick={() => this.handleClick("news")}
@@ -333,7 +349,9 @@ class Events extends Component {
               style={{ width: "max-content" }}
             >
               <Check active={this.state.active === "news" ? true : false} />
-              <h1><FormattedMessage id="New"/></h1>
+              <h1>
+                <FormattedMessage id="New" />
+              </h1>
             </Form>
           </Form>
         </DivHeading>
@@ -374,7 +392,8 @@ class Events extends Component {
               }`}
             />
             <h1 className={` ${this.props.larger ? "h1Pages" : "displayNone"}`}>
-              <FormattedMessage id="Page"/> {this.state.page} <FormattedMessage id="Of"/>{" "}
+              <FormattedMessage id="Page" /> {this.state.page}{" "}
+              <FormattedMessage id="Of" />{" "}
               {Math.ceil(events.length / this.props.final)}
             </h1>
             <i

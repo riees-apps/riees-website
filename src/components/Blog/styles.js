@@ -27,8 +27,7 @@ export const Card = styled.div`
     padding-bottom:10vh;
     border-bottom: 1px solid #999;
     background-color: #f4f4f4;
-    width:105%;
-    margin-left:10%;
+    width:100%;
     height: 30vh;
     display: flex;
     flex-direction: row;
@@ -41,7 +40,7 @@ export const Card = styled.div`
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      width: 110%;
+      width: 100%;
       height: 50vh;
   }
   `}
@@ -328,8 +327,8 @@ export const DivPosts = styled.div`
     props.side &&
     `
     width: 90vw;
-    padding-left:12.5%;
-    
+    margin: 0;
+    padding-left:11%;
     padding-bottom: 5%;
     padding-top: 10vh;
     display: flex;
@@ -338,8 +337,8 @@ export const DivPosts = styled.div`
     align-items: center;
     justify-content: space-between;
     @media (max-width: 600px) {
-    
-    width: 100%;
+      padding:10vh 5vw;
+      width: 100vw;
     justify-content: center;
   }
   `}

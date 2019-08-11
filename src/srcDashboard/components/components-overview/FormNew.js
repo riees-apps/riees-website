@@ -78,7 +78,7 @@ class FormNew extends Component {
             api.post("/evento", {
               nome: nome,
               descricao: descricao,
-              data: newDate,
+              dataInicio: newDate,
               link: link,
               admin: admin,
               capa: res.data._id
