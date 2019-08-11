@@ -48,6 +48,10 @@ class Mapa extends Component {
           lat: this.props.lat,
           lng: this.props.long
         }}
+        center={{
+          lat: this.props.lat,
+          lng: this.props.long
+        }}
         zoom={18}
         onClick={this.onMapClicked}
       >

@@ -1,6 +1,6 @@
 {
   "name": "riees",
-  "version": "0.24.0",
+  "version": "0.24.2",
   "private": true,
   "engines": {
     "node": "^12.8.0"
