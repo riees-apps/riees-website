@@ -309,6 +309,7 @@ class Institute extends Component {
     const cursos = this.props.cursos.filter(this.filtro.bind(this));
     const name = this.props.name.split("-")[0];
     const sub = this.props.name.split("-")[1];
+    console.log(unidades[this.state.unidade])
     return (
       <div>
         <Image
@@ -504,7 +505,7 @@ class Institute extends Component {
                     ? ""
                     : unidades[this.state.unidade].cep}
                 </Text2>
-                <Text className={unidades[this.state.unidade].complemento ? '' : 'displayNone'}>
+                <Text className={unidades[this.state.unidade].complemento !== ' ' ? '' : 'displayNone'}>
                   <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
                   {unidades.length === 0
                     ? ""
