@@ -89,13 +89,13 @@ class Institutes extends React.Component {
   };
 
   componentDidMount() {
-    api.get('/instituicao?where={"deletedAt":0}').then(res => {
+    api.get('/instituicao?deletedAt=0&populate=cursos,unidades,admin').then(res => {
       const inst = res.data;
       this.setState({ institutes: inst });
     });
   }
   componentDidUpdate() {
-    api.get('/instituicao?where={"deletedAt":0}').then(res => {
+    api.get('/instituicao?deletedAt=0&populate=cursos,unidades,admin').then(res => {
       const inst = res.data;
       this.setState({ institutes: inst });
     });

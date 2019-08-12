@@ -85,7 +85,7 @@ class Routes extends Component {
   }
   componentDidMount() {
     api
-      .get('/instituicao?where={"deletedAt":0}')
+      .get('/instituicao?deletedAt=0&populate=cursos,unidades,admin')
       .then(res => {
         const inst = res.data;
         

@@ -273,7 +273,13 @@ class Institute extends Component {
     } else return true;
   };
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log(this.props.location.state);
+    if (typeof this.props.location.state != "undefined") {
+      if (this.props.location.state.scrollTop === 0) {
+        document.documentElement.scrollTop = this.props.location.state.scrollTop;
+      }
+    }
     this.props.cursos.filter(this.filtro.bind(this)).map(curso => {
       const newArea = this.state.areas;
 
@@ -286,12 +292,6 @@ class Institute extends Component {
       .then(res => {
         this.setState({ unidadesComCidades: res.data });
       });
-
-    if (typeof this.props.location.state != "undefined") {
-      if (this.props.location.state.scrollTop === 0) {
-        document.documentElement.scrollTop = this.props.location.state.scrollTop;
-      }
-    }
   }
 
   render() {
@@ -309,7 +309,6 @@ class Institute extends Component {
     const cursos = this.props.cursos.filter(this.filtro.bind(this));
     const name = this.props.name.split("-")[0];
     const sub = this.props.name.split("-")[1];
-    console.log(unidades[this.state.unidade])
     return (
       <div>
         <Image
@@ -345,7 +344,9 @@ class Institute extends Component {
           <DivText>
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81"><FormattedMessage id="description" /></Heading>
+              <Heading color="#003b81">
+                <FormattedMessage id="description" />
+              </Heading>
             </Div>
             <div
               className="innerHTMLInstitute"
@@ -353,7 +354,9 @@ class Institute extends Component {
             />
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81"><FormattedMessage id="mission" /></Heading>
+              <Heading color="#003b81">
+                <FormattedMessage id="mission" />
+              </Heading>
             </Div>
             <div
               className="innerHTMLInstitute"
@@ -361,7 +364,9 @@ class Institute extends Component {
             />
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81"><FormattedMessage id="contact" /></Heading>
+              <Heading color="#003b81">
+                <FormattedMessage id="contact" />
+              </Heading>
             </Div>
 
             <Text>
@@ -388,7 +393,9 @@ class Institute extends Component {
 
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81"><FormattedMessage id="social media" /></Heading>
+              <Heading color="#003b81">
+                <FormattedMessage id="social media" />
+              </Heading>
             </Div>
             <div className="divIcons">
               <a
@@ -505,7 +512,13 @@ class Institute extends Component {
                     ? ""
                     : unidades[this.state.unidade].cep}
                 </Text2>
-                <Text className={unidades[this.state.unidade].complemento !== ' ' ? '' : 'displayNone'}>
+                <Text
+                  className={
+                    unidades[this.state.unidade].complemento !== " "
+                      ? ""
+                      : "displayNone"
+                  }
+                >
                   <i className={`fas fa-map-marker-alt iconInstitute`} />{" "}
                   {unidades.length === 0
                     ? ""

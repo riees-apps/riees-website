@@ -20,9 +20,7 @@ class Mapa extends Component {
       selectedPlace: {}
     };
   }
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-  }
+
   onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,

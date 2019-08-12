@@ -6,7 +6,7 @@ import { FormattedMessage } from "react-intl";
 import Collapse from "@material-ui/core/Collapse";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
-import api from '../../api/api'
+import api from "../../api/api";
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -107,9 +107,9 @@ const DivMenu = styled.div`
   margin-top: 2.5vh;
   @media (max-width: 768px) {
     display: none;
-    background-attachment: scroll
+    background-attachment: scroll;
   }
-  `;
+`;
 const Heading = styled.h1`
   font-family: "Poppins", Helvetica, Arial, sans-serif;
   color: #fff;
@@ -172,7 +172,6 @@ class SideMenu extends Component {
     const active = this.especialCharMask(window.location.pathname.split("/")[3])
       .split("%20")
       .join(" ");
-    console.log(active);
     this.setState({
       ...this.state,
       active: active,
@@ -180,12 +179,12 @@ class SideMenu extends Component {
     });
   }
   handleClick2(i) {
-    if(this.props.myDivToFocus.current){
-      this.props.myDivToFocus.current.scrollIntoView({ 
-         behavior: "smooth", 
-         block: "nearest"
-      })
-  }
+    if (this.props.myDivToFocus.current) {
+      this.props.myDivToFocus.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
     this.setState({
       ...this.state,
       active2: i
@@ -211,7 +210,7 @@ class SideMenu extends Component {
       return false;
     } else return true;
   };
-  componentWillMount() {
+  componentDidMount() {
     var path = this.especialCharMask(window.location.pathname.split("/")[3]);
     this.setState({
       ...this.state,
@@ -258,15 +257,17 @@ class SideMenu extends Component {
         <DivLink>
           <DivLink3>
             <StyledLink
-              onClick={() => this.handleClick}
+              onClick={this.handleClick}
               active={
                 this.state.active === `${link.nome.split("%20").join(" ")}`
+                  ? true
+                  : false
               }
               to={{
                 pathname: `/${window.location.pathname.split("/")[1]}/${page}/${
                   link.nome
                 }`,
-                state: { scrollTop: 1}
+                state: { scrollTop: 1 }
               }}
             >
               {link.nome.split("-")[0]}
