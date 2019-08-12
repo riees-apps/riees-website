@@ -8,7 +8,7 @@ import {
   Subheading,
   Details,
   SubTitle,
-  SubTitleParagraph,
+  Badges,
   Container,
   DivText,
   Heading,
@@ -53,7 +53,10 @@ class Post extends Component {
           }`}
         >
           <div>
-            <Badge>{tags[0]}</Badge>
+            <Badges>
+              <Badge>{tags[0]}</Badge>
+              <Badge className={typeof tags[1] !== "undefined" ? "" : "displayNone"} >{tags[1]}</Badge>
+            </Badges>
             <Title>{titulo}</Title>
             <Subheading
               className={typeof dateEvent === "undefined" ? "" : "displayNone"}

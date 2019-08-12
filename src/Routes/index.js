@@ -4,7 +4,7 @@ import ReactLoading from "react-loading";
 import "./routes.css";
 import api from "../api/api";
 
-import { isAuthenticated } from "../api/auth";
+import { isAuthenticated , logout} from "../api/auth";
 
 import Members from '../Institutes/index.js'
 import Dashboard from "../srcDashboard/App.js";
@@ -40,7 +40,7 @@ const LANGUAGES = {
 };
 
 const MultiLanguageRoute = props => {
-  const defaultLanguage = LANGUAGES.pt.urlLang;
+  const defaultLanguage = LANGUAGES.en.urlLang;
   const hasLang = props.computedMatch.params.lang;
   const is404Page = props.path;
   const isBasePathWithoutLang = props.path === "/";

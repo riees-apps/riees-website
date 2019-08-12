@@ -197,6 +197,14 @@ export const Container = styled.div`
   z-index: 100;
   position: relative;
 `;
+export const Badges = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding-left:10%;
+`;
 export const Details = styled.h1`
   text-align: start;
   font-weight: 500;
@@ -226,7 +234,7 @@ export const Badge = styled.h1`
   width: max-content;
   height: max-content;
   padding: 1vh 0 1vh 1vh;
-  margin-left: 10%;
+  margin-right: 2.5%;
   padding: 1vh;
   background-color: #f4f4f4;
   color: #606060;

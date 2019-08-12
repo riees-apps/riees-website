@@ -87,7 +87,9 @@ class Admin extends Component {
             "/admin/auth",
             { senha: password, email: email }
           ).then(response => {
-				login(response.data.token);
+            console.log(response.data)
+            console.log(response.data.id)
+				login(response.data.id);
 				this.props.history.push({
 				pathname: "/en/dashboard/show-institutes",
 				state: { detail: response.data.id}

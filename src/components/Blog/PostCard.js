@@ -19,7 +19,7 @@ const Badge = styled.h1`
   height: max-content;
   letter-spacing: 1px;
   padding: 1vh 1.5vh;
-  margin: -1% 0 1% 1%;
+  margin: -1% 1% 1% 1%;
   background-color: #0077ff;
   color: #fafafa;
   @media (max-width: 768px) {
@@ -32,7 +32,13 @@ const Badge = styled.h1`
     background-color: transparent;
   }
 `;
-
+export const Badges = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+`;
 const Date = styled.h1`
   font-family: "Poppins", sans-serif;
   display: flex;
@@ -109,7 +115,7 @@ export default class EventCard extends Component {
       <Card side={this.props.side} larger={this.props.larger}>
         <CardImg
           style={{ textDecoration: "none" }}
-          side={this.props.side} 
+          side={this.props.side}
           larger={this.props.larger}
           to={`/${window.location.pathname.split("/")[1]}/Post/${
             this.props.id
@@ -123,12 +129,15 @@ export default class EventCard extends Component {
             {`${this.props.dia} ${this.props.mes}, ${this.props.ano}`}
           </Date>
         </CardImg>
-        <CardBody side={this.props.side} 
-          larger={this.props.larger}>
-          <Badge>{this.props.tag}</Badge>
+        <CardBody side={this.props.side} larger={this.props.larger}>
+          <Badges>
+            <Badge>{this.props.tag[0]}</Badge>
+            <Badge className={typeof this.props.tag[1] !== "undefined" ? "" : "displayNone"} >{this.props.tag[1]}</Badge>
+          </Badges>
+
           <Title>{this.props.title}</Title>
 
-          <div style={{width:'100%'}}>
+          <div style={{ width: "100%" }}>
             <Text>{this.props.text}</Text>
           </div>
 

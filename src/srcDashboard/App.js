@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import routes from "./routes";
 import withTracker from "./withTracker";
-
+import {logout} from '../api/auth'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
 
 export default class App extends Component {
   render() {
-    console.log(typeof(this.props.location.state))
+    logout()
     return (
       <Router basename={process.env.REACT_APP_BASENAME || ""}>
         <div>
@@ -22,7 +22,6 @@ export default class App extends Component {
                 component={withTracker(props => {
                   return (
                     <route.layout {...props}>
-
                       <route.component {...props} adminId={typeof(this.props.location.state) !== 'undefined' ? this.props.location.state.detail : '5cfbd9a662c83a0017992ba1'} />
                     </route.layout>
                   );

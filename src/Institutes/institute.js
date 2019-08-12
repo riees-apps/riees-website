@@ -4,7 +4,7 @@ import Footer from "../components/Footer/index";
 import SideMenu from "../components/SideMenu/index";
 import AreaCard from "../components/AreaCard/index";
 import Button from "../components/Button/index";
-import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 import Mapa from "../components/Map/Map";
 import api from "../api/api";
 
@@ -345,7 +345,7 @@ class Institute extends Component {
           <DivText>
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81">description</Heading>
+              <Heading color="#003b81"><FormattedMessage id="description" /></Heading>
             </Div>
             <div
               className="innerHTMLInstitute"
@@ -353,7 +353,7 @@ class Institute extends Component {
             />
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81">mission</Heading>
+              <Heading color="#003b81"><FormattedMessage id="mission" /></Heading>
             </Div>
             <div
               className="innerHTMLInstitute"
@@ -361,7 +361,7 @@ class Institute extends Component {
             />
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81">contact</Heading>
+              <Heading color="#003b81"><FormattedMessage id="contact" /></Heading>
             </Div>
 
             <Text>
@@ -388,7 +388,7 @@ class Institute extends Component {
 
             <Div justify="flex-start">
               <Heading color="#303033">{name}</Heading>
-              <Heading color="#003b81">social media</Heading>
+              <Heading color="#003b81"><FormattedMessage id="social media" /></Heading>
             </Div>
             <div className="divIcons">
               <a

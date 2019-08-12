@@ -141,7 +141,7 @@ class City extends Component {
           <DivText>
             <Div justify="flex-start">
               <Heading color='#303033'>{name}</Heading>
-              <Heading  color="#003b81"><FormattedMessage id="Description"/></Heading>
+              <Heading  color="#003b81"><FormattedMessage id="description"/></Heading>
             </Div>
             <DivImg>
               <Img src={img1} alt="" />

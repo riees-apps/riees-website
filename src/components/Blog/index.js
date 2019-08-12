@@ -82,7 +82,7 @@ class Blog extends Component {
           capa={post.capa}
           title={post.titulo}
           text={post.resumo}
-          tag={post.tags[0]}
+          tag={post.tags}
           img={ufes}
           ano={new Date(post.data).getFullYear()}
           mes={months[new Date(post.data).getMonth()]}
