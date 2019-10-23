@@ -246,22 +246,7 @@ class Home extends Component {
             <FormattedMessage id="About" />
           </Heading>
           <Text>
-            Aut molestiae velit id maxime accusantium. Dolorem qui ab
-            accusantium qui et et tenetur facilis. Quia odio hic ea qui
-            molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
-            sequi. Voluptatem reiciendis sed perspiciatis. Consequatur a
-            voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
-            temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
-            consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
-            laudantium culpa similique. Vero dignissimos labore quos consequatur
-            explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
-            ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
-            sequi. Eos aspernatur hic. Nobis autem vel non. Aut molestiae velit
-            id maxime accusantium. Dolorem qui ab accusantium qui et et tenetur
-            facilis. Quia odio hic ea qui molestias minima. Asperiores corrupti
-            id qui rem. Ea a consecteturPlaceat voluptatem corporis ea ipsam
-            alias. Et sit consequatur in nisi voluptatum tempore est sequi. Eos
-            aspernatur hic. Nobis autem vel non. sequi.
+            <FormattedMessage id="AboutResume" />
           </Text>
           <Button url="/About" name={<FormattedMessage id="Button" />} />
         </DivText>
