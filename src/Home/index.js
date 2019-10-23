@@ -4,10 +4,10 @@ import Button from "../components/Button/index";
 import Footer from "../components/Footer/index";
 import "./home.css";
 import styled from "styled-components";
-import img from "./opa.jpg";
+import img from "./vix.jpg";
 import img2 from "./ei.jpg";
 import img6 from "./mapa.png";
-import img3 from "./ee.jpg";
+import img3 from "./opa.jpg";
 import img4 from "./oi.jpg";
 import img5 from "./ola.jpg";
 import InstituteImages from "../components/Institutes/index";
@@ -179,28 +179,19 @@ class Home extends Component {
                 <BouncyDiv>
                   <Title><FormattedMessage id="Come" /></Title>
                 </BouncyDiv>
-                <BouncyDiv2>
+                <BouncyDiv2 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
                   <Title><FormattedMessage id="to" /></Title>
                 </BouncyDiv2>
                 <BouncyDiv3>
                   <Title><FormattedMessage id="meet" /></Title>
                 </BouncyDiv3>
-                <BouncyDiv4 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
-                  <Title><FormattedMessage id="us" /></Title>
-                </BouncyDiv4>
               </DivTitle>
 
               <BouncyDiv5>
                 <Subheading>
-                  Etiam cursus elementum ante a porttitor.
+                  VITÓRIA
                 </Subheading>
               </BouncyDiv5>
-              <BouncyDiv6>
-                <Button
-                  url="/Institutes"
-                  name={<FormattedMessage id="Button" />}
-                />
-              </BouncyDiv6>
             </Imagee>
           </Carousel.Item>
           <Carousel.Item>
@@ -216,27 +207,18 @@ class Home extends Component {
                 <BouncyDiv>
                   <Title><FormattedMessage id="Come" /></Title>
                 </BouncyDiv>
-                <BouncyDiv2>
+                <BouncyDiv2 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
                   <Title><FormattedMessage id="to" /></Title>
                 </BouncyDiv2>
                 <BouncyDiv3>
                   <Title><FormattedMessage id="meet" /></Title>
                 </BouncyDiv3>
-                <BouncyDiv4 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
-                  <Title><FormattedMessage id="us" /></Title>
-                </BouncyDiv4>
               </DivTitle>
               <BouncyDiv5>
                 <Subheading>
-                  Etiam cursus elementum ante a porttitor.
+                  PEDRA AZUL
                 </Subheading>
               </BouncyDiv5>
-              <BouncyDiv6>
-                <Button
-                  url="/Institutes"
-                  name={<FormattedMessage id="Button" />}
-                />
-              </BouncyDiv6>
             </Imagee>
           </Carousel.Item>
         </Carousel>
