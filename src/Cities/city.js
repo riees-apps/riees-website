@@ -132,7 +132,6 @@ class City extends Component {
   }
   render() {
     const { name, id, capa, Cidades, places, descricao } = this.props;
-    console.log(capa)
     return (
       <div style={{background:'#f4f4f4'}}>
         <Image title={name} height="100vh" image={`https://riees-api.herokuapp.com/bucket/${capa !== null ? capa : ''}`} />

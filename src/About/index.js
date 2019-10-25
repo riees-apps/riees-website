@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import {FormattedMessage} from 'react-intl'
 import img from "./oi.jpg";
-import img2 from "./opa.jpg";
+import img2 from "./oi.jpg";
+import img3 from "./palacio.jpg";
 import Image from "../components/Image/index";
 import Footer from "../components/Footer/index";
+import fapes from "./oie_transparent2.png";
+import governo from "./Brasao_Governo_horizontal_white_right_small.png";
 
 const DivText = styled.div`
   background-color: #fafafa;
@@ -14,6 +17,36 @@ const DivText = styled.div`
   justify-content: center;
   width: 100%;
   padding: 5vh 0;
+`;
+const DivText2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding: 5vh 0;
+`;
+const Logo = styled.img`
+  max-width: 100%;
+  margin: 15px;
+  transition: all 0.2s linear;
+  :hover {
+    cursor:pointer;
+    transition: all 0.2s linear;
+    transform:scale(1.03)
+  }
+  @media (max-width: 768px) {
+    width: 120%;
+  }
+`;
+const DivLogo = styled.div`
+  color: #f1f1f1;
+  display: block;
+  height:auto;
+  width:65%;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: center;
 `;
 const DivImage = styled.div`
   padding: 5vh 0;
@@ -61,6 +94,31 @@ const Text = styled.h1`
     letter-spacing:0.5px;
   }
 `;
+const Text2 = styled.li`
+  font-family: 'Raleway', sans-serif;
+  font-size: calc(11px + 1vw);
+  color: ${props => props.color};
+  font-weight: lighter;
+  margin-bottom:1.5vh;
+  line-height: calc(12px + 1vw);
+  letter-spacing: 0.25px;
+  width: 100%;
+  text-align: start;
+`;
+const Text3 = styled.h1`
+  color: #FFF;
+  font-family: "Raleway", sans-serif;
+  font-size: calc(11px + 1vw);
+  line-height: calc(12px + 1vw);
+  letter-spacing:0.25px;
+  font-weight: lighter;
+  width: 100%;
+  @media (max-width: 600px) {
+    font-size: calc(10px + 1vw);
+    line-height: calc(11px + 1vw);
+    letter-spacing:0.5px;
+  }
+`;
 const Div = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,38 +135,12 @@ class About extends Component {
   render() {
     return (
       <div>
-        <Image title={<FormattedMessage id="About"/>} height="100vh" image={img} />
+        <Image title={<FormattedMessage id="RIEES"/>} height="60vh" image={img} />
         <DivText>
           <Heading border='pink' color='#0077ff'><FormattedMessage id="Who"/></Heading>
           <Div >
             <Text color='#505050'>
-              Quasi excepturi provident. Ratione laborum nulla sint. Quas et
-              perspiciatis iusto. Similique magnam exercitationem vero velit
-              quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
-              deserunt aut neque provident. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime. Dolore quis expedita vitae quam totam
-              corrupti libero. Itaque qui autem eum. Delectus necessitatibus
-              molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
-              voluptas velit.
-            </Text>
-            <Text color='#505050'>
-              Similique magnam exercitationem vero velit quis quas incidunt
-              animi et. Doloribus voluptatibus at et. Cum aut deserunt aut neque
-              provident.Quasi excepturi provident. Ratione laborum nulla sint.
-              Quas et perspiciatis iusto. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime. Dolore quis expedita vitae quam totam
-              corrupti libero. Itaque qui autem eum. Delectus necessitatibus
-              molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
-              voluptas velit.
-            </Text>
-            <Text color='#505050'>
-              Itaque qui autem eum. Delectus necessitatibus molestias. Ut ipsam
-              accusamus labore molestiae ut tenetur quia voluptas
-              velit.Similique magnam exercitationem vero velit quis quas
-              incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
-              aut neque provident.Quasi excepturi provident. Ratione laborum
-              nulla sint. Quas et perspiciatis iusto. Nostrum ea sunt.
-              Necessitatibus quia rem consequatur maxime.
+              Criada em 26 de julho de 2017 a RIEES objetiva-se em se estruturar e se consolidar como organismo de cooperação internacional de educação no estado do Espírito Santo, por meio do qual as instituições de ensino e pesquisa possam desenvolver ações de internacionalização de forma conjunta.
             </Text>
           </Div>
         </DivText>
@@ -116,73 +148,69 @@ class About extends Component {
           x="0.6"
           image={img2}
         >
-          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="Mission"/></Heading>
+          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="objetivos-especificos"/></Heading>
           <Div >
-            <Text color='#fafafa'>
-              Quasi excepturi provident. Ratione laborum nulla sint. Quas et
-              perspiciatis iusto. Similique magnam exercitationem vero velit
-              quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
-              deserunt aut neque provident. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime. Dolore quis expedita vitae quam totam
-              corrupti libero. Itaque qui autem eum. Delectus necessitatibus
-              molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
-              voluptas velit.
-            </Text>
-            <Text color='#fafafa'>
-              Similique magnam exercitationem vero velit quis quas incidunt
-              animi et. Doloribus voluptatibus at et. Cum aut deserunt aut neque
-              provident.Quasi excepturi provident. Ratione laborum nulla sint.
-              Quas et perspiciatis iusto. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime. Dolore quis expedita vitae quam totam
-              corrupti libero. Itaque qui autem eum. Delectus necessitatibus
-              molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
-              voluptas velit.
-            </Text>
-            <Text color='#fafafa'>
-              Itaque qui autem eum. Delectus necessitatibus molestias. Ut ipsam
-              accusamus labore molestiae ut tenetur quia voluptas
-              velit.Similique magnam exercitationem vero velit quis quas
-              incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
-              aut neque provident.Quasi excepturi provident. Ratione laborum
-              nulla sint. Quas et perspiciatis iusto. Nostrum ea sunt.
-              Necessitatibus quia rem consequatur maxime.
-            </Text>
+            <Text2 color='#fafafa'>
+              Estruturar os escritórios de relações internacionais da IEs participantes;
+            </Text2>
+            <Text2 color='#fafafa'>
+              Qualificar recursos humanos vinculados às IEs capixabas;
+            </Text2>
+            <Text2 color='#fafafa'>
+              Estruturar e fortalecer relações internacionais;
+            </Text2>
+            <Text2 color='#fafafa'>
+              Prospectar e atrair para o ES pesquisadores e jovens talentos, fundos internacionais, empresas e indústrias, aumentando a visibilidade do ecossistema de ensino, pesquisa, e inovação tecnológica e social do ES;
+            </Text2>
+            <Text2 color='#fafafa'>
+              Acompanhar ações de internacionalização das IEs participantes.
+            </Text2>
           </Div>
         </DivImage>
         <DivText>
-          <Heading border='pink' color='#0077ff'>Lorem Ipsum</Heading>
+          <Heading border='pink' color='#0077ff'><FormattedMessage id="colabora-participa"/></Heading>
           <Div>
-            <Text color='#505050'>
-              Quasi excepturi provident. Ratione laborum nulla sint. Quas et
-              perspiciatis iusto. Similique magnam exercitationem vero velit
-              quis quas incidunt animi et. Doloribus voluptatibus at et. Cum aut
-              deserunt aut neque provident. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime. Dolore quis expedita vitae quam totam
-              corrupti libero. Itaque qui autem eum. Delectus necessitatibus
-              molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
-              voluptas velit.
-            </Text>
-            <Text color='#505050'>
-              Similique magnam exercitationem vero velit quis quas incidunt
-              animi et. Doloribus voluptatibus at et. Cum aut deserunt aut neque
-              provident.Quasi excepturi provident. Ratione laborum nulla sint.
-              Quas et perspiciatis iusto. Nostrum ea sunt. Necessitatibus quia
-              rem consequatur maxime. Dolore quis expedita vitae quam totam
-              corrupti libero. Itaque qui autem eum. Delectus necessitatibus
-              molestias. Ut ipsam accusamus labore molestiae ut tenetur quia
-              voluptas velit.
-            </Text>
-            <Text color='#505050'>
-              Itaque qui autem eum. Delectus necessitatibus molestias. Ut ipsam
-              accusamus labore molestiae ut tenetur quia voluptas
-              velit.Similique magnam exercitationem vero velit quis quas
-              incidunt animi et. Doloribus voluptatibus at et. Cum aut deserunt
-              aut neque provident.Quasi excepturi provident. Ratione laborum
-              nulla sint. Quas et perspiciatis iusto. Nostrum ea sunt.
-              Necessitatibus quia rem consequatur maxime.
-            </Text>
+            <Text2>
+              Ações conjuntas, incluindo organização de missões para o exterior e o recebimento de delegações estrangeiras no Espírito Santo;
+            </Text2>
+            <Text2>
+              Seminários e encontros para discussão da cooperação acadêmica, científica e tecnológica;
+            </Text2>
+            <Text2>
+              Meios de facilitar a cooperação entre os responsáveis pela internacionalização das instituições de ensino espírito-santenses, promovendo a ampliação das redes de relacionamento e desenvolvimento profissional;
+            </Text2>
+            <Text2>
+              O incentivo, a promoção e a realização de congressos, conferências, fóruns, seminários, cursos e outros eventos, bem como ações junto à sociedade visando a sensibilização e conscientização da importância estratégica da experiência ou vivência internacional.
+            </Text2>
           </Div>
         </DivText>
+        <DivImage
+          x="0.75"
+          image={img3}
+        >
+          <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="Support"/></Heading>
+          <DivLogo>
+            <a href="https://www.es.gov.br/" target="_blank"><Logo src={governo}/></a>
+            <a href="https://fapes.es.gov.br/" target="_blank"><Logo src={fapes}/></a>
+          </DivLogo>
+          <DivText2>
+            <Text color='#fafafa'>
+              <FormattedMessage id="Development"/>:
+            </Text>
+            <Text color='#fafafa'>
+              Adrian Espindula Lübe - <FormattedMessage id="ProjectManager"/>
+            </Text>
+            <Text color='#fafafa'>
+              Ericles Pereira Brum - <FormattedMessage id="Development"/>
+            </Text>
+            <Text color='#fafafa'>
+              Évson Custódio Oliveira - <FormattedMessage id="Development"/>
+            </Text>
+            <Text color='#fafafa'>
+              Lucas Quintino Frinhani - <FormattedMessage id="Development"/>
+            </Text>
+          </DivText2>
+        </DivImage>
         <Footer/>
       </div>
     );

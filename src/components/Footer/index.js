@@ -104,6 +104,7 @@ const DivLogo = styled.div`
   
 `;
 const Title = styled.h1`
+  text-transform: uppercase;
   text-align: start;
   color: #fff;
   font-weight: bolder;
@@ -147,7 +148,7 @@ class Footer extends Component {
           <Text>Avenida Fernando Ferrari,514</Text>
           <Text>Vitória/ES-Brasil.</Text>
           <Text>CEP 29075-910</Text>
-          <Text>+55 27 40092046 / +55 27 31459205</Text>
+          <Text><a href="mailto:app.riees@gmail.com">app.riees@gmail.com</a></Text>
           <StyledLink
             style={{ color: "#0077ff" }}
             to={`/${window.location.pathname.split("/")[1]}/Contact`}
@@ -188,7 +189,7 @@ class Footer extends Component {
           </StyledLink>
         </DivText>
         <DivText active>
-          <Title>APOIO</Title>
+          <Title><FormattedMessage id="Support"/></Title>
           <DivLogo>
             <a href="https://fapes.es.gov.br/" target="_blank"><Logo src={fapes}/></a>
             <a href="https://www.es.gov.br/" target="_blank"><Logo src={governo}/></a>

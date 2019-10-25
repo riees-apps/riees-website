@@ -139,7 +139,7 @@ class Coming extends Component {
   render() {
     return (
       <div>
-        <Image x='0.5' height="80vh" image={img} >
+        <Image x='0.5' height="60vh" image={img} >
             <Title><FormattedMessage id="Coming"/></Title>
         </Image>
         <DivText>

@@ -72,21 +72,9 @@ class Cities extends Component {
   render() {
     return (
       <div style={{background:'#fafafa'}}>
-      <Img height="100vh" image={img3} title={<FormattedMessage id="Cities"/>}/>
+      <Img height="60vh" image={img3} title={<FormattedMessage id="Cities"/>}/>
 
-      <Div>
-          <Title color='#0077ff'><FormattedMessage id="CitiesTitle"/></Title>
-        </Div>
-        <DivText>
-          <Heading>
-            In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam
-            ullam possimus voluptas. Corrupti officia beatae hic omnis porro
-            dignissimos voluptas aliquid. Illum quis labore est. Recusandae qui
-            ut at qui consequatur quia omnis eos beatae. In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam
-            ullam possimus voluptas. Corrupti officia beatae hic omnis porro
-            dignissimos.
-          </Heading>
-        </DivText>
+
       <CitiesImages Cities={this.props.Cidades.filter(this.filtro.bind(this))} />
       <Footer/>
       </div>

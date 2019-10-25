@@ -5,11 +5,13 @@ import Footer from "../components/Footer/index";
 import "./home.css";
 import styled from "styled-components";
 import img from "./vix.jpg";
-import img2 from "./ei.jpg";
+import img2 from "./vix-airport.jpg";
+import img3 from "./pedraazul2.jpg";
+import img4 from "./vixeditada.png";
+import img5 from "./mestrealvaro.jpg";
 import img6 from "./mapa.png";
-import img3 from "./opa.jpg";
-import img4 from "./oi.jpg";
-import img5 from "./ola.jpg";
+import img7 from "./vilavelha.jpg";
+import img8 from "./colatina.jpg";
 import InstituteImages from "../components/Institutes/index";
 import Events from "../components/Events/index";
 import Testimonial from "../components/Testimonial/index";
@@ -198,6 +200,34 @@ class Home extends Component {
             <Imagee
               x="0.35"
               height="100vh"
+              image={img7}
+              brightness="120%"
+              align="center"
+              justify="center"
+            >
+              <DivTitle>
+                <BouncyDiv>
+                  <Title><FormattedMessage id="Come" /></Title>
+                </BouncyDiv>
+                <BouncyDiv2 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
+                  <Title><FormattedMessage id="to" /></Title>
+                </BouncyDiv2>
+                <BouncyDiv3>
+                  <Title><FormattedMessage id="meet" /></Title>
+                </BouncyDiv3>
+              </DivTitle>
+
+              <BouncyDiv5>
+                <Subheading>
+                  VILA VELHA
+                </Subheading>
+              </BouncyDiv5>
+            </Imagee>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Imagee
+              x="0.35"
+              height="100vh"
               image={img3}
               brightness="145%"
               align="center"
@@ -221,6 +251,60 @@ class Home extends Component {
               </BouncyDiv5>
             </Imagee>
           </Carousel.Item>
+          <Carousel.Item>
+            <Imagee
+              x="0.35"
+              height="100vh"
+              image={img5}
+              brightness="145%"
+              align="center"
+              justify="center"
+            >
+              <DivTitle>
+                <BouncyDiv>
+                  <Title><FormattedMessage id="Come" /></Title>
+                </BouncyDiv>
+                <BouncyDiv2 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
+                  <Title><FormattedMessage id="to" /></Title>
+                </BouncyDiv2>
+                <BouncyDiv3>
+                  <Title><FormattedMessage id="meet" /></Title>
+                </BouncyDiv3>
+              </DivTitle>
+              <BouncyDiv5>
+                <Subheading>
+                  SERRA
+                </Subheading>
+              </BouncyDiv5>
+            </Imagee>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Imagee
+              x="0.35"
+              height="100vh"
+              image={img8}
+              brightness="145%"
+              align="center"
+              justify="center"
+            >
+              <DivTitle>
+                <BouncyDiv>
+                  <Title><FormattedMessage id="Come" /></Title>
+                </BouncyDiv>
+                <BouncyDiv2 className={window.location.pathname.split("/")[1] === 'pt' ? 'displayNone' : ''}>
+                  <Title><FormattedMessage id="to" /></Title>
+                </BouncyDiv2>
+                <BouncyDiv3>
+                  <Title><FormattedMessage id="meet" /></Title>
+                </BouncyDiv3>
+              </DivTitle>
+              <BouncyDiv5>
+                <Subheading>
+                  COLATINA
+                </Subheading>
+              </BouncyDiv5>
+            </Imagee>
+          </Carousel.Item>
         </Carousel>
 
         <DivText>
@@ -236,7 +320,7 @@ class Home extends Component {
         <Carousel fade>
           <Carousel.Item>
             <Imagee
-              x="0.75"
+              x="0.65"
               height="85vh"
               brightness="100%"
               contrast="100%"
@@ -248,18 +332,8 @@ class Home extends Component {
                 <FormattedMessage id="Coming" />
               </div>
               <div className="paragraph">
-                Aut molestiae velit id maxime accusantium. Dolorem qui ab
-                accusantium qui et et tenetur facilis. Quia odio hic ea qui
-                molestias minima. Asperiores corrupti id qui rem. Ea a
-                consectetur sequi. Voluptatem reiciendis sed perspiciatis.
-                Consequatur a voluptates eos vel a harum quae. Temporibus sed ut
-                voluptas. Est temporibus nisi quaerat ea et. Quaerat cumque sit
-                eveniet cum consequuntur suscipit. Error maiores voluptatem
-                totam sint. Illum ab laudantium culpa similique. Vero
-                dignissimos labore quos consequatur explicabo.Quia reiciendis
-                aliquid nisi. Placeat voluptatem corporis ea ipsam alias. Et sit
-                consequatur in nisi voluptatum tempore est sequi. Eos aspernatur
-                hic. Nobis autem vel non.
+                  <FormattedMessage id="coming-es-1" />
+                  <FormattedMessage id="coming-es-2" />
               </div>
               <div className="margin">
                 <Button url="/Coming" name={<FormattedMessage id="Button" />} />
@@ -268,11 +342,11 @@ class Home extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <Imagee
-              x="0.75"
+              x="0.65"
               height="85vh"
               brightness="100%"
               contrast="100%"
-              image={img5}
+              image={img}
               align="flex-start"
               justify={window.screen.width > 600 ? "flex-start" : "flex-start"}
             >
@@ -282,18 +356,8 @@ class Home extends Component {
               <div className="living">
                 <img className="imgLiving" alt="" src={img6} />
                 <div className="paragraphLiving">
-                  Ea a consectetur sequi. Voluptatem reiciendis sed
-                  perspiciatis. Aut molestiae velit id maxime accusantium.
-                  Dolorem qui ab accusantium qui et et tenetur facilis. Quia
-                  odio hic ea qui molestias minima. Asperiores corrupti id qui
-                  rem. Consequatur a voluptates eos vel a harum quae. Temporibus
-                  sed ut voluptas. Est temporibus nisi quaerat ea et. Quaerat
-                  cumque sit eveniet cum consequuntur suscipit. Error maiores
-                  voluptatem totam sint. Illum ab laudantium culpa similique.
-                  Vero dignissimos labore quos consequatur explicabo.Quia
-                  reiciendis aliquid nisi. Placeat voluptatem corporis ea ipsam
-                  alias. Et sit consequatur in nisi voluptatum tempore est
-                  sequi. Eos aspernatur hic. Nobis autem vel non.
+                  <FormattedMessage id="living-es-1" />
+                  <FormattedMessage id="living-es-2" />
                 </div>
               </div>
 
@@ -304,7 +368,7 @@ class Home extends Component {
           </Carousel.Item>
           <Carousel.Item>
             <Imagee
-              x="0.75"
+              x="0.5"
               height="85vh"
               brightness="100%"
               contrast="100%"
@@ -316,18 +380,8 @@ class Home extends Component {
                 <FormattedMessage id="Cities" />
               </div>
               <div className="paragraph">
-                Temporibus sed ut voluptas. Est temporibus nisi quaerat ea et.
-                Quaerat cumque sit eveniet cum consequuntur suscipit. Error
-                maiores voluptatem totam sint. Illum ab laudantium culpa
-                similique. Vero dignissimos labore quos consequatur
-                explicabo.Quia reiciendis aliquid nisi. Temporibus sed ut
-                voluptas. Est temporibus nisi quaerat ea et. Quaerat cumque sit
-                eveniet cum consequuntur suscipit. Error maiores voluptatem
-                totam sint. Illum ab laudantium culpa similique. Vero
-                dignissimos labore quos consequatur explicabo.Quia reiciendis
-                aliquid nisi. Placeat voluptatem corporis ea ipsam alias. Et sit
-                consequatur in nisi voluptatum tempore est sequi. Eos aspernatur
-                hic. Nobis autem vel non.
+                <FormattedMessage id="our-cities-home1" />
+                <FormattedMessage id="our-cities-home2" />
               </div>
               <div className="margin">
                 <Button url="/Cities" name={<FormattedMessage id="Button" />} />
@@ -343,53 +397,6 @@ class Home extends Component {
         </DivText>
         <InstituteImages Institutos={this.props.Institutes} city="" />
 
-        <Carousel fade="true">
-          <Carousel.Item>
-            <Testimonial
-              x="0.75"
-              height="90vh"
-              brightness="100%"
-              contrast="100%"
-              image={img3}
-              align="center"
-              justify="center"
-              p="Aut molestiae velit id maxime accusantium. Dolorem qui ab
-                    accusantium qui et et tenetur facilis. Quia odio hic ea qui
-                    molestias minima. Asperiores corrupti id qui rem. Ea a consectetur
-                    sequi. Voluptatem reiciendis sed perspiciatis. Consequatur a
-                    voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
-                    temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
-                    consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
-                    laudantium culpa similique. Vero dignissimos labore quos consequatur
-                    explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
-                    ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
-                    sequi. Eos aspernatur hic. Nobis autem vel non."
-              author="Carmen Rodrigues"
-              city=" Santiago, Chile"
-            />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Testimonial
-              x="0.75"
-              height="90vh"
-              brightness="100%"
-              contrast="100%"
-              image={img3}
-              align="center"
-              justify="center"
-              p="Voluptatem reiciendis sed perspiciatis. Consequatur a
-                    voluptates eos vel a harum quae. Temporibus sed ut voluptas. Est
-                    temporibus nisi quaerat ea et. Quaerat cumque sit eveniet cum
-                    consequuntur suscipit. Error maiores voluptatem totam sint. Illum ab
-                    laudantium culpa similique. Vero dignissimos labore quos consequatur
-                    explicabo.Quia reiciendis aliquid nisi. Placeat voluptatem corporis
-                    ea ipsam alias. Et sit consequatur in nisi voluptatum tempore est
-                    sequi. Eos aspernatur hic. Nobis autem vel non."
-              author="Ulices Ernser"
-              city=" Santiago, Chile"
-            />
-          </Carousel.Item>
-        </Carousel>
         <DivText>
           <Heading background="#f4f4f4">
             <FormattedMessage id="News" />

@@ -1,5 +1,6 @@
 {
     "en-US": {
+        "TheState": "The State",
         "HomeTitle": "Come to visit us",
         "HomeSubHeading": "Non distinctio quasi alias est.",
         "Button": "Learn More",
@@ -46,9 +47,25 @@
         "Come": "Come",
         "to": "to",
         "meet": "meet",
-        "us": "us"
+        "us": "us",
+        "Support": "Support",
+        "Development": "Development",
+        "ProjectManager": "Project Manager",
+        "objetivos-especificos": "Specific Objectives",
+        "colabora-participa": "Collaborating and Participating",
+        "our-cities-home3": "With a privileged geography, mountains and a long coastline, the state has beautiful landscapes and a strong economy, which has agriculture, mining and livestock as the main assets.",
+        "our-cities-home4": "In addition, ES has the second largest port complex in Brazil. Victoria, its capital, was recently considered by the ONU, as the 2nd best city in Brazil to live.",
+        "our-cities-home1": "The state of Espírito Santo has over 50 different cities that cater to all tastes. The main cities are: Vitória, Vila Velha, Pedra Azul, Domingos Martins, Serra, Guarapari, and many others! Each of these cities has its own peculiarities and enchant all kinds of tastes.",
+        "our-cities-home2": "If you want a nice beach, the areas of Vila Velha, Vitória and Guarapari will serve you very well. If you are looking for towns, there are picturesque towns, full of landscapes and mountains, such as Pedra azul and Domingos Martins.",
+        "living-es-1": "Close to other major Brazilians states, such as Rio de Janeiro and São Paulo, Espírito Santo embraces everything a big city provides, but with a greater life quality. According to researchers, Vitória is the 3rd best capital to live in the country.",
+        "living-es-2": "Espírito Santo, a state in southeastern Brazil, is known for its tropical beaches and mountainous nature preserves. Founded in 1551, the capital and port city Vitória has a compact colonial-era center. Across narrow Vitória Bay lies Vila Velha, site of Praia da Costa, a famous beach getaway, and to the 16th-century Penha Convent, offering sweeping views from its steep perch.",
+        "living-es-3": "The state has 410 km of beautiful beaches, which allows everyone to take a moment and relax at the end of the day. In addition, if you drive around 1h30, it is possible to have great adventures in the mountains, with lots of beautiful landscapes to see and exciting activities to do.",
+        "living-es-4": "On the beach, in the mountains or in the city, it is possible to enjoy a meal with family and friends in the local restaurants, which provides outstanding gastronomy, rich with flavor and history.",
+        "living-es-5": "Talking about history, it is inevitable to talk about culture. Espirito Santo has some particularities in its culture that sets it apart from other cities. The famous regional dish “moqueca capixaba” it known in the whole country and everyday gains more and more fans. In arts, the “congo” is a traditional folklore expression together with “casaca”, an instrument create in the state.",
+        "living-es-6": "Whether traveling around the state or staying in the cities, Espirito Santo provides a unique cultural, historical experience filled different flavors to everyone who lives here or passes by."
     },
     "pt-BR": {
+        "TheState": "O Estado",
         "HomeTitle": "Venha nos conhecer",
         "HomeSubHeading": "Non distinctio quasi alias est.",
         "Button": "Saiba mais",
@@ -103,6 +120,21 @@
         "mission": "missão",
         "contact": "contato",
         "social media": "midias sociais",
-        "Members": "Membros"
+        "Members": "Membros",
+        "Support": "Apoio",
+        "Development": "Desenvolvimento",
+        "ProjectManager": "Gerente de Projeto",
+        "objetivos-especificos": "Objetivos Específicos",
+        "colabora-participa": "Colaborando e Participando",
+        "our-cities-home3": "Com uma geografia privilegiada, montanhas e um longo litoral, o estado possui belas paisagens e uma economia forte, que tem como principais ativos a agricultura, a mineração e a pecuária.",
+        "our-cities-home4": "Além disso, o ES possui o segundo maior complexo portuário do Brasil. Vitória, sua capital, foi recentemente considerada pela ONU como a segunda melhor cidade do Brasil a se viver.",
+        "our-cities-home1": "O estado do Espírito Santo possui mais de 50 cidades diferentes que atendem a todos os gostos. As principais cidades são: Vitória, Vila Velha, Pedra Azul, Domingos Martins, Serra, Guarapari e muitas outras! Cada uma dessas cidades tem suas próprias peculiaridades e encanta todos os tipos de gostos.",
+        "our-cities-home2": "Se você quer uma bela praia, as áreas de Vila Velha, Vitória e Guarapari irão atendê-lo muito bem. Se você procura cidades, existem cidades pitorescas, cheias de paisagens e montanhas, como Pedra azul e Domingos Martins.",
+        "living-es-1": "Perto de outros grandes estados brasileiros, como Rio de Janeiro e São Paulo, o Espírito Santo abraça tudo o que uma cidade grande oferece, mas com uma qualidade de vida maior. Segundo os pesquisadores, Vitória é a 3ª melhor capital para se viver no país.",
+        "living-es-2": "O Espírito Santo, um estado do sudeste do Brasil, é conhecido por suas praias tropicais e natureza montanhosa preservada. Fundada em 1551, a capital e cidade portuária de Vitória possui um centro da era colonial compacto. Do outro lado da estreita Baía de Vitória, encontra-se Vila Velha, local da famosa praia da Costa, e o Convento da Penha do século XVI, oferecendo vistas deslumbrantes de seu poleiro íngreme.",
+        "living-es-3": "O estado possui 410 km de belas praias, o que permite que todos tenham um momento e relaxem ao final do dia. Além disso, se você dirige por volta de 1h30, é possível vivenciar grandes aventuras nas montanhas, com muitas paisagens bonitas para ver e atividades emocionantes para fazer.",
+        "living-es-4": "Na praia, nas montanhas ou na cidade, é possível desfrutar de uma refeição com a família e amigos nos restaurantes locais, que oferecem excelente gastronomia, rica em sabor e história.",
+        "living-es-5": "Falando sobre história, é inevitável falar sobre cultura. O Espírito Santo tem algumas particularidades em sua cultura que o diferencia de outras cidades. O famoso prato regional “moqueca capixaba”, conhecido em todo o país e todos os dias, ganha cada vez mais fãs. Nas artes, o congo é uma expressão tradicional do folclore junto com a casaca, um instrumento criado no estado.",
+        "living-es-6": "Seja viajando pelo estado ou se hospedando nas cidades, o Espírito Santo oferece uma experiência cultural e histórica única, com sabores diferentes para todos que moram aqui ou passam por lá."
     }
 }

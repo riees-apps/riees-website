@@ -20,7 +20,7 @@ class Contact extends Component {
   render() {
     return (
       <div>
-        <Image x="0.5" height="80vh" image={img}>
+        <Image x="0.5" height="60vh" image={img}>
           <Title>
             <FormattedMessage id="Contact" />
           </Title>
@@ -42,14 +42,6 @@ class Contact extends Component {
                 <span className="local2">CEP 29075-910</span>
               </Text>
               <Text color="#505050">
-                <i className="fas fa-phone iconContact" />
-                <span className="textContact">+55 27 40092046</span>
-              </Text>
-              <Text color="#505050">
-                <i className="fas fa-phone iconContact" />
-                <span className="textContact">+55 27 31459205</span>
-              </Text>
-              <Text color="#505050">
                 <i className="fas fa-clock iconContact" />
                 <span className="textContact">
                   <FormattedMessage id="Atendimento" />
@@ -60,17 +52,17 @@ class Contact extends Component {
               </Text>
               <Text color="#505050">
                 <i className="fas fa-envelope iconContact" />
-                <span className="textContact">Email</span>
+                <span className="textContact">E-mail</span>
                 <span className="emailContact">
-                  <a href="mailto:contato@dominio.br">contato@dominio.br</a>
+                  <a href="mailto:app.riees@gmail.com">app.riees@gmail.com</a>
                 </span>
               </Text>
               <Text color="#505050">
                 <i className="fab fa-facebook-square iconContact" />
                 <span className="textContact">Facebook</span>
                 <span className="emailContact">
-                  <a href="https://www.facebook.com/SRI.Ufes/" target="_blank">
-                    Secretaria de Relações Internacionais
+                  <a href="http://facebook.com/riees.es" target="_blank">
+                    RIEES - Rede de Internacionalização da Educação do Espírito Santo
                   </a>
                 </span>
               </Text>

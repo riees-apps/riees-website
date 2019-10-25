@@ -67,24 +67,11 @@ class Institutes extends Component {
     return (
       <div style={{ backgroundColor: "#f4f4f4" }}>
         <Img
-          height="100vh"
+          height="60vh"
           image={img3}
           title={<FormattedMessage id="Institutes"/>}
           brightness="110%"
         />
-        <Div>
-          <Title color='#0077ff'><FormattedMessage id="InstitutesTitle"/></Title>
-        </Div>
-        <DivText>
-          <Heading>
-            In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam
-            ullam possimus voluptas. Corrupti officia beatae hic omnis porro
-            dignissimos voluptas aliquid. Illum quis labore est. Recusandae qui
-            ut at qui consequatur quia omnis eos beatae. In consectetur fugiat incidunt fugiat et aut. Voluptas quae nam
-            ullam possimus voluptas. Corrupti officia beatae hic omnis porro
-            dignissimos.
-          </Heading>
-        </DivText>
         <InstituteImages Institutos={this.props.Institutes} city=''/>
         <Footer />
       </div>
