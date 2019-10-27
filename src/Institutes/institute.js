@@ -222,14 +222,9 @@ const Img = styled.div`
   }
 `;
 const Logo = styled.img`
-  width: 30vh;
-  height: 10vh;
+  max-height: 93px;
   z-index: 100;
   position: relative;
-  @media (max-width: 768px) {
-    width: 45vw;
-    height: 10vh;
-  }
 `;
 
 const Icon = styled.i`

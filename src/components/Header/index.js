@@ -261,7 +261,7 @@ class Header extends Component {
               }
               className={this.state.scroll ? "dropscroll" : "dropdown"}
             >
-              Espirito Santo
+              Espírito Santo
               <div class="dropdown-content">
                 <StyledLink
                   li
