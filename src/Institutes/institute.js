@@ -375,7 +375,7 @@ class Institute extends Component {
               <i
                 className={
                   this.props.telefone2 !== ""
-                    ? `fas fa-envelope iconInstitute`
+                    ? `fas fa-phone iconInstitute`
                     : "displayNone"
                 }
               />{" "}
@@ -509,7 +509,7 @@ class Institute extends Component {
                 </Text2>
                 <Text
                   className={
-                    unidades[this.state.unidade].complemento !== " "
+                    unidades[this.state.unidade].complemento !== "" && unidades[this.state.unidade].complemento !== " "
                       ? ""
                       : "displayNone"
                   }
@@ -547,13 +547,13 @@ class Institute extends Component {
               <Button
                 url={url}
                 institute="true"
-                name="Visit the institute website"
+                name={<FormattedMessage id="MemberSite" />}
               />
               <Button
                 return={true}
                 color="#FF1493"
                 url="/Members"
-                name="All institutes"
+                name={<FormattedMessage id="AllMembers" />}
               />
             </div>
           </DivText>

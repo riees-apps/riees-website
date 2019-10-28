@@ -151,19 +151,19 @@ class About extends Component {
           <Heading border='#fafafa' color='#fafafa'><FormattedMessage id="objetivos-especificos"/></Heading>
           <Div >
             <Text2 color='#fafafa'>
-              Estruturar os escritórios de relações internacionais da IEs participantes;
+              <FormattedMessage id="Specific1"/>
             </Text2>
             <Text2 color='#fafafa'>
-              Qualificar recursos humanos vinculados às IEs capixabas;
+              <FormattedMessage id="Specific2"/>
             </Text2>
             <Text2 color='#fafafa'>
-              Estruturar e fortalecer relações internacionais;
+              <FormattedMessage id="Specific3"/>
             </Text2>
             <Text2 color='#fafafa'>
-              Prospectar e atrair para o ES pesquisadores e jovens talentos, fundos internacionais, empresas e indústrias, aumentando a visibilidade do ecossistema de ensino, pesquisa, e inovação tecnológica e social do ES;
+              <FormattedMessage id="Specific4"/>
             </Text2>
             <Text2 color='#fafafa'>
-              Acompanhar ações de internacionalização das IEs participantes.
+              <FormattedMessage id="Specific5"/>
             </Text2>
           </Div>
         </DivImage>
@@ -171,16 +171,16 @@ class About extends Component {
           <Heading border='pink' color='#0077ff'><FormattedMessage id="colabora-participa"/></Heading>
           <Div>
             <Text2>
-              Ações conjuntas, incluindo organização de missões para o exterior e o recebimento de delegações estrangeiras no Espírito Santo;
+              <FormattedMessage id="Collaborating1"/>
             </Text2>
             <Text2>
-              Seminários e encontros para discussão da cooperação acadêmica, científica e tecnológica;
+              <FormattedMessage id="Collaborating2"/>
             </Text2>
             <Text2>
-              Meios de facilitar a cooperação entre os responsáveis pela internacionalização das instituições de ensino espírito-santenses, promovendo a ampliação das redes de relacionamento e desenvolvimento profissional;
+              <FormattedMessage id="Collaborating3"/>
             </Text2>
             <Text2>
-              O incentivo, a promoção e a realização de congressos, conferências, fóruns, seminários, cursos e outros eventos, bem como ações junto à sociedade visando a sensibilização e conscientização da importância estratégica da experiência ou vivência internacional.
+              <FormattedMessage id="Collaborating4"/>
             </Text2>
           </Div>
         </DivText>

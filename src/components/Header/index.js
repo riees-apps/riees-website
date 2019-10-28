@@ -248,52 +248,19 @@ class Header extends Component {
             >
               <FormattedMessage id="Members" />
             </StyledLink>
+
             <StyledLink
-              onMouseOver={this.changeHover.bind(this)}
-              onMouseOut={this.changeOut.bind(this)}
+              onClick={() => this.handleClick(`/${this.state.lang}/Living`)}
               active={
-                window.location.pathname.split("/")[2] === `Cities` ||
-                window.location.pathname.split("/")[2] === `Coming` ||
-                window.location.pathname.split("/")[2] === `Living` ||
-                window.location.pathname.split("/")[2] === `City`
+                this.state.active === `/${this.state.lang}/Living`
                   ? true
-                  : false
+                  : false ||
+                    window.location.pathname.split("/")[2] === "Living"
               }
-              className={this.state.scroll ? "dropscroll" : "dropdown"}
+              className={this.state.scroll ? "scroll" : ""}
+              to={`/${this.state.lang}/Living`}
             >
-              Espírito Santo
-              <div class="dropdown-content">
-                <StyledLink
-                  li
-                  onClick={() => this.handleClick(`/${this.state.lang}/Coming`)}
-                  className={this.state.scroll ? "scroll2" : ""}
-                  to={`/${this.state.lang}/Coming`}
-                >
-                  <FormattedMessage id="Coming" />
-                </StyledLink>
-                <StyledLink
-                  li
-                  onClick={() => this.handleClick(`/${this.state.lang}/Living`)}
-                  className={this.state.scroll ? "scroll2" : ""}
-                  to={`/${this.state.lang}/Living`}
-                >
-                  <FormattedMessage id="Living" />
-                </StyledLink>
-                <StyledLink
-                  li
-                  onClick={() => this.handleClick(`/${this.state.lang}/Cities`)}
-                  className={this.state.scroll ? "scroll2" : ""}
-                  to={`/${this.state.lang}/Cities`}
-                >
-                  <FormattedMessage id="Cities" />
-                </StyledLink>
-              </div>
-              <FaCaretUp
-                className={this.state.hover ? "iconUpDown" : "displayNone"}
-              />
-              <FaCaretDown
-                className={this.state.hover ? "displayNone" : "iconUpDown"}
-              />
+              <FormattedMessage id="Living" />
             </StyledLink>
 
             <StyledLink

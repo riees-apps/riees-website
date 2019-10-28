@@ -179,9 +179,6 @@ class Living extends Component {
               <FormattedMessage id="our-cities-home2"/>
             </Text>
           </Div>
-          <div className="margin">
-            <Button url="/Cities" name={<FormattedMessage id="CitiesTitle" />} />
-          </div>
         </DivText>
         <Footer/>
       </div>

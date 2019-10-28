@@ -4,6 +4,7 @@ import "./area.css";
 import api from "../../api/api";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { FormattedMessage } from "react-intl";
 
 const DivAreas = styled.div`
   background: #e4e3ea;
@@ -146,7 +147,7 @@ class AreaCard extends Component {
       return this.props.areas.map(area => (
         <Card onClick={() => this.handleClick(area)}>
           <i className={`fas fa-${icon(area)} icon`} />
-          <h1 class="areaName">{area}</h1>
+          <h1 class="areaName"><FormattedMessage id={area} /></h1>
         </Card>
       ));
     };
@@ -159,7 +160,7 @@ class AreaCard extends Component {
           </Heading>
         </DivHeading>
         <DivSubTitle>
-          Clique na area para ver seus respectivos cursos
+          <FormattedMessage id="ClickArea" />
         </DivSubTitle>
         <DivCards>{renderAreas()}</DivCards>
         <Modal
@@ -178,13 +179,13 @@ class AreaCard extends Component {
           <Modal.Body>
             <table id="customers">
               <tr>
-                <th>Curso</th>
-                <th>Nível</th>
+                <th><FormattedMessage id="Course" /></th>
+                <th><FormattedMessage id="Level" /></th>
               </tr>
               {this.state.cursos.map(curso => (
                 <tr>
                   <td>{curso.nome}</td>
-                  <td>{curso.nivel}</td>
+                  <td><FormattedMessage id={curso.nivel} /></td>
                 </tr>
               ))}
             </table>

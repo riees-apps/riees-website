@@ -324,28 +324,6 @@ class Home extends Component {
               height="85vh"
               brightness="100%"
               contrast="100%"
-              image={img2}
-              align="flex-start"
-              justify="flex-start"
-            >
-              <div className="head">
-                <FormattedMessage id="Coming" />
-              </div>
-              <div className="paragraph">
-                  <FormattedMessage id="coming-es-1" />
-                  <FormattedMessage id="coming-es-2" />
-              </div>
-              <div className="margin">
-                <Button url="/Coming" name={<FormattedMessage id="Button" />} />
-              </div>
-            </Imagee>
-          </Carousel.Item>
-          <Carousel.Item>
-            <Imagee
-              x="0.65"
-              height="85vh"
-              brightness="100%"
-              contrast="100%"
               image={img}
               align="flex-start"
               justify={window.screen.width > 600 ? "flex-start" : "flex-start"}
