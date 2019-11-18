@@ -210,6 +210,14 @@ class About extends Component {
               Lucas Quintino Frinhani - <FormattedMessage id="Development"/>
             </Text>
           </DivText2>
+          <DivText2>
+            <Text color='#fafafa'>
+              Denise Coutinho Endringer - <FormattedMessage id="Supervision"/>
+            </Text>
+            <Text color='#fafafa'>
+              Patrícia Alcântara Cardoso - <FormattedMessage id="OverallCoordination"/>
+            </Text>
+          </DivText2>
         </DivImage>
         <Footer/>
       </div>
